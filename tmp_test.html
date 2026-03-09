@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><style>
+  body{background:#111;color:#fff;padding:20px;font-family:sans-serif;}
+  .image-list{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:4px;}
+  .image-chip{border:1px solid rgba(255,255,255,0.2);border-radius:12px;padding:10px;background:rgba(255,255,255,0.03);display:grid;gap:10px;}
+  .image-chip img{width:100%;height:auto;max-height:260px;object-fit:contain;border-radius:10px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.03);display:block;margin:0 auto;}
+  .chip-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;color:#bbb;font-size:12px;}
+</style></head><body>
+<div class="image-list">
+  <div class="image-chip">
+    <img src="https://picsum.photos/seed/a/400/300">
+    <div class="chip-meta"><span>One</span><span>Local</span></div>
+  </div>
+  <div class="image-chip">
+    <img src="https://picsum.photos/seed/b/400/300">
+    <div class="chip-meta"><span>Two</span><span>Local</span></div>
+  </div>
+  <div class="image-chip">
+    <img src="https://picsum.photos/seed/c/200/500">
+    <div class="chip-meta"><span>Three</span><span>Local</span></div>
+  </div>
+  <div class="image-chip">
+    <img src="https://picsum.photos/seed/d/800/200">
+    <div class="chip-meta"><span>Four</span><span>Local</span></div>
+  </div>
+</div>
+</body></html>

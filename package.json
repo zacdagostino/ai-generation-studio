@@ -1,0 +1,34 @@
+{
+  "name": "amelia_app",
+  "productName": "Content Studio",
+  "version": "1.0.0",
+  "description": "Local desktop client for Kie AI Nano Banana image generation",
+  "main": "main.js",
+  "scripts": {
+    "start": "env -u ELECTRON_RUN_AS_NODE electron .",
+    "start:watch": "env -u ELECTRON_RUN_AS_NODE electronmon .",
+    "diagnose": "node diagnostics/preset-paths.js"
+  },
+  "electronmon": {
+    "patterns": [
+      "!cache_uploads/**"
+    ]
+  },
+  "keywords": [
+    "electron",
+    "kie.ai",
+    "nano-banana"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "28.3.3",
+    "electronmon": "^2.0.4"
+  },
+  "dependencies": {
+    "@distube/ytdl-core": "^4.15.5",
+    "@supabase/supabase-js": "^2.86.0",
+    "undici": "^7.16.0"
+  }
+}
