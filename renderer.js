@@ -33,11 +33,25 @@ const kieKeyBadge = document.getElementById('kieKeyBadge');
 const openaiKeyBadge = document.getElementById('openaiKeyBadge');
 const elevenlabsKeyBadge = document.getElementById('elevenlabsKeyBadge');
 const localSoundsNavBtn = document.getElementById('localSoundsNavBtn');
+const automationCredentialsPanel = document.getElementById('automationCredentialsPanel');
+const automationCredentialsPanelBackdrop = document.getElementById('automationCredentialsPanelBackdrop');
+const automationCredentialsPanelClose = document.getElementById('automationCredentialsPanelClose');
+const automationCredentialsPanelStatus = document.getElementById('automationCredentialsPanelStatus');
+const automationTikTokTokenInput = document.getElementById('automationTikTokToken');
+const automationTikTokOpenIdInput = document.getElementById('automationTikTokOpenId');
+const automationInstagramTokenInput = document.getElementById('automationInstagramToken');
+const automationInstagramUserIdInput = document.getElementById('automationInstagramUserId');
+const automationFacebookTokenInput = document.getElementById('automationFacebookToken');
+const automationFacebookPageIdInput = document.getElementById('automationFacebookPageId');
 const themeModeToggle = document.getElementById('themeModeToggle');
+const appHeader = document.getElementById('appHeader');
+const appHeaderTitleBadge = document.getElementById('appHeaderTitleBadge');
+const appHeaderTagline = document.getElementById('appHeaderTagline');
 const openaiInlineBadge = document.getElementById('openaiInlineBadge');
 const elevenlabsInlineBadge = document.getElementById('elevenlabsInlineBadge');
 const kieInlineBadge = document.getElementById('kieInlineBadge');
 const navButtons = document.querySelectorAll('[data-view]');
+const sideNav = document.getElementById('sideNav');
 const views = {
   auth: document.getElementById('view-auth'),
   create: document.getElementById('view-create'),
@@ -47,7 +61,8 @@ const views = {
   activity: document.getElementById('view-activity'),
   avatars: document.getElementById('view-avatars'),
   objects: document.getElementById('view-objects'),
-  prompts: document.getElementById('view-prompts')
+  prompts: document.getElementById('view-prompts'),
+  lora: document.getElementById('view-lora')
 };
 const modelInput = document.getElementById('model');
 const aspectRatioSelect = document.getElementById('aspectRatio');
@@ -109,6 +124,118 @@ const avatarList = document.getElementById('avatarList');
 const avatarThumbSizeSlider = document.getElementById('avatarThumbSizeSlider');
 const avatarThumbSizeValue = document.getElementById('avatarThumbSizeValue');
 const createChooser = document.getElementById('createChooser');
+const tiktokModeManualBtn = document.getElementById('tiktokModeManualBtn');
+const tiktokModeAutomaticBtn = document.getElementById('tiktokModeAutomaticBtn');
+const tiktokModeHeroTitle = document.getElementById('tiktokModeHeroTitle');
+const tiktokModeHeroText = document.getElementById('tiktokModeHeroText');
+const tiktokAutomationStatusBadge = document.getElementById('tiktokAutomationStatusBadge');
+const tiktokAutomationNextBadge = document.getElementById('tiktokAutomationNextBadge');
+const tiktokSummaryModeValue = document.getElementById('tiktokSummaryModeValue');
+const tiktokSummaryModeNote = document.getElementById('tiktokSummaryModeNote');
+const tiktokSummaryMemoryValue = document.getElementById('tiktokSummaryMemoryValue');
+const tiktokSummaryMemoryNote = document.getElementById('tiktokSummaryMemoryNote');
+const tiktokSummaryUploadsValue = document.getElementById('tiktokSummaryUploadsValue');
+const tiktokSummaryUploadsNote = document.getElementById('tiktokSummaryUploadsNote');
+const tiktokSummaryDestinationsValue = document.getElementById('tiktokSummaryDestinationsValue');
+const tiktokSummaryDestinationsNote = document.getElementById('tiktokSummaryDestinationsNote');
+const tiktokAutomationCard = document.getElementById('tiktokAutomationCard');
+const tiktokManualModeCard = document.getElementById('tiktokManualModeCard');
+const tiktokAutomationRunTabBtn = document.getElementById('tiktokAutomationRunTabBtn');
+const tiktokAutomationSettingsTabBtn = document.getElementById('tiktokAutomationSettingsTabBtn');
+const tiktokAutomationTestTabBtn = document.getElementById('tiktokAutomationTestTabBtn');
+const tiktokAutomationMemoryTabBtn = document.getElementById('tiktokAutomationMemoryTabBtn');
+const tiktokAutomationRunView = document.getElementById('tiktokAutomationRunView');
+const tiktokAutomationSettingsView = document.getElementById('tiktokAutomationSettingsView');
+const tiktokAutomationTestView = document.getElementById('tiktokAutomationTestView');
+const tiktokAutomationMemoryView = document.getElementById('tiktokAutomationMemoryView');
+const tiktokAutomationRunTitle = document.getElementById('tiktokAutomationRunTitle');
+const tiktokAutomationRunText = document.getElementById('tiktokAutomationRunText');
+const tiktokAutomationCurrentStep = document.getElementById('tiktokAutomationCurrentStep');
+const tiktokAutomationCurrentDetail = document.getElementById('tiktokAutomationCurrentDetail');
+const tiktokAutomationOpenActiveRunBtn = document.getElementById('tiktokAutomationOpenActiveRunBtn');
+const tiktokAutomationActiveRunCard = document.getElementById('tiktokAutomationActiveRunCard');
+const tiktokAutomationActiveRunTitle = document.getElementById('tiktokAutomationActiveRunTitle');
+const tiktokAutomationActiveRunMeta = document.getElementById('tiktokAutomationActiveRunMeta');
+const tiktokAutomationActiveRunBody = document.getElementById('tiktokAutomationActiveRunBody');
+const tiktokAutomationActiveRunStages = document.getElementById('tiktokAutomationActiveRunStages');
+const tiktokAutomationCycleBadge = document.getElementById('tiktokAutomationCycleBadge');
+const tiktokAutomationRunCount = document.getElementById('tiktokAutomationRunCount');
+const tiktokAutomationDayList = document.getElementById('tiktokAutomationDayList');
+const tiktokAutomationSelectedDayTitle = document.getElementById('tiktokAutomationSelectedDayTitle');
+const tiktokAutomationSelectedDayMeta = document.getElementById('tiktokAutomationSelectedDayMeta');
+const tiktokAutomationShowAllHistoryBtn = document.getElementById('tiktokAutomationShowAllHistoryBtn');
+const tiktokAutomationRunList = document.getElementById('tiktokAutomationRunList');
+const tiktokAutomationRunOverview = document.getElementById('tiktokAutomationRunOverview');
+const tiktokAutomationRunHistoryPage = document.getElementById('tiktokAutomationRunHistoryPage');
+const tiktokAutomationHistoryBackBtn = document.getElementById('tiktokAutomationHistoryBackBtn');
+const tiktokAutomationHistoryMeta = document.getElementById('tiktokAutomationHistoryMeta');
+const tiktokAutomationHistoryList = document.getElementById('tiktokAutomationHistoryList');
+const tiktokAutomationMemoryNote = document.getElementById('tiktokAutomationMemoryNote');
+const tiktokAutomationUploadNote = document.getElementById('tiktokAutomationUploadNote');
+const tiktokAutomationDestinationCount = document.getElementById('tiktokAutomationDestinationCount');
+const tiktokAutomationDestinationNote = document.getElementById('tiktokAutomationDestinationNote');
+const tiktokAutomationSettingsModePill = document.getElementById('tiktokAutomationSettingsModePill');
+const tiktokAutomationWorkspaceInput = document.getElementById('tiktokAutomationWorkspaceInput');
+const tiktokAutomationProfileInput = document.getElementById('tiktokAutomationProfileInput');
+const tiktokAutomationPromptInput = document.getElementById('tiktokAutomationPromptInput');
+const tiktokAutomationAvatarSelect = document.getElementById('tiktokAutomationAvatarSelect');
+const tiktokAutomationAudienceInput = document.getElementById('tiktokAutomationAudienceInput');
+const tiktokAutomationStyleInput = document.getElementById('tiktokAutomationStyleInput');
+const tiktokAutomationDailyCountInput = document.getElementById('tiktokAutomationDailyCountInput');
+const tiktokAutomationAiAutoToggle = document.getElementById('tiktokAutomationAiAutoToggle');
+const tiktokAutomationAutoSearchToggle = document.getElementById('tiktokAutomationAutoSearchToggle');
+const tiktokAutomationAutoPickToggle = document.getElementById('tiktokAutomationAutoPickToggle');
+const tiktokAutomationYoutubeOnlyToggle = document.getElementById('tiktokAutomationYoutubeOnlyToggle');
+const tiktokAutomationPostingModeSelect = document.getElementById('tiktokAutomationPostingModeSelect');
+const tiktokAutomationPostingTimezoneSelect = document.getElementById('tiktokAutomationPostingTimezoneSelect');
+const tiktokAutomationPostingStartInput = document.getElementById('tiktokAutomationPostingStartInput');
+const tiktokAutomationPostingEndInput = document.getElementById('tiktokAutomationPostingEndInput');
+const tiktokAutomationReviewBeforePostToggle = document.getElementById('tiktokAutomationReviewBeforePostToggle');
+const tiktokAutomationMemorySelect = document.getElementById('tiktokAutomationMemorySelect');
+const tiktokAutomationPlatformTikTok = document.getElementById('tiktokAutomationPlatformTikTok');
+const tiktokAutomationPlatformInstagram = document.getElementById('tiktokAutomationPlatformInstagram');
+const tiktokAutomationPlatformFacebook = document.getElementById('tiktokAutomationPlatformFacebook');
+const tiktokAutomationPlatformTikTokState = document.getElementById('tiktokAutomationPlatformTikTokState');
+const tiktokAutomationPlatformInstagramState = document.getElementById('tiktokAutomationPlatformInstagramState');
+const tiktokAutomationPlatformFacebookState = document.getElementById('tiktokAutomationPlatformFacebookState');
+const tiktokAutomationPlatformTikTokStateSettings = document.getElementById('tiktokAutomationPlatformTikTokStateSettings');
+const tiktokAutomationPlatformInstagramStateSettings = document.getElementById('tiktokAutomationPlatformInstagramStateSettings');
+const tiktokAutomationPlatformFacebookStateSettings = document.getElementById('tiktokAutomationPlatformFacebookStateSettings');
+const tiktokAutomationJumpPublishBtn = document.getElementById('tiktokAutomationJumpPublishBtn');
+const tiktokAutomationSettingsJumpPublishBtn = document.getElementById('tiktokAutomationSettingsJumpPublishBtn');
+const tiktokAutomationStatusText = document.getElementById('tiktokAutomationStatusText');
+const tiktokAutomationProgressText = document.getElementById('tiktokAutomationProgressText');
+const tiktokAutomationRunPill = document.getElementById('tiktokAutomationRunPill');
+const tiktokAutomationMemoryPill = document.getElementById('tiktokAutomationMemoryPill');
+const tiktokAutomationStartBtn = document.getElementById('tiktokAutomationStartBtn');
+const tiktokAutomationPauseBtn = document.getElementById('tiktokAutomationPauseBtn');
+const tiktokAutomationGenerateBtn = document.getElementById('tiktokAutomationGenerateBtn');
+const tiktokAutomationSimulateBtn = document.getElementById('tiktokAutomationSimulateBtn');
+const tiktokAutomationTestPill = document.getElementById('tiktokAutomationTestPill');
+const tiktokAutomationTestRunsInput = document.getElementById('tiktokAutomationTestRunsInput');
+const tiktokAutomationTestDryRunBtn = document.getElementById('tiktokAutomationTestDryRunBtn');
+const tiktokAutomationTestClearBtn = document.getElementById('tiktokAutomationTestClearBtn');
+const tiktokAutomationTestExportBtn = document.getElementById('tiktokAutomationTestExportBtn');
+const tiktokAutomationTestStatus = document.getElementById('tiktokAutomationTestStatus');
+const tiktokAutomationTestMemory = document.getElementById('tiktokAutomationTestMemory');
+const tiktokAutomationTestResults = document.getElementById('tiktokAutomationTestResults');
+const tiktokAutomationIdeaCount = document.getElementById('tiktokAutomationIdeaCount');
+const tiktokAutomationUploadCount = document.getElementById('tiktokAutomationUploadCount');
+const tiktokAutomationEventCount = document.getElementById('tiktokAutomationEventCount');
+const tiktokAutomationEventList = document.getElementById('tiktokAutomationEventList');
+const tiktokMemoryExplorerSummary = document.getElementById('tiktokMemoryExplorerSummary');
+const tiktokMemoryExplorerHistoryBtn = document.getElementById('tiktokMemoryExplorerHistoryBtn');
+const tiktokMemoryExplorerConceptsBtn = document.getElementById('tiktokMemoryExplorerConceptsBtn');
+const tiktokMemoryExplorerRetrievalBtn = document.getElementById('tiktokMemoryExplorerRetrievalBtn');
+const tiktokMemoryExplorerEmbeddingsBtn = document.getElementById('tiktokMemoryExplorerEmbeddingsBtn');
+const tiktokAutomationMemoryExportBtn = document.getElementById('tiktokAutomationMemoryExportBtn');
+const tiktokAutomationMemoryClearBtn = document.getElementById('tiktokAutomationMemoryClearBtn');
+const tiktokAutomationMemoryExportStatus = document.getElementById('tiktokAutomationMemoryExportStatus');
+const tiktokMemoryExplorerContent = document.getElementById('tiktokMemoryExplorerContent');
+const tiktokRunDetailsPanel = document.getElementById('tiktokRunDetailsPanel');
+const tiktokRunDetailsPanelBackdrop = document.getElementById('tiktokRunDetailsPanelBackdrop');
+const tiktokRunDetailsPanelClose = document.getElementById('tiktokRunDetailsPanelClose');
+const tiktokRunDetailsContent = document.getElementById('tiktokRunDetailsContent');
 const tiktokIdeaInput = document.getElementById('tiktokIdeaInput');
 const tiktokAudienceInput = document.getElementById('tiktokAudienceInput');
 const tiktokStyleInput = document.getElementById('tiktokStyleInput');
@@ -225,6 +352,8 @@ const tiktokFinalLog = document.getElementById('tiktokFinalLog');
 const tiktokFinalPreview = document.getElementById('tiktokFinalPreview');
 const tiktokFinalRenderBtn = document.getElementById('tiktokFinalRenderBtn');
 const tiktokFinalRenderSpinner = document.getElementById('tiktokFinalRenderSpinner');
+const tiktokFinalYoutubeCheckSummary = document.getElementById('tiktokFinalYoutubeCheckSummary');
+const tiktokFinalYoutubeCheckList = document.getElementById('tiktokFinalYoutubeCheckList');
 const tiktokCaptionGenerateBtn = document.getElementById('tiktokCaptionGenerateBtn');
 const tiktokCaptionGenerateSpinner = document.getElementById('tiktokCaptionGenerateSpinner');
 const tiktokCaptionStatus = document.getElementById('tiktokCaptionStatus');
@@ -480,6 +609,7 @@ const manualSaveBtn = document.getElementById('manualSaveBtn');
 const saveFilterAll = document.getElementById('saveFilterAll');
 const saveFilterImage = document.getElementById('saveFilterImage');
 const saveFilterBatch = document.getElementById('saveFilterBatch');
+const saveFilterShortForm = document.getElementById('saveFilterShortForm');
 const creditValue = document.getElementById('creditValue');
 const creditSpinner = document.getElementById('creditSpinner');
 const avatarNameInput = document.getElementById('avatarNameInput');
@@ -556,6 +686,7 @@ const builderVideoTab = document.getElementById('builderVideoTab');
 const builderBatchTab = document.getElementById('builderBatchTab');
 const builderTikTokTab = document.getElementById('builderTikTokTab');
 const builderBack = document.getElementById('builderBack');
+const tiktokStudioBackBtn = document.getElementById('tiktokStudioBackBtn');
 const builderShared = document.getElementById('builderShared');
 const avatarRow = document.getElementById('avatarRow');
 const backFromAvatar = document.getElementById('backFromAvatar');
@@ -579,7 +710,12 @@ const batchThemeSuggestBtn = document.getElementById('batchThemeSuggestBtn');
 const batchThemeSpinner = document.getElementById('batchThemeSpinner');
 const batchCarouselCount = document.getElementById('batchCarouselCount');
 const batchStoryCount = document.getElementById('batchStoryCount');
+const batchPromptLabel = document.getElementById('batchPromptLabel');
+const batchPromptHint = document.getElementById('batchPromptHint');
 const batchCarouselLabel = document.getElementById('batchCarouselLabel');
+const batchCarouselHint = document.getElementById('batchCarouselHint');
+const batchStoryLabel = document.getElementById('batchStoryLabel');
+const batchStoryHint = document.getElementById('batchStoryHint');
 const batchStoryThemeWrap = document.getElementById('batchStoryThemeWrap');
 const batchStoryCountWrap = document.getElementById('batchStoryCountWrap');
 const batchModeWrap = document.getElementById('batchModeWrap');
@@ -593,6 +729,10 @@ const batchClearObjectBtn = document.getElementById('batchClearObjectBtn');
 const batchObjectEnvBtn = document.getElementById('batchObjectEnvBtn');
 const batchObjectBaseBtn = document.getElementById('batchObjectBaseBtn');
 const batchObjectEnvStatus = document.getElementById('batchObjectEnvStatus');
+const batchAvatarSelect = document.getElementById('batchAvatarSelect');
+const batchAvatarSelectPreview = document.getElementById('batchAvatarSelectPreview');
+const batchEditAvatarBtn = document.getElementById('batchEditAvatarBtn');
+const batchClearAvatarBtn = document.getElementById('batchClearAvatarBtn');
 const batchUseClothes = document.getElementById('batchUseClothes');
 const batchModeSelect = document.getElementById('batchModeSelect');
 const batchOutfitToggle = document.getElementById('batchOutfitToggle');
@@ -620,6 +760,54 @@ const presetAddBtn = document.getElementById('presetAddBtn');
 const presetDeleteBtn = document.getElementById('presetDeleteBtn');
 const presetList = document.getElementById('presetList');
 const selectedPresetChips = document.getElementById('selectedPresetChips');
+const loraCharacterNameInput = document.getElementById('loraCharacterNameInput');
+const loraConfigNameInput = document.getElementById('loraConfigNameInput');
+const loraDatasetPathInput = document.getElementById('loraDatasetPathInput');
+const loraOutputPathInput = document.getElementById('loraOutputPathInput');
+const loraStepsInput = document.getElementById('loraStepsInput');
+const loraSaveEveryInput = document.getElementById('loraSaveEveryInput');
+const loraBatchSizeInput = document.getElementById('loraBatchSizeInput');
+const loraLearningRateInput = document.getElementById('loraLearningRateInput');
+const loraRankInput = document.getElementById('loraRankInput');
+const loraAlphaInput = document.getElementById('loraAlphaInput');
+const loraResolutionsInput = document.getElementById('loraResolutionsInput');
+const loraCacheEmbeddingsToggle = document.getElementById('loraCacheEmbeddingsToggle');
+const loraGenerateConfigBtn = document.getElementById('loraGenerateConfigBtn');
+const loraCopyConfigBtn = document.getElementById('loraCopyConfigBtn');
+const loraCopyCommandsBtn = document.getElementById('loraCopyCommandsBtn');
+const loraCopyChecklistBtn = document.getElementById('loraCopyChecklistBtn');
+const loraConfigOutput = document.getElementById('loraConfigOutput');
+const loraCommandsOutput = document.getElementById('loraCommandsOutput');
+const loraChecklistText = document.getElementById('loraChecklistText');
+const loraEstimatedCost = document.getElementById('loraEstimatedCost');
+const loraOpenWizardBtn = document.getElementById('loraOpenWizardBtn');
+const loraOpenRunpodBtn = document.getElementById('loraOpenRunpodBtn');
+const loraWizardModal = document.getElementById('loraWizardModal');
+const loraWizardCloseBtn = document.getElementById('loraWizardCloseBtn');
+const loraWizardStepLabel = document.getElementById('loraWizardStepLabel');
+const loraWizardStepEyebrow = document.getElementById('loraWizardStepEyebrow');
+const loraWizardTitle = document.getElementById('loraWizardTitle');
+const loraWizardDescription = document.getElementById('loraWizardDescription');
+const loraWizardPoints = document.getElementById('loraWizardPoints');
+const loraWizardProgressText = document.getElementById('loraWizardProgressText');
+const loraWizardProgressFill = document.getElementById('loraWizardProgressFill');
+const loraWizardStatus = document.getElementById('loraWizardStatus');
+const loraWizardOpenRunpodBtn = document.getElementById('loraWizardOpenRunpodBtn');
+const loraWizardBackBtn = document.getElementById('loraWizardBackBtn');
+const loraWizardNextBtn = document.getElementById('loraWizardNextBtn');
+const loraRunpodApiKeyInput = document.getElementById('loraRunpodApiKeyInput');
+const loraRunpodRememberToggle = document.getElementById('loraRunpodRememberToggle');
+const loraRunpodPodSelect = document.getElementById('loraRunpodPodSelect');
+const loraRunpodToolkitUrlInput = document.getElementById('loraRunpodToolkitUrlInput');
+const loraRunpodLoadPodsBtn = document.getElementById('loraRunpodLoadPodsBtn');
+const loraRunpodRefreshPodBtn = document.getElementById('loraRunpodRefreshPodBtn');
+const loraRunpodValidateBtn = document.getElementById('loraRunpodValidateBtn');
+const loraRunpodConnectBtn = document.getElementById('loraRunpodConnectBtn');
+const loraRunpodOpenExternalBtn = document.getElementById('loraRunpodOpenExternalBtn');
+const loraRunpodPodMeta = document.getElementById('loraRunpodPodMeta');
+const loraRunpodStatus = document.getElementById('loraRunpodStatus');
+const loraToolkitFrame = document.getElementById('loraToolkitFrame');
+const loraToolkitPlaceholder = document.getElementById('loraToolkitPlaceholder');
 const videoView = document.getElementById('videoView');
 const videoModelInput = document.getElementById('videoModel');
 const videoAspectRatioSelect = document.getElementById('videoAspectRatio');
@@ -687,6 +875,17 @@ const objectBaseButtons = [objectBaseBtn, imageObjectBaseBtn, batchObjectBaseBtn
 
 const API_BASE = 'https://api.kie.ai/api/v1';
 const IMAGE_BATCH_SIZE_DEFAULT = 1;
+const TIKTOK_SCRIPT_MEMORY_KEY = 'nb_tiktok_scripts_v1';
+const TIKTOK_AUTOMATION_STATE_KEY = 'nb_tiktok_automation_v1';
+const TIKTOK_AUTOMATION_IDEA_LIMIT = 160;
+const TIKTOK_AUTOMATION_UPLOAD_LIMIT = 120;
+const TIKTOK_AUTOMATION_EVENT_LIMIT = 180;
+const TIKTOK_AUTOMATION_CONCEPT_LIMIT = 220;
+const TIKTOK_AUTOMATION_EMBEDDING_LIMIT = 240;
+const TIKTOK_AUTOMATION_RETRIEVAL_LIMIT = 260;
+const TIKTOK_AUTOMATION_EMBEDDING_MODEL = 'text-embedding-3-small';
+const TIKTOK_AUTOMATION_EMBEDDING_DIMENSIONS = 256;
+const TIKTOK_AUTOMATION_GENERATION_ATTEMPTS = 4;
 
 const normalizeImageBatchSize = (value) => {
   const parsed = Math.floor(Number(value));
@@ -715,6 +914,7 @@ let previewZoomBaseHeight = 0;
 const SAVES_KEY = 'nb_saves_v1';
 const ACTIVE_SAVE_KEY = 'nb_active_save';
 const SESSION_SAVES_KEY = 'nb_session_saves_v1';
+const SESSION_SAVES_BACKUP_KEY = 'nb_session_saves_backup_v1';
 const ACTIVE_SESSION_SAVE_KEY = 'nb_active_session_save';
 const LAST_ACTIVE_PROJECT_KEY = 'nb_last_active_project_v1';
 const UNTITLED_PREFIX = 'Untitled';
@@ -740,6 +940,10 @@ const MODEL_DURATION_KEY = 'nb_model_durations';
 const TIKTOK_FINAL_KEYING_PREFS_KEY = 'nb_tiktok_final_keying_v1';
 const UI_THEME_MODE_KEY = 'nb_ui_theme_mode_v1';
 const KNOWN_TASK_IDS_KEY = 'nb_known_task_ids_v1';
+const LORA_LAB_STATE_KEY = 'nb_lora_lab_v1';
+const RUNPOD_API_KEY_KEY = 'nb_runpod_api_key_v1';
+const RUNPOD_API_REMEMBER_KEY = 'nb_runpod_api_key_remember_v1';
+const RUNPOD_POD_CONSOLE_URL = 'https://www.runpod.io/console/pods';
 const ACTIVITY_DOWNLOAD_PREFIX_KEY = 'nb_activity_download_prefix';
 const ACTIVITY_TILE_SIZE_KEY = 'nb_activity_tile_size';
 const ACTIVITY_WEB_SESSION_KEY = 'nb_activity_web_session_v1';
@@ -757,11 +961,14 @@ let avatars = [];
 let activeAvatarName = '';
 let objects = [];
 let activeObjectName = '';
+let loraRunpodPods = [];
+let loraWizardStepIndex = 0;
 let supabaseCleanup = [];
 const stageOrder = ['upload', 'submit', 'queue', 'generate', 'complete'];
 let slowTimer = null;
 let autosaveTimer = null;
 let saveDebounce = null;
+let saveRestoreInProgress = false;
 let creditTimer = null;
 let objectDraftTimer = null;
 let pendingTabClose = null;
@@ -772,6 +979,7 @@ let appCloseAuthorized = false;
 let windowScrollPersistTimer = null;
 let windowScrollRestoreActive = false;
 let pendingRenameRecord = null;
+let lastAutomationUiDebugKey = '';
 let avatarSources = [];
 let avatarProfileSource = null;
 let clothesSources = [];
@@ -780,6 +988,7 @@ let objectSources = [];
 let objectBaseSource = null;
 let objectEnvironmentSource = null;
 let pendingObjectEnvironment = null;
+const localWebpConversionCache = new Map();
 let currentCreateView = 'image';
 let generations = [];
 let thumbSize = Number(localStorage.getItem('nb_thumb_size')) || 72;
@@ -847,6 +1056,35 @@ let batchOutfitsEnabled = false;
 let savesFilter = 'all';
 let batchMode = 'creative';
 let tiktokScripts = [];
+let tiktokMode = 'manual';
+let tiktokAutomationConfig = null;
+let tiktokAutomationState = null;
+let tiktokAutomationIdeaHistory = [];
+let tiktokAutomationUploadHistory = [];
+let tiktokAutomationEvents = [];
+let tiktokAutomationRuns = [];
+let tiktokAutomationConceptMemory = [];
+let tiktokAutomationEmbeddings = [];
+let tiktokAutomationRetrievalEvents = [];
+let tiktokAutomationTimer = null;
+let tiktokAutomationBusy = false;
+let tiktokAutomationPipelineActive = false;
+let tiktokAutomationQuietModeDepth = 0;
+let tiktokAutomationView = 'run';
+let tiktokAutomationMemoryExplorerView = 'history';
+let tiktokAutomationSelectedRunId = '';
+let tiktokAutomationSelectedDayKey = '';
+let tiktokAutomationRunHistoryPageOpen = false;
+let tiktokRunDetailsAvatarExpandedByRun = {};
+let tiktokAutomationSimulationBusy = false;
+let tiktokAutomationRestartingRunId = '';
+let tiktokAutomationRestartingStageKey = '';
+let tiktokAutomationTestState = {
+  busy: false,
+  error: false,
+  status: 'Run the same automation brief multiple times to see what gets accepted or blocked by memory.',
+  results: []
+};
 let tiktokGenerating = false;
 let tiktokLogs = [];
 let tiktokStoryboard = null;
@@ -921,7 +1159,22 @@ let tiktokAvatarSceneExpanded = {};
 let tiktokAvatarMediaUiFreezeUntil = 0;
 let tiktokAvatarPanelRenderLastAt = 0;
 let tiktokAvatarPanelRenderTimer = 0;
+let tiktokAvatarAutoRetryTimer = 0;
+let tiktokAvatarAutoRetryAttempt = 0;
+let tiktokAvatarAutoFinalRenderPending = false;
+let tiktokAutomationAvatarResumeInFlight = false;
+let tiktokAutomationAvatarResumeLastAt = 0;
 let tiktokFinalLogs = [];
+let tiktokFinalYoutubePreflight = {
+  checkedAt: 0,
+  checking: false,
+  ready: true,
+  total: 0,
+  ok: 0,
+  items: [],
+  message: 'Not checked yet.'
+};
+let tiktokFinalYoutubePreflightRefreshTimer = 0;
 let tiktokCaptionLogs = [];
 let tiktokPublishLogs = [];
 let tiktokCaptionRunning = false;
@@ -1169,77 +1422,93 @@ const estimateProgressPercent = (info = {}, state = '') => {
   return 10;
 };
 
+const hydrateStoredAccessKey = ({
+  rememberFlag = '',
+  storageKey = '',
+  checkbox = null,
+  input = null,
+  assign = null
+} = {}) => {
+  const remember = localStorage.getItem(rememberFlag) === 'true';
+  if (checkbox) checkbox.checked = remember;
+  const stored = String(localStorage.getItem(storageKey) || '').trim();
+  if (!stored) return '';
+  if (input) input.value = stored;
+  if (typeof assign === 'function') assign(stored);
+  return stored;
+};
+
 const loadStoredKey = () => {
-  const remember = localStorage.getItem('rememberKey') === 'true';
-  rememberKeyCheckbox.checked = remember;
-  if (remember) {
-    const key = localStorage.getItem('kieApiKey') || '';
-    if (key) {
-      apiKeyInput.value = key;
-      currentApiKey = key;
-      unlockApp(true);
+  const key = hydrateStoredAccessKey({
+    rememberFlag: 'rememberKey',
+    storageKey: 'kieApiKey',
+    checkbox: rememberKeyCheckbox,
+    input: apiKeyInput,
+    assign: (value) => {
+      currentApiKey = value;
     }
-  }
+  });
+  if (key) unlockApp(true);
 
-  const rememberOpenai = localStorage.getItem('rememberOpenai') === 'true';
-  rememberOpenaiCheckbox.checked = rememberOpenai;
-  if (rememberOpenai) {
-    const oKey = localStorage.getItem(OPENAI_KEY) || '';
-    if (oKey) {
-      openaiKeyInput.value = oKey;
-      currentOpenaiKey = oKey;
+  hydrateStoredAccessKey({
+    rememberFlag: 'rememberOpenai',
+    storageKey: OPENAI_KEY,
+    checkbox: rememberOpenaiCheckbox,
+    input: openaiKeyInput,
+    assign: (value) => {
+      currentOpenaiKey = value;
     }
-  }
+  });
 
-  const rememberFreesound = localStorage.getItem('rememberFreesound') === 'true';
-  if (rememberFreesoundCheckbox) rememberFreesoundCheckbox.checked = rememberFreesound;
-  if (rememberFreesound) {
-    const fsKey = localStorage.getItem(FREESOUND_KEY) || '';
-    if (fsKey && freesoundKeyInput) {
-      freesoundKeyInput.value = fsKey;
-      currentFreesoundKey = fsKey;
+  hydrateStoredAccessKey({
+    rememberFlag: 'rememberFreesound',
+    storageKey: FREESOUND_KEY,
+    checkbox: rememberFreesoundCheckbox,
+    input: freesoundKeyInput,
+    assign: (value) => {
+      currentFreesoundKey = value;
     }
-  }
+  });
 
-  const rememberPexels = localStorage.getItem('rememberPexels') === 'true';
-  if (rememberPexelsCheckbox) rememberPexelsCheckbox.checked = rememberPexels;
-  if (rememberPexels) {
-    const pKey = localStorage.getItem(PEXELS_KEY) || '';
-    if (pKey && pexelsKeyInput) {
-      pexelsKeyInput.value = pKey;
-      currentPexelsKey = pKey;
+  hydrateStoredAccessKey({
+    rememberFlag: 'rememberPexels',
+    storageKey: PEXELS_KEY,
+    checkbox: rememberPexelsCheckbox,
+    input: pexelsKeyInput,
+    assign: (value) => {
+      currentPexelsKey = value;
     }
-  }
+  });
 
-  const rememberPixabay = localStorage.getItem('rememberPixabay') === 'true';
-  if (rememberPixabayCheckbox) rememberPixabayCheckbox.checked = rememberPixabay;
-  if (rememberPixabay) {
-    const pbKey = localStorage.getItem(PIXABAY_KEY) || '';
-    if (pbKey && pixabayKeyInput) {
-      pixabayKeyInput.value = pbKey;
-      currentPixabayKey = pbKey;
+  hydrateStoredAccessKey({
+    rememberFlag: 'rememberPixabay',
+    storageKey: PIXABAY_KEY,
+    checkbox: rememberPixabayCheckbox,
+    input: pixabayKeyInput,
+    assign: (value) => {
+      currentPixabayKey = value;
     }
-  }
+  });
 
-  const rememberYoutube = localStorage.getItem('rememberYoutube') === 'true';
-  if (rememberYoutubeCheckbox) rememberYoutubeCheckbox.checked = rememberYoutube;
-  if (rememberYoutube) {
-    const ytKey = localStorage.getItem(YOUTUBE_KEY) || '';
-    if (ytKey && youtubeKeyInput) {
-      youtubeKeyInput.value = ytKey;
-      currentYoutubeKey = ytKey;
+  hydrateStoredAccessKey({
+    rememberFlag: 'rememberYoutube',
+    storageKey: YOUTUBE_KEY,
+    checkbox: rememberYoutubeCheckbox,
+    input: youtubeKeyInput,
+    assign: (value) => {
+      currentYoutubeKey = value;
     }
-  }
+  });
 
-  const rememberElevenlabs = localStorage.getItem('rememberElevenlabs') === 'true';
-  if (rememberElevenlabsCheckbox) rememberElevenlabsCheckbox.checked = rememberElevenlabs;
-  if (rememberElevenlabs) {
-    const eKey = localStorage.getItem(ELEVENLABS_KEY) || '';
-    if (eKey && elevenlabsKeyInput) {
-      elevenlabsKeyInput.value = eKey;
-      currentElevenlabsKey = eKey;
+  hydrateStoredAccessKey({
+    rememberFlag: 'rememberElevenlabs',
+    storageKey: ELEVENLABS_KEY,
+    checkbox: rememberElevenlabsCheckbox,
+    input: elevenlabsKeyInput,
+    assign: (value) => {
+      currentElevenlabsKey = value;
     }
-  }
+  });
   const storedVoice = localStorage.getItem(ELEVENLABS_VOICE) || '';
   if (storedVoice) {
     currentElevenlabsVoice = storedVoice;
@@ -1286,27 +1555,262 @@ const startCreditPolling = () => {
 
 const loadSaves = () => {
   try {
+    const diskItems = window.electronAPI?.loadSavedProjectsSync?.();
+    const diskList = Array.isArray(diskItems?.items) ? diskItems.items : [];
+    if (diskList.length) {
+      try {
+        localStorage.setItem(SAVES_KEY, JSON.stringify(diskList));
+      } catch (_err) {}
+      debugTrace('saves.load', {
+        source: 'disk',
+        count: diskList.length,
+        names: diskList.map((item) => String(item?.name || '').trim()).filter(Boolean).slice(0, 12)
+      });
+      return diskList;
+    }
     const raw = localStorage.getItem(SAVES_KEY);
     if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    const list = Array.isArray(parsed) ? parsed : [];
+    if (list.length) {
+      try {
+        window.electronAPI?.persistSavedProjectsSync?.(list);
+      } catch (_err) {}
+    }
+    debugTrace('saves.load', {
+      source: 'localStorage',
+      count: list.length,
+      names: list.map((item) => String(item?.name || '').trim()).filter(Boolean).slice(0, 12)
+    });
+    return list;
   } catch (err) {
     log('Could not read saves.');
     return [];
   }
 };
 
+const getSaveDataRichness = (type = 'image', data = {}) => {
+  const safe = data && typeof data === 'object' ? data : {};
+  if (type === 'tiktok') {
+    const automation = safe.automation && typeof safe.automation === 'object' ? safe.automation : {};
+    const storyboard = safe.storyboard && typeof safe.storyboard === 'object' ? safe.storyboard : {};
+    const exportState = safe.export && typeof safe.export === 'object' ? safe.export : {};
+    const finalState = exportState.final && typeof exportState.final === 'object' ? exportState.final : {};
+    const captionState = exportState.captions && typeof exportState.captions === 'object' ? exportState.captions : {};
+    return (
+      (Array.isArray(safe.scripts) ? safe.scripts.length : 0) * 6 +
+      (Array.isArray(automation.runs) ? automation.runs.length : 0) * 10 +
+      (Array.isArray(automation.concepts) ? automation.concepts.length : 0) * 7 +
+      (Array.isArray(automation.retrievalEvents) ? automation.retrievalEvents.length : 0) * 4 +
+      (Array.isArray(automation.uploadHistory) ? automation.uploadHistory.length : 0) * 3 +
+      (Array.isArray(automation.events) ? automation.events.length : 0) * 1 +
+      (Array.isArray(storyboard.scenes) ? storyboard.scenes.length : 0) * 3 +
+      (safe.audio ? 5 : 0) +
+      (String(finalState.status || '').trim() ? 2 : 0) +
+      (String(exportState.finalPreviewPath || '').trim() ? 4 : 0) +
+      (String(captionState.captionText || '').trim() ? 1 : 0)
+    );
+  }
+  if (type === 'batch') {
+    return Object.keys(safe).length + (Array.isArray(safe.rows) ? safe.rows.length : 0) * 3;
+  }
+  if (type === 'video') {
+    return Object.keys(safe).length + (Array.isArray(safe.shots) ? safe.shots.length : 0) * 3;
+  }
+  return Object.keys(safe).length + (Array.isArray(safe.images) ? safe.images.length : 0) * 2;
+};
+
+const choosePreferredSaveRecord = (current, incoming) => {
+  if (!current) return incoming;
+  if (!incoming) return current;
+  const currentType = String(current.type || 'image').trim() || 'image';
+  const incomingType = String(incoming.type || 'image').trim() || 'image';
+  const currentRichness = getSaveDataRichness(currentType, current.data || {});
+  const incomingRichness = getSaveDataRichness(incomingType, incoming.data || {});
+  const currentUpdatedAt = Number(current.updatedAt || current.createdAt || 0) || 0;
+  const incomingUpdatedAt = Number(incoming.updatedAt || incoming.createdAt || 0) || 0;
+  if (currentRichness === 0 && incomingRichness > 0) return incoming;
+  if (incomingRichness === 0 && currentRichness > 0) return current;
+  if (Math.abs(currentRichness - incomingRichness) >= 8) {
+    return incomingRichness > currentRichness ? incoming : current;
+  }
+  return incomingUpdatedAt >= currentUpdatedAt ? incoming : current;
+};
+
+const mergeSavedProjectLists = (primary = [], secondary = []) => {
+  const byKey = new Map();
+  const absorb = (entry) => {
+    if (!entry || typeof entry !== 'object') return;
+    const name = String(entry.name || '').trim();
+    const type = String(entry.type || 'image').trim() || 'image';
+    if (!name) return;
+    const key = `${type}::${name}`;
+    const existing = byKey.get(key) || null;
+    byKey.set(key, choosePreferredSaveRecord(existing, entry));
+  };
+  (Array.isArray(primary) ? primary : []).forEach(absorb);
+  (Array.isArray(secondary) ? secondary : []).forEach(absorb);
+  return Array.from(byKey.values())
+    .sort((a, b) => (Number(b?.updatedAt || b?.createdAt || 0) || 0) - (Number(a?.updatedAt || a?.createdAt || 0) || 0))
+    .slice(0, 50);
+};
+
+const syncSavesFromDisk = ({ persistLocal = true } = {}) => {
+  try {
+    const diskItems = window.electronAPI?.loadSavedProjectsSync?.();
+    const diskList = Array.isArray(diskItems?.items) ? diskItems.items : [];
+    if (!diskList.length) return saves;
+    const merged = mergeSavedProjectLists(diskList, saves);
+    const changed = JSON.stringify(merged.map((entry) => `${entry?.type || 'image'}::${entry?.name || ''}::${entry?.updatedAt || entry?.createdAt || 0}`)) !==
+      JSON.stringify((saves || []).map((entry) => `${entry?.type || 'image'}::${entry?.name || ''}::${entry?.updatedAt || entry?.createdAt || 0}`));
+    saves = merged;
+    if (persistLocal) {
+      try {
+        localStorage.setItem(SAVES_KEY, JSON.stringify(merged));
+      } catch (_err) {}
+    }
+    if (changed) {
+      debugTrace('saves.sync', {
+        count: merged.length,
+        names: merged.map((item) => String(item?.name || '').trim()).filter(Boolean).slice(0, 12)
+      });
+    }
+    return merged;
+  } catch (_err) {
+    return saves;
+  }
+};
+
+const reconcileSessionSavesWithPersisted = () => {
+  if (!Array.isArray(sessionSaves) || !sessionSaves.length || !Array.isArray(saves) || !saves.length) return;
+  let changed = false;
+  sessionSaves = sessionSaves.map((sessionRecord) => {
+    if (!sessionRecord || typeof sessionRecord !== 'object') return sessionRecord;
+    const persisted = saves.find(
+      (entry) => String(entry?.name || '') === String(sessionRecord.name || '') && String(entry?.type || 'image') === String(sessionRecord.type || 'image')
+    );
+    if (!persisted) return sessionRecord;
+    const persistedUpdatedAt = Number(persisted.updatedAt || persisted.createdAt || 0) || 0;
+    const sessionUpdatedAt = Number(sessionRecord.updatedAt || sessionRecord.createdAt || 0) || 0;
+    if (persistedUpdatedAt <= sessionUpdatedAt) return sessionRecord;
+    changed = true;
+    return {
+      ...sessionRecord,
+      data: JSON.parse(JSON.stringify(persisted.data || {})),
+      updatedAt: persistedUpdatedAt,
+      createdAt: persisted.createdAt || sessionRecord.createdAt || Date.now()
+    };
+  });
+  if (changed) {
+    persistSessionSaves(sessionSaves.slice(0, 50));
+  }
+};
+
+const recoverSavesFromStorageSnapshot = async () => {
+  if (!window.electronAPI?.recoverLocalStorageArraySnapshot) return false;
+  if (Array.isArray(saves) && saves.length) return false;
+  try {
+    const recovery = await window.electronAPI.recoverLocalStorageArraySnapshot(SAVES_KEY);
+    const items = Array.isArray(recovery?.items) ? recovery.items : [];
+    if (!items.length) return false;
+    persistSaves(items.slice(0, 50));
+    renderSavesList();
+    renderOpenTabs();
+    setStatus(`Recovered ${items.length} saved project${items.length === 1 ? '' : 's'} from local storage snapshot.`);
+    log(`Recovered ${items.length} saves from local storage snapshot.`);
+    return true;
+  } catch (_err) {
+    return false;
+  }
+};
+
+const recoverAvatarsFromStorageSnapshot = async () => {
+  if (!window.electronAPI?.recoverLocalStorageArraySnapshot) return false;
+  if (Array.isArray(avatars) && avatars.length) return false;
+  try {
+    const recovery = await window.electronAPI.recoverLocalStorageArraySnapshot(AVATARS_KEY);
+    const items = Array.isArray(recovery?.items) ? recovery.items : [];
+    if (!items.length) return false;
+    localStorage.setItem(AVATARS_KEY, JSON.stringify(items));
+    avatars = loadAvatars();
+    if (!avatars.length) return false;
+    persistAvatars(avatars.slice(0, 50));
+    renderAvatarOptions();
+    renderAvatarList();
+    renderClothesPicker();
+    setStatus(`Recovered ${avatars.length} avatar${avatars.length === 1 ? '' : 's'} from local storage snapshot.`);
+    log(`Recovered ${avatars.length} avatar${avatars.length === 1 ? '' : 's'} from local storage snapshot.`);
+    return true;
+  } catch (_err) {
+    return false;
+  }
+};
+
+const recoverObjectsFromStorageSnapshot = async () => {
+  if (!window.electronAPI?.recoverLocalStorageArraySnapshot) return false;
+  if (Array.isArray(objects) && objects.length) return false;
+  try {
+    const recovery = await window.electronAPI.recoverLocalStorageArraySnapshot(OBJECTS_KEY);
+    const items = Array.isArray(recovery?.items) ? recovery.items : [];
+    if (!items.length) return false;
+    localStorage.setItem(OBJECTS_KEY, JSON.stringify(items));
+    objects = loadObjects();
+    if (!objects.length) return false;
+    persistObjects(objects.slice(0, 50));
+    renderObjectOptions();
+    renderObjectList();
+    renderObjectImages();
+    setStatus(`Recovered ${objects.length} object${objects.length === 1 ? '' : 's'} from local storage snapshot.`);
+    log(`Recovered ${objects.length} object${objects.length === 1 ? '' : 's'} from local storage snapshot.`);
+    return true;
+  } catch (_err) {
+    return false;
+  }
+};
+
 const persistSaves = (list) => {
-  saves = list;
-  localStorage.setItem(SAVES_KEY, JSON.stringify(list));
+  syncSavesFromDisk({ persistLocal: false });
+  const merged = mergeSavedProjectLists(list, saves);
+  saves = merged;
+  localStorage.setItem(SAVES_KEY, JSON.stringify(merged));
+  debugTrace('saves.persist', {
+    incoming: Array.isArray(list) ? list.length : 0,
+    merged: merged.length,
+    names: merged.map((item) => String(item?.name || '').trim()).filter(Boolean).slice(0, 12)
+  });
+  try {
+    const result = window.electronAPI?.persistSavedProjectsSync?.(merged);
+    if (result && result.success === false) {
+      log(`Could not write saved projects to disk. ${result.error || ''}`.trim());
+    }
+  } catch (err) {
+    log(`Could not write saved projects to disk. ${err?.message || ''}`.trim());
+  }
+  reconcileSessionSavesWithPersisted();
 };
 
 const loadSessionSaves = () => {
+  const readSessionList = (storage, key) => {
+    try {
+      const raw = storage?.getItem(key);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (_err) {
+      return [];
+    }
+  };
   try {
-    const raw = sessionStorage.getItem(SESSION_SAVES_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
+    const sessionItems = readSessionList(sessionStorage, SESSION_SAVES_KEY);
+    if (sessionItems.length) return sessionItems;
+    const backupItems = readSessionList(localStorage, SESSION_SAVES_BACKUP_KEY);
+    if (backupItems.length) {
+      try {
+        sessionStorage.setItem(SESSION_SAVES_KEY, JSON.stringify(backupItems));
+      } catch (_err) {}
+      return backupItems;
+    }
+    return [];
   } catch (err) {
     log('Could not read session saves.');
     return [];
@@ -1316,6 +1820,9 @@ const loadSessionSaves = () => {
 const persistSessionSaves = (list) => {
   sessionSaves = list;
   sessionStorage.setItem(SESSION_SAVES_KEY, JSON.stringify(list));
+  try {
+    localStorage.setItem(SESSION_SAVES_BACKUP_KEY, JSON.stringify(list));
+  } catch (_err) {}
 };
 
 const loadAvatars = () => {
@@ -1362,7 +1869,13 @@ const loadAvatars = () => {
 
 const persistAvatars = (list) => {
   avatars = list;
-  localStorage.setItem(AVATARS_KEY, JSON.stringify(list));
+  try {
+    localStorage.setItem(AVATARS_KEY, JSON.stringify(list));
+    return true;
+  } catch (err) {
+    log(`Could not write avatars. ${err?.message || ''}`.trim());
+    return false;
+  }
 };
 
 const loadObjects = () => {
@@ -1754,34 +2267,535 @@ const persistPresets = (list) => {
   localStorage.setItem(PRESETS_KEY, JSON.stringify(list));
 };
 
-const loadTikTokScripts = () => [];
+const getDefaultTikTokAutomationConfig = () => ({
+  workspaceName: 'Content workspace',
+  profileName: 'Main automation',
+  seedPrompt: '',
+  avatarName: '',
+  audience: '',
+  style: '',
+  videosPerDay: 3,
+  postingScheduleMode: 'follow-generation',
+  postingTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+  postingStartHour: 9,
+  postingEndHour: 21,
+  approvalMode: 'approve-script',
+  memoryStrictness: 'strict',
+  clipAutoAiImages: true,
+  clipAutoSearch: true,
+  clipAutoPick: true,
+  clipYoutubeOnly: false,
+  platforms: {
+    tiktok: true,
+    instagram: false,
+    facebook: false
+  }
+});
+
+const getDefaultTikTokAutomationState = () => ({
+  running: false,
+  generatedByDate: {},
+  cycleCount: 0,
+  cycleStartedAt: '',
+  nextRunAt: '',
+  lastStartedAt: '',
+  lastStoppedAt: '',
+  lastGeneratedAt: '',
+  lastError: '',
+  currentRunId: '',
+  currentStep: '',
+  currentDetail: ''
+});
+
+const clampTikTokAutomationHour = (value, fallback) => {
+  const parsed = Math.floor(Number(value));
+  if (!Number.isFinite(parsed)) return fallback;
+  return Math.max(0, Math.min(23, parsed));
+};
+
+const getTikTokAutomationPostingTimezones = () => {
+  try {
+    if (typeof Intl.supportedValuesOf === 'function') {
+      const zones = Intl.supportedValuesOf('timeZone');
+      if (Array.isArray(zones) && zones.length) return zones;
+    }
+  } catch {}
+  return [
+    'UTC',
+    'Australia/Perth',
+    'Australia/Sydney',
+    'Australia/Melbourne',
+    'Australia/Brisbane',
+    'Asia/Singapore',
+    'Asia/Tokyo',
+    'Europe/London',
+    'Europe/Berlin',
+    'America/Los_Angeles',
+    'America/Denver',
+    'America/Chicago',
+    'America/New_York'
+  ];
+};
+
+const ensureTikTokAutomationPostingTimezoneOptions = () => {
+  if (!tiktokAutomationPostingTimezoneSelect) return;
+  if (tiktokAutomationPostingTimezoneSelect.options.length) return;
+  const preferred = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+  const zones = Array.from(new Set([preferred, ...getTikTokAutomationPostingTimezones()]));
+  tiktokAutomationPostingTimezoneSelect.innerHTML = zones
+    .map((zone) => `<option value="${escapeCaptionHtml(zone)}">${escapeCaptionHtml(zone)}</option>`)
+    .join('');
+};
+
+const formatTikTokAutomationHourLabel = (hourValue) => {
+  const hour = Math.max(0, Math.min(23, Math.floor(Number(hourValue) || 0)));
+  const suffix = hour >= 12 ? 'PM' : 'AM';
+  const normalized = hour % 12 || 12;
+  return `${String(hour).padStart(2, '0')}:00 (${normalized}:00 ${suffix})`;
+};
+
+const ensureTikTokAutomationPostingHourOptions = () => {
+  [tiktokAutomationPostingStartInput, tiktokAutomationPostingEndInput].forEach((select) => {
+    if (!select || select.options.length) return;
+    select.innerHTML = Array.from({ length: 24 }, (_value, hour) => {
+      const label = formatTikTokAutomationHourLabel(hour);
+      return `<option value="${hour}">${escapeCaptionHtml(label)}</option>`;
+    }).join('');
+  });
+};
+
+const normalizeTikTokAutomationConfig = (raw = {}) => {
+  const defaults = getDefaultTikTokAutomationConfig();
+  const next = {
+    ...defaults,
+    ...raw,
+    workspaceName: String(raw.workspaceName || defaults.workspaceName).trim() || defaults.workspaceName,
+    profileName: String(raw.profileName || defaults.profileName).trim() || defaults.profileName,
+    seedPrompt: String(raw.seedPrompt ?? ''),
+    avatarName: String(raw.avatarName || '').trim(),
+    audience: String(raw.audience ?? ''),
+    style: String(raw.style ?? ''),
+    videosPerDay: Math.max(1, Math.min(48, Math.floor(Number(raw.videosPerDay) || defaults.videosPerDay))),
+    postingScheduleMode: ['follow-generation', 'spread-window'].includes(String(raw.postingScheduleMode || ''))
+      ? String(raw.postingScheduleMode)
+      : defaults.postingScheduleMode,
+    postingTimezone: String(raw.postingTimezone || defaults.postingTimezone).trim() || defaults.postingTimezone,
+    postingStartHour: clampTikTokAutomationHour(raw.postingStartHour, defaults.postingStartHour),
+    postingEndHour: clampTikTokAutomationHour(raw.postingEndHour, defaults.postingEndHour),
+    approvalMode: ['approve-script', 'approve-final', 'full-auto'].includes(String(raw.approvalMode || ''))
+      ? String(raw.approvalMode)
+      : defaults.approvalMode,
+    memoryStrictness: ['strict', 'balanced', 'relaxed'].includes(String(raw.memoryStrictness || ''))
+      ? String(raw.memoryStrictness)
+      : defaults.memoryStrictness,
+    clipAutoAiImages: raw.clipAutoAiImages !== false,
+    clipAutoSearch: raw.clipAutoSearch !== false,
+    clipAutoPick: raw.clipAutoPick !== false,
+    clipYoutubeOnly: !!raw.clipYoutubeOnly,
+    platforms: {
+      tiktok: raw?.platforms?.tiktok !== false,
+      instagram: !!raw?.platforms?.instagram,
+      facebook: !!raw?.platforms?.facebook
+    }
+  };
+  if (next.postingEndHour <= next.postingStartHour) {
+    next.postingEndHour = Math.min(23, next.postingStartHour + 8);
+  }
+  return next;
+};
+
+const normalizeTikTokAutomationState = (raw = {}) => {
+  const defaults = getDefaultTikTokAutomationState();
+  const generatedByDateRaw =
+    raw && typeof raw.generatedByDate === 'object' && !Array.isArray(raw.generatedByDate) ? raw.generatedByDate : {};
+  const generatedByDate = {};
+  Object.entries(generatedByDateRaw).forEach(([key, value]) => {
+    const safeKey = String(key || '').trim();
+    const safeValue = Math.max(0, Math.floor(Number(value) || 0));
+    if (safeKey) generatedByDate[safeKey] = safeValue;
+  });
+  return {
+    ...defaults,
+    ...raw,
+    generatedByDate,
+    cycleCount: Math.max(0, Math.floor(Number(raw.cycleCount) || 0)),
+    cycleStartedAt: String(raw.cycleStartedAt || '').trim(),
+    running: !!raw.running,
+    nextRunAt: String(raw.nextRunAt || '').trim(),
+    lastStartedAt: String(raw.lastStartedAt || '').trim(),
+    lastStoppedAt: String(raw.lastStoppedAt || '').trim(),
+    lastGeneratedAt: String(raw.lastGeneratedAt || '').trim(),
+    lastError: String(raw.lastError || '').trim(),
+    currentRunId: String(raw.currentRunId || '').trim(),
+    currentStep: String(raw.currentStep || '').trim(),
+    currentDetail: String(raw.currentDetail || '').trim()
+  };
+};
+
+const normalizeTikTokIdeaHistoryEntry = (entry = {}, index = 0) => ({
+  id: String(entry.id || `${Date.now()}-idea-${index}`).trim(),
+  scriptId: String(entry.scriptId || '').trim(),
+  title: String(entry.title || `Idea ${index + 1}`).trim(),
+  hook: String(entry.hook || '').trim(),
+  angle: String(entry.angle || '').trim(),
+  script: String(entry.script || '').trim(),
+  ideaPrompt: String(entry.ideaPrompt || '').trim(),
+  audience: String(entry.audience || '').trim(),
+  style: String(entry.style || '').trim(),
+  source: entry.source === 'automatic' ? 'automatic' : 'manual',
+  status: ['draft', 'queued', 'posted', 'blocked'].includes(String(entry.status || '')) ? String(entry.status) : 'draft',
+  platforms: Array.isArray(entry.platforms) ? entry.platforms.map((platform) => String(platform || '').trim()).filter(Boolean) : [],
+  createdAt: String(entry.createdAt || new Date().toISOString()).trim()
+});
+
+const normalizeTikTokUploadHistoryEntry = (entry = {}, index = 0) => ({
+  id: String(entry.id || `${Date.now()}-upload-${index}`).trim(),
+  platform: ['tiktok', 'instagram', 'facebook'].includes(String(entry.platform || '')) ? String(entry.platform) : 'tiktok',
+  state: ['posted', 'failed', 'pending'].includes(String(entry.state || ''))
+    ? String(entry.state)
+    : entry.success === false
+      ? 'failed'
+      : 'posted',
+  success: entry.success !== false,
+  postId: String(entry.postId || '').trim(),
+  error: String(entry.error || '').trim(),
+  pendingReason: String(entry.pendingReason || '').trim(),
+  caption: String(entry.caption || '').trim(),
+  videoPath: String(entry.videoPath || '').trim(),
+  scriptId: String(entry.scriptId || '').trim(),
+  scriptTitle: String(entry.scriptTitle || '').trim(),
+  createdAt: String(entry.createdAt || new Date().toISOString()).trim()
+});
+
+const normalizeTikTokAutomationEventEntry = (entry = {}, index = 0) => ({
+  id: String(entry.id || `${Date.now()}-event-${index}`).trim(),
+  type: String(entry.type || 'info').trim() || 'info',
+  message: String(entry.message || '').trim(),
+  createdAt: String(entry.createdAt || new Date().toISOString()).trim()
+});
+
+const normalizeTikTokAutomationConceptEntry = (entry = {}, index = 0) => ({
+  id: String(entry.id || `${Date.now()}-concept-${index}`).trim(),
+  runId: String(entry.runId || '').trim(),
+  scriptId: String(entry.scriptId || '').trim(),
+  title: String(entry.title || '').trim(),
+  hook: String(entry.hook || '').trim(),
+  angle: String(entry.angle || '').trim(),
+  topic: String(entry.topic || '').trim(),
+  hookPattern: String(entry.hookPattern || '').trim(),
+  summary: String(entry.summary || '').trim(),
+  tags: Array.isArray(entry.tags) ? entry.tags.map((tag) => String(tag || '').trim()).filter(Boolean).slice(0, 8) : [],
+  seedPrompt: String(entry.seedPrompt || '').trim(),
+  audience: String(entry.audience || '').trim(),
+  style: String(entry.style || '').trim(),
+  source: entry.source === 'automatic' ? 'automatic' : 'manual',
+  status: ['approved', 'blocked', 'seeded'].includes(String(entry.status || '')) ? String(entry.status) : 'approved',
+  embeddingId: String(entry.embeddingId || '').trim(),
+  createdAt: String(entry.createdAt || new Date().toISOString()).trim(),
+  updatedAt: String(entry.updatedAt || entry.createdAt || new Date().toISOString()).trim()
+});
+
+const normalizeTikTokAutomationEmbeddingEntry = (entry = {}, index = 0) => ({
+  id: String(entry.id || `${Date.now()}-embedding-${index}`).trim(),
+  conceptId: String(entry.conceptId || '').trim(),
+  provider: String(entry.provider || 'openai').trim(),
+  model: String(entry.model || TIKTOK_AUTOMATION_EMBEDDING_MODEL).trim(),
+  dimensions: Math.max(1, Math.floor(Number(entry.dimensions) || 0 || TIKTOK_AUTOMATION_EMBEDDING_DIMENSIONS)),
+  vector: Array.isArray(entry.vector)
+    ? entry.vector.map((value) => Number(value)).filter((value) => Number.isFinite(value))
+    : [],
+  sourceText: String(entry.sourceText || '').trim(),
+  createdAt: String(entry.createdAt || new Date().toISOString()).trim(),
+  updatedAt: String(entry.updatedAt || entry.createdAt || new Date().toISOString()).trim()
+});
+
+const normalizeTikTokAutomationRetrievalMatch = (match = {}) => ({
+  conceptId: String(match.conceptId || '').trim(),
+  title: String(match.title || '').trim(),
+  hook: String(match.hook || '').trim(),
+  topic: String(match.topic || '').trim(),
+  score: Number.isFinite(Number(match.score)) ? Number(match.score) : null,
+  reason: String(match.reason || '').trim()
+});
+
+const normalizeTikTokAutomationRetrievalEntry = (entry = {}, index = 0) => ({
+  id: String(entry.id || `${Date.now()}-retrieval-${index}`).trim(),
+  runId: String(entry.runId || '').trim(),
+  testRunKey: String(entry.testRunKey || '').trim(),
+  attemptIndex: Math.max(1, Math.floor(Number(entry.attemptIndex) || 1)),
+  decision: ['accept', 'block'].includes(String(entry.decision || '')) ? String(entry.decision) : 'accept',
+  blockSource: ['exact-title', 'exact-hook', 'lexical', 'semantic', 'none'].includes(String(entry.blockSource || ''))
+    ? String(entry.blockSource)
+    : 'none',
+  threshold: Number.isFinite(Number(entry.threshold)) ? Number(entry.threshold) : null,
+  lexicalThreshold: Number.isFinite(Number(entry.lexicalThreshold)) ? Number(entry.lexicalThreshold) : null,
+  topicThreshold: Number.isFinite(Number(entry.topicThreshold)) ? Number(entry.topicThreshold) : null,
+  reason: String(entry.reason || '').trim(),
+  clusterSummary: Array.isArray(entry.clusterSummary)
+    ? entry.clusterSummary.map((item) => ({
+        label: String(item?.label || '').trim(),
+        count: Math.max(0, Math.floor(Number(item?.count) || 0))
+      })).filter((item) => item.label)
+    : [],
+  queryConcept: normalizeTikTokAutomationConceptEntry(entry.queryConcept || {}, index),
+  embeddingId: String(entry.embeddingId || '').trim(),
+  blockedConceptId: String(entry.blockedConceptId || '').trim(),
+  blockedConceptTitle: String(entry.blockedConceptTitle || '').trim(),
+  lexicalBreakdown: entry?.lexicalBreakdown && typeof entry.lexicalBreakdown === 'object'
+    ? {
+        titleScore: Number.isFinite(Number(entry.lexicalBreakdown.titleScore)) ? Number(entry.lexicalBreakdown.titleScore) : null,
+        hookScore: Number.isFinite(Number(entry.lexicalBreakdown.hookScore)) ? Number(entry.lexicalBreakdown.hookScore) : null,
+        topicScore: Number.isFinite(Number(entry.lexicalBreakdown.topicScore)) ? Number(entry.lexicalBreakdown.topicScore) : null,
+        combinedScore: Number.isFinite(Number(entry.lexicalBreakdown.combinedScore)) ? Number(entry.lexicalBreakdown.combinedScore) : null,
+        summaryScore: Number.isFinite(Number(entry.lexicalBreakdown.summaryScore)) ? Number(entry.lexicalBreakdown.summaryScore) : null,
+        titleBigramScore: Number.isFinite(Number(entry.lexicalBreakdown.titleBigramScore)) ? Number(entry.lexicalBreakdown.titleBigramScore) : null,
+        topicBigramScore: Number.isFinite(Number(entry.lexicalBreakdown.topicBigramScore)) ? Number(entry.lexicalBreakdown.topicBigramScore) : null,
+        weightedScore: Number.isFinite(Number(entry.lexicalBreakdown.weightedScore)) ? Number(entry.lexicalBreakdown.weightedScore) : null
+      }
+    : null,
+  retryContext: entry?.retryContext && typeof entry.retryContext === 'object'
+    ? {
+        blockedTitles: Array.isArray(entry.retryContext.blockedTitles)
+          ? entry.retryContext.blockedTitles.map((item) => String(item || '').trim()).filter(Boolean)
+          : [],
+        blockedTopics: Array.isArray(entry.retryContext.blockedTopics)
+          ? entry.retryContext.blockedTopics.map((item) => String(item || '').trim()).filter(Boolean)
+          : [],
+        crowdedTopics: Array.isArray(entry.retryContext.crowdedTopics)
+          ? entry.retryContext.crowdedTopics.map((item) => String(item || '').trim()).filter(Boolean)
+          : []
+      }
+    : null,
+  recentMatches: Array.isArray(entry.recentMatches)
+    ? entry.recentMatches.map((item) => normalizeTikTokAutomationRetrievalMatch(item)).filter((item) => item.conceptId || item.title)
+    : [],
+  lexicalMatches: Array.isArray(entry.lexicalMatches)
+    ? entry.lexicalMatches.map((item) => normalizeTikTokAutomationRetrievalMatch(item)).filter((item) => item.conceptId || item.title)
+    : [],
+  semanticMatches: Array.isArray(entry.semanticMatches)
+    ? entry.semanticMatches.map((item) => normalizeTikTokAutomationRetrievalMatch(item)).filter((item) => item.conceptId || item.title)
+    : [],
+  createdAt: String(entry.createdAt || new Date().toISOString()).trim()
+});
+
+const normalizeTikTokAutomationRunStage = (stageKey = '', stage = {}) => ({
+  key: String(stage.key || stageKey || '').trim(),
+  title: String(stage.title || stageKey || 'Stage').trim(),
+  status: ['idle', 'running', 'success', 'blocked', 'error', 'skipped', 'pending'].includes(String(stage.status || ''))
+    ? String(stage.status)
+    : 'idle',
+  detail: String(stage.detail || '').trim(),
+  output:
+    stage.output === undefined || stage.output === null
+      ? ''
+      : Array.isArray(stage.output) || typeof stage.output === 'object'
+        ? JSON.parse(JSON.stringify(stage.output))
+        : stage.output,
+  createdAt: String(stage.createdAt || new Date().toISOString()).trim(),
+  updatedAt: String(stage.updatedAt || stage.createdAt || new Date().toISOString()).trim()
+});
+
+const normalizeTikTokAutomationRunEntry = (entry = {}, index = 0) => {
+  const defaultStages = {
+    seed: normalizeTikTokAutomationRunStage('seed', { title: 'Seed brief' }),
+    concept: normalizeTikTokAutomationRunStage('concept', { title: 'Concept generation' }),
+    embedding: normalizeTikTokAutomationRunStage('embedding', { title: 'Embedding' }),
+    retrieval: normalizeTikTokAutomationRunStage('retrieval', { title: 'Retrieval' }),
+    memory: normalizeTikTokAutomationRunStage('memory', { title: 'Memory check' }),
+    script: normalizeTikTokAutomationRunStage('script', { title: 'Script output' }),
+    storyboard: normalizeTikTokAutomationRunStage('storyboard', { title: 'Storyboard' }),
+    audio: normalizeTikTokAutomationRunStage('audio', { title: 'Voice / audio' }),
+    assets: normalizeTikTokAutomationRunStage('assets', { title: 'Assets' }),
+    final: normalizeTikTokAutomationRunStage('final', { title: 'Video export' }),
+    avatar: normalizeTikTokAutomationRunStage('avatar', { title: 'Avatar processing' }),
+    final_render: normalizeTikTokAutomationRunStage('final_render', { title: 'Final render' }),
+    caption: normalizeTikTokAutomationRunStage('caption', { title: 'Timed captions' }),
+    zoom: normalizeTikTokAutomationRunStage('zoom', { title: 'Intro zoom' }),
+    sfx: normalizeTikTokAutomationRunStage('sfx', { title: 'SFX mix' }),
+    publish: normalizeTikTokAutomationRunStage('publish', { title: 'Publishing' })
+  };
+  const rawStages = entry?.stages && typeof entry.stages === 'object' ? entry.stages : {};
+  Object.keys(defaultStages).forEach((key) => {
+    defaultStages[key] = normalizeTikTokAutomationRunStage(key, {
+      ...defaultStages[key],
+      ...(rawStages[key] || {})
+    });
+  });
+  return {
+    id: String(entry.id || `${Date.now()}-run-${index}`).trim(),
+    reason: String(entry.reason || '').trim(),
+    status: ['running', 'generated', 'posted', 'blocked', 'failed', 'paused'].includes(String(entry.status || ''))
+      ? String(entry.status)
+      : 'running',
+    title: String(entry.title || '').trim(),
+    seedPrompt: String(entry.seedPrompt || '').trim(),
+    avatarName: String(entry.avatarName || '').trim(),
+    cycleId: String(entry.cycleId || entry.cycleStartedAt || '').trim(),
+    cycleStartedAt: String(entry.cycleStartedAt || '').trim(),
+    conceptId: String(entry.conceptId || '').trim(),
+    retrievalEventId: String(entry.retrievalEventId || '').trim(),
+    scriptId: String(entry.scriptId || '').trim(),
+    createdAt: String(entry.createdAt || new Date().toISOString()).trim(),
+    updatedAt: String(entry.updatedAt || entry.createdAt || new Date().toISOString()).trim(),
+    completedAt: String(entry.completedAt || '').trim(),
+    blockedBy: String(entry.blockedBy || '').trim(),
+    blockedScore: Number.isFinite(Number(entry.blockedScore)) ? Number(entry.blockedScore) : null,
+    error: String(entry.error || '').trim(),
+    platforms: Array.isArray(entry.platforms) ? entry.platforms.map((item) => String(item || '').trim()).filter(Boolean) : [],
+    thumbUrl: String(entry.thumbUrl || '').trim(),
+    stages: defaultStages
+  };
+};
+
+const persistTikTokAutomationLocalState = () => {
+  try {
+    localStorage.setItem(
+      TIKTOK_AUTOMATION_STATE_KEY,
+      JSON.stringify({
+        mode: tiktokMode,
+        config: tiktokAutomationConfig,
+        state: tiktokAutomationState,
+        ideaHistory: tiktokAutomationIdeaHistory,
+        uploadHistory: tiktokAutomationUploadHistory,
+        events: tiktokAutomationEvents,
+        runs: tiktokAutomationRuns,
+        concepts: tiktokAutomationConceptMemory,
+        embeddings: tiktokAutomationEmbeddings,
+        retrievalEvents: tiktokAutomationRetrievalEvents,
+        view: tiktokAutomationView,
+        memoryExplorerView: tiktokAutomationMemoryExplorerView
+      })
+    );
+  } catch (_err) {}
+};
+
+const loadTikTokAutomationLocalState = () => {
+  try {
+    const raw = localStorage.getItem(TIKTOK_AUTOMATION_STATE_KEY);
+    if (!raw) {
+      tiktokMode = 'manual';
+      tiktokAutomationConfig = normalizeTikTokAutomationConfig();
+      tiktokAutomationState = normalizeTikTokAutomationState();
+      tiktokAutomationIdeaHistory = [];
+      tiktokAutomationUploadHistory = [];
+      tiktokAutomationEvents = [];
+      tiktokAutomationRuns = [];
+      tiktokAutomationConceptMemory = [];
+      tiktokAutomationEmbeddings = [];
+      tiktokAutomationRetrievalEvents = [];
+      tiktokAutomationView = 'run';
+      tiktokAutomationMemoryExplorerView = 'history';
+      return;
+    }
+    const parsed = JSON.parse(raw);
+    tiktokMode = parsed?.mode === 'automatic' ? 'automatic' : 'manual';
+    tiktokAutomationConfig = normalizeTikTokAutomationConfig(parsed?.config || {});
+    tiktokAutomationState = normalizeTikTokAutomationState(parsed?.state || {});
+    tiktokAutomationIdeaHistory = Array.isArray(parsed?.ideaHistory)
+      ? parsed.ideaHistory.map((entry, index) => normalizeTikTokIdeaHistoryEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_IDEA_LIMIT)
+      : [];
+    tiktokAutomationUploadHistory = Array.isArray(parsed?.uploadHistory)
+      ? parsed.uploadHistory.map((entry, index) => normalizeTikTokUploadHistoryEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_UPLOAD_LIMIT)
+      : [];
+    tiktokAutomationEvents = Array.isArray(parsed?.events)
+      ? parsed.events.map((entry, index) => normalizeTikTokAutomationEventEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_EVENT_LIMIT)
+      : [];
+    tiktokAutomationRuns = Array.isArray(parsed?.runs)
+      ? parsed.runs.map((entry, index) => normalizeTikTokAutomationRunEntry(entry, index)).slice(0, 40)
+      : [];
+    tiktokAutomationConceptMemory = Array.isArray(parsed?.concepts)
+      ? parsed.concepts.map((entry, index) => normalizeTikTokAutomationConceptEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_CONCEPT_LIMIT)
+      : [];
+    tiktokAutomationEmbeddings = Array.isArray(parsed?.embeddings)
+      ? parsed.embeddings.map((entry, index) => normalizeTikTokAutomationEmbeddingEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_EMBEDDING_LIMIT)
+      : [];
+    tiktokAutomationRetrievalEvents = Array.isArray(parsed?.retrievalEvents)
+      ? parsed.retrievalEvents.map((entry, index) => normalizeTikTokAutomationRetrievalEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_RETRIEVAL_LIMIT)
+      : [];
+    tiktokAutomationView = ['run', 'settings', 'test', 'memory'].includes(parsed?.view) ? parsed.view : 'run';
+    tiktokAutomationMemoryExplorerView = ['history', 'concepts', 'retrieval', 'embeddings'].includes(parsed?.memoryExplorerView)
+      ? parsed.memoryExplorerView
+      : 'history';
+  } catch (_err) {
+    tiktokMode = 'manual';
+    tiktokAutomationConfig = normalizeTikTokAutomationConfig();
+    tiktokAutomationState = normalizeTikTokAutomationState();
+    tiktokAutomationIdeaHistory = [];
+    tiktokAutomationUploadHistory = [];
+    tiktokAutomationEvents = [];
+    tiktokAutomationRuns = [];
+    tiktokAutomationConceptMemory = [];
+    tiktokAutomationEmbeddings = [];
+    tiktokAutomationRetrievalEvents = [];
+    tiktokAutomationView = 'run';
+    tiktokAutomationMemoryExplorerView = 'history';
+  }
+};
+
+const loadTikTokScripts = () => {
+  try {
+    const raw = localStorage.getItem(TIKTOK_SCRIPT_MEMORY_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    return parsed.map((entry) => ({ ...entry }));
+  } catch (_err) {
+    return [];
+  }
+};
 
 const persistTikTokScripts = (list) => {
-  tiktokScripts = list;
+  tiktokScripts = Array.isArray(list) ? list.map((entry) => ({ ...entry })) : [];
+  try {
+    localStorage.setItem(TIKTOK_SCRIPT_MEMORY_KEY, JSON.stringify(tiktokScripts));
+  } catch (_err) {}
   scheduleSave();
 };
 
 const getCombinedSaves = () => {
-  const combined = [
-    ...sessionSaves.map((s) => ({ ...s, session: true })),
-    ...saves.map((s) => ({ ...s, session: false }))
-  ];
-  return combined.sort((a, b) => (b.updatedAt || b.createdAt || 0) - (a.updatedAt || a.createdAt || 0));
+  syncSavesFromDisk();
+  reconcileSessionSavesWithPersisted();
+  const byKey = new Map();
+  saves.forEach((entry) => {
+    const name = String(entry?.name || '').trim();
+    const type = String(entry?.type || 'image').trim() || 'image';
+    if (!name) return;
+    byKey.set(`${type}::${name}`, { ...entry, session: false });
+  });
+  sessionSaves.forEach((entry) => {
+    const name = String(entry?.name || '').trim();
+    const type = String(entry?.type || 'image').trim() || 'image';
+    if (!name) return;
+    const key = `${type}::${name}`;
+    const existing = byKey.get(key) || null;
+    const preferred = choosePreferredSaveRecord(existing, { ...entry, session: true });
+    byKey.set(key, preferred);
+  });
+  return Array.from(byKey.values()).sort(
+    (a, b) => (Number(b?.updatedAt || b?.createdAt || 0) || 0) - (Number(a?.updatedAt || a?.createdAt || 0) || 0)
+  );
 };
 
-const findSaveByName = (name) => {
+const findSaveByName = (name, { preferSession = true } = {}) => {
   if (!name) return { save: null, session: false };
-  const session = sessionSaves.find((s) => s.name === name);
-  if (session) return { save: session, session: true };
+  if (preferSession) {
+    const session = sessionSaves.find((s) => s.name === name);
+    if (session) return { save: session, session: true };
+    const persisted = saves.find((s) => s.name === name);
+    if (persisted) return { save: persisted, session: false };
+    return { save: null, session: false };
+  }
   const persisted = saves.find((s) => s.name === name);
   if (persisted) return { save: persisted, session: false };
+  const session = sessionSaves.find((s) => s.name === name);
+  if (session) return { save: session, session: true };
   return { save: null, session: false };
 };
 
 const getSaveTypeLabel = (type) => {
   if (type === 'batch') return 'Batch';
   if (type === 'video') return 'Sora Video';
-  if (type === 'tiktok') return 'TikTok Script';
+  if (type === 'tiktok') return 'Short-Form';
   if (type === 'avatar') return 'Avatar';
   return 'Image';
 };
@@ -1852,6 +2866,7 @@ const persistSessionSaveAsPermanent = (record) => {
   };
   saves.unshift(savedRecord);
   persistSaves(saves.slice(0, 50));
+  setActiveSaveDisplay();
   renderSavesList();
   return savedRecord;
 };
@@ -1872,6 +2887,7 @@ const persistSessionSaveToExisting = (record) => {
   };
   saves[idx] = updated;
   persistSaves(saves.slice(0, 50));
+  setActiveSaveDisplay();
   renderSavesList();
   return updated;
 };
@@ -1985,11 +3001,21 @@ const confirmSaveSessionTab = (record) => {
 
 const activateSaveRecord = (record, { session = false, reason = 'tab' } = {}) => {
   if (!record) return;
+  debugTrace('save.activate.start', {
+    name: String(record.name || '').trim(),
+    type: String(record.type || 'image').trim(),
+    session,
+    reason,
+    runs: Number(record?.data?.automation?.runs?.length || 0),
+    concepts: Number(record?.data?.automation?.concepts?.length || 0),
+    view: String(record?.data?.automation?.view || '').trim(),
+    mode: String(record?.data?.automation?.mode || '').trim()
+  });
   if (activeSaveName && activeSaveName !== record.name) {
     captureActiveSaveState();
   }
   setActiveSave(record.name, { session, skipCapture: true });
-  const type = record.type || 'image';
+  const type = String(record.type || 'image').trim().toLowerCase() || 'image';
   if (type === 'batch') {
     applyBatchState(record.data || {});
     setCreateView('batch');
@@ -1997,8 +3023,51 @@ const activateSaveRecord = (record, { session = false, reason = 'tab' } = {}) =>
     applyVideoState(record.data || {});
     setCreateView('video');
   } else if (type === 'tiktok') {
-    applyTikTokState(record.data || {});
-    setCreateView('tiktok');
+    saveRestoreInProgress = true;
+    let usedFallback = false;
+    try {
+      setActiveView('builder', { force: true, reason });
+      setCreateView('tiktok', { skipTikTokInit: true });
+      const restoreResult = restoreTikTokProjectState(record.data || {});
+      if (!restoreResult.ok) {
+        throw restoreResult.fallbackError || restoreResult.error || new Error('Failed to restore saved Short-Form project.');
+      }
+      usedFallback = !!restoreResult.usedFallback;
+      if (usedFallback) {
+        setStatus('Opened with Short-Form recovery mode. Some invalid saved fields were reset.', true);
+        debugTrace('save.activate.fallback', {
+          name: String(record.name || '').trim(),
+          reason: String(reason || '').trim()
+        });
+      }
+      debugTrace('save.activate.afterApply', buildTikTokAutomationDebugSnapshot({
+        name: String(record.name || '').trim(),
+        session,
+        reason
+      }));
+    } catch (err) {
+      console.error('[short-form] failed to restore saved project', err);
+      setStatus(err?.message || 'Failed to open saved Short-Form project.', true);
+      debugTrace('save.activate.error', {
+        name: String(record.name || '').trim(),
+        message: String(err?.message || err || '').trim()
+      });
+    } finally {
+      saveRestoreInProgress = false;
+      if (activeSaveName && !usedFallback) {
+        startAutosave();
+      } else if (usedFallback) {
+        stopAutosave();
+      }
+      setActiveSaveDisplay();
+      renderOpenTabs();
+      debugTrace('save.activate.finally', buildTikTokAutomationDebugSnapshot({
+        name: String(record.name || '').trim(),
+        session,
+        reason
+      }));
+    }
+    return;
   } else {
     applyState(record.data || {});
     setCreateView('image');
@@ -2008,14 +3077,88 @@ const activateSaveRecord = (record, { session = false, reason = 'tab' } = {}) =>
 
 const openSaveInSession = (save) => {
   if (!save) return null;
+  debugTrace('save.openInSession.start', {
+    name: String(save.name || '').trim(),
+    type: String(save.type || 'image').trim(),
+    runs: Number(save?.data?.automation?.runs?.length || 0),
+    concepts: Number(save?.data?.automation?.concepts?.length || 0)
+  });
+  if ((String(save.type || 'image').trim().toLowerCase() || 'image') === 'tiktok') {
+    let existing = sessionSaves.find((s) => s.name === save.name && s.type === save.type);
+    const record = {
+      id: existing?.id || generateSessionId(),
+      name: save.name,
+      type: save.type || 'image',
+      data: JSON.parse(JSON.stringify(save.data || {})),
+      updatedAt: Number(save.updatedAt || Date.now()) || Date.now(),
+      createdAt: save.createdAt || existing?.createdAt || Date.now(),
+      session: true
+    };
+    if (existing) {
+      sessionSaves = sessionSaves.map((s) => (s === existing ? record : s));
+    } else {
+      sessionSaves.unshift(record);
+    }
+    persistSessionSaves(sessionSaves.slice(0, 50));
+    saveRestoreInProgress = true;
+    setActiveSave(record.name, { session: true, skipCapture: true });
+    setActiveView('builder', { force: true, reason: existing ? 'activate-existing' : 'activate-new' });
+    setCreateView('tiktok', { skipTikTokInit: true });
+    let usedFallback = false;
+    try {
+      const restoreResult = restoreTikTokProjectState(record.data || {});
+      if (!restoreResult.ok) {
+        throw restoreResult.fallbackError || restoreResult.error || new Error('Failed to restore saved Short-Form project.');
+      }
+      usedFallback = !!restoreResult.usedFallback;
+      if (usedFallback) {
+        setStatus('Opened with Short-Form recovery mode. Some invalid saved fields were reset.', true);
+        debugTrace('save.openInSession.fallback', {
+          name: String(record.name || '').trim()
+        });
+      }
+      debugTrace('save.openInSession.afterApply', buildTikTokAutomationDebugSnapshot({
+        name: String(record.name || '').trim(),
+        via: 'openSaveInSession'
+      }));
+    } catch (err) {
+      console.error('[short-form] failed to restore saved project', err);
+      setStatus(err?.message || 'Failed to open saved Short-Form project.', true);
+      debugTrace('save.openInSession.error', {
+        name: String(record.name || '').trim(),
+        message: String(err?.message || err || '').trim()
+      });
+    } finally {
+      saveRestoreInProgress = false;
+      if (activeSaveName && !usedFallback) {
+        startAutosave();
+      } else if (usedFallback) {
+        stopAutosave();
+      }
+      setActiveSaveDisplay();
+      renderSavesList();
+      renderOpenTabs();
+      debugTrace('save.openInSession.finally', buildTikTokAutomationDebugSnapshot({
+        name: String(record.name || '').trim(),
+        via: 'openSaveInSession'
+      }));
+    }
+    return record;
+  }
   let existing = sessionSaves.find((s) => s.name === save.name && s.type === save.type);
   if (existing) {
-    if (!existing.id) {
-      const updated = { ...existing, id: generateSessionId() };
-      sessionSaves = sessionSaves.map((s) => (s === existing ? updated : s));
-      persistSessionSaves(sessionSaves.slice(0, 50));
-      existing = updated;
+    let updated = {
+      ...existing,
+      data: JSON.parse(JSON.stringify(save.data || {})),
+      updatedAt: Number(save.updatedAt || save.createdAt || Date.now()) || Date.now(),
+      createdAt: save.createdAt || existing.createdAt || Date.now()
+    };
+    if (!updated.id) {
+      updated = { ...updated, id: generateSessionId() };
     }
+    sessionSaves = sessionSaves.map((s) => (s === existing ? updated : s));
+    persistSessionSaves(sessionSaves.slice(0, 50));
+    existing = updated;
     activateSaveRecord(existing, { session: true, reason: 'activate-existing' });
     return existing;
   }
@@ -2546,7 +3689,7 @@ const serializeBatchState = () => ({
   presets: [...selectedPresetNames],
   mode: batchModeSelect?.value || 'creative',
   batch: {
-    type: batchTypeSelect?.value || 'story',
+    type: normalizeBatchType(batchTypeSelect?.value || 'standard'),
     day: (batchDayInput?.value || '').trim(),
     carousel: Number(batchCarouselCount?.value || 0),
     story: Number(batchStoryCount?.value || 0),
@@ -2679,6 +3822,22 @@ const serializeTikTokState = () => ({
   style: (tiktokStyleInput?.value || '').trim(),
   variations: Number(tiktokCountInput?.value || 3),
   scripts: Array.isArray(tiktokScripts) ? tiktokScripts : [],
+  automation: {
+    mode: tiktokMode,
+    config: normalizeTikTokAutomationConfig(tiktokAutomationConfig || {}),
+    state: normalizeTikTokAutomationState(tiktokAutomationState || {}),
+    ideaHistory: Array.isArray(tiktokAutomationIdeaHistory) ? tiktokAutomationIdeaHistory.map((entry) => ({ ...entry })) : [],
+    uploadHistory: Array.isArray(tiktokAutomationUploadHistory) ? tiktokAutomationUploadHistory.map((entry) => ({ ...entry })) : [],
+    events: Array.isArray(tiktokAutomationEvents) ? tiktokAutomationEvents.map((entry) => ({ ...entry })) : [],
+    runs: Array.isArray(tiktokAutomationRuns) ? tiktokAutomationRuns.map((entry) => ({ ...entry })) : [],
+    concepts: Array.isArray(tiktokAutomationConceptMemory) ? tiktokAutomationConceptMemory.map((entry) => ({ ...entry })) : [],
+    embeddings: Array.isArray(tiktokAutomationEmbeddings) ? tiktokAutomationEmbeddings.map((entry) => ({ ...entry })) : [],
+    retrievalEvents: Array.isArray(tiktokAutomationRetrievalEvents) ? tiktokAutomationRetrievalEvents.map((entry) => ({ ...entry })) : [],
+    view: ['run', 'settings', 'test', 'memory'].includes(tiktokAutomationView) ? tiktokAutomationView : 'run',
+    memoryExplorerView: ['history', 'concepts', 'retrieval', 'embeddings'].includes(tiktokAutomationMemoryExplorerView)
+      ? tiktokAutomationMemoryExplorerView
+      : 'history'
+  },
   storyboard: tiktokStoryboard,
   audio: tiktokAudio,
   alignment: tiktokAlignment,
@@ -2711,6 +3870,16 @@ const getEmptyTikTokState = () => ({
   style: '',
   variations: 3,
   scripts: [],
+  automation: {
+    mode: 'manual',
+    config: getDefaultTikTokAutomationConfig(),
+    state: getDefaultTikTokAutomationState(),
+    ideaHistory: [],
+    uploadHistory: [],
+    events: [],
+    runs: [],
+    view: 'run'
+  },
   storyboard: null,
   audio: null,
   alignment: null,
@@ -2908,8 +4077,8 @@ const serializeGreenScreenImages = () =>
   }));
 
 const renderAvatarOptions = () => {
-  if (!avatarSelect) return;
-  const selects = [avatarSelect, tiktokAvatarSelect, tiktokAvatarProcessingSelect].filter(Boolean);
+  const selects = [avatarSelect, batchAvatarSelect, tiktokAvatarSelect, tiktokAvatarProcessingSelect].filter(Boolean);
+  if (!selects.length && !tiktokAutomationAvatarSelect) return;
   selects.forEach((select) => {
     select.innerHTML = '<option value="">No avatar</option>';
     avatars.forEach((a) => {
@@ -2920,8 +4089,27 @@ const renderAvatarOptions = () => {
     });
     select.value = activeAvatarName || '';
   });
+  if (tiktokAutomationAvatarSelect) {
+    tiktokAutomationAvatarSelect.innerHTML = '<option value="">No avatar</option>';
+    avatars.forEach((a) => {
+      const opt = document.createElement('option');
+      opt.value = a.name;
+      opt.textContent = a.name;
+      tiktokAutomationAvatarSelect.appendChild(opt);
+    });
+    tiktokAutomationAvatarSelect.value = String(tiktokAutomationConfig?.avatarName || '').trim();
+  }
   renderAvatarSelectPreview();
   renderClothesPicker();
+};
+
+const syncAvatarSelectValues = (value = '') => {
+  const next = String(value || '').trim();
+  [avatarSelect, batchAvatarSelect, tiktokAvatarSelect, tiktokAvatarProcessingSelect]
+    .filter(Boolean)
+    .forEach((select) => {
+      select.value = next;
+    });
 };
 
 const syncObjectSelects = () => {
@@ -2949,31 +4137,34 @@ const renderObjectOptions = () => {
 };
 
 const renderAvatarSelectPreview = () => {
-  if (!avatarSelectPreview) return;
-  avatarSelectPreview.innerHTML = '';
-  if (!activeAvatarName) {
-    avatarSelectPreview.textContent = '';
-    return;
-  }
-  const avatar = avatars.find((a) => a.name === activeAvatarName);
-  if (!avatar) return;
-  if (avatar.profile?.uploadedUrl || avatar.profile?.localPath || avatar.profile?.path) {
-    const img = document.createElement('img');
-    img.src = getAvatarEntryDisplayUrl(avatar.profile);
-    img.style.width = '48px';
-    img.style.height = '48px';
-    img.style.objectFit = 'cover';
-    img.style.borderRadius = '8px';
-    img.style.border = '1px solid var(--border)';
-    avatarSelectPreview.appendChild(img);
-  }
-  const name = document.createElement('div');
-  name.className = 'small';
-  const metaParts = [];
-  if (avatar.age) metaParts.push(`age ${avatar.age}`);
-  if (avatar.gender) metaParts.push(avatar.gender);
-  name.textContent = metaParts.length ? `${activeAvatarName} (${metaParts.join(', ')})` : activeAvatarName;
-  avatarSelectPreview.appendChild(name);
+  const previews = [avatarSelectPreview, batchAvatarSelectPreview].filter(Boolean);
+  if (!previews.length) return;
+  previews.forEach((previewEl) => {
+    previewEl.innerHTML = '';
+    if (!activeAvatarName) {
+      previewEl.textContent = '';
+      return;
+    }
+    const avatar = avatars.find((a) => a.name === activeAvatarName);
+    if (!avatar) return;
+    if (avatar.profile?.uploadedUrl || avatar.profile?.localPath || avatar.profile?.path) {
+      const img = document.createElement('img');
+      img.src = getAvatarEntryDisplayUrl(avatar.profile);
+      img.style.width = '48px';
+      img.style.height = '48px';
+      img.style.objectFit = 'cover';
+      img.style.borderRadius = '8px';
+      img.style.border = '1px solid var(--border)';
+      previewEl.appendChild(img);
+    }
+    const name = document.createElement('div');
+    name.className = 'small';
+    const metaParts = [];
+    if (avatar.age) metaParts.push(`age ${avatar.age}`);
+    if (avatar.gender) metaParts.push(avatar.gender);
+    name.textContent = metaParts.length ? `${activeAvatarName} (${metaParts.join(', ')})` : activeAvatarName;
+    previewEl.appendChild(name);
+  });
 };
 
 const renderObjectSelectPreview = () => {
@@ -3284,7 +4475,7 @@ const renderBatchPlan = () => {
     batchPlanList.innerHTML = '<div class="small">No batch plan yet.</div>';
     return;
   }
-  const isStory = getBatchType() === 'story';
+  const isInstagramBatch = getBatchType() === 'instagram';
   batchPlan.forEach((item, idx) => {
     const wrap = document.createElement('div');
     wrap.className = 'history-item';
@@ -3312,7 +4503,7 @@ const renderBatchPlan = () => {
 
     const actions = document.createElement('div');
     actions.className = 'history-actions';
-    if (isStory) {
+    if (isInstagramBatch) {
       const outfitRow = document.createElement('div');
       outfitRow.className = 'small';
       outfitRow.style.marginTop = '6px';
@@ -3795,15 +4986,3614 @@ const setTikTokStatus = (text, isError = false) => {
   if (!tiktokStatus) return;
   tiktokStatus.textContent = text;
   tiktokStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'TikTok');
+  if (tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'TikTok');
   scheduleTikTokStickyStepUpdate();
+};
+
+const commitTikTokAutomationState = ({ save = true } = {}) => {
+  persistTikTokAutomationLocalState();
+  if (save) scheduleSave();
+};
+
+const formatTikTokAutomationDateKey = (date = new Date()) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const formatTikTokAutomationStamp = (value = '') => {
+  const date = value ? new Date(value) : null;
+  if (!date || Number.isNaN(date.getTime())) return '—';
+  return date.toLocaleString([], {
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit'
+  });
+};
+
+const pruneTikTokAutomationGeneratedByDate = () => {
+  if (!tiktokAutomationState) return;
+  const entries = Object.entries(tiktokAutomationState.generatedByDate || {}).sort(([a], [b]) => b.localeCompare(a));
+  tiktokAutomationState.generatedByDate = Object.fromEntries(entries.slice(0, 14));
+};
+
+const maybeResetTikTokAutomationCycle = (now = new Date()) => {
+  if (!tiktokAutomationState) return;
+  const startedAt = String(tiktokAutomationState.cycleStartedAt || '').trim();
+  if (!startedAt) {
+    tiktokAutomationState.cycleCount = 0;
+    return;
+  }
+  const startedDate = new Date(startedAt);
+  if (Number.isNaN(startedDate.getTime())) {
+    tiktokAutomationState.cycleStartedAt = '';
+    tiktokAutomationState.cycleCount = 0;
+    return;
+  }
+  if (now.getTime() - startedDate.getTime() >= 24 * 60 * 60 * 1000) {
+    tiktokAutomationState.cycleStartedAt = '';
+    tiktokAutomationState.cycleCount = 0;
+  }
+};
+
+const getTikTokAutomationGeneratedToday = (now = new Date()) => {
+  if (!tiktokAutomationState) return 0;
+  maybeResetTikTokAutomationCycle(now);
+  return Math.max(0, Number(tiktokAutomationState.cycleCount || 0));
+};
+
+const incrementTikTokAutomationGeneratedToday = (delta = 1, now = new Date()) => {
+  if (!tiktokAutomationState) return;
+  maybeResetTikTokAutomationCycle(now);
+  if (!String(tiktokAutomationState.cycleStartedAt || '').trim()) {
+    tiktokAutomationState.cycleStartedAt = now.toISOString();
+  }
+  tiktokAutomationState.cycleCount = Math.max(
+    0,
+    getTikTokAutomationGeneratedToday(now) + Math.max(0, Number(delta) || 0)
+  );
+  const key = formatTikTokAutomationDateKey();
+  const next = Math.max(0, Number(tiktokAutomationState.generatedByDate?.[key] || 0) + Math.max(0, Number(delta) || 0));
+  tiktokAutomationState.generatedByDate = {
+    ...(tiktokAutomationState.generatedByDate || {}),
+    [key]: next
+  };
+  tiktokAutomationState.lastGeneratedAt = now.toISOString();
+  pruneTikTokAutomationGeneratedByDate();
+};
+
+const pushTikTokAutomationEvent = (message, type = 'info') => {
+  if (!message) return;
+  tiktokAutomationEvents.unshift(
+    normalizeTikTokAutomationEventEntry({
+      id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      type,
+      message,
+      createdAt: new Date().toISOString()
+    })
+  );
+  tiktokAutomationEvents = tiktokAutomationEvents.slice(0, TIKTOK_AUTOMATION_EVENT_LIMIT);
+  persistTikTokAutomationLocalState();
+};
+
+const buildTikTokIdeaHistoryFromScripts = (scripts = []) =>
+  scripts.slice(0, TIKTOK_AUTOMATION_IDEA_LIMIT).map((script, index) =>
+    normalizeTikTokIdeaHistoryEntry(
+      {
+        id: script.id || `${Date.now()}-${index}`,
+        scriptId: script.id || '',
+        title: script.title || `Idea ${index + 1}`,
+        hook: script.hook || '',
+        angle: script.angle || '',
+        script: script.script || '',
+        ideaPrompt: script.idea || '',
+        audience: script.audience || '',
+        style: script.style || '',
+        source: script.source === 'automatic' ? 'automatic' : 'manual',
+        status: 'draft',
+        createdAt: script.createdAt ? new Date(script.createdAt).toISOString() : new Date().toISOString()
+      },
+      index
+    )
+  );
+
+const ensureTikTokAutomationHistorySeeded = () => {
+  if (tiktokAutomationIdeaHistory.length || !tiktokScripts.length) return;
+  tiktokAutomationIdeaHistory = buildTikTokIdeaHistoryFromScripts(tiktokScripts);
+  persistTikTokAutomationLocalState();
+};
+
+const appendTikTokIdeaHistoryEntries = (scripts = [], { source = 'manual', status = 'draft' } = {}) => {
+  if (!Array.isArray(scripts) || !scripts.length) return;
+  const nextEntries = scripts.map((script, index) =>
+    normalizeTikTokIdeaHistoryEntry({
+      id: `${script.id || Date.now()}-${index}`,
+      scriptId: script.id || '',
+      title: script.title || `Idea ${index + 1}`,
+      hook: script.hook || '',
+      angle: script.angle || '',
+      script: script.script || '',
+      ideaPrompt: script.idea || '',
+      audience: script.audience || '',
+      style: script.style || '',
+      source,
+      status,
+      createdAt: script.createdAt ? new Date(script.createdAt).toISOString() : new Date().toISOString()
+    })
+  );
+  const seen = new Set();
+  tiktokAutomationIdeaHistory = nextEntries
+    .concat(tiktokAutomationIdeaHistory)
+    .filter((entry) => {
+      const key = `${entry.scriptId || ''}:${entry.title}:${entry.createdAt}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .slice(0, TIKTOK_AUTOMATION_IDEA_LIMIT);
+  upsertTikTokAutomationConceptEntries(buildTikTokConceptEntriesFromScripts(scripts, { source }));
+  commitTikTokAutomationState();
+};
+
+const appendTikTokUploadHistoryEntries = (entries = []) => {
+  if (!Array.isArray(entries) || !entries.length) return;
+  const normalized = entries.map((entry, index) =>
+    normalizeTikTokUploadHistoryEntry({
+      ...entry,
+      id: entry.id || `${Date.now()}-${index}-${Math.random().toString(16).slice(2)}`
+    })
+  );
+  tiktokAutomationUploadHistory = normalized.concat(tiktokAutomationUploadHistory).slice(0, TIKTOK_AUTOMATION_UPLOAD_LIMIT);
+  normalized.forEach((entry) => {
+    const run = findTikTokAutomationRunByScriptId(entry.scriptId);
+    if (!run) return;
+    const entryState = ['posted', 'failed', 'pending'].includes(String(entry.state || ''))
+      ? String(entry.state)
+      : entry.success
+        ? 'posted'
+        : 'failed';
+    const existingPublishEntries =
+      run.stages?.publish?.output && typeof run.stages.publish.output === 'object' && Array.isArray(run.stages.publish.output.entries)
+        ? run.stages.publish.output.entries
+        : [];
+    const detail = entryState === 'posted'
+      ? `${String(entry.platform || 'platform').toUpperCase()} posted${entry.postId ? ` (ID ${entry.postId})` : ''}.`
+      : entryState === 'pending'
+        ? `${String(entry.platform || 'platform').toUpperCase()} pending: ${entry.pendingReason || 'saved to post later'}`
+        : `${String(entry.platform || 'platform').toUpperCase()} failed: ${entry.error || 'unknown error'}`;
+    patchTikTokAutomationRunStage(run.id, 'publish', {
+      status: entryState === 'posted' ? 'success' : entryState === 'pending' ? 'pending' : 'error',
+      detail,
+      output: {
+        entries: existingPublishEntries.concat([{
+          platform: String(entry.platform || '').trim(),
+          state: entryState,
+          success: entryState === 'posted',
+          postId: String(entry.postId || '').trim(),
+          error: String(entry.error || '').trim(),
+          pendingReason: String(entry.pendingReason || '').trim(),
+          videoPath: String(entry.videoPath || '').trim(),
+          caption: String(entry.caption || '').trim(),
+          createdAt: String(entry.createdAt || '').trim()
+        }]).slice(-6)
+      }
+    });
+    if (entryState === 'posted' || entryState === 'failed') {
+      patchTikTokAutomationRun(run.id, {
+        status: entryState === 'posted' ? 'posted' : 'failed',
+        completedAt: new Date().toISOString(),
+        platforms: Array.from(new Set([...(run.platforms || []), String(entry.platform || '').trim().toLowerCase()].filter(Boolean)))
+      });
+    }
+  });
+  commitTikTokAutomationState();
+};
+
+const markTikTokIdeaHistoryPosted = ({ scriptId = '', platforms = [] } = {}) => {
+  const target = String(scriptId || '').trim();
+  if (!target) return;
+  const platformList = Array.isArray(platforms) ? platforms.filter(Boolean) : [];
+  tiktokAutomationIdeaHistory = tiktokAutomationIdeaHistory.map((entry) => {
+    if (String(entry.scriptId || '').trim() !== target) return entry;
+    const existingPlatforms = Array.isArray(entry.platforms) ? entry.platforms : [];
+    return {
+      ...entry,
+      status: 'posted',
+      platforms: Array.from(new Set(existingPlatforms.concat(platformList)))
+    };
+  });
+  commitTikTokAutomationState();
+};
+
+const createTikTokAutomationRun = ({ reason = '', seedPrompt = '' } = {}) => {
+  const stamp = new Date().toISOString();
+  maybeResetTikTokAutomationCycle(new Date(stamp));
+  if (!String(tiktokAutomationState?.cycleStartedAt || '').trim()) {
+    tiktokAutomationState.cycleStartedAt = stamp;
+  }
+  const cycleId = String(tiktokAutomationState?.cycleStartedAt || stamp).trim();
+  const run = normalizeTikTokAutomationRunEntry({
+    id: `run-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    reason,
+    status: 'running',
+    title: '',
+    seedPrompt,
+    avatarName: String(tiktokAutomationConfig?.avatarName || '').trim(),
+    cycleId,
+    cycleStartedAt: cycleId,
+    createdAt: stamp,
+    updatedAt: stamp,
+    stages: {
+      seed: {
+        title: 'Seed brief',
+        status: 'success',
+        detail: 'Seed brief locked for this run.',
+        output: seedPrompt,
+        createdAt: stamp,
+        updatedAt: stamp
+      },
+      concept: {
+        title: 'Concept generation',
+        status: 'running',
+        detail: 'Generating the first concept attempt.',
+        createdAt: stamp,
+        updatedAt: stamp
+      },
+      embedding: {
+        title: 'Embedding',
+        status: 'idle',
+        detail: 'Waiting for concept embedding.'
+      },
+      retrieval: {
+        title: 'Retrieval',
+        status: 'idle',
+        detail: 'Waiting for memory retrieval.'
+      },
+      memory: {
+        title: 'Memory check',
+        status: 'running',
+        detail: 'Preparing concept comparison against saved memory.',
+        createdAt: stamp,
+        updatedAt: stamp
+      },
+      script: { title: 'Script output', status: 'idle' },
+      storyboard: { title: 'Storyboard', status: 'idle', detail: 'Not started by automation.' },
+      audio: { title: 'Voice / audio', status: 'idle', detail: 'Not started by automation.' },
+      assets: { title: 'Assets', status: 'idle', detail: 'Not started by automation.' },
+      final: { title: 'Video export', status: 'idle', detail: 'Not started by automation.' },
+      avatar: { title: 'Avatar processing', status: 'idle', detail: 'Not started by automation.' },
+      final_render: { title: 'Final render', status: 'idle', detail: 'Not started by automation.' },
+      caption: { title: 'Timed captions', status: 'idle', detail: 'Not started by automation.' },
+      zoom: { title: 'Intro zoom', status: 'idle', detail: 'Not started by automation.' },
+      sfx: { title: 'SFX mix', status: 'idle', detail: 'Not started by automation.' },
+      publish: { title: 'Publishing', status: 'idle', detail: 'Waiting for a publish step.' }
+    }
+  });
+  tiktokAutomationRuns = [run].concat(tiktokAutomationRuns).slice(0, 40);
+  if (tiktokAutomationState) {
+    tiktokAutomationState.currentRunId = run.id;
+    tiktokAutomationState.currentStep = 'Generating concept';
+    tiktokAutomationState.currentDetail = 'Automatic mode is requesting the first concept attempt.';
+  }
+  commitTikTokAutomationState();
+  return run;
+};
+
+const patchTikTokAutomationRun = (runId = '', patch = {}) => {
+  const target = String(runId || '').trim();
+  if (!target) return null;
+  let updated = null;
+  tiktokAutomationRuns = tiktokAutomationRuns.map((entry) => {
+    if (entry.id !== target) return entry;
+    updated = normalizeTikTokAutomationRunEntry({
+      ...entry,
+      ...patch,
+      stages: {
+        ...(entry.stages || {}),
+        ...(patch.stages || {})
+      },
+      updatedAt: new Date().toISOString()
+    });
+    return updated;
+  });
+  if (updated) commitTikTokAutomationState();
+  return updated;
+};
+
+const patchTikTokAutomationRunStage = (runId = '', stageKey = '', patch = {}) => {
+  const target = String(runId || '').trim();
+  const key = String(stageKey || '').trim();
+  if (!target || !key) return null;
+  const existing = tiktokAutomationRuns.find((entry) => entry.id === target);
+  if (!existing) return null;
+  const nextStage = normalizeTikTokAutomationRunStage(key, {
+    ...(existing.stages?.[key] || {}),
+    ...patch,
+    updatedAt: new Date().toISOString()
+  });
+  return patchTikTokAutomationRun(target, {
+    stages: {
+      ...(existing.stages || {}),
+      [key]: nextStage
+    }
+  });
+};
+
+const findTikTokAutomationRunByScriptId = (scriptId = '') =>
+  tiktokAutomationRuns.find((entry) => String(entry.scriptId || '').trim() === String(scriptId || '').trim()) || null;
+
+const getTikTokAutomationRunStatusClass = (status = '') => {
+  const normalized = String(status || '').trim().toLowerCase();
+  if (normalized === 'posted' || normalized === 'generated') return 'ready';
+  if (normalized === 'blocked') return 'warning';
+  if (normalized === 'failed') return 'error';
+  if (normalized === 'running') return 'running';
+  return 'paused';
+};
+
+const getTikTokAutomationActiveRun = () => {
+  const runId = String(tiktokAutomationState?.currentRunId || '').trim();
+  return tiktokAutomationRuns.find((entry) => entry.id === runId) || tiktokAutomationRuns.find((entry) => entry.status === 'running') || null;
+};
+
+const formatTikTokAutomationCycleTitle = (cycleKey = '', index = 0) => {
+  const date = cycleKey ? new Date(cycleKey) : null;
+  if (!date || Number.isNaN(date.getTime())) return index === 0 ? 'Current cycle' : `Cycle ${index + 1}`;
+  return index === 0 ? `Current cycle · ${formatTikTokAutomationStamp(date.toISOString())}` : formatTikTokAutomationStamp(date.toISOString());
+};
+
+const groupTikTokAutomationRunsByCycle = (runs = []) => {
+  const buckets = new Map();
+  runs.forEach((run) => {
+    const key = String(run.cycleId || run.cycleStartedAt || run.createdAt || '').trim() || 'unknown';
+    if (!buckets.has(key)) buckets.set(key, []);
+    buckets.get(key).push(run);
+  });
+  return [...buckets.entries()].map(([key, entries], index) => ({
+    key,
+    title: formatTikTokAutomationCycleTitle(key, index),
+    runs: entries.sort((left, right) => new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime())
+  }));
+};
+
+const formatTikTokAutomationDayKey = (value = '') => {
+  const date = value ? new Date(value) : new Date();
+  if (Number.isNaN(date.getTime())) return '';
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const formatTikTokAutomationDayTitle = (dayKey = '', index = 0) => {
+  if (!dayKey) return index === 0 ? 'Today' : `Day ${index + 1}`;
+  const date = new Date(`${dayKey}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return dayKey;
+  const todayKey = formatTikTokAutomationDayKey(new Date());
+  if (dayKey === todayKey) return 'Today';
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+  if (dayKey === formatTikTokAutomationDayKey(yesterday)) return 'Yesterday';
+  return new Intl.DateTimeFormat(undefined, { weekday: 'short', day: 'numeric', month: 'short' }).format(date);
+};
+
+const formatTikTokAutomationDayMeta = (dayKey = '') => {
+  if (!dayKey) return 'No date';
+  const date = new Date(`${dayKey}T00:00:00`);
+  if (Number.isNaN(date.getTime())) return dayKey;
+  return new Intl.DateTimeFormat(undefined, {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(date);
+};
+
+const groupTikTokAutomationRunsByDay = (runs = []) => {
+  const buckets = new Map();
+  runs.forEach((run) => {
+    const key = formatTikTokAutomationDayKey(run.createdAt || run.cycleStartedAt || run.updatedAt || '');
+    const safeKey = key || 'unknown';
+    if (!buckets.has(safeKey)) buckets.set(safeKey, []);
+    buckets.get(safeKey).push(run);
+  });
+  return [...buckets.entries()]
+    .sort((left, right) => String(right[0]).localeCompare(String(left[0])))
+    .map(([key, entries], index) => ({
+      key,
+      title: formatTikTokAutomationDayTitle(key, index),
+      meta: formatTikTokAutomationDayMeta(key),
+      runs: entries.sort((left, right) => new Date(right.createdAt).getTime() - new Date(left.createdAt).getTime())
+    }));
+};
+
+const getTikTokRunStageKeys = () => [
+  'seed',
+  'concept',
+  'embedding',
+  'retrieval',
+  'memory',
+  'script',
+  'storyboard',
+  'audio',
+  'assets',
+  'final',
+  'avatar',
+  'final_render',
+  'caption',
+  'zoom',
+  'sfx',
+  'publish'
+];
+
+const getTikTokAutomationPipelineRestartStartStage = (stageKey = '') => {
+  const key = String(stageKey || '').trim();
+  if (['seed', 'concept', 'embedding', 'retrieval', 'memory', 'script', 'storyboard'].includes(key)) return 'storyboard';
+  if (['audio', 'assets', 'final', 'avatar', 'final_render', 'caption', 'zoom', 'sfx', 'publish'].includes(key)) return key;
+  return 'storyboard';
+};
+
+const summarizeTikTokRunCardText = (run = {}) => {
+  const stagePriority = ['sfx', 'zoom', 'caption', 'final_render', 'avatar', 'final', 'publish', 'assets', 'audio', 'storyboard', 'script', 'memory', 'retrieval'];
+  for (const key of stagePriority) {
+    const stage = run.stages?.[key];
+    if (String(stage?.detail || '').trim()) return String(stage.detail).trim();
+  }
+  return String(run.error || '').trim() || 'Open this run to inspect stage outputs.';
+};
+
+const getTikTokRunStageOutputText = (output) => {
+  if (output === undefined || output === null) return '';
+  if (typeof output === 'string') return output.trim();
+  if (typeof output === 'number' || typeof output === 'boolean') return String(output);
+  if (Array.isArray(output) || typeof output === 'object') {
+    try {
+      return JSON.stringify(output, null, 2);
+    } catch (_err) {
+      return '';
+    }
+  }
+  return '';
+};
+
+const buildTikTokAutomationAssetsOutputFromStoryboard = () => {
+  const scenes = Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [];
+  const relevantScenes = scenes.filter((scene) => !scene?.merge_with_prev && !scene?.avatar_reserved);
+  const selectedScenes = relevantScenes.filter((scene) => !!(scene?.clip?.url || scene?.ai_image_url));
+  return {
+    sceneCount: relevantScenes.length,
+    selectedCount: selectedScenes.length,
+    reservedSceneCount: scenes.filter((scene) => !!scene?.avatar_reserved).length,
+    scenes: scenes
+      .filter((scene) => !scene?.merge_with_prev)
+      .map((scene, index) => {
+        const sceneId = scene.id || `s${index + 1}`;
+        return {
+          id: sceneId,
+          title: `Scene ${index + 1}`,
+          text: String(scene.text || '').trim(),
+          query: String(scene.clip_query || '').trim(),
+          provider: String(scene.clip?.provider || (scene.ai_image_url ? 'ai-image' : '')).trim(),
+          type: String(scene.clip?.type || (scene.ai_image_url ? 'image' : '')).trim(),
+          url: String(scene.clip?.url || scene.ai_image_url || '').trim(),
+          previewUrl: String(scene.clip?.preview || scene.clip?.url || scene.ai_image_url || '').trim(),
+          source: String(scene.clip?.source || '').trim(),
+          localPath: String(scene.clip?.local_path || '').trim(),
+          selected: !!(scene?.clip?.url || scene?.ai_image_url),
+          avatarReserved: !!scene?.avatar_reserved,
+          loading: !!tiktokClipLoading?.[sceneId],
+          queryScanning: !!(tiktokQueryScanSceneId === sceneId && tiktokQueryScanLoading),
+          aiLocked: isSceneAiLocked(scene),
+          selectedClipId: String(scene?.clip?.id || scene?.clip?.url || '').trim(),
+          clipValidation: scene?.clip_validation && typeof scene.clip_validation === 'object' ? { ...scene.clip_validation } : null,
+          results: Array.isArray(tiktokClipResults?.[sceneId])
+            ? tiktokClipResults[sceneId].slice(0, 12).map((clip) => ({
+                id: String(clip?.id || clip?.url || '').trim(),
+                provider: String(clip?.provider || '').trim(),
+                type: String(clip?.type || '').trim(),
+                duration: Number(clip?.duration || 0) || 0,
+                width: Number(clip?.width || 0) || 0,
+                height: Number(clip?.height || 0) || 0,
+                preview: String(clip?.preview || '').trim(),
+                url: String(clip?.url || '').trim(),
+                source: String(clip?.source || '').trim(),
+                author: String(clip?.author || '').trim()
+              }))
+            : []
+        };
+      })
+  };
+};
+
+const syncTikTokAutomationStoryboardStage = ({ scriptId = '' } = {}) => {
+  const run = findTikTokAutomationRunByScriptId(scriptId || tiktokStoryboard?.source_script_id || tiktokStoryboardScriptId || '');
+  if (!run || !Array.isArray(tiktokStoryboard?.scenes) || !tiktokStoryboard.scenes.length) return;
+  patchTikTokAutomationRunStage(run.id, 'storyboard', {
+    status: 'success',
+    detail: `Storyboard ready with ${tiktokStoryboard.scenes.length} scene${tiktokStoryboard.scenes.length === 1 ? '' : 's'}.`,
+    output: {
+      sourceScriptId: String(tiktokStoryboard.source_script_id || '').trim(),
+      sourceScriptTitle: String(tiktokStoryboard.source_script_title || '').trim(),
+      targetDurationMs: Number(tiktokStoryboard.target_duration_ms || 0) || 0,
+      notes: String(tiktokStoryboard.notes || '').trim(),
+      scenes: tiktokStoryboard.scenes.map((scene, index) => ({
+        id: scene.id || `s${index + 1}`,
+        title: `Scene ${index + 1}`,
+        text: String(scene.text || '').trim(),
+        visual_prompt: String(scene.visual_prompt || '').trim(),
+        visualPrompt: String(scene.visual_prompt || '').trim(),
+        keywords: Array.isArray(scene.keywords) ? scene.keywords.map((item) => String(item || '').trim()).filter(Boolean) : [],
+        startMs: Number(scene.start_ms || 0) || 0,
+        endMs: Number(scene.end_ms || 0) || 0,
+        clipQuery: String(scene.clip_query || '').trim(),
+        pace: String(scene.pace || '').trim(),
+        avatar_reserved: !!scene.avatar_reserved,
+        clip: scene.clip ? { ...scene.clip } : null,
+        ai_image_prompt: String(scene.ai_image_prompt || '').trim(),
+        ai_image_url: String(scene.ai_image_url || '').trim(),
+        ai_image_status: String(scene.ai_image_status || '').trim()
+      }))
+    }
+  });
+};
+
+const syncTikTokAutomationAudioStage = ({ scriptId = '' } = {}) => {
+  const run = findTikTokAutomationRunByScriptId(scriptId || tiktokAudio?.script_id || '');
+  if (!run || !tiktokAudio) return;
+  const filePath = String(tiktokAudio.original_file_path || tiktokAudio.file_path || '').trim();
+  patchTikTokAutomationRunStage(run.id, 'audio', {
+    status: 'success',
+    detail: `Voiceover ready${tiktokAudio.duration_ms ? ` • ${formatDurationMs(tiktokAudio.duration_ms)}` : ''}.`,
+    output: {
+      provider: String(tiktokAudio.provider || '').trim(),
+      voiceId: String(tiktokAudio.voice_id || '').trim(),
+      modelId: String(tiktokAudio.model_id || '').trim(),
+      durationMs: Number(tiktokAudio.duration_ms || 0) || 0,
+      filePath,
+      previewUrl: filePath ? `file://${filePath}` : String(tiktokAudioUrl || '').trim(),
+      scriptId: String(tiktokAudio.script_id || '').trim(),
+      scriptTitle: String(tiktokAudio.script_title || '').trim()
+    }
+  });
+};
+
+const syncTikTokAutomationAssetsStage = ({ scriptId = '' } = {}) => {
+  const resolvedScriptId = String(scriptId || tiktokStoryboard?.source_script_id || tiktokStoryboardScriptId || '').trim();
+  const run = findTikTokAutomationRunByScriptId(resolvedScriptId);
+  if (!run || !Array.isArray(tiktokStoryboard?.scenes) || !tiktokStoryboard.scenes.length) return;
+  const output = buildTikTokAutomationAssetsOutputFromStoryboard();
+  patchTikTokAutomationRunStage(run.id, 'assets', {
+    status: output.sceneCount <= 0
+      ? 'success'
+      : output.selectedCount && output.selectedCount >= output.sceneCount
+        ? 'success'
+        : output.selectedCount
+          ? 'running'
+          : 'idle',
+    detail: output.sceneCount <= 0
+      ? 'All scenes are avatar-reserved. Step 5 clip sourcing is complete.'
+      : output.selectedCount
+      ? `${output.selectedCount}/${output.sceneCount} scene${output.sceneCount === 1 ? '' : 's'} assigned.`
+      : 'No scene clips selected yet.',
+    output
+  });
+};
+
+const syncTikTokAutomationFinalStage = ({ scriptId = '', path = '' } = {}) => {
+  const resolvedScriptId = String(scriptId || tiktokStoryboard?.source_script_id || tiktokStoryboardScriptId || '').trim();
+  const run = findTikTokAutomationRunByScriptId(resolvedScriptId);
+  const filePath = String(path || '').trim();
+  if (!run || !filePath) return;
+  patchTikTokAutomationRunStage(run.id, 'final', {
+    status: 'success',
+    detail: 'Final video ready.',
+    output: {
+      path: filePath,
+      previewUrl: filePathToUrl(filePath) || `file://${filePath}`
+    }
+  });
+  syncTikTokAutomationPublishFallbackStage({
+    scriptId: resolvedScriptId,
+    path: filePath
+  });
+};
+
+const syncTikTokAutomationAvatarStage = ({ scriptId = '', runId = '' } = {}) => {
+  const resolvedRunId = String(runId || '').trim();
+  const resolvedScriptId = String(scriptId || tiktokStoryboard?.source_script_id || tiktokStoryboardScriptId || '').trim();
+  const run = resolvedRunId
+    ? tiktokAutomationRuns.find((entry) => String(entry.id || '').trim() === resolvedRunId) || null
+    : findTikTokAutomationRunByScriptId(resolvedScriptId);
+  if (!run) return null;
+  const stage = buildTikTokRunStep7AvatarStage(run);
+  patchTikTokAutomationRunStage(run.id, 'avatar', {
+    status: String(stage.status || 'idle').trim() || 'idle',
+    detail: String(stage.detail || '').trim(),
+    output: stage.output && typeof stage.output === 'object' ? { ...stage.output } : {}
+  });
+  return stage;
+};
+
+const syncTikTokAutomationFinalRenderStage = ({ scriptId = '', runId = '' } = {}) => {
+  const resolvedRunId = String(runId || '').trim();
+  const resolvedScriptId = String(scriptId || tiktokStoryboard?.source_script_id || tiktokStoryboardScriptId || '').trim();
+  const run = resolvedRunId
+    ? tiktokAutomationRuns.find((entry) => String(entry.id || '').trim() === resolvedRunId) || null
+    : findTikTokAutomationRunByScriptId(resolvedScriptId);
+  if (!run) return null;
+  const stage = buildTikTokRunStep8FinalStage(run);
+  patchTikTokAutomationRunStage(run.id, 'final_render', {
+    status: String(stage.status || 'idle').trim() || 'idle',
+    detail: String(stage.detail || '').trim(),
+    output: stage.output && typeof stage.output === 'object' ? { ...stage.output } : {}
+  });
+  return stage;
+};
+
+const buildTikTokAutomationCaptionOutput = () => {
+  const transcript = String(tiktokCaptionTranscript?.value || '').trim();
+  const primaryPath = String(tiktokCaptionCombinedPath || tiktokCaptionSubtitlePath || tiktokCaptionBaseRenderPath || '').trim();
+  return {
+    transcript,
+    timingSource: String(tiktokCaptionTimingSource || '').trim(),
+    wordCount: Array.isArray(tiktokCaptionWords) ? tiktokCaptionWords.length : 0,
+    captionText: String(tiktokPublishCaption?.value || '').trim(),
+    hashtags: String(tiktokPublishHashtags?.value || '').trim(),
+    baseRenderPath: String(tiktokCaptionBaseRenderPath || '').trim(),
+    subtitlePath: String(tiktokCaptionSubtitlePath || '').trim(),
+    combinedPath: String(tiktokCaptionCombinedPath || '').trim(),
+    primaryPath,
+    previewUrl: primaryPath ? filePathToUrl(primaryPath) || `file://${primaryPath}` : '',
+    status: String(tiktokCaptionRenderStatus?.textContent || tiktokCaptionStatus?.textContent || '').trim()
+  };
+};
+
+const buildTikTokAutomationZoomOutput = () => {
+  const path = String(tiktokZoomOutputPath || '').trim();
+  return {
+    path,
+    previewUrl: path ? filePathToUrl(path) || `file://${path}` : '',
+    status: String(tiktokZoomStatus?.textContent || '').trim(),
+    settings: { ...normalizeTikTokZoomSettings(tiktokZoomSettings) }
+  };
+};
+
+const buildTikTokAutomationSfxOutput = () => {
+  const path = String(tiktokSfxOutputPath || '').trim();
+  return {
+    path,
+    previewUrl: path ? filePathToUrl(path) || `file://${path}` : '',
+    status: String(tiktokSfxStatus?.textContent || '').trim(),
+    eventCount: Array.isArray(tiktokSfxEvents) ? tiktokSfxEvents.length : 0,
+    events: normalizeTikTokSfxEvents(tiktokSfxEvents).slice(0, 12),
+    settings: { ...normalizeTikTokSfxSettings(tiktokSfxSettings) }
+  };
+};
+
+const getTikTokAutomationLatestVideoOutput = (run = {}) => {
+  const stageOrder = ['sfx', 'zoom', 'caption', 'final_render', 'final'];
+  for (const key of stageOrder) {
+    const output = run?.stages?.[key]?.output;
+    if (!output || typeof output !== 'object' || Array.isArray(output)) continue;
+    const path =
+      String(
+        output.path ||
+          output.primaryPath ||
+          output.combinedPath ||
+          output.subtitlePath ||
+          output.baseRenderPath ||
+          ''
+      ).trim();
+    const previewUrl = String(output.previewUrl || '').trim();
+    if (path || previewUrl) {
+      return { stageKey: key, path, previewUrl, output };
+    }
+  }
+  return null;
+};
+
+const renderTikTokRunArtifactText = (label, value) => {
+  const text = String(value || '').trim();
+  if (!text) return null;
+  const wrap = document.createElement('div');
+  wrap.className = 'tiktok-run-artifact';
+  const heading = document.createElement('div');
+  heading.className = 'tiktok-run-artifact__label';
+  heading.textContent = label;
+  const body = document.createElement('div');
+  body.className = 'tiktok-run-artifact__text';
+  body.textContent = text;
+  wrap.appendChild(heading);
+  wrap.appendChild(body);
+  return wrap;
+};
+
+const normalizeTikTokRunMediaUrl = (value = '') => {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  if (/^(https?:|data:|blob:|file:)/i.test(raw)) return raw;
+  if (raw.startsWith('/')) return filePathToUrl(raw) || `file://${raw}`;
+  if (/^[a-zA-Z]:[\\/]/.test(raw)) return filePathToUrl(raw) || `file:///${raw.replace(/\\/g, '/')}`;
+  return raw;
+};
+
+const isLikelyTikTokRunVideoSource = (value = '') => {
+  const url = String(value || '').trim().toLowerCase();
+  if (!url) return false;
+  if (url.startsWith('file://')) {
+    return /\.(mp4|mov|webm|mkv|avi)(\?|#|$)/.test(url);
+  }
+  if (/^https?:\/\//.test(url)) {
+    if (/youtube\.com\/watch|youtu\.be\//.test(url)) return false;
+    return /\.(mp4|mov|webm|mkv|avi)(\?|#|$)/.test(url) || /mime=video|\/videoplayback/.test(url);
+  }
+  return /\.(mp4|mov|webm|mkv|avi)(\?|#|$)/.test(url);
+};
+
+const buildYoutubeThumbFromUrl = (value = '') => {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  const short = raw.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/);
+  if (short?.[1]) return `https://i.ytimg.com/vi/${short[1]}/hqdefault.jpg`;
+  const watch = raw.match(/[?&]v=([A-Za-z0-9_-]{6,})/);
+  if (watch?.[1]) return `https://i.ytimg.com/vi/${watch[1]}/hqdefault.jpg`;
+  return '';
+};
+
+const renderTikTokRunArtifactMedia = ({ label = '', kind = 'video', src = '', meta = '' } = {}) => {
+  const url = normalizeTikTokRunMediaUrl(src);
+  if (!url) return null;
+  const wrap = document.createElement('div');
+  wrap.className = 'tiktok-run-artifact__mini';
+  const title = document.createElement('div');
+  title.className = 'tiktok-run-artifact__mini-title';
+  title.textContent = label;
+  wrap.appendChild(title);
+  if (kind === 'audio') {
+    const audio = document.createElement('audio');
+    audio.controls = true;
+    audio.src = url;
+    wrap.appendChild(audio);
+  } else if (kind === 'image') {
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = label || 'Image output';
+    wrap.appendChild(img);
+  } else {
+    const video = document.createElement('video');
+    video.controls = true;
+    video.src = url;
+    wrap.appendChild(video);
+  }
+  if (meta) {
+    const details = document.createElement('div');
+    details.className = 'tiktok-run-artifact__mini-meta';
+    details.textContent = meta;
+    wrap.appendChild(details);
+  }
+  return wrap;
+};
+
+const isTikTokRunStageOutputEmpty = (output) => {
+  if (output === undefined || output === null) return true;
+  if (typeof output === 'string') return !output.trim();
+  if (Array.isArray(output)) return output.length === 0;
+  if (typeof output === 'object') return Object.keys(output).length === 0;
+  return false;
+};
+
+const canUseLiveTikTokRunWorkspaceData = (run = {}) => {
+  const runId = String(run?.id || '').trim();
+  if (!runId) return false;
+  const activeRunId = String(tiktokAutomationState?.currentRunId || '').trim();
+  if (runId === activeRunId || runId === String(tiktokAutomationRestartingRunId || '').trim()) return true;
+  const selectedRunId = String(tiktokAutomationSelectedRunId || '').trim();
+  const runScriptId = String(run?.scriptId || '').trim();
+  const storyboardScriptId = String(tiktokStoryboard?.source_script_id || '').trim();
+  if (
+    runId === selectedRunId &&
+    activeView === 'builder' &&
+    currentCreateView === 'tiktok' &&
+    runScriptId &&
+    storyboardScriptId &&
+    runScriptId === storyboardScriptId
+  ) {
+    return true;
+  }
+  return false;
+};
+
+const buildLiveTikTokRunStoryboardOutput = () => {
+  if (!Array.isArray(tiktokStoryboard?.scenes) || !tiktokStoryboard.scenes.length) return null;
+  return {
+    sourceScriptId: String(tiktokStoryboard.source_script_id || '').trim(),
+    sourceScriptTitle: String(tiktokStoryboard.source_script_title || '').trim(),
+    targetDurationMs: Number(tiktokStoryboard.target_duration_ms || 0) || 0,
+    notes: String(tiktokStoryboard.notes || '').trim(),
+    scenes: tiktokStoryboard.scenes.map((scene, index) => ({
+      id: scene.id || `s${index + 1}`,
+      title: `Scene ${index + 1}`,
+      text: String(scene.text || '').trim(),
+      visual_prompt: String(scene.visual_prompt || '').trim(),
+      visualPrompt: String(scene.visual_prompt || '').trim(),
+      keywords: Array.isArray(scene.keywords) ? scene.keywords.map((item) => String(item || '').trim()).filter(Boolean) : [],
+      startMs: Number(scene.start_ms || 0) || 0,
+      endMs: Number(scene.end_ms || 0) || 0,
+      clipQuery: String(scene.clip_query || '').trim(),
+      pace: String(scene.pace || '').trim(),
+      avatar_reserved: !!scene.avatar_reserved,
+      clip: scene.clip ? { ...scene.clip } : null,
+      ai_image_prompt: String(scene.ai_image_prompt || '').trim(),
+      ai_image_url: String(scene.ai_image_url || '').trim(),
+      ai_image_status: String(scene.ai_image_status || '').trim()
+    }))
+  };
+};
+
+const buildLiveTikTokRunAudioOutput = () => {
+  if (!tiktokAudio) return null;
+  const filePath = String(tiktokAudio.original_file_path || tiktokAudio.file_path || '').trim();
+  return {
+    provider: String(tiktokAudio.provider || '').trim(),
+    voiceId: String(tiktokAudio.voice_id || '').trim(),
+    modelId: String(tiktokAudio.model_id || '').trim(),
+    durationMs: Number(tiktokAudio.duration_ms || 0) || 0,
+    filePath,
+    previewUrl: filePath ? `file://${filePath}` : String(tiktokAudioUrl || '').trim(),
+    scriptId: String(tiktokAudio.script_id || '').trim(),
+    scriptTitle: String(tiktokAudio.script_title || '').trim()
+  };
+};
+
+const getLiveTikTokRunStageOutput = (run = {}, stageKey = '') => {
+  if (!canUseLiveTikTokRunWorkspaceData(run)) return null;
+  const key = String(stageKey || '').trim();
+  if (key === 'storyboard') return buildLiveTikTokRunStoryboardOutput();
+  if (key === 'assets') return buildTikTokAutomationAssetsOutputFromStoryboard();
+  if (key === 'audio') return buildLiveTikTokRunAudioOutput();
+  if (key === 'final') {
+    const basePath = String(tiktokBaseStitchedPath || '').trim();
+    if (basePath) {
+      return {
+        path: basePath,
+        previewUrl: filePathToUrl(basePath) || `file://${basePath}`
+      };
+    }
+    return run?.stages?.final?.output || null;
+  }
+  if (key === 'avatar') return buildTikTokRunStep7AvatarStage(run)?.output || null;
+  if (key === 'final_render') return buildTikTokRunStep8FinalStage(run)?.output || null;
+  if (key === 'caption') return buildTikTokAutomationCaptionOutput();
+  if (key === 'zoom') return buildTikTokAutomationZoomOutput();
+  if (key === 'sfx') return buildTikTokAutomationSfxOutput();
+  return null;
+};
+
+const renderTikTokRunStagePlaceholder = (container, stageKey, stage) => {
+  const key = String(stageKey || '').trim();
+  const running = String(stage?.status || '').trim().toLowerCase() === 'running';
+  const copyByStage = {
+    concept: 'Concept candidate UI appears here when generation starts.',
+    embedding: 'Embedding preview appears here after concept generation.',
+    retrieval: 'Retrieval matches appear here after embedding.',
+    memory: 'Memory-check decisions and attempts appear here during duplicate checks.',
+    script: 'Script output appears here after memory approval.',
+    storyboard: 'Storyboard scene cards appear here after script generation.',
+    audio: 'Voiceover + alignment output appears here after storyboard.',
+    assets: 'Step 5 clip sourcing output appears here while scene assets are being prepared.',
+    final: 'Step 6 timeline + export output appears here after clip sourcing.',
+    avatar: 'Step 7 avatar processing output appears here after timeline export.',
+    final_render: 'Step 8 final render output appears here after avatar processing.',
+    caption: 'Step 9 caption output appears here after Step 6.',
+    zoom: 'Step 10 intro zoom output appears here after captions.',
+    sfx: 'Step 11 SFX output appears here after zoom.',
+    publish: 'Publish package appears here once final output is ready.'
+  };
+  const text = running
+    ? `Running ${stage?.title || key}… live output will appear here as it updates.`
+    : copyByStage[key] || 'Output appears here when this stage runs.';
+  const body = document.createElement('div');
+  body.className = 'tiktok-run-stage__body';
+  body.textContent = text;
+  container.appendChild(body);
+};
+
+const getTikTokAutomationStageProgressPct = (stage = {}) => {
+  const status = String(stage?.status || 'idle').trim().toLowerCase();
+  if (status === 'success') return 100;
+  if (status === 'pending') return 100;
+  if (status === 'blocked') return 100;
+  if (status === 'error') return 100;
+  if (status === 'skipped') return 100;
+  if (status === 'running') return 58;
+  return 0;
+};
+
+const getTikTokAutomationActiveRunStageGroups = () => [
+  { label: 'Idea', keys: ['seed', 'concept', 'embedding', 'retrieval', 'memory'] },
+  { label: 'Script', keys: ['script', 'storyboard', 'audio'] },
+  { label: 'Build', keys: ['assets', 'final', 'avatar', 'final_render'] },
+  { label: 'Polish', keys: ['caption', 'zoom', 'sfx'] },
+  { label: 'Publish', keys: ['publish'] }
+];
+
+const isTikTokAutomationTerminalStageStatus = (status = '') =>
+  ['success', 'pending', 'blocked', 'error', 'skipped'].includes(String(status || '').trim().toLowerCase());
+
+const getTikTokAutomationRunCompletionPct = (run = {}) => {
+  const keys = getTikTokRunStageKeys();
+  if (!keys.length) return 0;
+  let score = 0;
+  keys.forEach((key) => {
+    const status = String(run.stages?.[key]?.status || 'idle').trim().toLowerCase();
+    if (isTikTokAutomationTerminalStageStatus(status)) {
+      score += 1;
+      return;
+    }
+    if (status === 'running') score += 0.45;
+  });
+  return Math.max(0, Math.min(100, Math.round((score / keys.length) * 100)));
+};
+
+const getTikTokAutomationStageGroupStatus = (run = {}, keys = []) => {
+  const statuses = keys
+    .map((key) => String(run.stages?.[key]?.status || 'idle').trim().toLowerCase())
+    .filter(Boolean);
+  if (!statuses.length || statuses.every((status) => status === 'idle')) return 'idle';
+  if (statuses.includes('error')) return 'error';
+  if (statuses.includes('blocked')) return 'blocked';
+  if (statuses.includes('running')) return 'running';
+  if (statuses.includes('pending')) return 'pending';
+  if (statuses.every((status) => status === 'success' || status === 'skipped')) return 'success';
+  if (statuses.some((status) => status === 'success' || status === 'skipped')) return 'running';
+  return statuses[0] || 'idle';
+};
+
+const getTikTokAutomationActiveStageSummary = (run = {}) => {
+  const runningStageKey = getTikTokRunStageKeys().find((key) => String(run.stages?.[key]?.status || '').trim().toLowerCase() === 'running');
+  if (runningStageKey) {
+    const stage = run.stages?.[runningStageKey];
+    return `Now: ${stage?.title || runningStageKey}${stage?.detail ? ` • ${stage.detail}` : ''}`;
+  }
+  const latestCompletedKey = [...getTikTokRunStageKeys()].reverse().find((key) => {
+    const status = String(run.stages?.[key]?.status || '').trim().toLowerCase();
+    return isTikTokAutomationTerminalStageStatus(status);
+  });
+  if (!latestCompletedKey) return summarizeTikTokRunCardText(run);
+  const stage = run.stages?.[latestCompletedKey];
+  return `Latest: ${stage?.title || latestCompletedKey}${stage?.detail ? ` • ${stage.detail}` : ''}`;
+};
+
+const getTikTokRunDetailsStoryboardScenes = (run = {}) => {
+  if (canUseLiveTikTokRunWorkspaceData(run) && Array.isArray(tiktokStoryboard?.scenes) && tiktokStoryboard.scenes.length) {
+    return tiktokStoryboard.scenes.map((scene) => ({ ...scene }));
+  }
+  const storyboardOutput = run?.stages?.storyboard?.output;
+  if (storyboardOutput && typeof storyboardOutput === 'object' && Array.isArray(storyboardOutput.scenes)) {
+    return storyboardOutput.scenes.map((scene) => ({ ...scene }));
+  }
+  return [];
+};
+
+const buildTikTokRunStep7AvatarStage = (run = {}) => {
+  const avatarName = String(run?.avatarName || '').trim();
+  const scenes = getTikTokRunDetailsStoryboardScenes(run);
+  const activeAvatar = avatars.find((entry) => String(entry?.name || '').trim() === avatarName) || null;
+  const avatarFallback = normalizeTikTokRunMediaUrl(
+    tiktokAvatarAssets.normalUrl ||
+      resolveAvatarPreviewUrl(activeAvatar) ||
+      getAvatarEntryDisplayUrl(activeAvatar?.profile || null) ||
+      ''
+  );
+  if (!avatarName) {
+    return {
+      key: 'avatar',
+      title: 'Step 7 · Avatar processing',
+      status: 'skipped',
+      detail: 'No avatar selected for this run.',
+      output: { scenes: [] }
+    };
+  }
+  if (!scenes.length) {
+    return {
+      key: 'avatar',
+      title: 'Step 7 · Avatar processing',
+      status: 'idle',
+      detail: 'Waiting for storyboard scenes.',
+      output: { scenes: [] }
+    };
+  }
+  const sceneOutputs = scenes.map((scene, index) => {
+    const sceneId = String(scene?.id || `s${index + 1}`).trim();
+    const clipEntry = getTikTokAvatarClipEntryBySceneId(sceneId);
+    const assetEntry = (Array.isArray(tiktokAvatarSceneAssets) ? tiktokAvatarSceneAssets : []).find(
+      (asset) => String(asset?.id || '').trim() === sceneId
+    ) || null;
+    const state = String(scene?.avatar_talk_state || '').trim().toLowerCase();
+    const videoUrl = normalizeTikTokRunMediaUrl(getTikTokAvatarSceneOutputUrl(scene));
+    const taskId = String(scene?.avatar_talk_task_id || '').trim();
+    const audioLocalPath = String(fileUrlToPath(scene?.avatar_talk_audio_local_path || '') || '').trim();
+    const audioPreviewUrl = normalizeTikTokRunMediaUrl(
+      String(
+        (audioLocalPath ? filePathToUrl(audioLocalPath) : '') ||
+        assetEntry?.audioPreviewUrl ||
+        clipEntry?.audioPreviewUrl ||
+        ''
+      ).trim()
+    );
+    const audioUrl = normalizeTikTokRunMediaUrl(
+      String(scene?.avatar_talk_audio_url || assetEntry?.audioUrl || clipEntry?.audioUrl || '').trim()
+    );
+    const imageUrl = normalizeTikTokRunMediaUrl(
+      String(
+        scene?.avatar_talk_image_url ||
+        assetEntry?.imageUrl ||
+        clipEntry?.previewImage ||
+        clipEntry?.imageUrl ||
+        scene?.clip?.preview ||
+        scene?.clip?.url ||
+        avatarFallback ||
+        ''
+      ).trim()
+    );
+    const progress = videoUrl
+      ? 100
+      : normalizeKieProgressPercent(state, { progress: Number(scene?.avatar_talk_progress || 0) || 0 });
+    const clipStatusRaw = String(clipEntry?.status || '').trim().toLowerCase();
+    const hasDoneClipState = clipStatusRaw.includes('ready') || clipStatusRaw.includes('done') || clipStatusRaw.includes('complete');
+    const normalizedState = videoUrl
+      ? 'done'
+      : hasDoneClipState
+      ? 'done'
+      : state === 'fail'
+      ? 'failed'
+      : taskId || state === 'queuing' || state === 'waiting' || state === 'generating' || state === 'retrying'
+      ? 'running'
+      : 'queued';
+    return {
+      id: sceneId,
+      title: `Scene ${index + 1}`,
+      imageUrl,
+      videoUrl,
+      audioPreviewUrl: audioPreviewUrl || audioUrl,
+      audioUrl,
+      prompt: String(scene?.avatar_talk_prompt || '').trim(),
+      provider: String(scene?.clip?.provider || '').trim(),
+      taskState: String(scene?.avatar_talk_state || '').trim(),
+      state: normalizedState,
+      progress,
+      status: formatKieSceneStatus(scene?.avatar_talk_state || (videoUrl ? 'success' : 'waiting'), {
+        failMsg: scene?.avatar_talk_fail_msg || ''
+      })
+    };
+  });
+  const total = sceneOutputs.length;
+  const done = sceneOutputs.filter((entry) => entry.state === 'done').length;
+  const failed = sceneOutputs.filter((entry) => entry.state === 'failed').length;
+  const running = sceneOutputs.filter((entry) => entry.state === 'running').length;
+  const queued = sceneOutputs.filter((entry) => entry.state === 'queued').length;
+  const activeSceneId =
+    canUseLiveTikTokRunWorkspaceData(run) && tiktokAvatarGenerateRunning
+      ? String(tiktokAvatarActiveSceneId || '').trim()
+      : '';
+  let status = 'idle';
+  if (done >= total && total > 0) status = 'success';
+  else if (running > 0 || queued > 0) status = 'running';
+  else if (failed > 0) status = 'error';
+  else if (done > 0) status = 'running';
+  const detail =
+    status === 'success'
+      ? `Avatar clips ready for ${done}/${total} scenes.`
+      : status === 'running'
+      ? `Avatar processing ${done}/${total} done${failed ? ` • ${failed} failed` : ''}.`
+      : status === 'error'
+      ? `Avatar processing failed for ${failed} scene${failed === 1 ? '' : 's'}.`
+      : `Avatar processing not started yet (${done}/${total} done).`;
+  return {
+    key: 'avatar',
+    title: 'Step 7 · Avatar processing',
+    status,
+    detail,
+    output: {
+      sceneCount: total,
+      doneCount: done,
+      failedCount: failed,
+      activeSceneId,
+      generating: status === 'running',
+      avatarName,
+      scenes: sceneOutputs
+    }
+  };
+};
+
+const buildTikTokRunStep8FinalStage = (run = {}) => {
+  const finalPreviewSrc = normalizeTikTokRunMediaUrl(String(tiktokFinalPreview?.getAttribute('src') || '').trim());
+  const finalPreviewPath = String(fileUrlToPath(finalPreviewSrc) || '').trim();
+  const runFinalOutput =
+    run?.stages?.final_render?.output && typeof run.stages.final_render.output === 'object' && !Array.isArray(run.stages.final_render.output)
+      ? run.stages.final_render.output
+      : null;
+  const finalPath = String(runFinalOutput?.path || finalPreviewPath || '').trim();
+  const finalUrl = normalizeTikTokRunMediaUrl(runFinalOutput?.previewUrl || finalPreviewSrc || (finalPath ? `file://${finalPath}` : ''));
+  const runningNow =
+    canUseLiveTikTokRunWorkspaceData(run) &&
+    !!tiktokExportRunning &&
+    String(tiktokFinalRenderBtn?.textContent || '').toLowerCase().includes('rendering');
+  const avatarStage = buildTikTokRunStep7AvatarStage(run);
+  let status = 'idle';
+  let detail = 'Waiting for Step 7 avatar output.';
+  if (finalPath || finalUrl) {
+    status = 'success';
+    detail = `Final render ready${finalPath ? ` • ${finalPath}` : ''}`;
+  } else if (runningNow) {
+    status = 'running';
+    detail = String(tiktokFinalStatus?.textContent || '').trim() || 'Rendering final output...';
+  } else if (avatarStage.status === 'success' || avatarStage.status === 'running') {
+    status = avatarStage.status === 'running' ? 'idle' : 'idle';
+    detail = avatarStage.status === 'running' ? 'Waiting for Step 7 to finish.' : 'Ready to run final render.';
+  } else if (avatarStage.status === 'skipped') {
+    status = 'skipped';
+    detail = 'No avatar processing configured for this run.';
+  }
+  return {
+    key: 'final_render',
+    title: 'Step 8 · Final render',
+    status,
+    detail,
+    output: {
+      path: finalPath,
+      previewUrl: finalUrl
+    }
+  };
+};
+
+const getTikTokRunDetailsStages = (run = {}) => {
+  const baseOrder = [
+    'seed',
+    'concept',
+    'embedding',
+    'retrieval',
+    'memory',
+    'script',
+    'storyboard',
+    'audio',
+    'assets',
+    'final',
+    'avatar',
+    'final_render',
+    'caption',
+    'zoom',
+    'sfx',
+    'publish'
+  ];
+  return baseOrder.map((key) => ({
+    key,
+    stage:
+      key === 'avatar'
+        ? (buildTikTokRunStep7AvatarStage(run) || run.stages?.[key] || null)
+        : key === 'final_render'
+          ? (buildTikTokRunStep8FinalStage(run) || run.stages?.[key] || null)
+          : (run.stages?.[key] || null),
+    restartable: !!(run.stages?.[key])
+  })).filter((entry) => !!entry.stage);
+};
+
+const renderTikTokRunStageArtifacts = (container, stageKey, stage, { run = null } = {}) => {
+  const output = stage?.output;
+  if (stageKey === 'avatar' && output && typeof output === 'object' && !Array.isArray(output)) {
+    const scenes = Array.isArray(output.scenes) ? output.scenes : [];
+    const canUseLiveControls = !!run && canUseLiveTikTokRunWorkspaceData(run);
+    const avatarName = String(output.avatarName || run?.avatarName || '').trim();
+    const avatar = avatars.find((entry) => String(entry?.name || '').trim() === avatarName) || null;
+    const sceneLookup = new Map(getTikTokRunDetailsStoryboardScenes(run).map((scene) => [String(scene?.id || '').trim(), scene]));
+    const runExpandKey = String(run?.id || 'active').trim() || 'active';
+    if (!tiktokRunDetailsAvatarExpandedByRun[runExpandKey] || typeof tiktokRunDetailsAvatarExpandedByRun[runExpandKey] !== 'object') {
+      tiktokRunDetailsAvatarExpandedByRun[runExpandKey] = {};
+    }
+    const expandedState = tiktokRunDetailsAvatarExpandedByRun[runExpandKey];
+    const summary = renderTikTokRunArtifactText(
+      'Avatar progress',
+      `${Math.max(0, Number(output.doneCount || 0))}/${Math.max(0, Number(output.sceneCount || scenes.length || 0))} done${
+        Number(output.failedCount || 0) ? ` • ${Number(output.failedCount)} failed` : ''
+      }`
+    );
+    if (summary) container.appendChild(summary);
+    if (scenes.length) {
+      const assetsLabel = document.createElement('div');
+      assetsLabel.className = 'small';
+      assetsLabel.style.fontWeight = '700';
+      assetsLabel.textContent = 'Assets sent per scene';
+      container.appendChild(assetsLabel);
+      const assetsList = document.createElement('div');
+      assetsList.className = 'timeline-list';
+      const mappedAssets = scenes.map((scene, index) => {
+        const state = String(scene.state || '').trim().toLowerCase();
+        const sceneId = String(scene.id || '').trim();
+        return {
+          id: sceneId,
+          label: scene.title || `Scene ${index + 1}`,
+          status: String(scene.status || scene.state || '').trim() || 'Queued',
+          state,
+          progress: Math.max(0, Math.min(100, Number(scene.progress || 0))),
+          imageUrl: String(scene.imageUrl || '').trim(),
+          videoUrl: String(scene.videoUrl || '').trim(),
+          audioPreviewUrl: String(scene.audioPreviewUrl || '').trim(),
+          audioUrl: String(scene.audioUrl || '').trim(),
+          prompt: String(scene.prompt || '').trim(),
+          provider: String(scene.provider || '').trim(),
+          taskState: String(scene.taskState || '').trim(),
+          retryable: canUseLiveControls && (state === 'failed' || state === 'queued')
+        };
+      });
+      renderTikTokAvatarSceneAssetsList({
+        container: assetsList,
+        assets: mappedAssets,
+        avatar,
+        sceneLookup,
+        activeSceneId: String(output.activeSceneId || '').trim(),
+        generating: !!output.generating || String(stage?.status || '').trim().toLowerCase() === 'running',
+        disableRetry: !!(tiktokAvatarGenerateRunning || tiktokAvatarCompressRunning),
+        expandedState,
+        onToggleExpanded: (sceneId) => {
+          const key = String(sceneId || '').trim();
+          if (!key) return;
+          expandedState[key] = !expandedState[key];
+          renderTikTokRunDetailsPanel();
+        },
+        onRetryScene: canUseLiveControls
+          ? (sceneId) => {
+              retryAvatarScene(sceneId).catch(() => {});
+            }
+          : null,
+        priorAudioState: null
+      });
+      container.appendChild(assetsList);
+
+      const clipsLabel = document.createElement('div');
+      clipsLabel.className = 'small';
+      clipsLabel.style.fontWeight = '700';
+      clipsLabel.textContent = 'Avatar clip outputs';
+      container.appendChild(clipsLabel);
+      const clipsList = document.createElement('div');
+      clipsList.className = 'timeline-list';
+      const mappedClips = scenes
+        .map((scene, index) => ({
+          id: String(scene.id || '').trim(),
+          label: scene.title || `Scene ${index + 1}`,
+          status: String(scene.status || scene.state || '').trim(),
+          state: String(scene.state || '').trim().toLowerCase(),
+          url: String(scene.videoUrl || '').trim(),
+          videoUrl: String(scene.videoUrl || '').trim(),
+          previewImage: String(scene.imageUrl || '').trim(),
+          imageUrl: String(scene.imageUrl || '').trim(),
+          audioPreviewUrl: String(scene.audioPreviewUrl || '').trim(),
+          audioUrl: String(scene.audioUrl || '').trim()
+        }))
+        .filter((clip) => clip.url || clip.previewImage);
+      renderTikTokAvatarClipCards({
+        container: clipsList,
+        clips: mappedClips,
+        avatar,
+        activeSceneId: String(output.activeSceneId || '').trim(),
+        generating: !!output.generating || String(stage?.status || '').trim().toLowerCase() === 'running',
+        priorClipVideoState: null,
+        emptyText: 'No avatar clips yet.'
+      });
+      container.appendChild(clipsList);
+    }
+    return;
+  }
+  if (stageKey === 'final_render' && output && typeof output === 'object' && !Array.isArray(output)) {
+    const media = renderTikTokRunArtifactMedia({
+      label: 'Step 8 final output',
+      kind: 'video',
+      src: output.previewUrl || output.path,
+      meta: output.path ? `Path: ${output.path}` : ''
+    });
+    if (media) container.appendChild(media);
+    else {
+      const note = renderTikTokRunArtifactText('Output', 'Step 8 final output is not available yet.');
+      if (note) container.appendChild(note);
+    }
+    return;
+  }
+  if (stageKey === 'retrieval' && output && typeof output === 'object' && !Array.isArray(output)) {
+    [
+      renderTikTokRunArtifactText('Decision', String(output.decision || '').trim()),
+      renderTikTokRunArtifactText('Threshold', Number.isFinite(Number(output.threshold)) ? String(output.threshold) : ''),
+      renderTikTokRunArtifactText(
+        'Cluster summary',
+        Array.isArray(output.clusterSummary)
+          ? output.clusterSummary
+              .map((item) => `${String(item?.label || '').trim()} (${Math.max(0, Number(item?.count || 0))})`)
+              .filter(Boolean)
+              .join(' • ')
+          : ''
+      ),
+      renderTikTokRunArtifactText(
+        'Recent matches',
+        Array.isArray(output.recentMatches)
+          ? output.recentMatches
+              .map((item) => {
+                const title = String(item?.title || '').trim();
+                const topic = String(item?.topic || '').trim();
+                const score = Number.isFinite(Number(item?.score)) ? ` • ${Math.round(Number(item.score) * 100)}%` : '';
+                return [title || 'Untitled', topic ? `topic ${topic}` : '', score].filter(Boolean).join(' ');
+              })
+              .filter(Boolean)
+              .join('\n')
+          : ''
+      ),
+      renderTikTokRunArtifactText(
+        'Semantic matches',
+        Array.isArray(output.semanticMatches)
+          ? output.semanticMatches
+              .map((item) => {
+                const title = String(item?.title || '').trim();
+                const topic = String(item?.topic || '').trim();
+                const score = Number.isFinite(Number(item?.score)) ? ` • ${Math.round(Number(item.score) * 100)}%` : '';
+                return [title || 'Untitled', topic ? `topic ${topic}` : '', score].filter(Boolean).join(' ');
+              })
+              .filter(Boolean)
+              .join('\n')
+          : ''
+      ),
+      renderTikTokRunArtifactText(
+        'Lexical matches',
+        Array.isArray(output.lexicalMatches)
+          ? output.lexicalMatches
+              .map((item) => {
+                const title = String(item?.title || '').trim();
+                const topic = String(item?.topic || '').trim();
+                const score = Number.isFinite(Number(item?.score)) ? ` • ${Math.round(Number(item.score) * 100)}%` : '';
+                return [title || 'Untitled', topic ? `topic ${topic}` : '', score].filter(Boolean).join(' ');
+              })
+              .filter(Boolean)
+              .join('\n')
+          : ''
+      )
+    ]
+      .filter(Boolean)
+      .forEach((node) => container.appendChild(node));
+    return;
+  }
+  if (stageKey === 'memory' && output && typeof output === 'object' && !Array.isArray(output)) {
+    const attempts = Array.isArray(output.attempts) ? output.attempts : [];
+    const summary = renderTikTokRunArtifactText('Memory summary', String(output.summary || '').trim());
+    if (summary) container.appendChild(summary);
+    if (attempts.length) {
+      const grid = document.createElement('div');
+      grid.className = 'tiktok-run-artifact__grid';
+      attempts.forEach((attempt, idx) => {
+        const card = document.createElement('div');
+        card.className = 'tiktok-run-scene-card';
+        const title = document.createElement('div');
+        title.className = 'tiktok-run-scene-card__title';
+        const attemptDecision = String(attempt?.decision || attempt?.result || '').trim().toLowerCase();
+        title.textContent = `Attempt ${attempt?.attemptIndex || idx + 1} • ${attemptDecision || 'reviewed'}`;
+        const meta = document.createElement('div');
+        meta.className = 'tiktok-run-scene-card__meta';
+        meta.textContent = [
+          attempt?.title ? `Title: ${attempt.title}` : '',
+          attempt?.hook ? `Hook: ${attempt.hook}` : '',
+          attempt?.angle ? `Angle: ${attempt.angle}` : '',
+          attempt?.topic ? `Topic: ${attempt.topic}` : '',
+          attempt?.reason ? `Reason: ${attempt.reason}` : ''
+        ]
+          .filter(Boolean)
+          .join('\n');
+        card.appendChild(title);
+        card.appendChild(meta);
+        grid.appendChild(card);
+      });
+      container.appendChild(grid);
+    }
+    return;
+  }
+  if (stageKey === 'script' && output && typeof output === 'object' && !Array.isArray(output)) {
+    [renderTikTokRunArtifactText('Hook', output.hook), renderTikTokRunArtifactText('Angle', output.angle), renderTikTokRunArtifactText('Script', output.script || output.fullScript)]
+      .filter(Boolean)
+      .forEach((node) => container.appendChild(node));
+    return;
+  }
+  if (stageKey === 'concept' && output && typeof output === 'object' && !Array.isArray(output)) {
+    [
+      renderTikTokRunArtifactText('Title', output.title),
+      renderTikTokRunArtifactText('Hook', output.hook),
+      renderTikTokRunArtifactText('Angle', output.angle),
+      renderTikTokRunArtifactText('Topic', output.topic),
+      renderTikTokRunArtifactText('Tags', Array.isArray(output.tags) ? output.tags.join(', ') : '')
+    ].filter(Boolean).forEach((node) => container.appendChild(node));
+    return;
+  }
+  if (stageKey === 'storyboard' && output && typeof output === 'object' && Array.isArray(output.scenes)) {
+    const list = document.createElement('div');
+    output.scenes.forEach((scene, idx) => {
+      const card = document.createElement('div');
+      card.className = 'storyboard-scene';
+      const meta = document.createElement('div');
+      meta.className = 'storyboard-scene__meta';
+      const parts = [scene.title || `Scene ${idx + 1}`];
+      if (scene.avatar_reserved) parts.push('avatar reserved');
+      meta.textContent = parts.join(' • ');
+      const text = document.createElement('div');
+      text.className = 'storyboard-scene__text';
+      text.textContent = String(scene.text || '').trim() || '—';
+      const visual = document.createElement('div');
+      visual.className = 'storyboard-scene__visual';
+      visual.textContent = `Visual: ${String(scene.visual_prompt || scene.visualPrompt || '').trim() || '—'}`;
+      card.appendChild(meta);
+      card.appendChild(text);
+      card.appendChild(visual);
+      if (scene.clipQuery) {
+        const query = document.createElement('div');
+        query.className = 'small';
+        query.textContent = `Search query: ${scene.clipQuery}`;
+        card.appendChild(query);
+      }
+      list.appendChild(card);
+    });
+    container.appendChild(list);
+    return;
+  }
+  if (stageKey === 'audio' && output && typeof output === 'object' && !Array.isArray(output)) {
+    const media = renderTikTokRunArtifactMedia({
+      label: 'Voiceover',
+      kind: 'audio',
+      src: output.previewUrl || output.filePath,
+      meta: [
+        output.provider ? `Provider: ${output.provider}` : '',
+        output.voiceId ? `Voice: ${output.voiceId}` : '',
+        output.modelId ? `Model: ${output.modelId}` : '',
+        output.durationMs ? `Duration: ${formatDurationMs(output.durationMs)}` : '',
+        output.filePath ? `Path: ${output.filePath}` : ''
+      ].filter(Boolean).join('\n')
+    });
+    if (media) container.appendChild(media);
+    else {
+      [
+        renderTikTokRunArtifactText('Transcript', output.transcript),
+        renderTikTokRunArtifactText('Audio details', [
+          output.provider ? `Provider: ${output.provider}` : '',
+          output.voiceId ? `Voice: ${output.voiceId}` : '',
+          output.modelId ? `Model: ${output.modelId}` : '',
+          output.durationMs ? `Duration: ${formatDurationMs(output.durationMs)}` : '',
+          output.filePath ? `Path: ${output.filePath}` : ''
+        ].filter(Boolean).join('\n'))
+      ].filter(Boolean).forEach((node) => container.appendChild(node));
+    }
+    return;
+  }
+  if (stageKey === 'assets' && output && typeof output === 'object' && Array.isArray(output.scenes)) {
+    const list = document.createElement('div');
+    const scenes = output.scenes;
+    scenes.forEach((scene, idx) => {
+      const sceneId = String(scene.id || `s${idx + 1}`).trim();
+      const row = document.createElement('div');
+      row.className = `clip-scene${scene.loading || scene.queryScanning ? ' scanning' : ''}`;
+
+      const header = document.createElement('div');
+      header.className = 'clip-scene-header';
+      const title = document.createElement('div');
+      title.className = 'clip-scene-title';
+      title.textContent = scene.title || `Scene ${idx + 1}`;
+      const meta = document.createElement('div');
+      meta.className = 'clip-scene-meta';
+      if (scene.avatarReserved) meta.textContent = 'Reserved for avatar';
+      else if (scene.loading) meta.textContent = 'Searching clips...';
+      else if (scene.queryScanning) meta.textContent = 'Generating search query...';
+      else if (scene.selected) meta.textContent = `Selected • ${scene.provider || 'library'}`;
+      else if (scene.aiLocked) meta.textContent = 'AI image locked';
+      else meta.textContent = 'Waiting for selection';
+      header.appendChild(title);
+      header.appendChild(meta);
+      row.appendChild(header);
+
+      const prompt = document.createElement('div');
+      prompt.className = 'small';
+      prompt.textContent = scene.text || 'No scene text.';
+      row.appendChild(prompt);
+
+      const sceneBody = document.createElement('div');
+      sceneBody.className = 'clip-scene-body';
+
+      const queryBlock = document.createElement('div');
+      queryBlock.className = 'clip-query';
+      if (scene.query) {
+        const query = document.createElement('div');
+        query.className = 'small';
+        query.textContent = `Query: ${scene.query}`;
+        queryBlock.appendChild(query);
+      }
+      if (scene.avatarReserved) {
+        const lock = document.createElement('div');
+        lock.className = 'clip-lock';
+        lock.textContent = 'Reserved for avatar full-shot — clip search disabled.';
+        queryBlock.appendChild(lock);
+      } else if (scene.aiLocked) {
+        const lock = document.createElement('div');
+        lock.className = 'clip-lock';
+        lock.textContent = 'AI image selected — clip search disabled for this scene.';
+        queryBlock.appendChild(lock);
+      } else if (scene.loading || scene.queryScanning) {
+        const loadingLine = document.createElement('div');
+        loadingLine.className = 'small';
+        loadingLine.style.display = 'inline-flex';
+        loadingLine.style.alignItems = 'center';
+        loadingLine.style.gap = '8px';
+        const spinner = document.createElement('span');
+        spinner.className = 'btn-spinner active';
+        loadingLine.appendChild(spinner);
+        const text = document.createElement('span');
+        text.textContent = scene.queryScanning ? 'Preparing query...' : 'Sourcing clips...';
+        loadingLine.appendChild(text);
+        queryBlock.appendChild(loadingLine);
+      }
+      sceneBody.appendChild(queryBlock);
+
+      const normalizedLocalPath = normalizeTikTokRunMediaUrl(scene.localPath || '');
+      const normalizedPreviewUrl = normalizeTikTokRunMediaUrl(scene.previewUrl || '');
+      const normalizedSourceUrl = normalizeTikTokRunMediaUrl(scene.url || '');
+      const providerKey = String(scene.provider || '').toLowerCase();
+      const youtubeThumb = providerKey === 'youtube' ? buildYoutubeThumbFromUrl(scene.url || scene.source || '') : '';
+      const selectedMediaSrc = scene.avatarReserved
+        ? normalizedPreviewUrl || normalizedSourceUrl || normalizedLocalPath
+        : normalizedLocalPath || normalizedPreviewUrl || youtubeThumb || normalizedSourceUrl;
+      const selectedAsImage =
+        scene.avatarReserved ||
+        scene.type === 'image' ||
+        (providerKey === 'youtube' && !isLikelyTikTokRunVideoSource(selectedMediaSrc));
+      if (scene.selected && selectedMediaSrc) {
+        const selected = document.createElement('div');
+        selected.className = 'clip-selected';
+        if (scene.provider) {
+          const sourceBadge = document.createElement('div');
+          sourceBadge.className = `clip-source-badge ${providerKey}`;
+          sourceBadge.textContent = providerKey || 'library';
+          selected.appendChild(sourceBadge);
+        }
+        const media = renderTikTokRunArtifactMedia({
+          label: selectedAsImage ? 'Selected image' : 'Selected clip',
+          kind: selectedAsImage ? 'image' : 'video',
+          src: selectedMediaSrc,
+          meta: scene.localPath ? `Local: ${scene.localPath}` : ''
+        });
+        if (media) {
+          media.classList.add('tiktok-run-artifact__mini--scene-selected');
+          selected.appendChild(media);
+        }
+        sceneBody.appendChild(selected);
+      }
+
+      const resultsWrap = document.createElement('div');
+      resultsWrap.className = 'clip-results';
+      const results = Array.isArray(scene.results) ? scene.results : [];
+      if (scene.avatarReserved) {
+        const empty = document.createElement('div');
+        empty.className = 'small';
+        empty.textContent = 'Avatar scene uses the avatar placeholder/media.';
+        resultsWrap.appendChild(empty);
+      } else if (!results.length) {
+        const empty = document.createElement('div');
+        empty.className = 'small';
+        empty.textContent = scene.loading ? 'Searching clips...' : 'No results yet.';
+        resultsWrap.appendChild(empty);
+      } else {
+        results.forEach((clip) => {
+          const clipId = String(clip.id || clip.url || '').trim();
+          const isSelected = !!scene.selectedClipId && scene.selectedClipId === clipId;
+          const card = document.createElement('div');
+          card.className = `clip-card${isSelected ? ' selected' : ''}`;
+          const previewSrc = normalizeTikTokRunMediaUrl(clip.preview || clip.url || '');
+          const fallbackThumb =
+            String(clip.provider || '').toLowerCase() === 'youtube' ? buildYoutubeThumbFromUrl(clip.url || clip.source || '') : '';
+          const thumbSrc = previewSrc || fallbackThumb;
+          if (thumbSrc) {
+            const img = document.createElement('img');
+            img.className = 'clip-thumb';
+            img.src = thumbSrc;
+            img.alt = 'Clip preview';
+            card.appendChild(img);
+          }
+          const body = document.createElement('div');
+          body.className = 'clip-card-body';
+          const metaLine = document.createElement('div');
+          metaLine.className = 'clip-card-meta';
+          metaLine.textContent = clip.type === 'image'
+            ? `image • ${clip.width || 0}x${clip.height || 0}`
+            : `${clip.duration || 0}s • ${clip.width || 0}x${clip.height || 0}`;
+          const providerLine = document.createElement('div');
+          providerLine.className = 'clip-card-meta';
+          providerLine.textContent = clip.author
+            ? `By ${clip.author}`
+            : (clip.provider ? String(clip.provider) : 'library');
+          const stateLine = document.createElement('div');
+          stateLine.className = 'small';
+          stateLine.textContent = isSelected ? 'Selected' : 'Candidate';
+          body.appendChild(metaLine);
+          body.appendChild(providerLine);
+          body.appendChild(stateLine);
+          card.appendChild(body);
+          resultsWrap.appendChild(card);
+        });
+      }
+      sceneBody.appendChild(resultsWrap);
+
+      const progress = document.createElement('div');
+      progress.className = `tiktok-auto-stage-progress ${
+        scene.loading || scene.queryScanning ? 'running' : scene.selected || scene.avatarReserved ? 'success' : 'idle'
+      }`.trim();
+      const progressBar = document.createElement('div');
+      progressBar.className = 'tiktok-auto-stage-progress__bar';
+      const progressFill = document.createElement('div');
+      progressFill.className = 'tiktok-auto-stage-progress__fill';
+      progressFill.style.width = `${
+        scene.loading || scene.queryScanning
+          ? 45
+          : scene.selected || scene.avatarReserved
+          ? 100
+          : 0
+      }%`;
+      progressBar.appendChild(progressFill);
+      progress.appendChild(progressBar);
+      sceneBody.appendChild(progress);
+
+      row.appendChild(sceneBody);
+      list.appendChild(row);
+    });
+    container.appendChild(list);
+    return;
+  }
+  if (stageKey === 'final' && output && typeof output === 'object' && !Array.isArray(output)) {
+    const media = renderTikTokRunArtifactMedia({
+      label: 'Video export',
+      kind: 'video',
+      src: output.previewUrl || output.path,
+      meta: output.path ? `Path: ${output.path}` : ''
+    });
+    if (media) container.appendChild(media);
+    else {
+      const details = renderTikTokRunArtifactText('Final output', output.path ? `Path: ${output.path}` : 'Final render metadata saved.');
+      if (details) container.appendChild(details);
+    }
+    return;
+  }
+  if (stageKey === 'caption' && output && typeof output === 'object' && !Array.isArray(output)) {
+    const media = renderTikTokRunArtifactMedia({
+      label: 'Caption output',
+      kind: 'video',
+      src: output.previewUrl || output.primaryPath || output.combinedPath || output.subtitlePath || output.baseRenderPath,
+      meta: [
+        output.primaryPath ? `Path: ${output.primaryPath}` : '',
+        output.timingSource ? `Timing: ${output.timingSource}` : '',
+        output.wordCount ? `Words: ${output.wordCount}` : ''
+      ].filter(Boolean).join('\n')
+    });
+    if (media) container.appendChild(media);
+    [
+      renderTikTokRunArtifactText('Transcript', output.transcript),
+      renderTikTokRunArtifactText('Caption draft', [output.captionText, output.hashtags].filter(Boolean).join('\n\n'))
+    ].filter(Boolean).forEach((node) => container.appendChild(node));
+    return;
+  }
+  if (stageKey === 'zoom' && output && typeof output === 'object' && !Array.isArray(output)) {
+    const media = renderTikTokRunArtifactMedia({
+      label: 'Zoom output',
+      kind: 'video',
+      src: output.previewUrl || output.path,
+      meta: output.path ? `Path: ${output.path}` : ''
+    });
+    if (media) container.appendChild(media);
+    const details = renderTikTokRunArtifactText('Zoom settings', getTikTokRunStageOutputText(output.settings || {}));
+    if (details) container.appendChild(details);
+    return;
+  }
+  if (stageKey === 'sfx' && output && typeof output === 'object' && !Array.isArray(output)) {
+    const media = renderTikTokRunArtifactMedia({
+      label: 'SFX output',
+      kind: 'video',
+      src: output.previewUrl || output.path,
+      meta: [
+        output.path ? `Path: ${output.path}` : '',
+        Number.isFinite(Number(output.eventCount)) ? `Cues: ${Number(output.eventCount)}` : ''
+      ].filter(Boolean).join('\n')
+    });
+    if (media) container.appendChild(media);
+    const events = Array.isArray(output.events) ? output.events : [];
+    if (events.length) {
+      const eventDetails = renderTikTokRunArtifactText(
+        'Sound cues',
+        events
+          .map((event) =>
+            [
+              Number.isFinite(Number(event?.timeSec)) ? `${Number(event.timeSec).toFixed(2)}s` : '',
+              String(event?.label || event?.query || 'Cue').trim(),
+              String(event?.reason || '').trim()
+            ].filter(Boolean).join(' • ')
+          )
+          .join('\n')
+      );
+      if (eventDetails) container.appendChild(eventDetails);
+    }
+    return;
+  }
+  if (stageKey === 'publish' && output && typeof output === 'object' && Array.isArray(output.entries)) {
+    const grid = document.createElement('div');
+    grid.className = 'tiktok-run-artifact__grid';
+    output.entries.forEach((entry) => {
+      const card = renderTikTokRunArtifactText(
+        String(entry.platform || 'Platform').toUpperCase(),
+        [
+          entry.state === 'pending'
+            ? `Pending${entry.pendingReason ? `: ${entry.pendingReason}` : ': saved to post later'}`
+            : entry.success
+              ? 'Posted successfully'
+              : `Failed${entry.error ? `: ${entry.error}` : ''}`,
+          entry.postId ? `Post ID: ${entry.postId}` : '',
+          entry.videoPath ? `Video: ${entry.videoPath}` : '',
+          entry.caption ? `Caption: ${entry.caption}` : ''
+        ].filter(Boolean).join('\n')
+      );
+      if (card) grid.appendChild(card);
+    });
+    container.appendChild(grid);
+    [
+      renderTikTokRunArtifactText('Selected destinations', Array.isArray(output.platforms) ? formatTikTokPlatformList(output.platforms) : ''),
+      renderTikTokRunArtifactText('Missing credentials', Array.isArray(output.missingPlatforms) ? formatTikTokPlatformList(output.missingPlatforms) : ''),
+      renderTikTokRunArtifactText('Caption package', output.caption),
+      renderTikTokRunArtifactText('Final video path', output.videoPath)
+    ].filter(Boolean).forEach((node) => container.appendChild(node));
+    return;
+  }
+  if (stageKey === 'publish' && output && typeof output === 'object' && !Array.isArray(output)) {
+    [
+      renderTikTokRunArtifactText('Publish state', String(output.state || '').trim()),
+      renderTikTokRunArtifactText('Selected destinations', Array.isArray(output.platforms) ? formatTikTokPlatformList(output.platforms) : ''),
+      renderTikTokRunArtifactText('Connected destinations', Array.isArray(output.readyPlatforms) ? formatTikTokPlatformList(output.readyPlatforms) : ''),
+      renderTikTokRunArtifactText('Missing credentials', Array.isArray(output.missingPlatforms) ? formatTikTokPlatformList(output.missingPlatforms) : ''),
+      renderTikTokRunArtifactText('Caption package', output.caption),
+      renderTikTokRunArtifactText('Hashtags', output.hashtags),
+      renderTikTokRunArtifactText('Final video path', output.videoPath)
+    ].filter(Boolean).forEach((node) => container.appendChild(node));
+    return;
+  }
+  const fallback = renderTikTokRunArtifactText('Output', getTikTokRunStageOutputText(output));
+  if (fallback) container.appendChild(fallback);
+};
+
+const openTikTokRunInManualWorkspace = (runId = '') => {
+  const run = tiktokAutomationRuns.find((entry) => entry.id === runId);
+  if (!run) {
+    setTikTokStatus('Run not found.', true);
+    return;
+  }
+  const scriptOutput =
+    run?.stages?.script?.output && typeof run.stages.script.output === 'object' && !Array.isArray(run.stages.script.output)
+      ? run.stages.script.output
+      : null;
+  const scriptId = String(run.scriptId || scriptOutput?.id || `script-${run.id}`).trim();
+  if (scriptOutput) {
+    const nextScript = {
+      id: scriptId,
+      title: String(scriptOutput.title || run.title || 'Automation script').trim(),
+      hook: String(scriptOutput.hook || '').trim(),
+      angle: String(scriptOutput.angle || '').trim(),
+      script: String(scriptOutput.script || scriptOutput.fullScript || '').trim(),
+      source: 'automatic',
+      createdAt: run.createdAt || new Date().toISOString()
+    };
+    const merged = [nextScript].concat(tiktokScripts.filter((entry) => String(entry?.id || '').trim() !== scriptId));
+    persistTikTokScripts(merged.slice(0, 60));
+    tiktokStoryboardScriptId = scriptId;
+  }
+
+  const storyboardOutput =
+    run?.stages?.storyboard?.output && typeof run.stages.storyboard.output === 'object' && !Array.isArray(run.stages.storyboard.output)
+      ? run.stages.storyboard.output
+      : null;
+  if (storyboardOutput && Array.isArray(storyboardOutput.scenes) && storyboardOutput.scenes.length) {
+    tiktokStoryboard = {
+      id: `run-storyboard-${run.id}`,
+      generated_at: run.createdAt || new Date().toISOString(),
+      source_script_id: scriptId,
+      source_script_title: String(storyboardOutput.sourceScriptTitle || scriptOutput?.title || run.title || '').trim(),
+      target_duration_ms: Number(storyboardOutput.targetDurationMs || 0) || 0,
+      notes: String(storyboardOutput.notes || '').trim(),
+      scenes: storyboardOutput.scenes.map((scene, index) => ({
+        id: String(scene.id || `s${index + 1}`).trim(),
+        text: String(scene.text || '').trim(),
+        keywords: Array.isArray(scene.keywords) ? scene.keywords.map((item) => String(item || '').trim()).filter(Boolean) : [],
+        visual_prompt: String(scene.visual_prompt || scene.visualPrompt || '').trim(),
+        start_ms: Number(scene.startMs || scene.start_ms || 0) || 0,
+        end_ms: Number(scene.endMs || scene.end_ms || 0) || 0,
+        clip_query: String(scene.clipQuery || scene.clip_query || '').trim(),
+        pace: String(scene.pace || '').trim(),
+        avatar_reserved: !!scene.avatar_reserved,
+        clip: scene.clip && typeof scene.clip === 'object' ? { ...scene.clip } : null,
+        ai_image_prompt: String(scene.ai_image_prompt || '').trim(),
+        ai_image_url: String(scene.ai_image_url || '').trim(),
+        ai_image_status: String(scene.ai_image_status || '').trim()
+      }))
+    };
+  }
+
+  const audioOutput =
+    run?.stages?.audio?.output && typeof run.stages.audio.output === 'object' && !Array.isArray(run.stages.audio.output)
+      ? run.stages.audio.output
+      : null;
+  if (audioOutput && (audioOutput.filePath || audioOutput.previewUrl)) {
+    const filePath = String(fileUrlToPath(audioOutput.filePath || '') || audioOutput.filePath || '').trim();
+    tiktokAudio = {
+      provider: String(audioOutput.provider || '').trim(),
+      voice_id: String(audioOutput.voiceId || '').trim(),
+      model_id: String(audioOutput.modelId || '').trim(),
+      duration_ms: Number(audioOutput.durationMs || 0) || 0,
+      file_path: filePath,
+      original_file_path: filePath,
+      script_id: scriptId,
+      script_title: String(scriptOutput?.title || run.title || '').trim()
+    };
+    tiktokAudioUrl = String(audioOutput.previewUrl || (filePath ? `file://${filePath}` : '')).trim();
+  }
+
+  if (activeView !== 'builder') {
+    setView('builder', { reason: 'run-details-manual', force: true });
+  }
+  if (currentCreateView !== 'tiktok') {
+    setCreateView('tiktok', { skipTikTokInit: true });
+  }
+  setTikTokAutomationMode('manual');
+  renderTikTokScripts();
+  renderTikTokStoryboardOutput();
+  renderTikTokClipLibrary();
+  renderTikTokTimeline();
+  closeTikTokRunDetailsPanel();
+  setTikTokStatus(`Loaded "${run.title || 'run'}" into manual workspace.`);
+};
+
+const openTikTokRunDetailsPanel = (runId = '') => {
+  const run = tiktokAutomationRuns.find((entry) => entry.id === runId);
+  if (!run || !tiktokRunDetailsPanel) return;
+  tiktokAutomationSelectedRunId = run.id;
+  renderTikTokRunDetailsPanel();
+  tiktokRunDetailsPanel.classList.add('show');
+};
+
+const closeTikTokRunDetailsPanel = () => {
+  if (!tiktokRunDetailsPanel) return;
+  tiktokRunDetailsPanel.classList.remove('show');
+};
+
+const renderTikTokRunDetailsPanel = () => {
+  if (!tiktokRunDetailsContent) return;
+  const run = tiktokAutomationRuns.find((entry) => entry.id === tiktokAutomationSelectedRunId);
+  tiktokRunDetailsContent.innerHTML = '';
+  if (!run) {
+    tiktokRunDetailsContent.innerHTML = '<div class="small">Select a run to inspect its outputs and stage history.</div>';
+    return;
+  }
+  const header = document.createElement('div');
+  header.className = 'tiktok-run-detail__header';
+  const title = document.createElement('div');
+  title.className = 'tiktok-run-detail__title';
+  title.textContent = run.title || run.seedPrompt || 'Automation run';
+  const meta = document.createElement('div');
+  meta.className = 'tiktok-run-detail__meta';
+  meta.textContent = `${formatTikTokAutomationStamp(run.createdAt)} • ${run.status}${run.avatarName ? ` • avatar ${run.avatarName}` : ''}`;
+  const pills = document.createElement('div');
+  pills.className = 'tiktok-mini-pills';
+  const status = document.createElement('span');
+  status.className = `tiktok-status-pill ${getTikTokAutomationRunStatusClass(run.status)}`;
+  status.textContent = run.status;
+  const openManualBtn = document.createElement('button');
+  openManualBtn.type = 'button';
+  openManualBtn.className = 'secondary';
+  openManualBtn.textContent = 'Open In Manual Workspace';
+  openManualBtn.addEventListener('click', () => openTikTokRunInManualWorkspace(run.id));
+  pills.appendChild(status);
+  pills.appendChild(openManualBtn);
+  header.appendChild(title);
+  header.appendChild(meta);
+  header.appendChild(pills);
+  tiktokRunDetailsContent.appendChild(header);
+
+  const latestVideo = getTikTokAutomationLatestVideoOutput(run);
+  const hero = document.createElement('div');
+  hero.className = 'tiktok-run-detail__hero';
+  const cycle = document.createElement('div');
+  cycle.className = 'tiktok-run-detail__meta';
+  cycle.textContent = `Cycle: ${formatTikTokAutomationCycleTitle(run.cycleId || run.cycleStartedAt || run.createdAt)}`;
+  hero.appendChild(cycle);
+  const finalOutput = latestVideo?.output || run.stages?.final?.output;
+  const audioOutput = run.stages?.audio?.output;
+  if (finalOutput && typeof finalOutput === 'object' && (finalOutput.previewUrl || finalOutput.path || latestVideo?.path)) {
+    const result = document.createElement('div');
+    result.className = 'tiktok-run-detail__result';
+    const media = renderTikTokRunArtifactMedia({
+      label: latestVideo?.stageKey === 'sfx'
+        ? 'SFX result'
+        : latestVideo?.stageKey === 'zoom'
+          ? 'Zoom result'
+          : latestVideo?.stageKey === 'caption'
+            ? 'Caption result'
+            : 'Video result',
+      kind: 'video',
+      src: finalOutput.previewUrl || latestVideo?.previewUrl || finalOutput.path || latestVideo?.path,
+      meta: (finalOutput.path || latestVideo?.path) ? `Path: ${finalOutput.path || latestVideo?.path}` : ''
+    });
+    if (media) result.appendChild(media);
+    hero.appendChild(result);
+  } else if (audioOutput && typeof audioOutput === 'object' && (audioOutput.previewUrl || audioOutput.filePath)) {
+    const result = document.createElement('div');
+    result.className = 'tiktok-run-detail__result';
+    const media = renderTikTokRunArtifactMedia({
+      label: 'Latest audio',
+      kind: 'audio',
+      src: audioOutput.previewUrl || audioOutput.filePath,
+      meta: audioOutput.filePath ? `Path: ${audioOutput.filePath}` : ''
+    });
+    if (media) result.appendChild(media);
+    hero.appendChild(result);
+  }
+  tiktokRunDetailsContent.appendChild(hero);
+
+  const stagesWrap = document.createElement('div');
+  stagesWrap.className = 'tiktok-run-detail__stages';
+  const manualStageLabels = {
+    script: 'Step 2 · Script drafts',
+    storyboard: 'Step 3 · Storyboard + library',
+    audio: 'Step 4 · Audio alignment',
+    assets: 'Step 5 · Clip sourcing',
+    final: 'Step 6 · Timeline + export',
+    avatar: 'Step 7 · Avatar processing',
+    final_render: 'Step 8 · Final render',
+    caption: 'Step 9 · Caption overlays',
+    zoom: 'Step 10 · Intro zoom',
+    sfx: 'Step 11 · SFX mix',
+    publish: 'Publish'
+  };
+  getTikTokRunDetailsStages(run).forEach((entry) => {
+    const key = String(entry.key || '').trim();
+    const stage = entry.stage;
+    if (!stage) return;
+    const liveOutput = getLiveTikTokRunStageOutput(run, key);
+    const shouldPreferLiveOutput =
+      canUseLiveTikTokRunWorkspaceData(run) &&
+      !isTikTokRunStageOutputEmpty(liveOutput) &&
+      ['storyboard', 'audio', 'assets', 'final', 'avatar', 'final_render', 'caption', 'zoom', 'sfx', 'publish'].includes(key);
+    const effectiveOutput = shouldPreferLiveOutput
+      ? liveOutput
+      : (
+        isTikTokRunStageOutputEmpty(stage.output) && !isTikTokRunStageOutputEmpty(liveOutput)
+          ? liveOutput
+          : stage.output
+      );
+    const stageForRender =
+      effectiveOutput === stage.output
+        ? stage
+        : {
+            ...stage,
+            output: effectiveOutput
+          };
+    const card = document.createElement('div');
+    card.className = `tiktok-run-stage ${String(stageForRender.status || 'idle').trim().toLowerCase()}`;
+    const top = document.createElement('div');
+    top.className = 'tiktok-run-stage__top';
+    const stageTitle = document.createElement('div');
+    stageTitle.className = 'tiktok-run-stage__title';
+    stageTitle.textContent = manualStageLabels[key] || stageForRender.title || key;
+    const stageRight = document.createElement('div');
+    stageRight.className = 'tiktok-mini-pills';
+    const stagePill = document.createElement('span');
+    stagePill.className = `tiktok-auto-stage-chip ${stageForRender.status === 'idle' ? '' : stageForRender.status}`;
+    stagePill.textContent = stageForRender.status;
+    const rerunBtn = document.createElement('button');
+    rerunBtn.type = 'button';
+    rerunBtn.className = 'secondary';
+    const isRestartingThisStage = tiktokAutomationRestartingRunId === run.id && tiktokAutomationRestartingStageKey === key;
+    if (entry.restartable) {
+      rerunBtn.textContent = isRestartingThisStage ? 'Restarting from this step…' : 'Restart from here';
+      rerunBtn.disabled = tiktokAutomationBusy || tiktokGenerating || tiktokAutomationPipelineActive;
+      if (isRestartingThisStage) {
+        const spinner = document.createElement('span');
+        spinner.className = 'btn-spinner active';
+        rerunBtn.appendChild(spinner);
+      }
+      rerunBtn.addEventListener('click', () => {
+        restartTikTokAutomationRunFromStage(run.id, key).catch(() => {});
+      });
+    } else {
+      rerunBtn.textContent = 'View only';
+      rerunBtn.disabled = true;
+    }
+    stageRight.appendChild(stagePill);
+    stageRight.appendChild(rerunBtn);
+    top.appendChild(stageTitle);
+    top.appendChild(stageRight);
+    card.appendChild(top);
+    const progress = document.createElement('div');
+    progress.className = `tiktok-auto-stage-progress ${stageForRender.status === 'idle' ? '' : stageForRender.status}`.trim();
+    const progressBar = document.createElement('div');
+    progressBar.className = 'tiktok-auto-stage-progress__bar';
+    const progressFill = document.createElement('div');
+    progressFill.className = 'tiktok-auto-stage-progress__fill';
+    progressFill.style.width = `${getTikTokAutomationStageProgressPct(stageForRender)}%`;
+    progressBar.appendChild(progressFill);
+    progress.appendChild(progressBar);
+    card.appendChild(progress);
+    if (stageForRender.detail) {
+      const detail = document.createElement('div');
+      detail.className = 'tiktok-run-stage__detail';
+      detail.textContent = stageForRender.detail;
+      card.appendChild(detail);
+    }
+    renderTikTokRunStageArtifacts(card, key, stageForRender, { run });
+    if (isTikTokRunStageOutputEmpty(stageForRender.output)) {
+      renderTikTokRunStagePlaceholder(card, key, stageForRender);
+    }
+    stagesWrap.appendChild(card);
+  });
+  tiktokRunDetailsContent.appendChild(stagesWrap);
+};
+
+const refreshTikTokRunDetailsLiveView = () => {
+  if (!tiktokRunDetailsPanel?.classList.contains('show')) return;
+  const run = tiktokAutomationRuns.find((entry) => entry.id === tiktokAutomationSelectedRunId);
+  if (!run) return;
+  if (!canUseLiveTikTokRunWorkspaceData(run)) return;
+  renderTikTokRunDetailsPanel();
+};
+
+const buildTikTokAutomationRunCard = (run, { activeRun = null, eyebrowText = 'Run' } = {}) => {
+  const runStatusClass = getTikTokAutomationRunStatusClass(run.status);
+  const latestVideo = getTikTokAutomationLatestVideoOutput(run);
+  const finalOutput = latestVideo?.output || run.stages?.final?.output;
+  const audioOutput = run.stages?.audio?.output;
+  const hasFinal = !!latestVideo;
+  const hasAudio = !!(audioOutput && typeof audioOutput === 'object' && (audioOutput.filePath || audioOutput.previewUrl));
+  const publishStage = run.stages?.publish;
+  const publishOutput = publishStage?.output && typeof publishStage.output === 'object' ? publishStage.output : {};
+  const hasPendingPublish = publishStage?.status === 'pending';
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = `tiktok-auto-run-card ${runStatusClass}${activeRun?.id === run.id ? ' is-current' : ''}`;
+
+  const top = document.createElement('div');
+  top.className = 'tiktok-auto-run-card__top';
+
+  const left = document.createElement('div');
+  left.className = 'tiktok-auto-run-card__lead';
+
+  const eyebrow = document.createElement('div');
+  eyebrow.className = 'tiktok-auto-run-card__eyebrow';
+  eyebrow.textContent = activeRun?.id === run.id ? 'Active run' : eyebrowText;
+
+  const title = document.createElement('div');
+  title.className = 'tiktok-auto-run-card__title';
+  title.textContent = run.title || run.seedPrompt || 'Automation run';
+
+  const meta = document.createElement('div');
+  meta.className = 'tiktok-auto-run-card__meta';
+  meta.textContent = `${formatTikTokAutomationStamp(run.createdAt)} • ${run.reason || 'automatic'}`;
+
+  left.appendChild(eyebrow);
+  left.appendChild(title);
+  left.appendChild(meta);
+
+  const aside = document.createElement('div');
+  aside.className = 'tiktok-auto-run-card__aside';
+
+  const statusPill = document.createElement('span');
+  statusPill.className = `tiktok-status-pill ${runStatusClass}`;
+  statusPill.textContent = run.status;
+
+  const signal = document.createElement('span');
+  signal.className = 'tiktok-auto-run-card__signal';
+  signal.textContent = run.status === 'posted'
+    ? 'Posted'
+    : hasPendingPublish
+      ? Array.isArray(publishOutput.missingPlatforms) && publishOutput.missingPlatforms.length
+        ? 'Ready to post later'
+        : 'Ready to post'
+      : hasFinal
+    ? 'Final ready'
+    : hasAudio
+      ? 'Audio ready'
+      : run.stages?.storyboard?.status === 'success'
+        ? 'Storyboard ready'
+        : run.stages?.assets?.status === 'success'
+          ? 'Assets sourced'
+          : run.status === 'blocked'
+            ? 'Blocked by memory'
+            : run.status === 'failed'
+              ? 'Needs attention'
+              : run.status === 'running'
+                ? 'Working now'
+                : 'Inspect outputs';
+
+  aside.appendChild(statusPill);
+  aside.appendChild(signal);
+
+  top.appendChild(left);
+  top.appendChild(aside);
+
+  const stages = document.createElement('div');
+  stages.className = 'tiktok-auto-stage-strip';
+  getTikTokRunStageKeys().forEach((key) => {
+    const stage = run.stages?.[key];
+    if (!stage || stage.status === 'idle') return;
+    const chip = document.createElement('span');
+    chip.className = `tiktok-auto-stage-chip ${stage.status}`;
+    chip.textContent = stage.title;
+    stages.appendChild(chip);
+  });
+
+  const body = document.createElement('div');
+  body.className = 'tiktok-auto-run-card__text';
+  body.textContent = summarizeTikTokRunCardText(run);
+
+  const bottom = document.createElement('div');
+  bottom.className = 'tiktok-auto-run-card__bottom';
+
+  const footer = document.createElement('div');
+  footer.className = 'tiktok-auto-run-card__footer';
+
+  const footerMeta = document.createElement('span');
+  footerMeta.textContent = run.avatarName
+    ? `Avatar ${run.avatarName}`
+    : hasPendingPublish
+      ? 'Saved with a publish package for later'
+      : run.status === 'running'
+      ? 'Live progress available'
+      : 'Step outputs ready to inspect';
+
+  const openLabel = document.createElement('span');
+  openLabel.className = 'tiktok-auto-run-card__open';
+  openLabel.textContent = 'Inspect run';
+
+  footer.appendChild(footerMeta);
+  footer.appendChild(openLabel);
+  bottom.appendChild(footer);
+
+  card.appendChild(top);
+  card.appendChild(stages);
+  card.appendChild(body);
+  card.appendChild(bottom);
+  card.addEventListener('click', () => openTikTokRunDetailsPanel(run.id));
+  return card;
+};
+
+const buildTikTokAutomationDayGroupSection = (group, { activeRun = null } = {}) => {
+  const section = document.createElement('div');
+  section.className = 'tiktok-auto-cycle-group';
+
+  const head = document.createElement('div');
+  head.className = 'tiktok-auto-cycle-group__head';
+
+  const groupTitle = document.createElement('div');
+  groupTitle.className = 'tiktok-auto-cycle-group__title';
+  groupTitle.textContent = group.title;
+
+  const groupMeta = document.createElement('div');
+  groupMeta.className = 'tiktok-auto-cycle-group__meta';
+  const runningCount = group.runs.filter((entry) => entry.status === 'running').length;
+  const postedCount = group.runs.filter((entry) => entry.status === 'posted').length;
+  const generatedCount = group.runs.filter((entry) => entry.status === 'generated').length;
+  const blockedCount = group.runs.filter((entry) => entry.status === 'blocked').length;
+  const failedCount = group.runs.filter((entry) => entry.status === 'failed').length;
+  groupMeta.textContent = [
+    group.meta,
+    `${group.runs.length} run${group.runs.length === 1 ? '' : 's'}`,
+    runningCount ? `${runningCount} live` : '',
+    postedCount ? `${postedCount} posted` : '',
+    generatedCount ? `${generatedCount} ready` : '',
+    blockedCount ? `${blockedCount} blocked` : '',
+    failedCount ? `${failedCount} failed` : ''
+  ].filter(Boolean).join(' • ');
+
+  head.appendChild(groupTitle);
+  head.appendChild(groupMeta);
+  section.appendChild(head);
+
+  const groupList = document.createElement('div');
+  groupList.className = 'tiktok-auto-cycle-groups';
+  group.runs.forEach((run, index) => {
+    groupList.appendChild(buildTikTokAutomationRunCard(run, {
+      activeRun,
+      eyebrowText: `Run ${index + 1}`
+    }));
+  });
+  section.appendChild(groupList);
+  return section;
+};
+
+const getTikTokDestinationCredentialState = (platform) => {
+  if (platform === 'tiktok') {
+    return !!String(tiktokPublishTikTokToken?.value || '').trim() && !!String(tiktokPublishTikTokOpenId?.value || '').trim();
+  }
+  if (platform === 'instagram') {
+    return !!String(tiktokPublishInstagramToken?.value || '').trim() && !!String(tiktokPublishInstagramUserId?.value || '').trim();
+  }
+  if (platform === 'facebook') {
+    return !!String(tiktokPublishFacebookToken?.value || '').trim() && !!String(tiktokPublishFacebookPageId?.value || '').trim();
+  }
+  return false;
+};
+
+const getTikTokAutomationSelectedPlatformCount = () => {
+  if (!tiktokAutomationConfig?.platforms) return 0;
+  return ['tiktok', 'instagram', 'facebook'].filter((platform) => !!tiktokAutomationConfig.platforms[platform]).length;
+};
+
+const getTikTokAutomationReadyPlatformCount = () =>
+  ['tiktok', 'instagram', 'facebook'].filter(
+    (platform) => !!tiktokAutomationConfig?.platforms?.[platform] && getTikTokDestinationCredentialState(platform)
+  ).length;
+
+const getTikTokAutomationSelectedPlatforms = () =>
+  ['tiktok', 'instagram', 'facebook'].filter((platform) => !!tiktokAutomationConfig?.platforms?.[platform]);
+
+const getTikTokPlatformsMissingCredentials = (platforms = []) =>
+  (Array.isArray(platforms) ? platforms : []).filter((platform) => !getTikTokDestinationCredentialState(platform));
+
+const formatTikTokPlatformList = (platforms = []) =>
+  (Array.isArray(platforms) ? platforms : [])
+    .map((platform) => String(platform || '').trim().toLowerCase())
+    .filter(Boolean)
+    .map((platform) => {
+      if (platform === 'tiktok') return 'TikTok';
+      if (platform === 'instagram') return 'Instagram';
+      if (platform === 'facebook') return 'Facebook';
+      return platform;
+    })
+    .join(', ');
+
+const buildTikTokRunPublishFallbackDraft = (run = {}) => {
+  const draft = getStep10PublishDraft();
+  const scriptOutput = run?.stages?.script?.output && typeof run.stages.script.output === 'object'
+    ? run.stages.script.output
+    : {};
+  const conceptOutput = run?.stages?.concept?.output && typeof run.stages.concept.output === 'object'
+    ? run.stages.concept.output
+    : {};
+  const title = String(scriptOutput.title || run.title || conceptOutput.title || '').trim();
+  const hook = String(scriptOutput.hook || conceptOutput.hook || '').trim();
+  const script = String(scriptOutput.script || scriptOutput.fullScript || '').trim();
+  const caption = String(draft.captionText || '').trim() || [title, hook].filter(Boolean).join(' — ');
+  const hashtags = ensureHashTagList(String(draft.hashtags || '').trim());
+  const combined = String(draft.combined || '').trim() || [caption, hashtags].filter(Boolean).join('\n\n').trim();
+  return {
+    captionText: caption,
+    hashtags,
+    combined,
+    script
+  };
+};
+
+const patchTikTokAutomationRunPublishState = ({
+  runId = '',
+  scriptId = '',
+  stageStatus = 'pending',
+  detail = '',
+  videoPath = '',
+  caption = '',
+  hashtags = '',
+  platforms = [],
+  readyPlatforms = [],
+  missingPlatforms = [],
+  entries = null
+} = {}) => {
+  const run =
+    tiktokAutomationRuns.find((entry) => entry.id === String(runId || '').trim()) ||
+    findTikTokAutomationRunByScriptId(scriptId) ||
+    null;
+  if (!run) return null;
+  const existingOutput = run.stages?.publish?.output && typeof run.stages.publish.output === 'object' && !Array.isArray(run.stages.publish.output)
+    ? run.stages.publish.output
+    : {};
+  const existingEntries = Array.isArray(existingOutput.entries) ? existingOutput.entries : [];
+  const mergedEntries = Array.isArray(entries) && entries.length ? existingEntries.concat(entries).slice(-8) : existingEntries;
+  return patchTikTokAutomationRunStage(run.id, 'publish', {
+    status: stageStatus,
+    detail,
+    output: {
+      ...existingOutput,
+      state: stageStatus,
+      videoPath: String(videoPath || existingOutput.videoPath || '').trim(),
+      caption: String(caption || existingOutput.caption || '').trim(),
+      hashtags: String(hashtags || existingOutput.hashtags || '').trim(),
+      platforms: Array.from(new Set((Array.isArray(platforms) ? platforms : []).filter(Boolean))),
+      readyPlatforms: Array.from(new Set((Array.isArray(readyPlatforms) ? readyPlatforms : []).filter(Boolean))),
+      missingPlatforms: Array.from(new Set((Array.isArray(missingPlatforms) ? missingPlatforms : []).filter(Boolean))),
+      entries: mergedEntries
+    }
+  });
+};
+
+const syncTikTokAutomationPublishFallbackStage = ({ scriptId = '', path = '' } = {}) => {
+  const resolvedScriptId = String(scriptId || '').trim();
+  const run = findTikTokAutomationRunByScriptId(resolvedScriptId);
+  const videoPath = String(path || run?.stages?.final?.output?.path || '').trim();
+  if (!run || !videoPath) return;
+  const selectedPlatforms = getTikTokAutomationSelectedPlatforms();
+  const missingPlatforms = getTikTokPlatformsMissingCredentials(selectedPlatforms);
+  const readyPlatforms = selectedPlatforms.filter((platform) => !missingPlatforms.includes(platform));
+  const draft = buildTikTokRunPublishFallbackDraft(run);
+  if (!selectedPlatforms.length) {
+    patchTikTokAutomationRunPublishState({
+      runId: run.id,
+      scriptId: resolvedScriptId,
+      stageStatus: 'pending',
+      detail: 'Final video saved. No destinations are selected, so this run is ready to post later.',
+      videoPath,
+      caption: draft.combined,
+      hashtags: draft.hashtags,
+      platforms: [],
+      readyPlatforms: [],
+      missingPlatforms: []
+    });
+    return;
+  }
+  if (missingPlatforms.length) {
+    patchTikTokAutomationRunPublishState({
+      runId: run.id,
+      scriptId: resolvedScriptId,
+      stageStatus: 'pending',
+      detail: `Final video saved. Posting is pending credentials for ${formatTikTokPlatformList(missingPlatforms)}.`,
+      videoPath,
+      caption: draft.combined,
+      hashtags: draft.hashtags,
+      platforms: selectedPlatforms,
+      readyPlatforms,
+      missingPlatforms
+    });
+    return;
+  }
+  if (String(tiktokAutomationConfig?.approvalMode || '').trim() !== 'full-auto') {
+    patchTikTokAutomationRunPublishState({
+      runId: run.id,
+      scriptId: resolvedScriptId,
+      stageStatus: 'pending',
+      detail: 'Final video saved. Review and post this run when you are ready.',
+      videoPath,
+      caption: draft.combined,
+      hashtags: draft.hashtags,
+      platforms: selectedPlatforms,
+      readyPlatforms,
+      missingPlatforms: []
+    });
+  }
+};
+
+const describeTikTokAutomationSchedule = (config = tiktokAutomationConfig || normalizeTikTokAutomationConfig()) => {
+  return `Generate ${config.videosPerDay} run${config.videosPerDay === 1 ? '' : 's'} back-to-back immediately, then wait 24 hours before starting the next burst.`;
+};
+
+const describeTikTokAutomationPostingSchedule = (config = tiktokAutomationConfig || normalizeTikTokAutomationConfig()) => {
+  const timezoneLabel = String(config.postingTimezone || 'UTC').trim() || 'UTC';
+  if (String(config.postingScheduleMode || 'follow-generation') === 'spread-window') {
+    return `When full-auto posting is active, posts will spread between ${String(config.postingStartHour).padStart(
+      2,
+      '0'
+    )}:00 and ${String(config.postingEndHour).padStart(2, '0')}:00 in ${timezoneLabel}.`;
+  }
+  return `When full-auto posting is active, each post will publish as soon as its run is ready in ${timezoneLabel}.`;
+};
+
+const computeTikTokAutomationNextRunAt = (now = new Date()) => {
+  const config = tiktokAutomationConfig || normalizeTikTokAutomationConfig();
+  const cycleCount = getTikTokAutomationGeneratedToday(now);
+  if (cycleCount >= Math.max(1, Number(config.videosPerDay) || 1)) {
+    const cycleStartedAt = String(tiktokAutomationState?.cycleStartedAt || '').trim();
+    if (cycleStartedAt) {
+      const cycleStartedDate = new Date(cycleStartedAt);
+      if (!Number.isNaN(cycleStartedDate.getTime())) {
+        return new Date(cycleStartedDate.getTime() + 24 * 60 * 60 * 1000).toISOString();
+      }
+    }
+    return new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString();
+  }
+  return new Date(now.getTime() + 5 * 1000).toISOString();
+};
+
+const TIKTOK_AUTOMATION_SIMULATION_STEP_MS = 2200;
+
+const waitForTikTokAutomationSimulationStep = (ms = TIKTOK_AUTOMATION_SIMULATION_STEP_MS) =>
+  new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+
+const buildTikTokAutomationSimulationPayload = (seedPrompt = '') => {
+  const prompt = String(seedPrompt || tiktokAutomationConfig?.seedPrompt || '').trim() || 'cat psychology video ideas';
+  const templates = [
+    {
+      title: 'Why Cats Guard Doorways',
+      hook: 'Ever notice your cat sitting in the doorway like a tiny bouncer?',
+      angle: 'Break down the territorial and curiosity-driven reasons behind this behavior.',
+      topic: 'Cat territory behavior',
+      tags: ['cats', 'territory', 'behavior']
+    },
+    {
+      title: 'Why Cats Stare While You Sleep',
+      hook: 'Why does your cat watch you at night like it knows something you do not?',
+      angle: 'Explain how routine tracking and social bonding turn into this eerie habit.',
+      topic: 'Cat nighttime behavior',
+      tags: ['cats', 'sleep', 'bonding']
+    },
+    {
+      title: 'Why Cats Love Window Patrol',
+      hook: 'Your cat is not being lazy at the window. It is on a full surveillance shift.',
+      angle: 'Show how stimulation, prey tracking, and territory awareness make window time rewarding.',
+      topic: 'Cat environmental enrichment',
+      tags: ['cats', 'windows', 'stimulation']
+    },
+    {
+      title: 'Why Cats Sprint After Using the Litter Box',
+      hook: 'Those post-litter zoomies are not random.',
+      angle: 'Connect the burst of energy to instinct, relief, and vulnerability behavior.',
+      topic: 'Cat zoomies',
+      tags: ['cats', 'zoomies', 'behavior']
+    }
+  ];
+  const base = templates[(tiktokAutomationRuns.length + tiktokAutomationEvents.length) % templates.length];
+  const selectedPlatforms = getTikTokAutomationSelectedPlatforms();
+  const missingPlatforms = getTikTokPlatformsMissingCredentials(selectedPlatforms);
+  const readyPlatforms = selectedPlatforms.filter((platform) => !missingPlatforms.includes(platform));
+  const selectedAvatarName = String(tiktokAutomationConfig?.avatarName || activeAvatarName || '').trim();
+  const hasAvatar = !!(selectedAvatarName && avatars.some((entry) => String(entry?.name || '').trim() === selectedAvatarName));
+  const caption = `${base.title}\n\n${ensureHashTagList('#cats #catfacts #shortform')}`;
+  return {
+    prompt,
+    avatarName: hasAvatar ? selectedAvatarName : '',
+    concept: {
+      ...base
+    },
+    script: {
+      title: base.title,
+      hook: base.hook,
+      angle: base.angle,
+      script: [
+        base.hook,
+        'Here is what is actually going on.',
+        'This behavior usually comes from a mix of instinct, environmental awareness, and learned routine.',
+        'Once you know the trigger, the habit makes a lot more sense.',
+        'Follow for more short-form cat behavior breakdowns.'
+      ].join(' ')
+    },
+    storyboard: {
+      sourceScriptTitle: base.title,
+      scenes: [
+        {
+          id: 'scene-1',
+          title: 'Scene 1',
+          text: base.hook,
+          visualPrompt: 'Close framing of a cat performing the behavior indoors.',
+          clipQuery: 'cat indoor behavior vertical video',
+          keywords: ['cat', 'behavior', 'vertical']
+        },
+        {
+          id: 'scene-2',
+          title: 'Scene 2',
+          text: 'Show the instinct or routine driving the behavior.',
+          visualPrompt: 'Cat observing surroundings with alert body language.',
+          clipQuery: 'cat alert home close up',
+          keywords: ['cat', 'alert', 'home']
+        },
+        {
+          id: 'scene-3',
+          title: 'Scene 3',
+          text: 'Resolve with a practical explanation and CTA.',
+          visualPrompt: 'Owner interacting calmly with cat in a bright room.',
+          clipQuery: 'owner cat bonding vertical',
+          keywords: ['owner', 'cat', 'bonding']
+        }
+      ]
+    },
+    audio: {
+      provider: 'simulation',
+      voiceId: 'demo-voice',
+      modelId: 'ui-sim',
+      durationMs: 17800,
+      filePath: '',
+      transcript: [
+        base.hook,
+        'This behavior usually comes from instinct, environmental awareness, and routine.',
+        'Once you know the trigger, the habit makes much more sense.'
+      ].join(' ')
+    },
+    assets: {
+      sceneCount: 3,
+      selectedCount: 3,
+      scenes: [
+        {
+          id: 'scene-1',
+          title: 'Scene 1',
+          text: base.hook,
+          query: 'cat vertical indoor close up',
+          provider: 'youtube',
+          type: 'video',
+          url: '',
+          previewUrl: '',
+          localPath: '/simulated/scene-1.mp4'
+        },
+        {
+          id: 'scene-2',
+          title: 'Scene 2',
+          text: 'Instinct explanation visual',
+          query: 'cat alert close up vertical',
+          provider: 'pexels',
+          type: 'video',
+          url: '',
+          previewUrl: '',
+          localPath: '/simulated/scene-2.mp4'
+        },
+        {
+          id: 'scene-3',
+          title: 'Scene 3',
+          text: 'Owner interaction close',
+          query: 'owner cat vertical video',
+          provider: 'pexels',
+          type: 'video',
+          url: '',
+          previewUrl: '',
+          localPath: '/simulated/scene-3.mp4'
+        }
+      ]
+    },
+    final: {
+      path: '/simulated/final-output.mp4',
+      previewUrl: ''
+    },
+    avatar: hasAvatar
+      ? {
+          sceneCount: 3,
+          doneCount: 3,
+          failedCount: 0,
+          scenes: [
+            {
+              id: 'scene-1',
+              title: 'Scene 1',
+              imageUrl: '',
+              videoUrl: '/simulated/avatar-scene-1.mp4',
+              state: 'done',
+              progress: 100,
+              status: 'Ready'
+            },
+            {
+              id: 'scene-2',
+              title: 'Scene 2',
+              imageUrl: '',
+              videoUrl: '/simulated/avatar-scene-2.mp4',
+              state: 'done',
+              progress: 100,
+              status: 'Ready'
+            },
+            {
+              id: 'scene-3',
+              title: 'Scene 3',
+              imageUrl: '',
+              videoUrl: '/simulated/avatar-scene-3.mp4',
+              state: 'done',
+              progress: 100,
+              status: 'Ready'
+            }
+          ]
+        }
+      : {
+          sceneCount: 0,
+          doneCount: 0,
+          failedCount: 0,
+          scenes: []
+        },
+    final_render: hasAvatar
+      ? {
+          path: '/simulated/final-render.mp4',
+          previewUrl: ''
+        }
+      : {
+          path: '',
+          previewUrl: ''
+        },
+    caption: {
+      primaryPath: '/simulated/final-caption.mp4',
+      combinedPath: '/simulated/final-caption.mp4',
+      subtitlePath: '/simulated/final-caption.mp4',
+      baseRenderPath: '/simulated/final-caption-base.mp4',
+      previewUrl: '',
+      status: 'Simulated caption render ready.',
+      transcript: [
+        base.hook,
+        'This behavior usually comes from instinct, environmental awareness, and routine.',
+        'Once you know the trigger, the habit makes much more sense.'
+      ].join(' '),
+      captionText: base.hook,
+      hashtags: '#cats #catfacts #shortform',
+      timingSource: 'alignment',
+      wordCount: 33
+    },
+    zoom: {
+      path: '/simulated/final-zoom.mp4',
+      previewUrl: '',
+      status: 'Simulated zoom output ready.',
+      settings: {
+        amount: 1.12,
+        durationSec: 1.2,
+        easing: 'ease-out'
+      }
+    },
+    sfx: {
+      path: '/simulated/final-sfx.mp4',
+      previewUrl: '',
+      status: 'Simulated SFX mix ready.',
+      eventCount: 3,
+      events: [
+        { timeSec: 0.2, label: 'whoosh', reason: 'Hook emphasis' },
+        { timeSec: 4.8, label: 'impact', reason: 'Midpoint beat' },
+        { timeSec: 11.3, label: 'click', reason: 'CTA punctuation' }
+      ]
+    },
+    publish: {
+      caption,
+      hashtags: '#cats #catfacts #shortform',
+      platforms: selectedPlatforms,
+      readyPlatforms,
+      missingPlatforms
+    }
+  };
+};
+
+const simulateTikTokAutomationRun = async () => {
+  if (tiktokAutomationSimulationBusy || tiktokAutomationBusy || tiktokGenerating) return false;
+  tiktokAutomationSimulationBusy = true;
+  const payload = buildTikTokAutomationSimulationPayload(String(tiktokAutomationConfig?.seedPrompt || '').trim());
+  const run = createTikTokAutomationRun({
+    reason: 'ui-simulation',
+    seedPrompt: payload.prompt
+  });
+  patchTikTokAutomationRun(run.id, {
+    title: payload.script.title,
+    status: 'running',
+    avatarName: String(payload.avatarName || '').trim()
+  });
+  tiktokAutomationState.currentRunId = run.id;
+  tiktokAutomationState.currentStep = 'Simulating run';
+  tiktokAutomationState.currentDetail = 'Walking through placeholder generation steps for UI review.';
+  pushTikTokAutomationEvent(`UI simulation started for "${payload.script.title}".`, 'run');
+  renderTikTokAutomationUi();
+
+  try {
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'concept', {
+      status: 'success',
+      detail: 'Simulated concept prepared for this run.',
+      output: payload.concept
+    });
+    patchTikTokAutomationRunStage(run.id, 'embedding', {
+      status: 'success',
+      detail: 'Simulated embedding created.',
+      output: {
+        model: TIKTOK_AUTOMATION_EMBEDDING_MODEL,
+        provider: 'simulation',
+        dimensions: TIKTOK_AUTOMATION_EMBEDDING_DIMENSIONS,
+        preview: '0.1032, -0.0274, 0.0440, 0.1182, -0.0901, 0.0563, 0.0081, 0.0224'
+      }
+    });
+    patchTikTokAutomationRunStage(run.id, 'retrieval', {
+      status: 'success',
+      detail: 'Simulated retrieval cleared memory checks.',
+      output: {
+        decision: 'accept',
+        threshold: getTikTokSemanticDuplicateThreshold(),
+        clusterSummary: buildTikTokConceptClusterSummary(),
+        semanticMatches: [],
+        recentMatches: [],
+        lexicalMatches: []
+      }
+    });
+    patchTikTokAutomationRunStage(run.id, 'memory', {
+      status: 'success',
+      detail: 'Simulation approved the concept for generation.',
+      output: {
+        summary: 'Simulation path approved this concept immediately.',
+        attempts: [{ attemptIndex: 1, title: payload.concept.title, decision: 'accept' }]
+      }
+    });
+    tiktokAutomationState.currentStep = 'Writing script';
+    tiktokAutomationState.currentDetail = 'Simulation is filling the script stage.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'script', {
+      status: 'success',
+      detail: payload.script.title,
+      output: payload.script
+    });
+    tiktokAutomationState.currentStep = 'Building storyboard';
+    tiktokAutomationState.currentDetail = 'Simulation is filling storyboard scenes.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'storyboard', {
+      status: 'success',
+      detail: `Storyboard ready with ${payload.storyboard.scenes.length} scenes.`,
+      output: payload.storyboard
+    });
+    tiktokAutomationState.currentStep = 'Generating audio';
+    tiktokAutomationState.currentDetail = 'Simulation is filling voiceover output.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'audio', {
+      status: 'success',
+      detail: `Voiceover ready • ${formatDurationMs(payload.audio.durationMs)}`,
+      output: payload.audio
+    });
+    tiktokAutomationState.currentStep = 'Sourcing assets';
+    tiktokAutomationState.currentDetail = 'Simulation is filling sourced clips.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'assets', {
+      status: 'success',
+      detail: `${payload.assets.selectedCount}/${payload.assets.sceneCount} asset selections ready.`,
+      output: payload.assets
+    });
+    tiktokAutomationState.currentStep = 'Exporting base video';
+    tiktokAutomationState.currentDetail = 'Simulation is filling the base stitched output.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'final', {
+      status: 'success',
+      detail: 'Final video ready.',
+      output: payload.final
+    });
+    tiktokAutomationState.currentStep = 'Processing avatar';
+    tiktokAutomationState.currentDetail = 'Simulation is filling Step 7 avatar output.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'avatar', {
+      status: payload.avatar.sceneCount ? 'success' : 'skipped',
+      detail: payload.avatar.sceneCount
+        ? `Avatar clips ready for ${payload.avatar.doneCount}/${payload.avatar.sceneCount} scenes.`
+        : 'No avatar selected. Step 7 skipped for this run.',
+      output: payload.avatar
+    });
+    tiktokAutomationState.currentStep = 'Rendering final output';
+    tiktokAutomationState.currentDetail = payload.avatar.sceneCount
+      ? 'Simulation is filling Step 8 final render output.'
+      : 'Step 8 is skipped because no avatar is selected.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'final_render', {
+      status: payload.avatar.sceneCount ? 'success' : 'skipped',
+      detail: payload.avatar.sceneCount
+        ? 'Final render ready.'
+        : 'Step 8 skipped because no avatar processing is configured for this run.',
+      output: payload.final_render
+    });
+    tiktokAutomationState.currentStep = 'Rendering captions';
+    tiktokAutomationState.currentDetail = 'Simulation is filling timed caption output.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'caption', {
+      status: 'success',
+      detail: payload.caption.status || 'Caption output ready.',
+      output: payload.caption
+    });
+    tiktokAutomationState.currentStep = 'Rendering zoom';
+    tiktokAutomationState.currentDetail = 'Simulation is filling zoom-enhanced output.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'zoom', {
+      status: 'success',
+      detail: payload.zoom.status || 'Zoom output ready.',
+      output: payload.zoom
+    });
+    tiktokAutomationState.currentStep = 'Rendering SFX mix';
+    tiktokAutomationState.currentDetail = 'Simulation is filling sound-designed output.';
+    renderTikTokAutomationUi();
+
+    await waitForTikTokAutomationSimulationStep();
+    patchTikTokAutomationRunStage(run.id, 'sfx', {
+      status: 'success',
+      detail: payload.sfx.status || 'SFX output ready.',
+      output: payload.sfx
+    });
+    if (payload.publish.platforms.length) {
+      const pendingDetail = payload.publish.missingPlatforms.length
+        ? `Final video saved. Posting is pending credentials for ${formatTikTokPlatformList(payload.publish.missingPlatforms)}.`
+        : String(tiktokAutomationConfig?.approvalMode || '').trim() === 'full-auto'
+          ? 'Simulation marked this run ready for immediate publishing.'
+          : 'Final video saved. Review and post this run when you are ready.';
+      patchTikTokAutomationRunStage(run.id, 'publish', {
+        status: payload.publish.missingPlatforms.length || String(tiktokAutomationConfig?.approvalMode || '').trim() !== 'full-auto' ? 'pending' : 'success',
+        detail: pendingDetail,
+        output: {
+          state: payload.publish.missingPlatforms.length || String(tiktokAutomationConfig?.approvalMode || '').trim() !== 'full-auto' ? 'pending' : 'posted',
+          caption: payload.publish.caption,
+          hashtags: payload.publish.hashtags,
+          videoPath: payload.sfx.path || payload.zoom.path || payload.caption.primaryPath || payload.final_render.path || payload.final.path,
+          platforms: payload.publish.platforms,
+          readyPlatforms: payload.publish.readyPlatforms,
+          missingPlatforms: payload.publish.missingPlatforms,
+          entries: []
+        }
+      });
+    } else {
+      patchTikTokAutomationRunStage(run.id, 'publish', {
+        status: 'pending',
+        detail: 'Final video saved. No destinations are selected, so this run is ready to post later.',
+        output: {
+          state: 'pending',
+          caption: payload.publish.caption,
+          hashtags: payload.publish.hashtags,
+          videoPath: payload.sfx.path || payload.zoom.path || payload.caption.primaryPath || payload.final_render.path || payload.final.path,
+          platforms: [],
+          readyPlatforms: [],
+          missingPlatforms: [],
+          entries: []
+        }
+      });
+    }
+    patchTikTokAutomationRun(run.id, {
+      status: 'generated',
+      completedAt: new Date().toISOString(),
+      title: payload.script.title
+    });
+    tiktokAutomationState.currentStep = 'Simulation complete';
+    tiktokAutomationState.currentDetail = `Created placeholder outputs for "${payload.script.title}".`;
+    pushTikTokAutomationEvent(`UI simulation completed for "${payload.script.title}".`, 'success');
+    renderTikTokAutomationUi();
+    return true;
+  } catch (err) {
+    patchTikTokAutomationRun(run.id, {
+      status: 'failed',
+      error: String(err?.message || 'UI simulation failed.').trim(),
+      completedAt: new Date().toISOString()
+    });
+    patchTikTokAutomationRunStage(run.id, 'script', {
+      status: 'error',
+      detail: String(err?.message || 'UI simulation failed.').trim()
+    });
+    tiktokAutomationState.currentStep = 'Simulation failed';
+    tiktokAutomationState.currentDetail = String(err?.message || 'UI simulation failed.').trim();
+    pushTikTokAutomationEvent(`UI simulation failed: ${tiktokAutomationState.currentDetail}`, 'error');
+    renderTikTokAutomationUi();
+    return false;
+  } finally {
+    tiktokAutomationSimulationBusy = false;
+  }
+};
+
+const setTikTokAutomationMode = (mode = 'manual') => {
+  tiktokMode = mode === 'automatic' ? 'automatic' : 'manual';
+  if (tiktokMode !== 'automatic' && tiktokAutomationState) {
+    tiktokAutomationState.running = false;
+  }
+  commitTikTokAutomationState();
+  renderTikTokAutomationUi();
+};
+
+const renderTikTokAutomationFeed = (container, entries, renderEntry, emptyText) => {
+  if (!container) return;
+  container.innerHTML = '';
+  if (!entries.length) {
+    const empty = document.createElement('div');
+    empty.className = 'tiktok-history-empty';
+    empty.textContent = emptyText;
+    container.appendChild(empty);
+    return;
+  }
+  entries.forEach((entry) => container.appendChild(renderEntry(entry)));
+};
+
+const setFieldValueIfNeeded = (field, value) => {
+  if (!field) return;
+  const nextValue = String(value ?? '');
+  if (field.value !== nextValue) field.value = nextValue;
+};
+
+const renderTikTokMemoryExplorerUi = () => {
+  const generatedConcepts = getTikTokGeneratedConceptEntries();
+  const memoryEmbeddings = getTikTokMemoryEmbeddingEntries();
+  const queryEmbeddings = getTikTokQueryEmbeddingEntries();
+  if (tiktokMemoryExplorerHistoryBtn) tiktokMemoryExplorerHistoryBtn.classList.toggle('active', tiktokAutomationMemoryExplorerView === 'history');
+  if (tiktokMemoryExplorerConceptsBtn) tiktokMemoryExplorerConceptsBtn.classList.toggle('active', tiktokAutomationMemoryExplorerView === 'concepts');
+  if (tiktokMemoryExplorerRetrievalBtn) tiktokMemoryExplorerRetrievalBtn.classList.toggle('active', tiktokAutomationMemoryExplorerView === 'retrieval');
+  if (tiktokMemoryExplorerEmbeddingsBtn) tiktokMemoryExplorerEmbeddingsBtn.classList.toggle('active', tiktokAutomationMemoryExplorerView === 'embeddings');
+
+  if (tiktokMemoryExplorerSummary) {
+    tiktokMemoryExplorerSummary.textContent =
+      `Runs ${tiktokAutomationRuns.length} • Memory concepts ${tiktokAutomationConceptMemory.length} • Generated concepts ${generatedConcepts.length} • Memory embeddings ${memoryEmbeddings.length} • Query embeddings ${queryEmbeddings.length} • Retrieval events ${tiktokAutomationRetrievalEvents.length}`;
+  }
+  if (tiktokAutomationMemoryExportBtn) {
+    tiktokAutomationMemoryExportBtn.disabled =
+      (!tiktokAutomationConceptMemory.length &&
+        !tiktokAutomationRetrievalEvents.length &&
+        !tiktokAutomationEmbeddings.length &&
+        !tiktokAutomationTestState.results.length);
+  }
+  if (tiktokAutomationMemoryExportStatus && !String(tiktokAutomationMemoryExportStatus.textContent || '').trim()) {
+    setTikTokAutomationMemoryExportStatus('Export the current memory state and test results for external analysis.');
+  }
+
+  if (!tiktokMemoryExplorerContent) return;
+  tiktokMemoryExplorerContent.innerHTML = '';
+
+  const createBox = (title, lines = [], accent = '') => {
+    const box = document.createElement('div');
+    box.className = 'tiktok-auto-test-result';
+    if (accent) box.style.borderColor = accent;
+    const head = document.createElement('div');
+    head.className = 'tiktok-history-entry__top';
+    const headTitle = document.createElement('div');
+    headTitle.className = 'tiktok-auto-test-result__title';
+    headTitle.textContent = title;
+    head.appendChild(headTitle);
+    const body = document.createElement('div');
+    body.className = 'small';
+    body.style.whiteSpace = 'pre-wrap';
+    body.style.marginTop = '8px';
+    body.textContent = lines.filter(Boolean).join('\n');
+    box.appendChild(head);
+    box.appendChild(body);
+    return box;
+  };
+
+  if (tiktokAutomationMemoryExplorerView === 'history') {
+    if (!tiktokAutomationRuns.length) {
+      tiktokMemoryExplorerContent.innerHTML = '<div class="tiktok-history-empty">No run history yet.</div>';
+      return;
+    }
+    tiktokAutomationRuns.slice(0, 24).forEach((run) => {
+      tiktokMemoryExplorerContent.appendChild(
+        createBox(run.title || run.seedPrompt || 'Automation run', [
+          `Run ID: ${run.id}`,
+          `Status: ${run.status}`,
+          run.conceptId ? `Concept ID: ${run.conceptId}` : '',
+          run.retrievalEventId ? `Retrieval event: ${run.retrievalEventId}` : '',
+          run.scriptId ? `Script ID: ${run.scriptId}` : '',
+          `Created: ${formatTikTokAutomationStamp(run.createdAt)}`
+        ])
+      );
+    });
+    return;
+  }
+
+  if (tiktokAutomationMemoryExplorerView === 'concepts') {
+    if (!tiktokAutomationConceptMemory.length && !generatedConcepts.length) {
+      tiktokMemoryExplorerContent.innerHTML = '<div class="tiktok-history-empty">No concept entries yet.</div>';
+      return;
+    }
+    tiktokMemoryExplorerContent.appendChild(
+      createBox('Memory concepts', [
+        `Durable accepted concepts: ${tiktokAutomationConceptMemory.length}`,
+        'These are the concepts currently used as long-term duplicate-protection memory.'
+      ])
+    );
+    tiktokAutomationConceptMemory.slice(0, 40).forEach((concept) => {
+      tiktokMemoryExplorerContent.appendChild(
+        createBox(concept.title || concept.hook || 'Concept', [
+          `Concept ID: ${concept.id}`,
+          concept.runId ? `Run ID: ${concept.runId}` : '',
+          concept.scriptId ? `Script ID: ${concept.scriptId}` : '',
+          concept.hook ? `Hook: ${concept.hook}` : '',
+          concept.angle ? `Angle: ${concept.angle}` : '',
+          concept.topic ? `Topic: ${concept.topic}` : '',
+          concept.hookPattern ? `Hook pattern: ${concept.hookPattern}` : '',
+          concept.summary ? `Summary: ${concept.summary}` : '',
+          Array.isArray(concept.tags) && concept.tags.length ? `Tags: ${concept.tags.join(', ')}` : '',
+          concept.embeddingId ? `Embedding ID: ${concept.embeddingId}` : 'Embedding ID: missing',
+          `Status: ${concept.status}`,
+          `Created: ${formatTikTokAutomationStamp(concept.createdAt)}`
+        ])
+      );
+    });
+    if (generatedConcepts.length) {
+      tiktokMemoryExplorerContent.appendChild(
+        createBox('Generated / query concepts', [
+          `Temporary generated concepts from retrieval/test attempts: ${generatedConcepts.length}`,
+          'These are not all part of durable memory. They came from test or query attempts.'
+        ])
+      );
+      generatedConcepts.slice(0, 40).forEach((concept) => {
+        tiktokMemoryExplorerContent.appendChild(
+          createBox(concept.title || concept.hook || 'Generated concept', [
+            `Concept ID: ${concept.id}`,
+            concept.hook ? `Hook: ${concept.hook}` : '',
+            concept.angle ? `Angle: ${concept.angle}` : '',
+            concept.topic ? `Topic: ${concept.topic}` : '',
+            concept.summary ? `Summary: ${concept.summary}` : '',
+            Array.isArray(concept.tags) && concept.tags.length ? `Tags: ${concept.tags.join(', ')}` : '',
+            `Status: ${concept.status}`,
+            `Created: ${formatTikTokAutomationStamp(concept.createdAt)}`
+          ], 'rgba(136, 150, 188, 0.16)')
+        );
+      });
+    }
+    return;
+  }
+
+  if (tiktokAutomationMemoryExplorerView === 'retrieval') {
+    if (!tiktokAutomationRetrievalEvents.length) {
+      tiktokMemoryExplorerContent.innerHTML = '<div class="tiktok-history-empty">No retrieval events yet.</div>';
+      return;
+    }
+    tiktokAutomationRetrievalEvents.slice(0, 40).forEach((event) => {
+      tiktokMemoryExplorerContent.appendChild(
+        createBox(event.queryConcept?.title || event.queryConcept?.hook || 'Retrieval event', [
+          `Retrieval ID: ${event.id}`,
+          event.runId ? `Run ID: ${event.runId}` : '',
+          event.testRunKey ? `Test key: ${event.testRunKey}` : '',
+          `Attempt: ${event.attemptIndex}`,
+          `Decision: ${event.decision}`,
+          Number.isFinite(Number(event.threshold)) ? `Threshold: ${Number(event.threshold).toFixed(2)}` : '',
+          event.reason ? `Reason: ${event.reason}` : '',
+          Array.isArray(event.clusterSummary) && event.clusterSummary.length
+            ? `Clusters: ${event.clusterSummary.map((item) => `${item.label} (${item.count})`).join(' • ')}`
+            : '',
+          Array.isArray(event.semanticMatches) && event.semanticMatches.length
+            ? `Semantic: ${event.semanticMatches.slice(0, 5).map((item) => `${item.title || item.hook || 'Concept'}${Number.isFinite(item.score) ? ` (${Math.round(item.score * 100)}%)` : ''}`).join(' • ')}`
+            : '',
+          `Created: ${formatTikTokAutomationStamp(event.createdAt)}`
+        ], event.decision === 'block' ? 'rgba(255,122,122,0.28)' : '')
+      );
+    });
+    return;
+  }
+
+  if (!tiktokAutomationEmbeddings.length) {
+    tiktokMemoryExplorerContent.innerHTML = '<div class="tiktok-history-empty">No embeddings stored yet.</div>';
+    return;
+  }
+  tiktokMemoryExplorerContent.appendChild(
+    createBox('Embedding split', [
+      `Memory embeddings: ${memoryEmbeddings.length}`,
+      `Query/test embeddings: ${queryEmbeddings.length}`
+    ])
+  );
+  memoryEmbeddings.slice(0, 24).forEach((embedding) => {
+    tiktokMemoryExplorerContent.appendChild(
+      createBox(`Memory embedding ${embedding.conceptId || embedding.id}`, [
+        `Embedding ID: ${embedding.id}`,
+        `Concept ID: ${embedding.conceptId || 'query-only'}`,
+        `Provider: ${embedding.provider}`,
+        `Model: ${embedding.model}`,
+        `Dimensions: ${embedding.dimensions}`,
+        `Preview: ${previewEmbeddingVector(embedding.vector, 16)}`,
+        `Stored: ${formatTikTokAutomationStamp(embedding.createdAt)}`
+      ])
+    );
+  });
+  queryEmbeddings.slice(0, 24).forEach((embedding) => {
+    tiktokMemoryExplorerContent.appendChild(
+      createBox(`Query embedding ${embedding.conceptId || embedding.id}`, [
+        `Embedding ID: ${embedding.id}`,
+        `Concept ID: ${embedding.conceptId || 'query-only'}`,
+        `Provider: ${embedding.provider}`,
+        `Model: ${embedding.model}`,
+        `Dimensions: ${embedding.dimensions}`,
+        `Preview: ${previewEmbeddingVector(embedding.vector, 16)}`,
+        `Stored: ${formatTikTokAutomationStamp(embedding.createdAt)}`
+      ], 'rgba(136, 150, 188, 0.16)')
+    );
+  });
+};
+
+const renderTikTokAutomationUi = () => {
+  if (!tiktokAutomationConfig) tiktokAutomationConfig = normalizeTikTokAutomationConfig();
+  if (!tiktokAutomationState) tiktokAutomationState = normalizeTikTokAutomationState();
+  ensureTikTokAutomationHistorySeeded();
+  ensureTikTokConceptMemorySeeded();
+  const automatic = tiktokMode === 'automatic';
+  const ideaCount = tiktokAutomationConceptMemory.length;
+  const uploadCount = tiktokAutomationUploadHistory.length;
+  const selectedPlatforms = getTikTokAutomationSelectedPlatformCount();
+  const readyPlatforms = getTikTokAutomationReadyPlatformCount();
+  const todayCount = getTikTokAutomationGeneratedToday();
+  const nextRunLabel = tiktokAutomationState?.running && tiktokAutomationState?.nextRunAt
+    ? formatTikTokAutomationStamp(tiktokAutomationState.nextRunAt)
+    : '—';
+  const recentRuns = tiktokAutomationRuns.slice(0, 12);
+  const latestRun = recentRuns[0] || null;
+  if (tiktokModeManualBtn) tiktokModeManualBtn.classList.toggle('active', !automatic);
+  if (tiktokModeAutomaticBtn) tiktokModeAutomaticBtn.classList.toggle('active', automatic);
+  if (tiktokModeHeroTitle) tiktokModeHeroTitle.textContent = automatic ? 'Automatic profile active' : 'Manual workflow active';
+  if (tiktokModeHeroText) {
+    tiktokModeHeroText.textContent = automatic
+      ? `${tiktokAutomationConfig.profileName || 'Automation'} is set to ${describeTikTokAutomationSchedule(
+          tiktokAutomationConfig
+        ).replace(/\.$/, '')} with ${tiktokAutomationConfig.memoryStrictness} duplicate protection.`
+      : 'Draft ideas yourself, then push them through storyboard, timing, clip search, and publish.';
+  }
+  if (tiktokAutomationStatusBadge) {
+    tiktokAutomationStatusBadge.className = `tiktok-status-pill ${tiktokAutomationState?.running ? 'running' : 'paused'}`;
+    tiktokAutomationStatusBadge.textContent = tiktokAutomationState?.running ? 'Running' : 'Idle';
+  }
+  if (tiktokAutomationNextBadge) {
+    tiktokAutomationNextBadge.className = `tiktok-status-pill ${tiktokAutomationState?.running ? 'ready' : ''}`.trim();
+    tiktokAutomationNextBadge.textContent = `Next run ${nextRunLabel}`;
+  }
+  if (tiktokSummaryModeValue) tiktokSummaryModeValue.textContent = automatic ? 'Auto' : 'Manual';
+  if (tiktokSummaryModeNote) {
+    tiktokSummaryModeNote.textContent = automatic
+      ? `${tiktokAutomationConfig.profileName || 'Profile'} • ${tiktokAutomationConfig.videosPerDay} per day`
+      : 'Step-by-step creation';
+  }
+  if (tiktokSummaryMemoryValue) tiktokSummaryMemoryValue.textContent = String(ideaCount);
+  if (tiktokSummaryMemoryNote) {
+    tiktokSummaryMemoryNote.textContent = ideaCount
+      ? `${todayCount}/${tiktokAutomationConfig.videosPerDay} accepted today`
+      : 'No concepts stored yet';
+  }
+  if (tiktokSummaryUploadsValue) tiktokSummaryUploadsValue.textContent = String(uploadCount);
+  if (tiktokSummaryUploadsNote) {
+    const latestUpload = tiktokAutomationUploadHistory[0];
+    tiktokSummaryUploadsNote.textContent = latestUpload
+      ? `${String(latestUpload.platform || 'platform').toUpperCase()} • ${
+          latestUpload.state === 'pending' ? 'pending' : latestUpload.state === 'failed' ? 'failed' : 'posted'
+        } • ${formatTikTokAutomationStamp(latestUpload.createdAt)}`
+      : 'No publishing history yet';
+  }
+  if (tiktokSummaryDestinationsValue) {
+    tiktokSummaryDestinationsValue.textContent = selectedPlatforms ? `${readyPlatforms}/${selectedPlatforms}` : '0/0';
+  }
+  if (tiktokSummaryDestinationsNote) {
+    tiktokSummaryDestinationsNote.textContent = selectedPlatforms
+      ? readyPlatforms
+        ? `${readyPlatforms} destination${readyPlatforms === 1 ? '' : 's'} ready`
+        : 'Selected destinations still need credentials'
+      : 'No social destinations selected';
+  }
+  if (tiktokAutomationCard) tiktokAutomationCard.classList.toggle('hidden', !automatic);
+  if (tiktokManualModeCard) tiktokManualModeCard.classList.toggle('hidden', automatic);
+  if (tiktokView) {
+    [...tiktokView.querySelectorAll('section.card')].forEach((section) => {
+      const stepText = String(section.querySelector('.step')?.textContent || '').trim();
+      if (!/^Step\s+\d+/i.test(stepText)) return;
+      section.classList.toggle('hidden', automatic);
+    });
+  }
+
+  setFieldValueIfNeeded(tiktokAutomationWorkspaceInput, tiktokAutomationConfig.workspaceName || '');
+  setFieldValueIfNeeded(tiktokAutomationProfileInput, tiktokAutomationConfig.profileName || '');
+  setFieldValueIfNeeded(tiktokAutomationPromptInput, tiktokAutomationConfig.seedPrompt || '');
+  setFieldValueIfNeeded(tiktokAutomationAvatarSelect, tiktokAutomationConfig.avatarName || '');
+  setFieldValueIfNeeded(tiktokAutomationAudienceInput, tiktokAutomationConfig.audience || '');
+  setFieldValueIfNeeded(tiktokAutomationStyleInput, tiktokAutomationConfig.style || '');
+  setFieldValueIfNeeded(tiktokAutomationDailyCountInput, String(tiktokAutomationConfig.videosPerDay || 3));
+  if (tiktokAutomationAiAutoToggle) tiktokAutomationAiAutoToggle.checked = tiktokAutomationConfig.clipAutoAiImages !== false;
+  if (tiktokAutomationAutoSearchToggle) tiktokAutomationAutoSearchToggle.checked = tiktokAutomationConfig.clipAutoSearch !== false;
+  if (tiktokAutomationAutoPickToggle) tiktokAutomationAutoPickToggle.checked = tiktokAutomationConfig.clipAutoPick !== false;
+  if (tiktokAutomationYoutubeOnlyToggle) tiktokAutomationYoutubeOnlyToggle.checked = !!tiktokAutomationConfig.clipYoutubeOnly;
+  ensureTikTokAutomationPostingTimezoneOptions();
+  ensureTikTokAutomationPostingHourOptions();
+  setFieldValueIfNeeded(
+    tiktokAutomationPostingTimezoneSelect,
+    tiktokAutomationConfig.postingTimezone || Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+  );
+  setFieldValueIfNeeded(tiktokAutomationPostingModeSelect, tiktokAutomationConfig.postingScheduleMode || 'follow-generation');
+  setFieldValueIfNeeded(tiktokAutomationPostingStartInput, String(tiktokAutomationConfig.postingStartHour || 9));
+  setFieldValueIfNeeded(tiktokAutomationPostingEndInput, String(tiktokAutomationConfig.postingEndHour || 21));
+  if (tiktokAutomationReviewBeforePostToggle) {
+    tiktokAutomationReviewBeforePostToggle.checked = String(tiktokAutomationConfig.approvalMode || '').trim() !== 'full-auto';
+  }
+  setFieldValueIfNeeded(tiktokAutomationMemorySelect, tiktokAutomationConfig.memoryStrictness || 'strict');
+  if (tiktokAutomationPlatformTikTok) tiktokAutomationPlatformTikTok.checked = tiktokAutomationConfig.platforms?.tiktok !== false;
+  if (tiktokAutomationPlatformInstagram) tiktokAutomationPlatformInstagram.checked = !!tiktokAutomationConfig.platforms?.instagram;
+  if (tiktokAutomationPlatformFacebook) tiktokAutomationPlatformFacebook.checked = !!tiktokAutomationConfig.platforms?.facebook;
+  if (automatic) {
+    syncTikTokAvatarSelection(tiktokAutomationConfig.avatarName || '');
+    syncTikTokAutomationClipDefaultsToManualControls();
+  }
+
+  if (tiktokAutomationRunTabBtn) tiktokAutomationRunTabBtn.classList.toggle('active', tiktokAutomationView === 'run');
+  if (tiktokAutomationSettingsTabBtn) tiktokAutomationSettingsTabBtn.classList.toggle('active', tiktokAutomationView === 'settings');
+  if (tiktokAutomationTestTabBtn) tiktokAutomationTestTabBtn.classList.toggle('active', tiktokAutomationView === 'test');
+  if (tiktokAutomationMemoryTabBtn) tiktokAutomationMemoryTabBtn.classList.toggle('active', tiktokAutomationView === 'memory');
+  if (tiktokAutomationRunView) tiktokAutomationRunView.classList.toggle('hidden', tiktokAutomationView !== 'run');
+  if (tiktokAutomationSettingsView) tiktokAutomationSettingsView.classList.toggle('hidden', tiktokAutomationView !== 'settings');
+  if (tiktokAutomationTestView) tiktokAutomationTestView.classList.toggle('hidden', tiktokAutomationView !== 'test');
+  if (tiktokAutomationMemoryView) tiktokAutomationMemoryView.classList.toggle('hidden', tiktokAutomationView !== 'memory');
+
+  [
+    ['tiktok', tiktokAutomationPlatformTikTokState, tiktokAutomationPlatformTikTokStateSettings],
+    ['instagram', tiktokAutomationPlatformInstagramState, tiktokAutomationPlatformInstagramStateSettings],
+    ['facebook', tiktokAutomationPlatformFacebookState, tiktokAutomationPlatformFacebookStateSettings]
+  ].forEach(([platform, primaryEl, settingsEl]) => {
+    const connected = getTikTokDestinationCredentialState(platform);
+    [primaryEl, settingsEl].forEach((el) => {
+      if (!el) return;
+      el.className = `tiktok-destination-state ${connected ? 'connected' : 'warning'}`;
+      el.textContent = connected ? 'Connected' : 'Credentials needed';
+    });
+  });
+
+  if (tiktokAutomationStatusText) {
+    const stateText = tiktokAutomationBusy
+      ? 'Automation is generating the next concept...'
+      : tiktokAutomationState?.running
+        ? `Automation is active inside this app session. ${describeTikTokAutomationSchedule(
+            tiktokAutomationConfig
+          )} Next slot: ${nextRunLabel}.`
+        : 'Automatic mode is paused.';
+    tiktokAutomationStatusText.textContent = stateText;
+  }
+  if (tiktokAutomationProgressText) {
+    tiktokAutomationProgressText.textContent = `Today: ${todayCount} / ${tiktokAutomationConfig.videosPerDay} runs accepted.`;
+  }
+  if (tiktokAutomationRunPill) {
+    tiktokAutomationRunPill.className = `tiktok-status-pill ${tiktokAutomationState?.running ? 'running' : 'paused'}`;
+    tiktokAutomationRunPill.textContent = tiktokAutomationState?.running ? 'Running' : 'Paused';
+  }
+  if (tiktokAutomationSettingsModePill) {
+    tiktokAutomationSettingsModePill.className = `tiktok-status-pill ${tiktokAutomationState?.running ? 'running' : 'paused'}`;
+    tiktokAutomationSettingsModePill.textContent = tiktokAutomationState?.running ? 'Running' : 'Paused';
+  }
+  if (tiktokAutomationMemoryPill) {
+    tiktokAutomationMemoryPill.className = `tiktok-status-pill ${ideaCount ? 'ready' : 'warning'}`;
+    tiktokAutomationMemoryPill.textContent = ideaCount
+      ? `${ideaCount} concepts in memory`
+      : 'Memory empty';
+  }
+  if (tiktokAutomationStartBtn) tiktokAutomationStartBtn.disabled = tiktokAutomationBusy || tiktokAutomationState?.running;
+  if (tiktokAutomationPauseBtn) tiktokAutomationPauseBtn.disabled = tiktokAutomationBusy || !tiktokAutomationState?.running;
+  if (tiktokAutomationGenerateBtn) tiktokAutomationGenerateBtn.disabled = tiktokAutomationBusy || !String(tiktokAutomationConfig.seedPrompt || '').trim();
+  if (tiktokAutomationSimulateBtn) tiktokAutomationSimulateBtn.disabled = tiktokAutomationBusy || tiktokGenerating || tiktokAutomationSimulationBusy;
+
+  if (tiktokAutomationIdeaCount) tiktokAutomationIdeaCount.textContent = String(ideaCount);
+  if (tiktokAutomationMemoryNote) {
+    const latestIdea = tiktokAutomationConceptMemory[0];
+    tiktokAutomationMemoryNote.textContent = latestIdea
+      ? `${latestIdea.title || latestIdea.hook || 'Latest concept'}`
+      : String(tiktokAutomationConfig.avatarName || '').trim()
+        ? `Avatar: ${tiktokAutomationConfig.avatarName}`
+        : 'No concepts stored yet.';
+  }
+  if (tiktokAutomationUploadCount) tiktokAutomationUploadCount.textContent = String(uploadCount);
+  if (tiktokAutomationUploadNote) {
+    const latestUpload = tiktokAutomationUploadHistory[0];
+    tiktokAutomationUploadNote.textContent = latestUpload
+      ? `${String(latestUpload.platform || 'platform').toUpperCase()} • ${
+          latestUpload.state === 'pending' ? 'pending' : latestUpload.state === 'failed' ? 'failed' : 'posted'
+        }`
+      : 'No publishing history yet.';
+  }
+  if (tiktokAutomationDestinationCount) {
+    tiktokAutomationDestinationCount.textContent = selectedPlatforms ? `${readyPlatforms}/${selectedPlatforms}` : '0/0';
+  }
+  if (tiktokAutomationDestinationNote) {
+    tiktokAutomationDestinationNote.textContent = selectedPlatforms
+      ? readyPlatforms
+        ? `${readyPlatforms} ready for posting`
+        : 'Credentials still required'
+      : 'No social destinations selected.';
+  }
+  if (tiktokAutomationEventCount) tiktokAutomationEventCount.textContent = `${tiktokAutomationEvents.length} events`;
+  renderTikTokAutomationTestUi();
+  renderTikTokMemoryExplorerUi();
+  const activeRun = getTikTokAutomationActiveRun();
+  const dayGroups = groupTikTokAutomationRunsByDay(tiktokAutomationRuns.slice(0, 120));
+  if (tiktokAutomationSelectedDayKey && !dayGroups.some((group) => group.key === tiktokAutomationSelectedDayKey)) {
+    tiktokAutomationSelectedDayKey = '';
+  }
+  if (!tiktokAutomationSelectedDayKey && dayGroups[0]?.key) {
+    tiktokAutomationSelectedDayKey = dayGroups[0].key;
+  }
+  const selectedDayGroup = dayGroups.find((group) => group.key === tiktokAutomationSelectedDayKey) || dayGroups[0] || null;
+  if (tiktokAutomationRunTitle) {
+    tiktokAutomationRunTitle.textContent = tiktokAutomationState?.running
+      ? `${tiktokAutomationConfig.profileName || 'Automation'} is live`
+      : `${tiktokAutomationConfig.profileName || 'Automation'} is paused`;
+  }
+  if (tiktokAutomationRunText) {
+    const avatarLabel = String(tiktokAutomationConfig.avatarName || '').trim();
+    const postingLabel = describeTikTokAutomationPostingSchedule(tiktokAutomationConfig);
+    tiktokAutomationRunText.textContent = latestRun
+      ? `${latestRun.title || 'Latest run'} • ${latestRun.status} • ${
+          avatarLabel ? `avatar ${avatarLabel} • ` : ''
+        }next slot ${nextRunLabel} • ${postingLabel.replace(/^When full-auto posting is active, /, '').replace(/\.$/, '')}`
+      : avatarLabel
+        ? `Configured to run with avatar ${avatarLabel}. ${describeTikTokAutomationSchedule(
+            tiktokAutomationConfig
+          )} ${postingLabel}`
+        : `No automation runs yet. ${describeTikTokAutomationSchedule(tiktokAutomationConfig)} ${postingLabel}`;
+  }
+  if (tiktokAutomationCurrentStep) {
+    tiktokAutomationCurrentStep.textContent = tiktokAutomationState.currentStep || 'Waiting for the next instruction.';
+  }
+  if (tiktokAutomationCurrentDetail) {
+    tiktokAutomationCurrentDetail.textContent =
+      tiktokAutomationState.currentDetail || 'Start automation or trigger the next run manually to create the first run record.';
+  }
+  if (tiktokAutomationOpenActiveRunBtn) {
+    tiktokAutomationOpenActiveRunBtn.disabled = !activeRun;
+  }
+  if (tiktokAutomationActiveRunTitle) {
+    tiktokAutomationActiveRunTitle.textContent = activeRun
+      ? activeRun.title || activeRun.seedPrompt || 'Current automation run'
+      : 'No run in progress';
+  }
+  if (tiktokAutomationActiveRunMeta) {
+    tiktokAutomationActiveRunMeta.textContent = activeRun
+      ? `${formatTikTokAutomationStamp(activeRun.createdAt)} • ${activeRun.status}${activeRun.avatarName ? ` • avatar ${activeRun.avatarName}` : ''}`
+      : 'Start automation to begin the next burst cycle.';
+  }
+  if (tiktokAutomationActiveRunBody) {
+    tiktokAutomationActiveRunBody.textContent = activeRun
+      ? `${String(activeRun.status || 'running').toUpperCase()} • ${getTikTokAutomationRunCompletionPct(activeRun)}% complete. Open Inspect for full stage outputs.`
+      : 'The active run panel will show the current video generation and its latest output as it moves through each stage.';
+  }
+  if (tiktokAutomationCycleBadge) {
+    const cycleTitle = activeRun
+      ? formatTikTokAutomationCycleTitle(activeRun.cycleId || activeRun.cycleStartedAt || activeRun.createdAt)
+      : 'Cycle —';
+    tiktokAutomationCycleBadge.textContent = cycleTitle;
+    tiktokAutomationCycleBadge.className = `tiktok-status-pill ${activeRun ? 'ready' : ''}`.trim();
+  }
+  if (tiktokAutomationActiveRunStages) {
+    tiktokAutomationActiveRunStages.innerHTML = '';
+    tiktokAutomationActiveRunStages.className = 'tiktok-auto-current-compact';
+    if (activeRun) {
+      const runProgress = getTikTokAutomationRunCompletionPct(activeRun);
+      const progress = document.createElement('div');
+      progress.className = 'tiktok-auto-current-compact__progress';
+      const progressTop = document.createElement('div');
+      progressTop.className = 'tiktok-auto-current-compact__progress-top';
+      const progressLabel = document.createElement('div');
+      progressLabel.className = 'tiktok-auto-current-compact__progress-label';
+      progressLabel.textContent = 'Pipeline progress';
+      const progressValue = document.createElement('div');
+      progressValue.className = 'tiktok-auto-current-compact__progress-value';
+      progressValue.textContent = `${runProgress}%`;
+      const progressBar = document.createElement('div');
+      progressBar.className = 'tiktok-auto-current-compact__progress-bar';
+      const progressFill = document.createElement('div');
+      progressFill.className = 'tiktok-auto-current-compact__progress-fill';
+      progressFill.style.width = `${runProgress}%`;
+      progressTop.appendChild(progressLabel);
+      progressTop.appendChild(progressValue);
+      progressBar.appendChild(progressFill);
+      progress.appendChild(progressTop);
+      progress.appendChild(progressBar);
+      tiktokAutomationActiveRunStages.appendChild(progress);
+
+      const chips = document.createElement('div');
+      chips.className = 'tiktok-auto-current-compact__chips';
+      getTikTokAutomationActiveRunStageGroups().forEach((group) => {
+        const status = getTikTokAutomationStageGroupStatus(activeRun, group.keys);
+        const chip = document.createElement('span');
+        chip.className = `tiktok-auto-current-stage-chip ${status}`.trim();
+        chip.textContent = group.label;
+        chips.appendChild(chip);
+      });
+      tiktokAutomationActiveRunStages.appendChild(chips);
+
+      const summary = document.createElement('div');
+      summary.className = 'tiktok-auto-current-compact__summary';
+      summary.textContent = getTikTokAutomationActiveStageSummary(activeRun);
+      tiktokAutomationActiveRunStages.appendChild(summary);
+    } else {
+      const empty = document.createElement('div');
+      empty.className = 'small';
+      empty.textContent = 'No active run yet.';
+      tiktokAutomationActiveRunStages.appendChild(empty);
+    }
+  }
+  if (tiktokAutomationActiveRunCard) {
+    tiktokAutomationActiveRunCard.classList.toggle('is-clickable', !!activeRun);
+  }
+  if (tiktokAutomationRunCount) {
+    tiktokAutomationRunCount.textContent = `${dayGroups.length} day${dayGroups.length === 1 ? '' : 's'} • ${tiktokAutomationRuns.length} run${tiktokAutomationRuns.length === 1 ? '' : 's'}`;
+  }
+  if (tiktokAutomationRunOverview) {
+    tiktokAutomationRunOverview.classList.toggle('hidden', !!tiktokAutomationRunHistoryPageOpen);
+  }
+  if (tiktokAutomationRunHistoryPage) {
+    tiktokAutomationRunHistoryPage.classList.toggle('hidden', !tiktokAutomationRunHistoryPageOpen);
+  }
+  if (tiktokAutomationShowAllHistoryBtn) {
+    tiktokAutomationShowAllHistoryBtn.disabled = dayGroups.length <= 4;
+    tiktokAutomationShowAllHistoryBtn.classList.toggle('hidden', dayGroups.length <= 4);
+  }
+  if (tiktokAutomationDayList) {
+    tiktokAutomationDayList.innerHTML = '';
+    if (!dayGroups.length) {
+      tiktokAutomationDayList.innerHTML = '<div class="tiktok-history-empty">No day history yet.</div>';
+    } else {
+      dayGroups.slice(0, 4).forEach((group) => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = `tiktok-auto-day-card${group.key === tiktokAutomationSelectedDayKey ? ' active' : ''}`;
+
+        const title = document.createElement('div');
+        title.className = 'tiktok-auto-day-card__title';
+        title.textContent = group.title;
+
+        const meta = document.createElement('div');
+        meta.className = 'tiktok-auto-day-card__meta';
+        meta.textContent = group.meta;
+
+        const postedCount = group.runs.filter((entry) => entry.status === 'posted').length;
+        const blockedCount = group.runs.filter((entry) => entry.status === 'blocked').length;
+        const failedCount = group.runs.filter((entry) => entry.status === 'failed').length;
+        const stats = document.createElement('div');
+        stats.className = 'tiktok-auto-day-card__stats';
+        stats.textContent = [
+          `${group.runs.length} run${group.runs.length === 1 ? '' : 's'}`,
+          postedCount ? `${postedCount} posted` : '',
+          blockedCount ? `${blockedCount} blocked` : '',
+          failedCount ? `${failedCount} failed` : ''
+        ].filter(Boolean).join(' • ');
+
+        card.appendChild(title);
+        card.appendChild(meta);
+        card.appendChild(stats);
+        card.addEventListener('click', () => {
+          tiktokAutomationSelectedDayKey = group.key;
+          tiktokAutomationRunHistoryPageOpen = false;
+          renderTikTokAutomationUi();
+        });
+        tiktokAutomationDayList.appendChild(card);
+      });
+    }
+  }
+  if (tiktokAutomationSelectedDayTitle) {
+    tiktokAutomationSelectedDayTitle.textContent = selectedDayGroup ? selectedDayGroup.title : 'Latest day';
+  }
+  if (tiktokAutomationSelectedDayMeta) {
+    tiktokAutomationSelectedDayMeta.textContent = selectedDayGroup
+      ? `${selectedDayGroup.meta} • ${selectedDayGroup.runs.length} run${selectedDayGroup.runs.length === 1 ? '' : 's'}`
+      : '0 runs';
+  }
+  if (tiktokAutomationRunList) {
+    tiktokAutomationRunList.innerHTML = '';
+    if (!selectedDayGroup) {
+      tiktokAutomationRunList.innerHTML = '<div class="tiktok-history-empty">No automation runs yet.</div>';
+    } else {
+      selectedDayGroup.runs.forEach((run, index) => {
+        tiktokAutomationRunList.appendChild(buildTikTokAutomationRunCard(run, {
+          activeRun,
+          eyebrowText: `Run ${index + 1}`
+        }));
+      });
+    }
+  }
+  if (tiktokAutomationHistoryMeta) {
+    tiktokAutomationHistoryMeta.textContent = `${dayGroups.length} day${dayGroups.length === 1 ? '' : 's'} • ${tiktokAutomationRuns.length} run${tiktokAutomationRuns.length === 1 ? '' : 's'} total`;
+  }
+  if (tiktokAutomationHistoryList) {
+    tiktokAutomationHistoryList.innerHTML = '';
+    if (!dayGroups.length) {
+      tiktokAutomationHistoryList.innerHTML = '<div class="tiktok-history-empty">No automation run history yet.</div>';
+    } else {
+      dayGroups.forEach((group) => {
+        tiktokAutomationHistoryList.appendChild(buildTikTokAutomationDayGroupSection(group, { activeRun }));
+      });
+    }
+  }
+
+  renderTikTokAutomationFeed(
+    tiktokAutomationEventList,
+    tiktokAutomationEvents.slice(0, 20),
+    (entry) => {
+      const card = document.createElement('div');
+      card.className = 'tiktok-history-entry';
+      const top = document.createElement('div');
+      top.className = 'tiktok-history-entry__top';
+      const title = document.createElement('div');
+      title.className = 'tiktok-history-entry__title';
+      title.textContent = entry.message || 'Event';
+      const meta = document.createElement('div');
+      meta.className = 'tiktok-history-entry__meta';
+      meta.textContent = formatTikTokAutomationStamp(entry.createdAt);
+      top.appendChild(title);
+      top.appendChild(meta);
+      card.appendChild(top);
+      return card;
+    },
+    'No automation events yet.'
+  );
+  if (tiktokRunDetailsPanel?.classList.contains('show')) {
+    renderTikTokRunDetailsPanel();
+  }
+  if (automatic) {
+    resumeTikTokAutomationRunFromFinalRenderIfReady({ source: 'ui-reconcile' }).catch(() => {});
+  }
+  const snapshot = buildTikTokAutomationDebugSnapshot({
+    phase: 'render',
+    selectedPlatforms,
+    readyPlatforms,
+    todayCount,
+    nextRunLabel
+  });
+  const snapshotKey = JSON.stringify(snapshot);
+  if (snapshotKey !== lastAutomationUiDebugKey) {
+    lastAutomationUiDebugKey = snapshotKey;
+    debugTrace('tiktok.automation.render', snapshot);
+  }
+};
+
+const syncTikTokAutomationConfigFromInputs = () => {
+  const reviewBeforePost = !!tiktokAutomationReviewBeforePostToggle?.checked;
+  const previousAvatarName = String(tiktokAutomationConfig?.avatarName || '').trim();
+  tiktokAutomationConfig = normalizeTikTokAutomationConfig({
+    ...(tiktokAutomationConfig || {}),
+    workspaceName: String(tiktokAutomationWorkspaceInput?.value || '').trim(),
+    profileName: String(tiktokAutomationProfileInput?.value || '').trim(),
+    seedPrompt: String(tiktokAutomationPromptInput?.value || ''),
+    avatarName: String(tiktokAutomationAvatarSelect?.value || '').trim(),
+    audience: String(tiktokAutomationAudienceInput?.value || ''),
+    style: String(tiktokAutomationStyleInput?.value || ''),
+    videosPerDay: Number(tiktokAutomationDailyCountInput?.value || 3),
+    clipAutoAiImages: tiktokAutomationAiAutoToggle?.checked !== false,
+    clipAutoSearch: tiktokAutomationAutoSearchToggle?.checked !== false,
+    clipAutoPick: tiktokAutomationAutoPickToggle?.checked !== false,
+    clipYoutubeOnly: !!tiktokAutomationYoutubeOnlyToggle?.checked,
+    postingScheduleMode: String(tiktokAutomationPostingModeSelect?.value || 'follow-generation').trim(),
+    postingTimezone: String(
+      tiktokAutomationPostingTimezoneSelect?.value || Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+    ).trim(),
+    postingStartHour: Number(tiktokAutomationPostingStartInput?.value || 9),
+    postingEndHour: Number(tiktokAutomationPostingEndInput?.value || 21),
+    approvalMode: reviewBeforePost ? 'approve-final' : 'full-auto',
+    memoryStrictness: String(tiktokAutomationMemorySelect?.value || 'strict').trim(),
+    platforms: {
+      tiktok: !!tiktokAutomationPlatformTikTok?.checked,
+      instagram: !!tiktokAutomationPlatformInstagram?.checked,
+      facebook: !!tiktokAutomationPlatformFacebook?.checked
+    }
+  });
+  const nextAvatarName = String(tiktokAutomationConfig?.avatarName || '').trim();
+  if (tiktokMode === 'automatic' || previousAvatarName !== nextAvatarName) {
+    syncTikTokAvatarSelection(nextAvatarName);
+  }
+  syncTikTokAutomationClipDefaultsToManualControls();
+  syncTikTokAutomationSchedule();
+};
+
+const startTikTokAutomation = () => {
+  if (!tiktokAutomationState) tiktokAutomationState = normalizeTikTokAutomationState();
+  if (!String(tiktokAutomationConfig?.seedPrompt || '').trim()) {
+    setTikTokStatus('Add a seed brief before starting automation.', true);
+    return;
+  }
+  tiktokAutomationState.running = true;
+  tiktokAutomationState.lastStartedAt = new Date().toISOString();
+  tiktokAutomationState.lastError = '';
+  tiktokAutomationState.currentStep = 'Automation running';
+  tiktokAutomationState.currentDetail = 'Burst generation will start immediately and continue until the daily target is finished.';
+  pushTikTokAutomationEvent(`Automation started for "${tiktokAutomationConfig.profileName || 'profile'}".`, 'run');
+  syncTikTokAutomationSchedule();
+  setTimeout(() => {
+    tickTikTokAutomation().catch(() => {});
+  }, 50);
+};
+
+const pauseTikTokAutomation = () => {
+  if (!tiktokAutomationState) tiktokAutomationState = normalizeTikTokAutomationState();
+  tiktokAutomationState.running = false;
+  tiktokAutomationState.lastStoppedAt = new Date().toISOString();
+  tiktokAutomationState.nextRunAt = '';
+  tiktokAutomationState.currentStep = 'Automation paused';
+  tiktokAutomationState.currentDetail = 'No new runs will start until you resume the profile.';
+  pushTikTokAutomationEvent('Automation paused.', 'warning');
+  commitTikTokAutomationState();
+  renderTikTokAutomationUi();
 };
 
 const setTikTokAvatarStatus = (text, isError = false) => {
   if (!tiktokAvatarStatus) return;
   tiktokAvatarStatus.textContent = text;
   tiktokAvatarStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'Avatar');
+  if (tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Avatar');
 };
 
 const setTikTokAvatarProgress = (value) => {
@@ -3830,6 +8620,8 @@ const setTikTokAvatarGenerationBoard = ({ phase = '', done = 0, total = 0, perce
 };
 
 const resetTikTokAvatarGenerationResults = () => {
+  clearTikTokAvatarAutoRetry({ resetAttempts: true });
+  tiktokAvatarAutoFinalRenderPending = false;
   tiktokAvatarResumeRunToken = 0;
   tiktokAvatarClips = [];
   tiktokAvatarSceneAssets = [];
@@ -3852,11 +8644,263 @@ const pushTikTokAvatarLog = (message) => {
   tiktokAvatarLog.textContent = tiktokAvatarLogs.join('\n');
 };
 
+const clearTikTokAvatarAutoRetry = ({ resetAttempts = false } = {}) => {
+  if (tiktokAvatarAutoRetryTimer) {
+    clearTimeout(tiktokAvatarAutoRetryTimer);
+    tiktokAvatarAutoRetryTimer = 0;
+  }
+  if (resetAttempts) {
+    tiktokAvatarAutoRetryAttempt = 0;
+  }
+};
+
+const getTikTokAvatarSceneLocalOutputPath = (scene = {}) =>
+  String(fileUrlToPath(scene?.avatar_talk_local_path || '') || '').trim();
+
+const getTikTokAvatarClipEntryBySceneId = (sceneId = '') => {
+  const id = String(sceneId || '').trim();
+  if (!id) return null;
+  const clips = Array.isArray(tiktokAvatarClips) ? tiktokAvatarClips : [];
+  const exact = clips.find((clip) => String(clip?.id || '').trim() === id);
+  if (exact) return exact;
+  const sceneNum = String(id).match(/(\d+)/)?.[1] || '';
+  if (!sceneNum) return null;
+  return clips.find((clip) => {
+    const clipId = String(clip?.id || '').trim();
+    if (!clipId) return false;
+    const clipNum = String(clipId).match(/(\d+)/)?.[1] || '';
+    return clipNum && clipNum === sceneNum;
+  }) || null;
+};
+
+const getTikTokAvatarSceneOutputUrl = (scene = {}) => {
+  const remoteUrl = String(scene?.avatar_talk_url || '').trim();
+  if (remoteUrl) return remoteUrl;
+  const localPath = getTikTokAvatarSceneLocalOutputPath(scene);
+  if (localPath) return String(filePathToUrl(localPath) || '').trim();
+  const clipEntry = getTikTokAvatarClipEntryBySceneId(String(scene?.id || '').trim());
+  const clipRemote = String(clipEntry?.url || clipEntry?.videoUrl || '').trim();
+  if (clipRemote) return clipRemote;
+  const clipLocalPath = String(fileUrlToPath(clipEntry?.localPath || clipEntry?.path || '') || '').trim();
+  return clipLocalPath ? String(filePathToUrl(clipLocalPath) || '').trim() : '';
+};
+
+const hasTikTokAvatarSceneOutput = (scene = {}) => !!getTikTokAvatarSceneOutputUrl(scene);
+
+const resolveTikTokStoryboardSceneByRetryId = (sceneId = '') => {
+  const rawId = String(sceneId || '').trim();
+  if (!rawId) return null;
+  const scenes = Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [];
+  if (!scenes.length) return null;
+  const exact = scenes.find((scene) => String(scene?.id || '').trim() === rawId);
+  if (exact) return exact;
+  const numeric = String(rawId).match(/(\d+)/);
+  if (numeric?.[1]) {
+    const idx = Math.max(0, Number(numeric[1]) - 1);
+    if (Number.isFinite(idx) && scenes[idx]) return scenes[idx];
+  }
+  return null;
+};
+
+const hasTikTokAvatarSceneOutputById = (sceneId = '') => {
+  const id = String(sceneId || '').trim();
+  if (!id) return false;
+  const storyboardScene = resolveTikTokStoryboardSceneByRetryId(id);
+  if (storyboardScene) {
+    return hasTikTokAvatarSceneOutput(storyboardScene);
+  }
+  const clipEntry = getTikTokAvatarClipEntryBySceneId(id);
+  const clipUrl = String(clipEntry?.url || clipEntry?.videoUrl || '').trim();
+  if (clipUrl) return true;
+  const clipLocalPath = String(fileUrlToPath(clipEntry?.localPath || clipEntry?.path || '') || '').trim();
+  return !!clipLocalPath;
+};
+
+const getTikTokAvatarFailedSceneIds = () =>
+  (Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [])
+    .filter((scene) => {
+      const state = String(scene?.avatar_talk_state || '').trim().toLowerCase();
+      const hasVideo = hasTikTokAvatarSceneOutputById(String(scene?.id || '').trim());
+      return state === 'fail' && !hasVideo;
+    })
+    .map((scene) => String(scene?.id || '').trim())
+    .filter(Boolean);
+
+const hasTikTokAvatarReusableSceneAudio = (scenes = []) =>
+  (Array.isArray(scenes) ? scenes : []).some((scene) => {
+    const audioUrl = String(scene?.avatar_talk_audio_url || '').trim();
+    const audioLocalPath = String(fileUrlToPath(scene?.avatar_talk_audio_local_path || '') || '').trim();
+    return !!(audioUrl || audioLocalPath);
+  });
+
+const shouldAutoContinueAvatarToFinalRender = () => {
+  if (tiktokAutomationPipelineActive) return false;
+  if (tiktokExportRunning || tiktokExportStarting) return false;
+  const scenes = Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [];
+  if (!scenes.length) return false;
+  let doneCount = 0;
+  let failedCount = 0;
+  let activeCount = 0;
+  scenes.forEach((scene) => {
+    const state = String(scene?.avatar_talk_state || '').trim().toLowerCase();
+    const hasOutput = hasTikTokAvatarSceneOutput(scene);
+    if (hasOutput) doneCount += 1;
+    if (state === 'fail' && !hasOutput) failedCount += 1;
+    if ((state === 'waiting' || state === 'queuing' || state === 'generating' || state === 'retrying' || !!String(scene?.avatar_talk_task_id || '').trim()) && !hasOutput) {
+      activeCount += 1;
+    }
+  });
+  return doneCount > 0 && doneCount === scenes.length && failedCount === 0 && activeCount === 0;
+};
+
+const findTikTokAutomationRunForCurrentStoryboard = () => {
+  const storyboardScriptId = String(tiktokStoryboard?.source_script_id || tiktokStoryboardScriptId || '').trim();
+  const selectedRunId = String(tiktokAutomationSelectedRunId || '').trim();
+  const currentRunId = String(tiktokAutomationState?.currentRunId || '').trim();
+  const runs = Array.isArray(tiktokAutomationRuns) ? tiktokAutomationRuns : [];
+  const byId = (id = '') => runs.find((entry) => String(entry?.id || '').trim() === String(id || '').trim()) || null;
+  const selectedRun = byId(selectedRunId);
+  if (selectedRun && String(selectedRun.scriptId || '').trim() === storyboardScriptId) return selectedRun;
+  const currentRun = byId(currentRunId);
+  if (currentRun && String(currentRun.scriptId || '').trim() === storyboardScriptId) return currentRun;
+  if (!storyboardScriptId) return selectedRun || currentRun || null;
+  return runs.find((entry) => String(entry?.scriptId || '').trim() === storyboardScriptId) || null;
+};
+
+const resumeTikTokAutomationRunFromFinalRenderIfReady = async ({ source = '' } = {}) => {
+  if (tiktokMode !== 'automatic') return false;
+  if (tiktokAutomationAvatarResumeInFlight) return false;
+  const now = Date.now();
+  if (now - tiktokAutomationAvatarResumeLastAt < 2200) return false;
+  if (
+    tiktokAutomationPipelineActive ||
+    tiktokAutomationBusy ||
+    tiktokGenerating ||
+    tiktokAvatarGenerateRunning ||
+    tiktokAvatarCompressRunning ||
+    tiktokExportRunning ||
+    tiktokExportStarting
+  ) {
+    return false;
+  }
+  const run = findTikTokAutomationRunForCurrentStoryboard();
+  if (!run || !String(run.id || '').trim()) return false;
+  const avatarStage = syncTikTokAutomationAvatarStage({
+    runId: String(run.id || '').trim(),
+    scriptId: String(run.scriptId || '').trim()
+  });
+  const avatarStatus = String(avatarStage?.status || '').trim().toLowerCase();
+  if (!['success', 'skipped'].includes(avatarStatus)) return false;
+  const finalStage = syncTikTokAutomationFinalRenderStage({
+    runId: String(run.id || '').trim(),
+    scriptId: String(run.scriptId || '').trim()
+  });
+  const finalStatus = String(finalStage?.status || '').trim().toLowerCase();
+  const finalOutput = finalStage?.output && typeof finalStage.output === 'object' ? finalStage.output : {};
+  const hasFinalOutput = !!String(finalOutput.path || finalOutput.previewUrl || '').trim();
+  if (hasFinalOutput || ['success', 'running', 'skipped', 'pending'].includes(finalStatus)) return false;
+  tiktokAutomationAvatarResumeInFlight = true;
+  tiktokAutomationAvatarResumeLastAt = now;
+  try {
+    pushTikTokAutomationEvent(
+      `Resuming "${run.title || 'run'}" from Step 8${source ? ` (${source})` : ''}.`,
+      'run'
+    );
+    await restartTikTokAutomationRunFromStage(String(run.id || '').trim(), 'final_render');
+    return true;
+  } catch (_err) {
+    return false;
+  } finally {
+    tiktokAutomationAvatarResumeInFlight = false;
+    tiktokAutomationAvatarResumeLastAt = Date.now();
+  }
+};
+
+const requestTikTokAvatarAutoHandoff = ({ source = '' } = {}) => {
+  if (!shouldAutoContinueAvatarToFinalRender()) return false;
+  if (tiktokAvatarAutoFinalRenderPending) return false;
+  tiktokAvatarAutoFinalRenderPending = true;
+  pushTikTokAvatarLog('All Step 7 scenes completed. Continuing pipeline from Step 8.');
+  setTikTokAvatarStatus('Step 7 complete. Continuing from Step 8 final render...');
+  setTimeout(async () => {
+    try {
+      if (!shouldAutoContinueAvatarToFinalRender()) return;
+      const run = findTikTokAutomationRunForCurrentStoryboard();
+      const canResumeFullPipeline =
+        tiktokMode === 'automatic' &&
+        !!run &&
+        !tiktokAutomationPipelineActive &&
+        !tiktokAutomationBusy &&
+        !tiktokGenerating;
+      if (canResumeFullPipeline) {
+        pushTikTokAvatarLog(`Resuming automation run from Step 8${source ? ` (${source})` : ''}.`);
+        const resumed = await resumeTikTokAutomationRunFromFinalRenderIfReady({ source: source || 'step7-handoff' });
+        if (resumed) return;
+      }
+      await withTikTokAutomationQuietMode(() => renderTikTokFinalOutput());
+    } catch (err) {
+      pushTikTokAvatarLog(`Auto-handoff from Step 7 failed: ${String(err?.message || err || 'unknown error')}`);
+    } finally {
+      tiktokAvatarAutoFinalRenderPending = false;
+    }
+  }, 120);
+  return true;
+};
+
+const scheduleTikTokAvatarAutoRetry = () => {
+  const failedSceneIds = getTikTokAvatarFailedSceneIds();
+  if (!failedSceneIds.length) {
+    clearTikTokAvatarAutoRetry({ resetAttempts: true });
+    return false;
+  }
+  if (tiktokAvatarCancelRequested || tiktokAvatarCompressRunning || tiktokAvatarGenerateRunning) return false;
+  const maxAutoRetries = 12;
+  const delayMs = 3500;
+  if (tiktokAvatarAutoRetryAttempt >= maxAutoRetries) {
+    pushTikTokAvatarLog(`Auto-retry limit reached with ${failedSceneIds.length} failed scene(s) still pending.`);
+    setTikTokAvatarStatus(
+      `Avatar clips ready with ${failedSceneIds.length} failed scene(s). Auto-retry limit reached.`,
+      true
+    );
+    return false;
+  }
+  const attempt = tiktokAvatarAutoRetryAttempt + 1;
+  tiktokAvatarAutoRetryAttempt = attempt;
+  clearTikTokAvatarAutoRetry({ resetAttempts: false });
+  const seconds = Math.max(1, Math.round(delayMs / 1000));
+  pushTikTokAvatarLog(
+    `Auto-retrying ${failedSceneIds.length} failed scene(s) in ${seconds}s (pass ${attempt}/${maxAutoRetries}).`
+  );
+  setTikTokAvatarStatus(
+    `Retrying ${failedSceneIds.length} failed scene(s) automatically in ${seconds}s (pass ${attempt}/${maxAutoRetries}).`,
+    true
+  );
+  tiktokAvatarAutoRetryTimer = setTimeout(async () => {
+    tiktokAvatarAutoRetryTimer = 0;
+    if (tiktokAvatarCancelRequested || tiktokAvatarCompressRunning || tiktokAvatarGenerateRunning) return;
+    try {
+      const latestFailedIds = getTikTokAvatarFailedSceneIds();
+      const nextSceneId = latestFailedIds[0] || '';
+      if (!nextSceneId) {
+        clearTikTokAvatarAutoRetry({ resetAttempts: true });
+        return;
+      }
+      await retryAvatarScene(nextSceneId, { fromAutoRetry: true });
+      scheduleTikTokAvatarAutoRetry();
+    } catch (err) {
+      pushTikTokAvatarLog(`Auto-retry pass ${attempt} failed: ${String(err?.message || err || 'unknown error')}`);
+    }
+  }, delayMs);
+  return true;
+};
+
 const requestTikTokAvatarProcessingCancel = (showIdleToast = true) => {
   if (!tiktokAvatarCompressRunning && !tiktokAvatarGenerateRunning) {
     if (showIdleToast) showToast('No avatar processing is active.', true, 'Avatar');
     return false;
   }
+  clearTikTokAvatarAutoRetry({ resetAttempts: true });
+  tiktokAvatarAutoFinalRenderPending = false;
   tiktokAvatarCancelRequested = true;
   setTikTokAvatarStatus('Cancel requested. Stopping avatar processing...');
   pushTikTokAvatarLog('Cancel requested by user.');
@@ -3935,11 +8979,11 @@ const formatKieSceneStatus = (state = '', info = {}) => {
   return s ? `Kie.ai state: ${s}` : 'Kie.ai pending';
 };
 
-const setTikTokFinalStatus = (text, isError = false) => {
+const setTikTokFinalStatus = (text, isError = false, { notify = true } = {}) => {
   if (!tiktokFinalStatus) return;
   tiktokFinalStatus.textContent = text;
   tiktokFinalStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'Final');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Final');
 };
 
 const setTikTokFinalProgress = (value) => {
@@ -3960,28 +9004,28 @@ const setTikTokCaptionStatus = (text, isError = false, { notify = true } = {}) =
   if (!tiktokCaptionStatus) return;
   tiktokCaptionStatus.textContent = text;
   tiktokCaptionStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  if (notify) showToast(text, isError, 'Captions');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Captions');
 };
 
 const setTikTokCaptionRenderStatus = (text, isError = false, { notify = false } = {}) => {
   if (!tiktokCaptionRenderStatus) return;
   tiktokCaptionRenderStatus.textContent = text;
   tiktokCaptionRenderStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  if (notify) showToast(text, isError, 'Caption Overlay');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Caption Overlay');
 };
 
 const setTikTokCaptionIntroMaskStatus = (text, isError = false, { notify = false } = {}) => {
   if (!tiktokCaptionIntroMaskStatus) return;
   tiktokCaptionIntroMaskStatus.textContent = text;
   tiktokCaptionIntroMaskStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  if (notify) showToast(text, isError, 'Intro Mask');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Intro Mask');
 };
 
 const setTikTokCaptionCombineStatus = (text, isError = false, { notify = false } = {}) => {
   if (!tiktokCaptionCombineStatus) return;
   tiktokCaptionCombineStatus.textContent = text;
   tiktokCaptionCombineStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  if (notify) showToast(text, isError, 'Step 9');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Step 9');
 };
 
 const normalizeTikTokZoomSettings = (raw = {}) => {
@@ -4004,7 +9048,7 @@ const setTikTokZoomStatus = (text, isError = false, { notify = false } = {}) => 
   if (!tiktokZoomStatus) return;
   tiktokZoomStatus.textContent = String(text || '').trim();
   tiktokZoomStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  if (notify) showToast(text, isError, 'Step 10');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Step 10');
 };
 
 const setTikTokZoomProgress = (value = 0, message = '') => {
@@ -5523,7 +10567,7 @@ const setTikTokSfxStatus = (text, isError = false, { notify = false } = {}) => {
   const mutedColor = String(styles.getPropertyValue('--muted') || '').trim() || '#97a0b9';
   tiktokSfxStatus.textContent = String(text || '').trim();
   tiktokSfxStatus.style.color = isError ? errorColor : mutedColor;
-  if (notify) showToast(text, isError, 'Step 11');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Step 11');
 };
 
 const setTikTokSfxResultsLoading = (loading = false) => {
@@ -7832,7 +12876,7 @@ const setTikTokPublishStatus = (text, isError = false, { notify = true } = {}) =
   if (!tiktokPublishStatus) return;
   tiktokPublishStatus.textContent = text;
   tiktokPublishStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  if (notify) showToast(text, isError, 'Publish');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Publish');
 };
 
 const setTikTokPublishDraftStatus = (text, isError = false) => {
@@ -7849,7 +12893,8 @@ const pushTikTokPublishLog = (message) => {
   tiktokPublishLog.textContent = tiktokPublishLogs.join('\n');
 };
 
-const getStep8FinalVideoPath = () => fileUrlToPath(tiktokFinalPreview?.getAttribute('src') || '');
+const getStep8FinalVideoPath = () =>
+  String(fileUrlToPath(tiktokFinalPreview?.getAttribute('src') || '') || tiktokBaseStitchedPath || '').trim();
 const getStep9SubtitleVideoPath = () =>
   String(tiktokCaptionSubtitlePath || fileUrlToPath(tiktokCaptionPreview?.getAttribute('src') || '')).trim();
 
@@ -11266,6 +16311,41 @@ const publishStep10ToSocial = async () => {
     setTikTokPublishStatus('Caption is empty. Generate/edit caption first.', true);
     return;
   }
+  const selectedPlatforms = [
+    toTikTok ? 'tiktok' : '',
+    toInstagram ? 'instagram' : '',
+    toFacebook ? 'facebook' : ''
+  ].filter(Boolean);
+  const missingPlatforms = getTikTokPlatformsMissingCredentials(selectedPlatforms);
+  const readyPlatforms = selectedPlatforms.filter((platform) => !missingPlatforms.includes(platform));
+  const selectedScript = getSelectedTikTokScript();
+  if (missingPlatforms.length) {
+    patchTikTokAutomationRunPublishState({
+      scriptId: String(selectedScript?.id || '').trim(),
+      stageStatus: 'pending',
+      detail: readyPlatforms.length
+        ? `Posted destinations will run now. ${formatTikTokPlatformList(missingPlatforms)} still need credentials, so this output is saved to post later there.`
+        : `No publish credentials are connected for ${formatTikTokPlatformList(missingPlatforms)}. This output is saved to post later.`,
+      videoPath,
+      caption,
+      hashtags: publishDraft.hashtags,
+      platforms: selectedPlatforms,
+      readyPlatforms,
+      missingPlatforms
+    });
+    if (!readyPlatforms.length) {
+      pushTikTokPublishLog(`Saved for later posting. Missing credentials: ${formatTikTokPlatformList(missingPlatforms)}.`);
+      setTikTokPublishStatus(`Saved to post later. Missing credentials for ${formatTikTokPlatformList(missingPlatforms)}.`);
+      pushTikTokAutomationEvent(
+        `Publish saved for later: missing credentials for ${formatTikTokPlatformList(missingPlatforms)}.`,
+        'warning'
+      );
+      renderTikTokAutomationUi();
+      scheduleSave();
+      return;
+    }
+    pushTikTokPublishLog(`Continuing with connected destinations only. Missing credentials: ${formatTikTokPlatformList(missingPlatforms)}.`);
+  }
   tiktokPublishRunning = true;
   if (tiktokPublishSpinner) tiktokPublishSpinner.classList.add('active');
   if (tiktokPublishNowBtn) {
@@ -11280,9 +16360,9 @@ const publishStep10ToSocial = async () => {
       caption,
       kieApiKey: (apiKeyInput?.value || currentApiKey || '').trim(),
       platforms: {
-        tiktok: toTikTok,
-        instagram: toInstagram,
-        facebook: toFacebook
+        tiktok: readyPlatforms.includes('tiktok'),
+        instagram: readyPlatforms.includes('instagram'),
+        facebook: readyPlatforms.includes('facebook')
       },
       credentials: {
         tiktokToken: String(tiktokPublishTikTokToken?.value || '').trim(),
@@ -11305,6 +16385,50 @@ const publishStep10ToSocial = async () => {
         pushTikTokPublishLog(`${platform}: failed — ${entry?.error || 'unknown error'}`);
       }
     });
+    appendTikTokUploadHistoryEntries(
+      results.map((entry, index) => ({
+        id: `${Date.now()}-publish-${index}-${String(entry?.platform || 'platform')}`,
+        platform: String(entry?.platform || 'tiktok').trim().toLowerCase(),
+        success: !!entry?.success,
+        postId: String(entry?.postId || '').trim(),
+        error: String(entry?.error || '').trim(),
+        caption,
+        videoPath,
+        scriptId: String(selectedScript?.id || '').trim(),
+        scriptTitle: String(selectedScript?.title || '').trim(),
+        createdAt: new Date().toISOString()
+      }))
+    );
+    if (missingPlatforms.length) {
+      patchTikTokAutomationRunPublishState({
+        scriptId: String(selectedScript?.id || '').trim(),
+        stageStatus: 'pending',
+        detail: `Posted where possible. ${formatTikTokPlatformList(missingPlatforms)} still need credentials, so this output is saved to post later there.`,
+        videoPath,
+        caption,
+        hashtags: publishDraft.hashtags,
+        platforms: selectedPlatforms,
+        readyPlatforms,
+        missingPlatforms
+      });
+      const run = findTikTokAutomationRunByScriptId(String(selectedScript?.id || '').trim());
+      if (run) {
+        patchTikTokAutomationRun(run.id, {
+          status: 'generated',
+          completedAt: new Date().toISOString(),
+          platforms: results.filter((entry) => entry?.success).map((entry) => String(entry?.platform || '').trim().toLowerCase())
+        });
+      }
+    }
+    markTikTokIdeaHistoryPosted({
+      scriptId: String(selectedScript?.id || '').trim(),
+      platforms: results.filter((entry) => entry?.success).map((entry) => String(entry?.platform || '').trim().toLowerCase())
+    });
+    pushTikTokAutomationEvent(
+      `Publish attempt finished: ${results.filter((entry) => entry?.success).length}/${results.length} platform(s) succeeded.`,
+      results.every((entry) => entry?.success) ? 'success' : 'warning'
+    );
+    renderTikTokAutomationUi();
     const okCount = results.filter((r) => r?.success).length;
     const failCount = results.length - okCount;
     setTikTokPublishStatus(
@@ -11903,7 +17027,15 @@ const renderTikTokFinalOutput = async () => {
     setTikTokFinalStatus('No timeline scenes available. Complete Step 6 first.', true);
     return;
   }
-  const hasAvatarClip = scenesRaw.some((scene) => String(scene?.avatar_talk_url || '').trim());
+  const youtubePreflight = await runStep8YoutubePreflightCheck({ force: true });
+  if (!youtubePreflight.ready) {
+    const missingCount = Math.max(0, Number(youtubePreflight.total || 0) - Number(youtubePreflight.ok || 0));
+    const msg = `Step 8 blocked: ${missingCount} YouTube clip${missingCount === 1 ? '' : 's'} still not accessible locally.`;
+    setTikTokFinalStatus(msg, true);
+    pushTikTokFinalLog(msg);
+    return;
+  }
+  const hasAvatarClip = scenesRaw.some((scene) => hasTikTokAvatarSceneOutput(scene));
   if (!hasAvatarClip) {
     setTikTokFinalStatus('No Step 7 avatar clips found. Generate avatar clips first.', true);
     return;
@@ -11986,11 +17118,9 @@ const renderTikTokFinalOutput = async () => {
       setTikTokFinalStatus('No scenes available after timeline merge.', true);
       return;
     }
-    const overlayCandidates = exportScenes.filter(
-      (scene) => !scene?.avatar_reserved && !!String(scene?.avatar_talk_url || '').trim()
-    );
+    const overlayCandidates = exportScenes.filter((scene) => !scene?.avatar_reserved && hasTikTokAvatarSceneOutput(scene));
     const invalidAvatarUrls = exportScenes.filter((scene) => {
-      const raw = String(scene?.avatar_talk_url || '').trim();
+      const raw = getTikTokAvatarSceneOutputUrl(scene);
       return !!raw && isAudioUrl(raw);
     }).length;
     pushTikTokFinalLog(
@@ -12007,7 +17137,7 @@ const renderTikTokFinalOutput = async () => {
     const payload = {
       scenes: exportScenes.map((scene) => {
         const hasAvatarReserved = !!scene?.avatar_reserved;
-        const avatarTalkUrl = String(scene?.avatar_talk_url || '').trim();
+        const avatarTalkUrl = getTikTokAvatarSceneOutputUrl(scene);
         const fullAvatarUrl = !isAudioUrl(avatarTalkUrl) ? avatarTalkUrl : '';
         let clip = scene.clip?.local_path ? { ...scene.clip, url: scene.clip.local_path } : { ...(scene.clip || {}) };
         if (hasAvatarReserved && fullAvatarUrl) {
@@ -12093,6 +17223,14 @@ const renderTikTokFinalOutput = async () => {
     }
     ensureCaptionEditorVideoSource({ forceReload: true });
     refreshCaptionEditorFromWords({ keepTime: true });
+    const automationScriptId = String(tiktokStoryboard?.source_script_id || tiktokStoryboardScriptId || '').trim();
+    syncTikTokAutomationFinalRenderStage({
+      scriptId: automationScriptId
+    });
+    syncTikTokAutomationPublishFallbackStage({
+      scriptId: automationScriptId,
+      path: String(res.path || '').trim()
+    });
     scheduleSave();
   } catch (err) {
     const message = err?.message || 'Final render failed.';
@@ -12149,7 +17287,7 @@ const setTikTokExportStatus = (text, isError = false, { notify = true } = {}) =>
   if (!tiktokExportStatus) return;
   tiktokExportStatus.textContent = text;
   tiktokExportStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  if (notify) showToast(text, isError, 'Export');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Export');
   scheduleTikTokStickyStepUpdate();
 };
 
@@ -12251,6 +17389,7 @@ const renderTikTokDownloadQueue = () => {
     tiktokStep6Downloads.style.display = 'none';
     tiktokStep6DownloadsList.innerHTML = '';
     setStep6StitchBoard({ visible: false, percent: 0, phase: 'Idle', desc: 'Waiting for all clips to finish downloading.' });
+    queueStep8YoutubePreflightRefresh();
     return;
   }
   tiktokStep6Downloads.style.display = 'grid';
@@ -12359,6 +17498,7 @@ const renderTikTokDownloadQueue = () => {
     tiktokStep6DownloadsList.appendChild(item);
   });
   maybeAutoRecoverMissingExport();
+  queueStep8YoutubePreflightRefresh();
 };
 
 const queueTikTokDownloadQueueRender = () => {
@@ -12405,6 +17545,7 @@ const syncStep6DownloadQueueFromStoryboard = () => {
     tiktokStep6ActiveSceneId = '';
     tiktokStep6Expanded = {};
     queueTikTokDownloadQueueRender();
+    queueStep8YoutubePreflightRefresh();
     return;
   }
   initTikTokDownloadQueue(
@@ -12413,6 +17554,7 @@ const syncStep6DownloadQueueFromStoryboard = () => {
       duration_sec: Number(scene.duration_sec || 0) || getSceneDurationSec(scene)
     }))
   );
+  queueStep8YoutubePreflightRefresh();
 };
 
 const setStep6DownloadState = (sceneId = '', patch = {}) => {
@@ -12566,6 +17708,279 @@ const fileUrlToPath = (value = '') => {
   } catch (_err) {
     return raw.replace(/^file:\/\//i, '');
   }
+};
+
+const doesLocalPathExist = async (target = '') => {
+  const local = String(target || '').trim();
+  if (!local) return false;
+  if (window.electronAPI?.pathExists) {
+    try {
+      const check = await window.electronAPI.pathExists(local);
+      return !!(check?.success && check.exists);
+    } catch (_err) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const renderStep8YoutubePreflightUi = () => {
+  if (!tiktokFinalYoutubeCheckSummary || !tiktokFinalYoutubeCheckList) return;
+  const state = tiktokFinalYoutubePreflight || {};
+  const total = Math.max(0, Number(state.total || 0));
+  const ok = Math.max(0, Number(state.ok || 0));
+  const checkedAt = Number(state.checkedAt || 0);
+  const stamp = checkedAt ? ` • ${new Date(checkedAt).toLocaleTimeString()}` : '';
+  const baseMessage = String(state.message || '').trim() || 'Not checked yet.';
+  tiktokFinalYoutubeCheckSummary.textContent = state.checking
+    ? 'Checking YouTube clip accessibility...'
+    : `${baseMessage}${stamp}`;
+  tiktokFinalYoutubeCheckSummary.style.color = state.checking
+    ? '#97a0b9'
+    : total > 0 && ok < total
+      ? '#ff7a7a'
+      : '#97a0b9';
+  tiktokFinalYoutubeCheckList.innerHTML = '';
+  if (!total) {
+    const row = document.createElement('div');
+    row.className = 'timeline-item';
+    row.textContent = 'No YouTube clips in the current timeline.';
+    tiktokFinalYoutubeCheckList.appendChild(row);
+    return;
+  }
+  const items = Array.isArray(state.items) ? state.items : [];
+  const carousel = document.createElement('div');
+  carousel.className = 'clip-selected-carousel active';
+  const track = document.createElement('div');
+  track.className = 'clip-selected-track';
+  items.forEach((item) => {
+    const card = document.createElement('div');
+    card.className = 'clip-selected-scene';
+    const title = document.createElement('div');
+    title.className = 'title';
+    title.textContent = String(item.label || item.id || 'Scene').trim();
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    meta.style.color = item.ok ? '#7ef29d' : '#ff9c9c';
+    meta.textContent = item.ok ? 'Downloaded + accessible' : 'Missing / inaccessible';
+    card.appendChild(title);
+    card.appendChild(meta);
+    const previewUrl = String(item.previewUrl || '').trim();
+    if (previewUrl) {
+      const video = document.createElement('video');
+      video.src = previewUrl;
+      video.controls = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.muted = true;
+      video.preload = 'metadata';
+      video.style.width = '100%';
+      video.style.aspectRatio = '9 / 16';
+      video.style.objectFit = 'cover';
+      video.style.borderRadius = '8px';
+      video.style.border = '1px solid var(--border)';
+      card.appendChild(video);
+    } else {
+      const placeholder = document.createElement('div');
+      placeholder.className = 'clip-thumb';
+      placeholder.style.display = 'grid';
+      placeholder.style.placeItems = 'center';
+      placeholder.style.fontSize = '11px';
+      placeholder.style.color = 'var(--muted)';
+      placeholder.textContent = 'No local preview';
+      card.appendChild(placeholder);
+    }
+    const actions = document.createElement('div');
+    actions.className = 'clip-selected-actions';
+    const previewBtn = document.createElement('button');
+    previewBtn.type = 'button';
+    previewBtn.className = 'secondary';
+    previewBtn.textContent = 'Preview';
+    previewBtn.disabled = !previewUrl;
+    previewBtn.addEventListener('click', () => {
+      if (previewUrl) showPreviewVideo(previewUrl);
+    });
+    actions.appendChild(previewBtn);
+    const localBtn = document.createElement('button');
+    localBtn.type = 'button';
+    localBtn.className = 'secondary';
+    localBtn.textContent = 'Open local';
+    localBtn.disabled = !String(item.localPath || '').trim();
+    localBtn.addEventListener('click', () => {
+      if (!String(item.localPath || '').trim()) return;
+      openLocalSceneContent({
+        clip: {
+          local_path: String(item.localPath || '').trim(),
+          url: previewUrl
+        }
+      });
+    });
+    actions.appendChild(localBtn);
+    card.appendChild(actions);
+    track.appendChild(card);
+  });
+  carousel.appendChild(track);
+  tiktokFinalYoutubeCheckList.appendChild(carousel);
+  items.forEach((item) => {
+    const row = document.createElement('div');
+    row.className = 'timeline-item';
+    row.style.borderColor = item.ok ? 'rgba(126, 242, 157, 0.35)' : 'rgba(255, 122, 122, 0.45)';
+    const title = document.createElement('strong');
+    title.textContent = String(item.label || item.id || 'Scene').trim();
+    const status = document.createElement('div');
+    status.className = 'small';
+    status.style.color = item.ok ? '#7ef29d' : '#ff9c9c';
+    status.textContent = item.ok ? 'Accessible on disk' : 'Missing / inaccessible on disk';
+    const detail = document.createElement('div');
+    detail.className = 'small';
+    detail.textContent = item.detail || '';
+    row.appendChild(title);
+    row.appendChild(status);
+    row.appendChild(detail);
+    tiktokFinalYoutubeCheckList.appendChild(row);
+  });
+};
+
+const runStep8YoutubePreflightCheck = async ({ force = false } = {}) => {
+  const now = Date.now();
+  if (!force && now - Number(tiktokFinalYoutubePreflight?.checkedAt || 0) < 1200) {
+    renderStep8YoutubePreflightUi();
+    return { ...tiktokFinalYoutubePreflight };
+  }
+  const scenes = Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [];
+  const youtubeScenes = scenes
+    .filter((scene) => !scene?.merge_with_prev && !scene?.avatar_reserved)
+    .filter((scene) => String(scene?.clip?.provider || '').toLowerCase() === 'youtube');
+  tiktokFinalYoutubePreflight = {
+    ...(tiktokFinalYoutubePreflight || {}),
+    checking: true
+  };
+  renderStep8YoutubePreflightUi();
+  const items = [];
+  for (let idx = 0; idx < youtubeScenes.length; idx += 1) {
+    const scene = youtubeScenes[idx];
+    const sceneId = String(scene?.id || `s${idx + 1}`).trim();
+    const localPathRaw =
+      String(scene?.clip?.local_path || '').trim() ||
+      String(fileUrlToPath(scene?.clip?.url || '') || '').trim();
+    const exists = localPathRaw ? await doesLocalPathExist(localPathRaw) : false;
+    const label = `Scene ${idx + 1} · ${getStep6SceneLabel(scene, idx)}`;
+    const detail = localPathRaw
+      ? exists
+        ? `Path: ${localPathRaw}`
+        : `File not found: ${localPathRaw}`
+      : 'No local clip path. Run Step 6 download first.';
+    const previewUrl = localPathRaw && exists
+      ? normalizeTikTokRunMediaUrl(filePathToUrl(localPathRaw))
+      : '';
+    items.push({
+      id: sceneId,
+      label,
+      ok: !!(localPathRaw && exists),
+      detail,
+      localPath: localPathRaw,
+      previewUrl
+    });
+  }
+  const total = items.length;
+  const ok = items.filter((item) => item.ok).length;
+  const ready = total === 0 || ok === total;
+  const message = total
+    ? ready
+      ? `Ready to export video in Step 8 • ${ok}/${total} YouTube clip${total === 1 ? '' : 's'} accessible locally.`
+      : `Not ready for Step 8 export • ${ok}/${total} YouTube clip${total === 1 ? '' : 's'} accessible locally.`
+    : 'Ready to export video in Step 8 • No YouTube clips required.';
+  tiktokFinalYoutubePreflight = {
+    checkedAt: Date.now(),
+    checking: false,
+    ready,
+    total,
+    ok,
+    items,
+    message
+  };
+  renderStep8YoutubePreflightUi();
+  return { ...tiktokFinalYoutubePreflight };
+};
+
+const queueStep8YoutubePreflightRefresh = () => {
+  if (tiktokFinalYoutubePreflightRefreshTimer) return;
+  tiktokFinalYoutubePreflightRefreshTimer = setTimeout(() => {
+    tiktokFinalYoutubePreflightRefreshTimer = 0;
+    runStep8YoutubePreflightCheck({ force: true }).catch(() => {});
+  }, 200);
+};
+
+const resolveTikTokAvatarSplitSourceAudioPath = async () => {
+  const candidates = [
+    String(tiktokAudio?.original_file_path || '').trim(),
+    String(tiktokAudio?.file_path || '').trim(),
+    String(tiktokAudioFilePath || '').trim()
+  ].filter(Boolean);
+  for (const candidate of candidates) {
+    if (await doesLocalPathExist(candidate)) return candidate;
+  }
+  return '';
+};
+
+const ensureTikTokAvatarRetrySceneInputs = async (scene = {}, sceneImageUrl = '') => {
+  const sceneId = String(scene?.id || '').trim() || 'scene';
+  const output = {
+    sceneImageUrl: String(sceneImageUrl || '').trim(),
+    hasImage: !!String(sceneImageUrl || '').trim(),
+    audioLocalPath: '',
+    audioUrl: String(scene?.avatar_talk_audio_url || '').trim(),
+    audioPreviewUrl: '',
+    hasAudio: false,
+    audioRebuilt: false,
+    audioRecoveryDetail: ''
+  };
+  const storedLocal = String(fileUrlToPath(scene?.avatar_talk_audio_local_path || '') || '').trim();
+  if (storedLocal && (await doesLocalPathExist(storedLocal))) {
+    output.audioLocalPath = storedLocal;
+    output.audioPreviewUrl = filePathToUrl(storedLocal);
+    output.hasAudio = true;
+    return output;
+  }
+  if (output.audioUrl) {
+    output.hasAudio = true;
+    return output;
+  }
+  if (!window.electronAPI?.splitAudio) {
+    output.audioRecoveryDetail = 'Audio split bridge unavailable in this session.';
+    return output;
+  }
+  const sourceAudioPath = await resolveTikTokAvatarSplitSourceAudioPath();
+  if (!sourceAudioPath) {
+    output.audioRecoveryDetail = 'No source voiceover file found for scene re-split.';
+    return output;
+  }
+  const startMs = Number(scene?.start_ms || 0);
+  let endMs = Number(scene?.end_ms || 0);
+  if (!Number.isFinite(endMs) || endMs <= startMs) {
+    endMs = startMs + Math.max(400, Math.round(getSceneDurationSec(scene) * 1000));
+  }
+  const splitRes = await window.electronAPI.splitAudio({
+    audioPath: sourceAudioPath,
+    segments: [
+      {
+        id: sceneId,
+        start_ms: startMs,
+        end_ms: endMs
+      }
+    ]
+  });
+  const firstSegment = Array.isArray(splitRes?.segments) ? splitRes.segments.find((seg) => seg?.id === sceneId) || splitRes.segments[0] : null;
+  if (splitRes?.success && firstSegment?.success && firstSegment?.path) {
+    output.audioLocalPath = String(firstSegment.path || '').trim();
+    output.audioPreviewUrl = filePathToUrl(output.audioLocalPath);
+    output.hasAudio = true;
+    output.audioRebuilt = true;
+    output.audioRecoveryDetail = 'Scene audio segment rebuilt from the full voiceover.';
+    return output;
+  }
+  output.audioRecoveryDetail = String(firstSegment?.error || splitRes?.error || 'Scene audio segment rebuild failed.').trim();
+  return output;
 };
 
 const getAvatarEntryDisplayUrl = (entry = null) => {
@@ -12780,15 +18195,10 @@ const applyAvatarReservedScenes = async () => {
     const assets = await ensureCompressedAvatarAssets().catch(() => ({ normalUrl: '' }));
     avatarUrl = assets.normalUrl || (await ensureAvatarNormalImageUrl());
   }
-  const reservedTail = new Set();
-  reservedTail.add(lastIdx);
-  for (let i = lastIdx - 1; i >= 0; i -= 1) {
-    const scene = scenes[i];
-    if (scene.clip?.url || scene.ai_image_prompt || scene.ai_image_url) break;
-    reservedTail.add(i);
-  }
+  const reservedIndexes = new Set([0]);
+  if (lastIdx > 0) reservedIndexes.add(lastIdx);
   const updated = scenes.map((scene, idx) => {
-    const reserved = idx === 0 || reservedTail.has(idx);
+    const reserved = reservedIndexes.has(idx);
     if (!reserved) {
       const clearedClip = scene.clip?.provider === 'avatar' ? null : scene.clip;
       return { ...scene, avatar_reserved: false, clip: clearedClip };
@@ -12831,17 +18241,18 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
     setTikTokAvatarStatus('Enter your Kie.ai key first.', true);
     return;
   }
-  const canSplitAudio = !!tiktokAudio?.file_path && !!window.electronAPI?.splitAudio;
+  const sourceAudioPath = await resolveTikTokAvatarSplitSourceAudioPath();
+  const canSplitAudio = !!sourceAudioPath && !!window.electronAPI?.splitAudio;
   const candidates = Array.isArray(scenes) ? scenes.filter((scene) => scene?.id) : [];
   const needs = candidates.filter((scene) => {
-    const hasRenderedOutput = !!String(scene?.avatar_talk_url || '').trim();
+    const hasRenderedOutput = hasTikTokAvatarSceneOutput(scene);
     return overwrite || !hasRenderedOutput;
   });
   const skippedCompleted = Math.max(0, candidates.length - needs.length);
   if (!needs.length) {
     setTikTokAvatarStatus('Avatar clips already generated for all scenes.');
     setTikTokAvatarGenerationBoard({ phase: 'All scene clips already exist.', done: candidates.length, total: candidates.length, percent: 100, active: false });
-    return;
+    return { total: candidates.length, done: candidates.length, failed: 0, skippedCompleted };
   }
 
   if (!preserveExistingUi) {
@@ -12884,10 +18295,19 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
   );
   setTikTokAvatarProgress(10);
   const pathById = new Map();
-  needs.forEach((scene) => {
+  for (const scene of needs) {
     const stored = String(fileUrlToPath(scene?.avatar_talk_audio_local_path || '') || '').trim();
-    if (stored) pathById.set(scene.id, stored);
-  });
+    if (!stored) continue;
+    if (window.electronAPI?.pathExists) {
+      try {
+        const existsRes = await window.electronAPI.pathExists(stored);
+        if (!existsRes?.exists) continue;
+      } catch (_err) {
+        continue;
+      }
+    }
+    pathById.set(scene.id, stored);
+  }
   const splitTargets = needs.filter((scene) => !pathById.has(scene.id));
   const reusableAudioById = new Map();
   needs.forEach((scene) => {
@@ -12917,7 +18337,7 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
       pushTikTokAvatarLog(`Splitting audio into ${segments.length} segment(s).`);
       ensureAvatarProcessingActive();
       const splitRes = await window.electronAPI.splitAudio({
-        audioPath: tiktokAudio.file_path,
+        audioPath: sourceAudioPath,
         segments
       });
       ensureAvatarProcessingActive();
@@ -12953,7 +18373,7 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
     scheduleSave();
     syncAvatarSceneUiFromStoryboard(Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : []);
     renderTikTokAvatarPanel();
-    return;
+    return { total: needs.length, done: 0, failed: needs.length, skippedCompleted };
   }
 
   const urlByPath = new Map();
@@ -13158,7 +18578,7 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
     });
     setTikTokAvatarProgress(failed ? 100 : 0);
     scheduleSave();
-    return;
+    return { total: needs.length, done: 0, failed, skippedCompleted };
   }
 
   pushTikTokAvatarLog(
@@ -13185,11 +18605,87 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
   };
 
   const maxSceneAttempts = Math.max(1, Number(options.retryAttempts) || 4);
+  const sceneImageHostingCache = new Map();
   const runScenePayload = async (payload) => {
     ensureAvatarProcessingActive();
     const { scene, sceneImageUrl, segPath, prompt, assetIdx, clipIdx } = payload;
+    let resolvedSceneImageUrl = String(sceneImageUrl || '').trim();
     let resolvedAudioUrl = String(payload.audioUrl || '').trim();
     let lastErrMsg = '';
+    if (resolvedSceneImageUrl) {
+      if (assetIdx >= 0) {
+        tiktokAvatarSceneAssets[assetIdx].status = 'Preparing avatar image URL';
+        tiktokAvatarSceneAssets[assetIdx].state = 'submitting';
+        tiktokAvatarSceneAssets[assetIdx].progress = Math.max(12, Number(tiktokAvatarSceneAssets[assetIdx].progress || 0));
+      }
+      if (clipIdx >= 0) {
+        tiktokAvatarClips[clipIdx] = {
+          ...tiktokAvatarClips[clipIdx],
+          status: 'Preparing avatar image URL',
+          state: 'submitting',
+          progress: Math.max(12, Number(tiktokAvatarClips[clipIdx].progress || 0))
+        };
+      }
+      renderTikTokAvatarPanel();
+      try {
+        resolvedSceneImageUrl = String(
+          await ensureKieAccessibleImageUrl(resolvedSceneImageUrl, {
+            apiKey: key,
+            uploadPath: 'images/avatar',
+            cacheMap: sceneImageHostingCache
+          }) || resolvedSceneImageUrl
+        ).trim();
+      } catch (err) {
+        lastErrMsg = String(err?.message || 'avatar image missing').trim();
+      }
+      tiktokStoryboard = {
+        ...tiktokStoryboard,
+        scenes: tiktokStoryboard.scenes.map((s) =>
+          s.id === scene.id
+            ? {
+                ...s,
+                avatar_talk_image_url: resolvedSceneImageUrl || String(s.avatar_talk_image_url || '').trim()
+              }
+            : s
+        )
+      };
+      scheduleSave();
+    }
+    if (!isHttpUrl(resolvedSceneImageUrl)) {
+      lastErrMsg = lastErrMsg || 'avatar image missing';
+      if (assetIdx >= 0) {
+        tiktokAvatarSceneAssets[assetIdx].status = `Missing avatar image URL`;
+        tiktokAvatarSceneAssets[assetIdx].state = 'failed';
+        tiktokAvatarSceneAssets[assetIdx].progress = 100;
+      }
+      if (clipIdx >= 0) {
+        tiktokAvatarClips[clipIdx] = {
+          ...tiktokAvatarClips[clipIdx],
+          status: 'Missing avatar image URL',
+          state: 'failed',
+          progress: 100
+        };
+      }
+      tiktokStoryboard = {
+        ...tiktokStoryboard,
+        scenes: tiktokStoryboard.scenes.map((s) =>
+          s.id === scene.id
+            ? {
+                ...s,
+                avatar_talk_task_id: '',
+                avatar_talk_state: 'fail',
+                avatar_talk_progress: 100,
+                avatar_talk_fail_msg: lastErrMsg
+              }
+            : s
+        )
+      };
+      failed += 1;
+      updateAvatarOverallProgress(`Scene ${scene.id} failed`);
+      renderTikTokAvatarPanel();
+      scheduleSave();
+      return;
+    }
     for (let attempt = 1; attempt <= maxSceneAttempts; attempt += 1) {
       ensureAvatarProcessingActive();
       if (!resolvedAudioUrl && segPath && window.electronAPI?.uploadFiles) {
@@ -13296,7 +18792,7 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
       renderTikTokAvatarPanel();
       let taskId = '';
       try {
-        taskId = await createKieTalkingTask({ imageUrl: sceneImageUrl, audioUrl: resolvedAudioUrl, prompt, resolution: '720p' });
+        taskId = await createKieTalkingTask({ imageUrl: resolvedSceneImageUrl, audioUrl: resolvedAudioUrl, prompt, resolution: '720p' });
       } catch (err) {
         if (/cancelled by user/i.test(String(err?.message || ''))) throw err;
         lastErrMsg = String(err?.message || 'Failed to submit scene to Kie.ai');
@@ -13532,7 +19028,7 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
       if (!sceneId) return false;
       const sceneState = tiktokStoryboard?.scenes?.find((s) => String(s?.id || '') === sceneId);
       if (!sceneState) return false;
-      const hasVideo = !!String(sceneState.avatar_talk_url || '').trim();
+      const hasVideo = hasTikTokAvatarSceneOutput(sceneState);
       const state = String(sceneState.avatar_talk_state || '').toLowerCase();
       return !hasVideo && state === 'fail';
     });
@@ -13587,6 +19083,7 @@ const ensureTikTokAvatarTalkingClips = async (scenes = [], avatarUrl = '', optio
   });
   setTikTokAvatarProgress(100);
   renderTikTokAvatarPanel();
+  return { total: needs.length, done, failed, skippedCompleted };
 };
 
 const renderTikTokTimeline = () => {
@@ -13702,7 +19199,14 @@ const pushTikTokLog = (message) => {
 };
 
 const formatTikTokMemory = (limit = 12) => {
-  const memory = tiktokScripts.slice(0, limit);
+  const historyBackfill = tiktokAutomationIdeaHistory.length
+    ? tiktokAutomationIdeaHistory.map((item) => ({
+        title: item.title,
+        hook: item.hook,
+        angle: item.angle
+      }))
+    : [];
+  const memory = (tiktokScripts.length ? tiktokScripts : historyBackfill).slice(0, limit);
   if (!memory.length) return 'None yet.';
   return memory
     .map((item, idx) => {
@@ -13782,6 +19286,42 @@ const closeAccessPanel = () => {
   document.body.classList.remove('panel-open');
 };
 
+const syncAutomationCredentialsPanelFromPublishInputs = () => {
+  if (automationTikTokTokenInput) automationTikTokTokenInput.value = String(tiktokPublishTikTokToken?.value || '');
+  if (automationTikTokOpenIdInput) automationTikTokOpenIdInput.value = String(tiktokPublishTikTokOpenId?.value || '');
+  if (automationInstagramTokenInput) automationInstagramTokenInput.value = String(tiktokPublishInstagramToken?.value || '');
+  if (automationInstagramUserIdInput) automationInstagramUserIdInput.value = String(tiktokPublishInstagramUserId?.value || '');
+  if (automationFacebookTokenInput) automationFacebookTokenInput.value = String(tiktokPublishFacebookToken?.value || '');
+  if (automationFacebookPageIdInput) automationFacebookPageIdInput.value = String(tiktokPublishFacebookPageId?.value || '');
+};
+
+const syncPublishInputsFromAutomationCredentialsPanel = () => {
+  if (tiktokPublishTikTokToken && automationTikTokTokenInput) tiktokPublishTikTokToken.value = automationTikTokTokenInput.value;
+  if (tiktokPublishTikTokOpenId && automationTikTokOpenIdInput) tiktokPublishTikTokOpenId.value = automationTikTokOpenIdInput.value;
+  if (tiktokPublishInstagramToken && automationInstagramTokenInput) tiktokPublishInstagramToken.value = automationInstagramTokenInput.value;
+  if (tiktokPublishInstagramUserId && automationInstagramUserIdInput) tiktokPublishInstagramUserId.value = automationInstagramUserIdInput.value;
+  if (tiktokPublishFacebookToken && automationFacebookTokenInput) tiktokPublishFacebookToken.value = automationFacebookTokenInput.value;
+  if (tiktokPublishFacebookPageId && automationFacebookPageIdInput) tiktokPublishFacebookPageId.value = automationFacebookPageIdInput.value;
+  scheduleSave();
+  renderTikTokAutomationUi();
+};
+
+const openAutomationCredentialsPanel = () => {
+  if (!automationCredentialsPanel) return;
+  syncAutomationCredentialsPanelFromPublishInputs();
+  automationCredentialsPanel.classList.add('show');
+  document.body.classList.add('panel-open');
+  if (automationTikTokTokenInput) {
+    setTimeout(() => automationTikTokTokenInput.focus(), 150);
+  }
+};
+
+const closeAutomationCredentialsPanel = () => {
+  if (!automationCredentialsPanel) return;
+  automationCredentialsPanel.classList.remove('show');
+  document.body.classList.remove('panel-open');
+};
+
 const openLocalSoundsPanel = () => {
   if (!localSoundsPanel) return;
   localSoundsPanel.classList.add('show');
@@ -13805,11 +19345,11 @@ const ensureTikTokScriptIds = () => {
   if (changed) scheduleSave();
 };
 
-const setTikTokStoryboardStatus = (text, isError = false) => {
+const setTikTokStoryboardStatus = (text, isError = false, { notify = true } = {}) => {
   if (!tiktokStoryboardStatus) return;
   tiktokStoryboardStatus.textContent = text;
   tiktokStoryboardStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'Storyboard');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Storyboard');
   scheduleTikTokStickyStepUpdate();
 };
 
@@ -13988,19 +19528,23 @@ const getPixabayKey = () => (currentPixabayKey || localStorage.getItem(PIXABAY_K
 
 const getYoutubeKey = () => (currentYoutubeKey || localStorage.getItem(YOUTUBE_KEY) || '').trim();
 
-const setTikTokClipStatus = (text, isError = false) => {
+const setTikTokClipStatus = (text, isError = false, { notify = true } = {}) => {
   if (!tiktokClipStatus) return;
   tiktokClipStatus.textContent = text;
   tiktokClipStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'Clips');
+  if (notify && text && tiktokAutomationQuietModeDepth <= 0) {
+    showToast(text, isError, 'Clips');
+  }
   scheduleTikTokStickyStepUpdate();
 };
 
-const setTikTokAiStatus = (text, isError = false) => {
+const setTikTokAiStatus = (text, isError = false, { notify = true } = {}) => {
   if (!tiktokAiStatus) return;
   tiktokAiStatus.textContent = text;
   tiktokAiStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'AI');
+  if (notify && text && tiktokAutomationQuietModeDepth <= 0) {
+    showToast(text, isError, 'AI');
+  }
 };
 
 const normalizeClipQuery = (value) => {
@@ -14205,10 +19749,14 @@ const createKieTalkingTask = async ({ imageUrl, audioUrl, prompt, resolution = '
   const key = requireKey();
   if (!key) throw new Error('Kie API key missing');
   if (!imageUrl || !audioUrl) throw new Error('Missing image or audio URL');
+  const normalizedImageUrl = await ensureKieAccessibleImageUrl(imageUrl, {
+    apiKey: key,
+    uploadPath: 'images/avatar'
+  });
   const payload = {
     model: 'infinitalk/from-audio',
     input: {
-      image_url: imageUrl,
+      image_url: normalizedImageUrl || imageUrl,
       audio_url: audioUrl,
       prompt: prompt || 'A person speaking to camera.',
       resolution
@@ -14230,6 +19778,107 @@ const createKieTalkingTask = async ({ imageUrl, audioUrl, prompt, resolution = '
   const taskId = data.data?.taskId;
   if (!taskId) throw new Error('No taskId returned');
   return taskId;
+};
+
+const ensureKieAccessibleImageUrl = async (imageUrl = '', { apiKey = '', uploadPath = 'images/avatar', cacheMap = null } = {}) => {
+  const raw = String(imageUrl || '').trim();
+  if (!raw) return '';
+  const key = String(apiKey || '').trim();
+  const cache = cacheMap instanceof Map ? cacheMap : null;
+  if (cache && cache.has(raw)) return String(cache.get(raw) || '').trim();
+
+  if (isHttpUrl(raw) && !shouldRehostAvatarUrl(raw)) {
+    if (cache) cache.set(raw, raw);
+    return raw;
+  }
+
+  const resolveLocalPath = (value = '') => {
+    const text = String(value || '').trim();
+    if (!text) return '';
+    if (text.startsWith('file://')) return fileUrlToPath(text);
+    if (text.startsWith('/')) return text;
+    if (/^[A-Za-z]:[\\/]/.test(text)) return text;
+    return '';
+  };
+
+  let localPath = resolveLocalPath(raw);
+  if (!localPath && isHttpUrl(raw) && window.electronAPI?.cacheRemoteFile) {
+    try {
+      const cached = await window.electronAPI.cacheRemoteFile({
+        url: raw,
+        sceneId: `avatar-ref-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+        kind: 'image'
+      });
+      if (cached?.success && cached.path) localPath = String(cached.path || '').trim();
+    } catch (_err) {}
+  }
+
+  const uploadAsWebpBlob = async (blob, nameHint = `avatar-ref-${Date.now()}`) => {
+    if (!(blob instanceof Blob)) return '';
+    if (!key || !window.electronAPI?.uploadBlobs) return '';
+    try {
+      const webpBlob = await convertImageBlobToWebp(blob, 0.9);
+      const payload = [
+        {
+          name: ensureWebpFilename(nameHint),
+          data: Array.from(new Uint8Array(await webpBlob.arrayBuffer())),
+          type: 'image/webp'
+        }
+      ];
+      const uploaded = await window.electronAPI.uploadBlobs(payload, { apiKey: key, uploadPath });
+      const first = Array.isArray(uploaded) ? uploaded[0] : null;
+      if (first?.success && first?.url) {
+        return String(first.url || '').trim();
+      }
+    } catch (_err) {}
+    return '';
+  };
+
+  if (!localPath && raw.startsWith('data:') && key && window.electronAPI?.uploadBlobs) {
+    try {
+      const res = await fetch(raw);
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = await uploadAsWebpBlob(blob, `avatar-ref-${Date.now()}`);
+        if (url) {
+          if (cache) cache.set(raw, url);
+          return url;
+        }
+      }
+    } catch (_err) {}
+  }
+
+  if (localPath && key && (window.electronAPI?.uploadBlobs || window.electronAPI?.uploadFiles)) {
+    try {
+      const localBlob = await readBlobFromLocalPath(localPath);
+      const localName = String(localPath.split('/').pop() || localPath.split('\\').pop() || '').trim() || `avatar-ref-${Date.now()}`;
+      let url = await uploadAsWebpBlob(localBlob, localName);
+      if (!url && window.electronAPI?.uploadFiles) {
+        const uploaded = await window.electronAPI.uploadFiles([localPath], {
+          apiKey: key,
+          uploadPath
+        });
+        const first = Array.isArray(uploaded) ? uploaded[0] : null;
+        if (first?.success && first?.url) {
+          url = String(first.url || '').trim();
+        }
+      }
+      if (url) {
+        if (cache) {
+          cache.set(raw, url);
+          cache.set(localPath, url);
+          cache.set(filePathToUrl(localPath), url);
+        }
+        return url;
+      }
+    } catch (_err) {}
+  }
+
+  if (isHttpUrl(raw)) {
+    if (cache) cache.set(raw, raw);
+    return raw;
+  }
+  return raw;
 };
 
 const CLIP_QUERY_ABSTRACT_TERMS = new Set([
@@ -14745,6 +20394,7 @@ const maybeAutoRunAiImages = async (origin = '') => {
 const maybeAutoRunClipPipeline = async (origin = '') => {
   if (tiktokAutoWorkflowRunning) return;
   if (!tiktokStoryboard?.scenes?.length) return;
+  if (tiktokAutomationPipelineActive) return;
   tiktokAutoWorkflowRunning = true;
   try {
     await maybeAutoRunAiImages(origin);
@@ -15349,6 +20999,7 @@ const setSceneClip = (sceneId, clip) => {
     tiktokClipSceneExpanded[sceneId] = true;
   }
   renderTikTokStoryboardOutput();
+  syncTikTokAutomationAssetsStage();
   scheduleSave();
   if (clip?.type === 'image') {
     const key = (openaiKeyInput?.value || currentOpenaiKey || '').trim();
@@ -15412,6 +21063,7 @@ const searchTikTokClipsForScene = async (sceneId, query) => {
     return;
   }
   tiktokClipLoading[sceneId] = true;
+  syncTikTokAutomationAssetsStage();
   renderTikTokClipLibrary();
   setTikTokClipStatus(tiktokYoutubeOnly?.checked
     ? `Searching YouTube for "${trimmedQuery}"...`
@@ -15430,6 +21082,7 @@ const searchTikTokClipsForScene = async (sceneId, query) => {
     setTikTokClipStatus(err.message || 'Clip search failed.', true);
   } finally {
     tiktokClipLoading[sceneId] = false;
+    syncTikTokAutomationAssetsStage();
     renderTikTokClipLibrary();
   }
 };
@@ -16144,7 +21797,7 @@ const renderTikTokClipLibrary = () => {
   if (!scenes.length) {
     tiktokClipList.innerHTML = '<div class="small">Generate a storyboard to start sourcing clips.</div>';
     if (!tiktokClipSearching) {
-      setTikTokClipStatus('Generate a storyboard first.');
+      setTikTokClipStatus('Generate a storyboard first.', false, { notify: false });
     }
     return;
   }
@@ -16648,6 +22301,7 @@ const renderTikTokScripts = () => {
     tiktokScriptList.innerHTML = '<div class="small">No scripts yet.</div>';
     renderTikTokStoryboardSelect();
     renderTikTokAssetsPanel();
+    renderTikTokAutomationUi();
     return;
   }
   tiktokScripts.forEach((script, idx) => {
@@ -16661,8 +22315,17 @@ const renderTikTokScripts = () => {
     const meta = document.createElement('div');
     meta.className = 'history-meta';
     meta.textContent = new Date(script.createdAt || Date.now()).toLocaleString();
+    const sourceBadge = document.createElement('span');
+    sourceBadge.className = `tiktok-script-source ${script.source === 'automatic' ? 'automatic' : 'manual'}`;
+    sourceBadge.textContent = script.source === 'automatic' ? 'Automatic' : 'Manual';
+    const rightMeta = document.createElement('div');
+    rightMeta.style.display = 'inline-flex';
+    rightMeta.style.alignItems = 'center';
+    rightMeta.style.gap = '8px';
     top.appendChild(name);
-    top.appendChild(meta);
+    rightMeta.appendChild(sourceBadge);
+    rightMeta.appendChild(meta);
+    top.appendChild(rightMeta);
 
     const summary = document.createElement('div');
     summary.className = 'small';
@@ -16729,6 +22392,7 @@ const renderTikTokScripts = () => {
   });
   renderTikTokStoryboardSelect();
   renderTikTokAssetsPanel();
+  renderTikTokAutomationUi();
 };
 
 const draftThemeWithOpenAI = async ({ key, preferClothes }) => {
@@ -16851,6 +22515,2541 @@ const assignOutfitsForPlan = async ({ key, theme, plan }) => {
 
 const sanitizeScriptValue = (value) => (typeof value === 'string' ? value.trim() : '');
 
+const stripTikTokScriptEmojis = (value = '') =>
+  String(value || '').replace(
+    /[\p{Extended_Pictographic}\p{Emoji_Presentation}\u200d\uFE0F]/gu,
+    ''
+  );
+
+const sanitizeTikTokVoiceoverLine = (value = '') =>
+  String(value || '')
+    .replace(/^\s*\[(?:intro|outro|beat|scene|shot|visual|camera|cut)[^\]]*\]\s*/i, '')
+    .replace(/^\s*\((?:intro|outro|beat|scene|shot|visual|camera|cut)[^)]*\)\s*/i, '')
+    .replace(/^\s*(?:scene|shot|beat)\s*\d+\s*:\s*/i, '')
+    .replace(/^\s*(?:vo|voiceover|host|narrator|on-screen text|sfx)\s*:\s*/i, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const sanitizeTikTokVoiceoverText = (value = '') => {
+  let text = stripTikTokScriptEmojis(String(value || ''));
+  text = text
+    .replace(/\[[^\]]*\]/g, ' ')
+    .replace(/\((?:cut to|scene|shot|camera|visual|intro|outro|beat|sfx)[^)]*\)/gi, ' ')
+    .replace(/#\S+/g, ' ')
+    .replace(/^\s*(?:scene|shot|beat)\s*\d+\s*:\s*/gim, '')
+    .replace(/^\s*(?:vo|voiceover|host|narrator|on-screen text|sfx)\s*:\s*/gim, '')
+    .replace(/\|\s*(?:hook|angle|topic|hook_pattern|summary|tags)\s*=[^|\n]+/gi, ' ')
+    .replace(/\n{3,}/g, '\n\n');
+  const cleanedLines = text
+    .split('\n')
+    .map((line) => sanitizeTikTokVoiceoverLine(line))
+    .filter(Boolean);
+  return cleanedLines.join('\n').replace(/[ \t]{2,}/g, ' ').trim();
+};
+
+const looksLikeTikTokStoryboardText = (value = '') => {
+  const text = String(value || '').trim();
+  if (!text) return false;
+  return (
+    /\[[^\]]+\]/.test(text) ||
+    /(?:^|\n)\s*(?:scene|shot|beat)\s*\d+\s*:/i.test(text) ||
+    /(?:^|\n)\s*(?:vo|voiceover|host|narrator|on-screen text|sfx)\s*:/i.test(text) ||
+    /#\S+/.test(text) ||
+    /[\p{Extended_Pictographic}\p{Emoji_Presentation}]/u.test(text)
+  );
+};
+
+const sanitizeTikTokConceptField = (value = '') =>
+  String(value || '')
+    .replace(/\|\s*(?:hook|angle|topic|hook_pattern|summary|tags)\s*=/gi, ' ')
+    .replace(/[\r\n]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const normalizeTikTokConceptTags = (value = '') =>
+  String(value || '')
+    .split(',')
+    .map((part) => sanitizeTikTokConceptField(part))
+    .filter(Boolean)
+    .slice(0, 8);
+
+const normalizeTikTokConceptCandidate = (concept = {}) => {
+  const title = sanitizeTikTokConceptField(concept.title || '');
+  const hook = sanitizeTikTokConceptField(concept.hook || '');
+  const angle = sanitizeTikTokConceptField(concept.angle || '');
+  const topic = sanitizeTikTokConceptField(concept.topic || '');
+  const hookPattern = sanitizeTikTokConceptField(concept.hook_pattern || concept.hookPattern || '');
+  const summary = sanitizeTikTokConceptField(concept.summary || '');
+  const tags = Array.isArray(concept.tags)
+    ? concept.tags.map((tag) => sanitizeTikTokConceptField(tag)).filter(Boolean).slice(0, 8)
+    : normalizeTikTokConceptTags(concept.tags || '');
+  return {
+    title,
+    hook,
+    angle,
+    topic,
+    hook_pattern: hookPattern,
+    summary,
+    tags
+  };
+};
+
+const isMalformedTikTokConceptCandidate = (concept = {}) => {
+  const fields = [
+    concept.title,
+    concept.hook,
+    concept.angle,
+    concept.topic,
+    concept.hook_pattern || concept.hookPattern,
+    concept.summary
+  ]
+    .map((value) => String(value || ''))
+    .filter(Boolean);
+  const packedFieldPattern = /\b(?:hook|angle|topic|hook_pattern|summary|tags)\s*=/i;
+  if (!String(concept.title || '').trim() || !String(concept.hook || '').trim() || !String(concept.angle || '').trim()) {
+    return true;
+  }
+  if (fields.some((value) => packedFieldPattern.test(value))) return true;
+  if (String(concept.title || '').length > 140 || String(concept.hook || '').length > 240) return true;
+  return false;
+};
+
+const buildTikTokScriptRequestBody = ({ idea, audience, style, count, memoryText }) => ({
+  model: 'gpt-4o',
+  messages: [
+    {
+      role: 'system',
+      content:
+        'You are a TikTok scriptwriter. Generate distinct, high-retention scripts with strong hooks and clear beats. Keep each script 35–55 seconds when read aloud. Return JSON: { "scripts":[{ "title":"", "angle":"", "hook":"", "beats":["","",...], "cta":"", "full_script":"" }] }.'
+    },
+    {
+      role: 'user',
+      content:
+        `Idea: ${idea}\n` +
+        `${audience ? `Target audience: ${audience}\n` : ''}` +
+        `${style ? `Style: ${style}\n` : ''}` +
+        `Count: ${count}\n` +
+        `Avoid repeating or closely echoing any of these prior outputs:\n${memoryText}\n` +
+        'Each script must feel fresh with a different angle and hook.'
+    }
+  ],
+  temperature: 0.9,
+  response_format: { type: 'json_object' },
+  max_tokens: 1200
+});
+
+const normalizeTikTokScriptCandidates = ({ scripts = [], count = 1, idea = '', audience = '', style = '', source = 'manual' }) => {
+  const stamp = Date.now();
+  return scripts.slice(0, count).map((script, idx) => {
+    const title = sanitizeScriptValue(script.title) || `Script ${idx + 1}`;
+    const angle = sanitizeScriptValue(script.angle || script.idea || script.concept);
+    const hook = sanitizeScriptValue(script.hook);
+    const beats = Array.isArray(script.beats)
+      ? script.beats.map((beat) => sanitizeTikTokVoiceoverLine(sanitizeScriptValue(beat))).filter(Boolean)
+      : [];
+    const cta = sanitizeTikTokVoiceoverLine(sanitizeScriptValue(script.cta));
+    let fullScript = sanitizeTikTokVoiceoverText(sanitizeScriptValue(script.full_script || script.script));
+    if (!fullScript) {
+      fullScript = [hook, ...beats, cta].filter(Boolean).join('\n');
+    }
+    return {
+      id: `${stamp}-${idx}-${Math.random().toString(16).slice(2)}`,
+      title,
+      angle,
+      hook,
+      beats,
+      cta,
+      script: fullScript,
+      createdAt: Date.now(),
+      idea,
+      audience,
+      style,
+      source
+    };
+  });
+};
+
+const requestTikTokScriptsFromOpenAI = async ({
+  key,
+  idea,
+  audience = '',
+  style = '',
+  count = 1,
+  signal = null,
+  onProgress = null,
+  source = 'manual'
+} = {}) => {
+  if (typeof onProgress === 'function') onProgress('Compiled memory of prior scripts.', 18);
+  const memoryText = formatTikTokMemory(12);
+  const body = buildTikTokScriptRequestBody({
+    idea,
+    audience,
+    style,
+    count,
+    memoryText
+  });
+  if (typeof onProgress === 'function') onProgress('Sending request to OpenAI...', 28);
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${key}`
+    },
+    signal,
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(`OpenAI error ${res.status}`);
+  if (typeof onProgress === 'function') onProgress('Received response. Parsing JSON...', 55);
+  const data = await res.json();
+  const content = data.choices?.[0]?.message?.content || '{}';
+  const parsed = JSON.parse(content);
+  const scripts = Array.isArray(parsed.scripts) ? parsed.scripts : [];
+  if (!scripts.length) throw new Error('No scripts returned.');
+  if (typeof onProgress === 'function') onProgress(`Normalizing ${scripts.length} script(s)...`, 75);
+  return normalizeTikTokScriptCandidates({
+    scripts,
+    count,
+    idea,
+    audience,
+    style,
+    source
+  });
+};
+
+const mergeGeneratedTikTokScripts = (scripts = [], { source = 'manual' } = {}) => {
+  if (!Array.isArray(scripts) || !scripts.length) return [];
+  const nextList = scripts.concat(tiktokScripts).slice(0, 50);
+  persistTikTokScripts(nextList);
+  appendTikTokIdeaHistoryEntries(scripts, { source, status: 'draft' });
+  renderTikTokScripts();
+  renderTikTokAutomationUi();
+  return scripts;
+};
+
+const normalizeTikTokConceptCandidates = ({ concepts = [], count = 1, seedPrompt = '', audience = '', style = '', source = 'automatic' } = {}) => {
+  const stamp = Date.now();
+  return concepts
+    .map((concept) => normalizeTikTokConceptCandidate(concept))
+    .filter((concept) => !isMalformedTikTokConceptCandidate(concept))
+    .slice(0, count)
+    .map((concept, index) =>
+    normalizeTikTokAutomationConceptEntry({
+      id: `${stamp}-concept-${index}-${Math.random().toString(16).slice(2)}`,
+      title: String(concept.title || '').trim(),
+      hook: String(concept.hook || '').trim(),
+      angle: String(concept.angle || '').trim(),
+      topic: String(concept.topic || '').trim(),
+      hookPattern: String(concept.hook_pattern || concept.hookPattern || '').trim(),
+      summary: String(concept.summary || '').trim(),
+      tags: Array.isArray(concept.tags) ? concept.tags : [],
+      seedPrompt,
+      audience,
+      style,
+      source,
+      status: 'approved',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }, index)
+  );
+};
+
+const buildTikTokConceptComparisonText = (entry = {}) =>
+  [
+    entry.title,
+    entry.hook,
+    entry.angle,
+    entry.topic,
+    Array.isArray(entry.tags) ? entry.tags.join(' ') : '',
+    entry.summary
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+const buildTikTokConceptMemoryFromIdeaHistory = (history = []) =>
+  (Array.isArray(history) ? history : []).slice(0, TIKTOK_AUTOMATION_CONCEPT_LIMIT).map((entry, index) =>
+    normalizeTikTokAutomationConceptEntry({
+      id: `seeded-concept-${entry.id || index}`,
+      runId: '',
+      scriptId: entry.scriptId || '',
+      title: entry.title || '',
+      hook: entry.hook || '',
+      angle: entry.angle || '',
+      topic: entry.angle || entry.title || '',
+      hookPattern: entry.hook ? String(entry.hook).trim().split(/[?.!]/)[0] : '',
+      summary: String(entry.script || '').trim().slice(0, 260),
+      tags: tokenizeTikTokIdea([entry.title, entry.hook, entry.angle].filter(Boolean).join(' ')).slice(0, 6),
+      seedPrompt: entry.ideaPrompt || '',
+      audience: entry.audience || '',
+      style: entry.style || '',
+      source: entry.source === 'automatic' ? 'automatic' : 'manual',
+      status: 'seeded',
+      createdAt: entry.createdAt || new Date().toISOString(),
+      updatedAt: entry.createdAt || new Date().toISOString()
+    }, index)
+  );
+
+const buildTikTokConceptEntriesFromScripts = (scripts = [], { source = 'manual' } = {}) =>
+  (Array.isArray(scripts) ? scripts : []).map((script, index) =>
+    normalizeTikTokAutomationConceptEntry({
+      id: `concept-from-script-${script.id || `${Date.now()}-${index}`}`,
+      scriptId: script.id || '',
+      title: script.title || '',
+      hook: script.hook || '',
+      angle: script.angle || '',
+      topic: script.angle || script.title || '',
+      hookPattern: script.hook ? String(script.hook).trim().split(/[?.!]/)[0] : '',
+      summary: String(script.script || '').trim().slice(0, 260),
+      tags: tokenizeTikTokIdea([script.title, script.hook, script.angle].filter(Boolean).join(' ')).slice(0, 6),
+      seedPrompt: script.idea || '',
+      audience: script.audience || '',
+      style: script.style || '',
+      source,
+      status: 'approved',
+      createdAt: script.createdAt ? new Date(script.createdAt).toISOString() : new Date().toISOString(),
+      updatedAt: script.createdAt ? new Date(script.createdAt).toISOString() : new Date().toISOString()
+    }, index)
+  );
+
+const ensureTikTokConceptMemorySeeded = () => {
+  if (tiktokAutomationConceptMemory.length) return;
+  tiktokAutomationConceptMemory = buildTikTokConceptMemoryFromIdeaHistory(tiktokAutomationIdeaHistory);
+};
+
+const upsertTikTokAutomationConceptEntries = (entries = []) => {
+  if (!Array.isArray(entries) || !entries.length) return [];
+  const incoming = entries.map((entry, index) => normalizeTikTokAutomationConceptEntry(entry, index));
+  const map = new Map(tiktokAutomationConceptMemory.map((entry) => [entry.id, entry]));
+  incoming.forEach((entry) => {
+    map.set(entry.id, normalizeTikTokAutomationConceptEntry({
+      ...(map.get(entry.id) || {}),
+      ...entry,
+      updatedAt: new Date().toISOString()
+    }));
+  });
+  tiktokAutomationConceptMemory = Array.from(map.values())
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, TIKTOK_AUTOMATION_CONCEPT_LIMIT);
+  persistTikTokAutomationLocalState();
+  return incoming;
+};
+
+const upsertTikTokAutomationEmbeddingEntries = (entries = []) => {
+  if (!Array.isArray(entries) || !entries.length) return [];
+  const incoming = entries.map((entry, index) => normalizeTikTokAutomationEmbeddingEntry(entry, index));
+  const map = new Map(tiktokAutomationEmbeddings.map((entry) => [entry.id, entry]));
+  incoming.forEach((entry) => {
+    map.set(entry.id, normalizeTikTokAutomationEmbeddingEntry({
+      ...(map.get(entry.id) || {}),
+      ...entry,
+      updatedAt: new Date().toISOString()
+    }));
+  });
+  tiktokAutomationEmbeddings = Array.from(map.values())
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, TIKTOK_AUTOMATION_EMBEDDING_LIMIT);
+  persistTikTokAutomationLocalState();
+  return incoming;
+};
+
+const appendTikTokAutomationRetrievalEntry = (entry = {}) => {
+  const normalized = normalizeTikTokAutomationRetrievalEntry(entry, 0);
+  tiktokAutomationRetrievalEvents = [normalized].concat(tiktokAutomationRetrievalEvents).slice(0, TIKTOK_AUTOMATION_RETRIEVAL_LIMIT);
+  persistTikTokAutomationLocalState();
+  return normalized;
+};
+
+const getTikTokConceptEmbeddingByConceptId = (conceptId = '') =>
+  tiktokAutomationEmbeddings.find((entry) => entry.conceptId === String(conceptId || '').trim()) || null;
+
+const findTikTokConceptEmbeddingEntry = (conceptId = '', embeddings = tiktokAutomationEmbeddings) =>
+  (Array.isArray(embeddings) ? embeddings : []).find((entry) => entry.conceptId === String(conceptId || '').trim()) || null;
+
+const getTikTokSemanticDuplicateThreshold = () => {
+  const strictness = String(tiktokAutomationConfig?.memoryStrictness || 'strict');
+  if (strictness === 'relaxed') return 0.93;
+  if (strictness === 'balanced') return 0.88;
+  return 0.83;
+};
+
+const cosineSimilarity = (left = [], right = []) => {
+  if (!Array.isArray(left) || !Array.isArray(right) || !left.length || !right.length || left.length !== right.length) return 0;
+  let dot = 0;
+  let leftMag = 0;
+  let rightMag = 0;
+  for (let index = 0; index < left.length; index += 1) {
+    const a = Number(left[index] || 0);
+    const b = Number(right[index] || 0);
+    dot += a * b;
+    leftMag += a * a;
+    rightMag += b * b;
+  }
+  if (!leftMag || !rightMag) return 0;
+  return dot / (Math.sqrt(leftMag) * Math.sqrt(rightMag));
+};
+
+const buildFallbackEmbeddingVector = (text = '', dimensions = TIKTOK_AUTOMATION_EMBEDDING_DIMENSIONS) => {
+  const vector = Array.from({ length: dimensions }, () => 0);
+  const tokens = tokenizeTikTokIdea(String(text || ''));
+  tokens.forEach((token, tokenIndex) => {
+    let hash = 0;
+    for (let index = 0; index < token.length; index += 1) {
+      hash = (hash * 31 + token.charCodeAt(index) + tokenIndex) % 2147483647;
+    }
+    vector[hash % dimensions] += 1;
+  });
+  const norm = Math.sqrt(vector.reduce((sum, value) => sum + value * value, 0)) || 1;
+  return vector.map((value) => value / norm);
+};
+
+const requestTikTokEmbeddingsFromOpenAI = async ({ key, texts = [] } = {}) => {
+  const cleanTexts = (Array.isArray(texts) ? texts : []).map((text) => String(text || '').trim()).filter(Boolean);
+  if (!cleanTexts.length) return [];
+  const requestBody = {
+    model: TIKTOK_AUTOMATION_EMBEDDING_MODEL,
+    input: cleanTexts,
+    dimensions: TIKTOK_AUTOMATION_EMBEDDING_DIMENSIONS
+  };
+  try {
+    const res = await fetch('https://api.openai.com/v1/embeddings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${key}`
+      },
+      body: JSON.stringify(requestBody)
+    });
+    if (!res.ok) throw new Error(`OpenAI embeddings error ${res.status}`);
+    const data = await res.json();
+    return Array.isArray(data?.data)
+      ? data.data.map((entry) => ({
+          provider: 'openai',
+          vector: Array.isArray(entry.embedding) ? entry.embedding : []
+        }))
+      : [];
+  } catch (_err) {
+    return cleanTexts.map((text) => ({
+      provider: 'local-fallback',
+      vector: buildFallbackEmbeddingVector(text)
+    }));
+  }
+};
+
+const ensureTikTokAutomationEmbeddingsBackfilled = async (key, { limit = 24 } = {}) => {
+  ensureTikTokConceptMemorySeeded();
+  const missing = tiktokAutomationConceptMemory
+    .filter((entry) => !getTikTokConceptEmbeddingByConceptId(entry.id))
+    .slice(0, limit);
+  if (!missing.length) return [];
+  const vectors = await requestTikTokEmbeddingsFromOpenAI({
+    key,
+    texts: missing.map((entry) => buildTikTokConceptComparisonText(entry))
+  });
+  const nextEntries = missing.map((entry, index) =>
+    normalizeTikTokAutomationEmbeddingEntry({
+      id: `embedding-${entry.id}`,
+      conceptId: entry.id,
+      provider: vectors[index]?.provider || 'local-fallback',
+      model: TIKTOK_AUTOMATION_EMBEDDING_MODEL,
+      dimensions: vectors[index]?.vector?.length || TIKTOK_AUTOMATION_EMBEDDING_DIMENSIONS,
+      vector: vectors[index]?.vector?.length ? vectors[index].vector : buildFallbackEmbeddingVector(buildTikTokConceptComparisonText(entry)),
+      sourceText: buildTikTokConceptComparisonText(entry),
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
+    }, index)
+  );
+  upsertTikTokAutomationEmbeddingEntries(nextEntries);
+  upsertTikTokAutomationConceptEntries(
+    missing.map((entry, index) => ({
+      ...entry,
+      embeddingId: nextEntries[index]?.id || entry.embeddingId || ''
+    }))
+  );
+  return nextEntries;
+};
+
+const requestTikTokConceptsFromOpenAI = async ({
+  key,
+  idea,
+  audience = '',
+  style = '',
+  count = 1,
+  memoryEntries = null,
+  retryContext = null,
+  signal = null
+} = {}) => {
+  const memoryContext = (Array.isArray(memoryEntries) ? memoryEntries : tiktokAutomationConceptMemory)
+    .slice(0, 20)
+    .map((entry) =>
+      [
+        entry.title ? `title=${entry.title}` : '',
+        entry.hook ? `hook=${entry.hook}` : '',
+        entry.angle ? `angle=${entry.angle}` : '',
+        entry.topic ? `topic=${entry.topic}` : ''
+      ].filter(Boolean).join(' | ')
+    )
+    .filter(Boolean)
+    .join('\n');
+  const body = {
+    model: 'gpt-4o',
+    messages: [
+      {
+        role: 'system',
+        content:
+          'You create fresh short-form video concepts. Return JSON only: { "concepts":[{ "title":"", "hook":"", "angle":"", "topic":"", "hook_pattern":"", "summary":"", "tags":["",""] }] }. Every field must contain only its own value. Never pack multiple fields into title or any other field. Keep concepts concise, distinct, and clearly different from prior memory.'
+      },
+      {
+        role: 'user',
+        content:
+          `Seed brief: ${idea}\n` +
+          `${audience ? `Audience: ${audience}\n` : ''}` +
+          `${style ? `Style: ${style}\n` : ''}` +
+          `Count: ${count}\n` +
+          `${memoryContext ? `Avoid concepts similar to these prior memories:\n${memoryContext}\n` : ''}` +
+          `${Array.isArray(retryContext?.blockedMatches) && retryContext.blockedMatches.length
+            ? `These concepts were already rejected in earlier attempts. Do not produce anything close to them:\n${retryContext.blockedMatches
+                .map((match) => `- ${match.title || match.hook || 'Untitled concept'}${match.topic ? ` | topic=${match.topic}` : ''}`)
+                .join('\n')}\n`
+            : ''}` +
+          `${Array.isArray(retryContext?.blockedTopics) && retryContext.blockedTopics.length
+            ? `Avoid these subtopics on this retry: ${retryContext.blockedTopics.join(', ')}.\n`
+            : ''}` +
+          `${Array.isArray(retryContext?.crowdedTopics) && retryContext.crowdedTopics.length
+            ? `These subtopics are already crowded in memory: ${retryContext.crowdedTopics.join(', ')}. Move to a clearly different cat psychology angle.\n`
+            : ''}` +
+          'Each concept should be a different idea, not just a wording variation. Do not include scene directions, production notes, or field labels like hook= or angle= inside any field.'
+    }
+    ],
+    temperature: 0.85,
+    response_format: { type: 'json_object' },
+    max_tokens: 900
+  };
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${key}`
+    },
+    signal,
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(`OpenAI error ${res.status}`);
+  const data = await res.json();
+  const content = data.choices?.[0]?.message?.content || '{}';
+  const parsed = JSON.parse(content);
+  const concepts = Array.isArray(parsed?.concepts) ? parsed.concepts : [];
+  if (!concepts.length) throw new Error('No concepts returned.');
+  const normalized = normalizeTikTokConceptCandidates({
+    concepts,
+    count,
+    seedPrompt: idea,
+    audience,
+    style,
+    source: 'automatic'
+  });
+  if (!normalized.length) {
+    throw new Error('No valid concepts returned.');
+  }
+  return normalized;
+};
+
+const requestTikTokScriptFromConceptFromOpenAI = async ({
+  key,
+  seedPrompt = '',
+  concept = {},
+  audience = '',
+  style = '',
+  signal = null
+} = {}) => {
+  const body = {
+    model: 'gpt-4o',
+    messages: [
+      {
+        role: 'system',
+        content:
+          'You are a short-form voiceover scriptwriter. Expand the approved concept into one strong narration-only script. Return JSON only: { "script": { "title":"", "angle":"", "hook":"", "beats":["","",...], "cta":"", "full_script":"" } }. Preserve the concept title, hook, and angle exactly unless they are empty. The full_script must be plain spoken narration only. Do not include emojis, hashtags, scene directions, shot lists, bracketed notes, camera cues, VO labels, host labels, or storyboard formatting.'
+      },
+      {
+        role: 'user',
+        content:
+          `Seed brief: ${seedPrompt}\n` +
+          `${audience ? `Audience: ${audience}\n` : ''}` +
+          `${style ? `Style: ${style}\n` : ''}` +
+          `Approved concept title: ${concept.title || ''}\n` +
+          `Approved hook: ${concept.hook || ''}\n` +
+          `Approved angle: ${concept.angle || ''}\n` +
+          `Topic: ${concept.topic || ''}\n` +
+          `Hook pattern: ${concept.hookPattern || ''}\n` +
+          `Summary: ${concept.summary || ''}\n` +
+          `Tags: ${Array.isArray(concept.tags) ? concept.tags.join(', ') : ''}\n` +
+          'Write one complete voiceover script from this approved concept. This output is equivalent to the script draft step only, not the storyboard step.'
+      }
+    ],
+    temperature: 0.75,
+    response_format: { type: 'json_object' },
+    max_tokens: 1200
+  };
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${key}`
+    },
+    signal,
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(`OpenAI error ${res.status}`);
+  const data = await res.json();
+  const content = data.choices?.[0]?.message?.content || '{}';
+  const parsed = JSON.parse(content);
+  const scriptPayload = parsed?.script || parsed?.scripts?.[0];
+  if (!scriptPayload) throw new Error('No script returned from concept expansion.');
+  const normalized = normalizeTikTokScriptCandidates({
+    scripts: [{
+      ...scriptPayload,
+      title: scriptPayload.title || concept.title || '',
+      hook: scriptPayload.hook || concept.hook || '',
+      angle: scriptPayload.angle || concept.angle || ''
+    }],
+    count: 1,
+    idea: seedPrompt,
+    audience,
+    style,
+    source: 'automatic'
+  });
+  const candidate = normalized[0] || null;
+  if (!candidate) return null;
+  candidate.script = sanitizeTikTokVoiceoverText(candidate.script || '');
+  if (!candidate.script || looksLikeTikTokStoryboardText(candidate.script)) {
+    throw new Error('Generated script was not plain voiceover narration.');
+  }
+  return candidate;
+};
+
+const normalizeTikTokIdeaToken = (token = '') => {
+  let normalized = String(token || '').toLowerCase().trim();
+  if (normalized.length > 4 && normalized.endsWith('ies')) {
+    normalized = `${normalized.slice(0, -3)}y`;
+  } else if (normalized.length > 5 && normalized.endsWith('es')) {
+    normalized = normalized.slice(0, -2);
+  } else if (normalized.length > 4 && normalized.endsWith('s')) {
+    normalized = normalized.slice(0, -1);
+  }
+  return normalized;
+};
+
+const tokenizeTikTokIdea = (value = '') =>
+  Array.from(
+    new Set(
+      String(value || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .split(/\s+/)
+        .map((token) => normalizeTikTokIdeaToken(token))
+        .filter((token) => token.length >= 3)
+    )
+  );
+
+const getTikTokConceptLexicalThreshold = () => {
+  const strictness = String(tiktokAutomationConfig?.memoryStrictness || 'strict');
+  if (strictness === 'relaxed') return 0.78;
+  if (strictness === 'balanced') return 0.68;
+  return 0.58;
+};
+
+const getTikTokConceptTopicThreshold = () => {
+  const strictness = String(tiktokAutomationConfig?.memoryStrictness || 'strict');
+  if (strictness === 'relaxed') return 0.86;
+  if (strictness === 'balanced') return 0.76;
+  return 0.68;
+};
+
+const TIKTOK_CONCEPT_GENERIC_TOKENS = new Set([
+  'cat',
+  'cats',
+  'feline',
+  'psychology',
+  'behavior',
+  'behaviour',
+  'understanding',
+  'discover',
+  'discovering',
+  'exploring',
+  'unveiling',
+  'mystery',
+  'mysterious',
+  'secret',
+  'science',
+  'behind',
+  'about',
+  'really',
+  'your',
+  'they',
+  'them',
+  'what',
+  'why',
+  'how',
+  'much',
+  'love'
+]);
+
+const scoreTikTokTokenOverlap = (leftTokens = [], rightTokens = []) => {
+  if (!leftTokens.length || !rightTokens.length) return 0;
+  const overlap = leftTokens.filter((token) => rightTokens.includes(token)).length;
+  return overlap / Math.max(Math.min(leftTokens.length, rightTokens.length), 1);
+};
+
+const filterTikTokSpecificTokens = (tokens = []) =>
+  (Array.isArray(tokens) ? tokens : []).filter((token) => token && !TIKTOK_CONCEPT_GENERIC_TOKENS.has(token));
+
+const buildTikTokTokenBigrams = (tokens = []) => {
+  const source = Array.isArray(tokens) ? tokens : [];
+  const pairs = [];
+  for (let index = 0; index < source.length - 1; index += 1) {
+    const current = source[index];
+    const next = source[index + 1];
+    if (!current || !next) continue;
+    pairs.push(`${current}_${next}`);
+  }
+  return Array.from(new Set(pairs));
+};
+
+const buildTikTokConceptLexicalProfile = (entry = {}) => {
+  const titleTokens = tokenizeTikTokIdea(entry.title || '');
+  const hookTokens = tokenizeTikTokIdea(entry.hook || '');
+  const topicTokens = tokenizeTikTokIdea(entry.topic || '');
+  const summaryTokens = tokenizeTikTokIdea(entry.summary || '');
+  const tagsTokens = tokenizeTikTokIdea(Array.isArray(entry.tags) ? entry.tags.join(' ') : '');
+  const specificTitleTokens = filterTikTokSpecificTokens(titleTokens);
+  const specificHookTokens = filterTikTokSpecificTokens(hookTokens);
+  const specificTopicTokens = filterTikTokSpecificTokens(topicTokens);
+  const specificSummaryTokens = filterTikTokSpecificTokens(summaryTokens);
+  const titleBigrams = buildTikTokTokenBigrams(specificTitleTokens.length ? specificTitleTokens : titleTokens);
+  const topicBigrams = buildTikTokTokenBigrams(specificTopicTokens.length ? specificTopicTokens : topicTokens);
+  const combinedTokens = Array.from(
+    new Set([].concat(titleTokens, hookTokens, topicTokens, summaryTokens, tagsTokens))
+  );
+  const specificCombinedTokens = Array.from(
+    new Set([].concat(
+      specificTitleTokens,
+      specificHookTokens,
+      specificTopicTokens,
+      specificSummaryTokens,
+      filterTikTokSpecificTokens(tagsTokens)
+    ))
+  );
+  return {
+    titleTokens,
+    hookTokens,
+    topicTokens,
+    summaryTokens,
+    tagsTokens,
+    combinedTokens,
+    specificTitleTokens,
+    specificHookTokens,
+    specificTopicTokens,
+    specificSummaryTokens,
+    specificCombinedTokens,
+    titleBigrams,
+    topicBigrams
+  };
+};
+
+const scoreTikTokConceptLexicalMatch = (candidate = {}, existing = {}) => {
+  const candidateProfile = buildTikTokConceptLexicalProfile(candidate);
+  const existingProfile = buildTikTokConceptLexicalProfile(existing);
+  const titleScore = scoreTikTokTokenOverlap(
+    candidateProfile.specificTitleTokens.length ? candidateProfile.specificTitleTokens : candidateProfile.titleTokens,
+    existingProfile.specificTitleTokens.length ? existingProfile.specificTitleTokens : existingProfile.titleTokens
+  );
+  const hookScore = scoreTikTokTokenOverlap(
+    candidateProfile.specificHookTokens.length ? candidateProfile.specificHookTokens : candidateProfile.hookTokens,
+    existingProfile.specificHookTokens.length ? existingProfile.specificHookTokens : existingProfile.hookTokens
+  );
+  const topicScore = scoreTikTokTokenOverlap(
+    candidateProfile.specificTopicTokens.length ? candidateProfile.specificTopicTokens : candidateProfile.topicTokens,
+    existingProfile.specificTopicTokens.length ? existingProfile.specificTopicTokens : existingProfile.topicTokens
+  );
+  const combinedScore = scoreTikTokTokenOverlap(
+    candidateProfile.specificCombinedTokens.length ? candidateProfile.specificCombinedTokens : candidateProfile.combinedTokens,
+    existingProfile.specificCombinedTokens.length ? existingProfile.specificCombinedTokens : existingProfile.combinedTokens
+  );
+  const summaryScore = scoreTikTokTokenOverlap(
+    candidateProfile.specificSummaryTokens.length ? candidateProfile.specificSummaryTokens : candidateProfile.summaryTokens,
+    existingProfile.specificSummaryTokens.length ? existingProfile.specificSummaryTokens : existingProfile.summaryTokens
+  );
+  const titleBigramScore = scoreTikTokTokenOverlap(candidateProfile.titleBigrams, existingProfile.titleBigrams);
+  const topicBigramScore = scoreTikTokTokenOverlap(candidateProfile.topicBigrams, existingProfile.topicBigrams);
+  const weightedScore = Math.max(
+    titleBigramScore,
+    topicBigramScore,
+    (titleScore * 0.32) +
+      (hookScore * 0.14) +
+      (topicScore * 0.08) +
+      (summaryScore * 0.24) +
+      (combinedScore * 0.22) +
+      (titleBigramScore * 0.36) +
+      (topicBigramScore * 0.18)
+  );
+  return {
+    titleScore,
+    hookScore,
+    topicScore,
+    combinedScore,
+    summaryScore,
+    titleBigramScore,
+    topicBigramScore,
+    weightedScore
+  };
+};
+
+const buildTikTokConceptRetryContext = ({ attempts = [], memoryEntries = [] } = {}) => {
+  const blockedAttempts = (Array.isArray(attempts) ? attempts : []).filter((attempt) => attempt?.decision === 'block');
+  const blockedMatches = blockedAttempts
+    .flatMap((attempt) => []
+      .concat(attempt?.lexicalMatches || [])
+      .concat(attempt?.semanticMatches || [])
+    )
+    .filter((match) => match?.title || match?.hook)
+    .sort((left, right) => Number(right?.score || 0) - Number(left?.score || 0))
+    .slice(0, 6);
+  const blockedTopics = Array.from(
+    new Set(
+      blockedMatches
+        .map((match) => String(match?.topic || '').trim())
+        .filter(Boolean)
+    )
+  ).slice(0, 5);
+  const crowdedTopics = buildTikTokConceptClusterSummary(memoryEntries)
+    .map((item) => String(item?.label || '').trim())
+    .filter(Boolean)
+    .slice(0, 5);
+  return {
+    blockedMatches,
+    blockedTopics,
+    crowdedTopics
+  };
+};
+
+const getTikTokIdeaComparisonText = (entry = {}) =>
+  [entry.title, entry.hook, entry.angle, String(entry.script || '').slice(0, 220)].filter(Boolean).join(' ');
+
+const getTikTokDuplicateThreshold = () => {
+  const strictness = String(tiktokAutomationConfig?.memoryStrictness || 'strict');
+  if (strictness === 'relaxed') return 0.72;
+  if (strictness === 'balanced') return 0.58;
+  return 0.45;
+};
+
+const findSimilarTikTokIdea = (candidate = {}, memory = tiktokAutomationIdeaHistory) => {
+  const candidateTokens = tokenizeTikTokIdea(getTikTokIdeaComparisonText(candidate));
+  if (!candidateTokens.length) return null;
+  const threshold = getTikTokDuplicateThreshold();
+  const recent = (Array.isArray(memory) ? memory : []).slice(0, 40);
+  for (const existing of recent) {
+    const existingText = getTikTokIdeaComparisonText(existing);
+    if (!existingText) continue;
+    const existingTokens = tokenizeTikTokIdea(existingText);
+    if (!existingTokens.length) continue;
+    const overlap = candidateTokens.filter((token) => existingTokens.includes(token)).length;
+    const score = overlap / Math.max(candidateTokens.length, existingTokens.length, 1);
+    const exactTitle =
+      String(candidate.title || '').trim().toLowerCase() &&
+      String(candidate.title || '').trim().toLowerCase() === String(existing.title || '').trim().toLowerCase();
+    const exactHook =
+      String(candidate.hook || '').trim().toLowerCase() &&
+      String(candidate.hook || '').trim().toLowerCase() === String(existing.hook || '').trim().toLowerCase();
+    if (exactTitle || exactHook || score >= threshold) {
+      return { existing, score };
+    }
+  }
+  return null;
+};
+
+const buildTikTokConceptClusterSummary = (memory = tiktokAutomationConceptMemory) => {
+  const counts = new Map();
+  (Array.isArray(memory) ? memory : []).slice(0, 60).forEach((entry) => {
+    const label = String(entry.topic || entry.tags?.[0] || entry.title || '').trim();
+    if (!label) return;
+    counts.set(label, (counts.get(label) || 0) + 1);
+  });
+  return Array.from(counts.entries())
+    .sort((left, right) => right[1] - left[1])
+    .slice(0, 5)
+    .map(([label, count]) => ({ label, count }));
+};
+
+const evaluateTikTokConceptAgainstMemory = async ({
+  key,
+  candidateConcept,
+  runId = '',
+  testRunKey = '',
+  attemptIndex = 1,
+  memoryOverride = null,
+  embeddingsOverride = null,
+  retryContext = null
+} = {}) => {
+  ensureTikTokConceptMemorySeeded();
+  await ensureTikTokAutomationEmbeddingsBackfilled(key, { limit: 24 });
+  const memorySource = Array.isArray(memoryOverride) ? memoryOverride : tiktokAutomationConceptMemory;
+  const embeddingSource = Array.isArray(embeddingsOverride) ? embeddingsOverride : tiktokAutomationEmbeddings;
+  const normalizedConcept = normalizeTikTokAutomationConceptEntry(candidateConcept || {}, 0);
+  const conceptText = buildTikTokConceptComparisonText(normalizedConcept);
+  const [candidateVector] = await requestTikTokEmbeddingsFromOpenAI({
+    key,
+    texts: [conceptText]
+  });
+  const candidateEmbedding = normalizeTikTokAutomationEmbeddingEntry({
+    id: `embedding-query-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    conceptId: normalizedConcept.id,
+    provider: candidateVector?.provider || 'local-fallback',
+    model: TIKTOK_AUTOMATION_EMBEDDING_MODEL,
+    dimensions: candidateVector?.vector?.length || TIKTOK_AUTOMATION_EMBEDDING_DIMENSIONS,
+    vector: candidateVector?.vector?.length ? candidateVector.vector : buildFallbackEmbeddingVector(conceptText),
+    sourceText: conceptText,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  }, 0);
+  const recentMatches = memorySource
+    .slice(0, 20)
+    .map((entry) => {
+      const lexical = scoreTikTokConceptLexicalMatch(normalizedConcept, entry);
+      return normalizeTikTokAutomationRetrievalMatch({
+        conceptId: entry.id,
+        title: entry.title,
+        hook: entry.hook,
+        topic: entry.topic,
+        score: lexical.weightedScore,
+        reason: 'Recent concept memory'
+      });
+    });
+  const semanticMatches = memorySource
+    .map((entry) => {
+      const embedding = findTikTokConceptEmbeddingEntry(entry.id, embeddingSource);
+      if (!embedding?.vector?.length) return null;
+      return normalizeTikTokAutomationRetrievalMatch({
+        conceptId: entry.id,
+        title: entry.title,
+        hook: entry.hook,
+        topic: entry.topic,
+        score: cosineSimilarity(candidateEmbedding.vector, embedding.vector),
+        reason: 'Semantic nearest neighbor'
+      });
+    })
+    .filter(Boolean)
+    .sort((left, right) => (right.score || 0) - (left.score || 0))
+    .slice(0, 10);
+  const lexicalMatches = memorySource
+    .map((entry) => {
+      const lexical = scoreTikTokConceptLexicalMatch(normalizedConcept, entry);
+      return normalizeTikTokAutomationRetrievalMatch({
+        conceptId: entry.id,
+        title: entry.title,
+        hook: entry.hook,
+        topic: entry.topic,
+        score: lexical.weightedScore,
+        reason: `Lexical overlap • title ${Math.round(lexical.titleScore * 100)}% • summary ${Math.round(lexical.summaryScore * 100)}% • topic ${Math.round(lexical.topicScore * 100)}% • combined ${Math.round(lexical.combinedScore * 100)}%`
+      });
+    })
+    .filter((entry) => Number(entry.score || 0) > 0)
+    .sort((left, right) => (right.score || 0) - (left.score || 0))
+    .slice(0, 10);
+  const threshold = getTikTokSemanticDuplicateThreshold();
+  const lexicalThreshold = getTikTokConceptLexicalThreshold();
+  const topicThreshold = getTikTokConceptTopicThreshold();
+  const exactTitle = memorySource.find((entry) => {
+    const candidateTitle = String(normalizedConcept.title || '').trim().toLowerCase();
+    return candidateTitle && candidateTitle === String(entry.title || '').trim().toLowerCase();
+  });
+  const exactHook = memorySource.find((entry) => {
+    const candidateHook = String(normalizedConcept.hook || '').trim().toLowerCase();
+    return candidateHook && candidateHook === String(entry.hook || '').trim().toLowerCase();
+  });
+  const topSemantic = semanticMatches[0] || null;
+  const topLexical = lexicalMatches[0] || null;
+  const strongestLexicalSource = topLexical
+    ? memorySource.find((entry) => entry.id === topLexical.conceptId) || null
+    : null;
+  const strongestLexicalScore = topLexical ? Number(topLexical.score || 0) : 0;
+  const strongestLexicalBreakdown = strongestLexicalSource
+    ? scoreTikTokConceptLexicalMatch(normalizedConcept, strongestLexicalSource)
+    : null;
+  let decision = 'accept';
+  let blockSource = 'none';
+  let reason = 'Concept cleared recent and semantic memory checks.';
+  if (exactTitle) {
+    decision = 'block';
+    blockSource = 'exact-title';
+    reason = `Blocked because the title matches "${exactTitle.title}".`;
+  } else if (exactHook) {
+    decision = 'block';
+    blockSource = 'exact-hook';
+    reason = `Blocked because the hook matches "${exactHook.hook}".`;
+  } else if (
+    strongestLexicalSource &&
+    strongestLexicalBreakdown &&
+    (
+      (
+        strongestLexicalScore >= lexicalThreshold &&
+        (
+          strongestLexicalBreakdown.titleBigramScore >= 0.5 ||
+          strongestLexicalBreakdown.topicBigramScore >= 0.5 ||
+          strongestLexicalBreakdown.summaryScore >= 0.55 ||
+          (strongestLexicalBreakdown.titleScore >= 0.67 && strongestLexicalBreakdown.combinedScore >= 0.72)
+        )
+      ) ||
+      (
+        strongestLexicalBreakdown.topicScore >= topicThreshold &&
+        strongestLexicalBreakdown.combinedScore >= lexicalThreshold
+      )
+    )
+  ) {
+    decision = 'block';
+    blockSource = 'lexical';
+    reason = `Blocked because lexical/topic overlap reached ${Math.round(strongestLexicalScore * 100)}% against "${strongestLexicalSource.title || strongestLexicalSource.hook || 'saved concept'}".`;
+  } else if (topSemantic && Number(topSemantic.score || 0) >= threshold) {
+    decision = 'block';
+    blockSource = 'semantic';
+    reason = `Blocked because semantic similarity reached ${Math.round(Number(topSemantic.score || 0) * 100)}% against "${topSemantic.title || topSemantic.hook || 'saved concept'}".`;
+  }
+  const retrievalEvent = appendTikTokAutomationRetrievalEntry({
+    runId,
+    testRunKey,
+    attemptIndex,
+    decision,
+    blockSource,
+    threshold,
+    lexicalThreshold,
+    topicThreshold,
+    reason,
+    clusterSummary: buildTikTokConceptClusterSummary(memorySource),
+    queryConcept: normalizedConcept,
+    embeddingId: candidateEmbedding.id,
+    blockedConceptId:
+      exactTitle?.id ||
+      exactHook?.id ||
+      strongestLexicalSource?.id ||
+      topSemantic?.conceptId ||
+      '',
+    blockedConceptTitle:
+      exactTitle?.title ||
+      exactHook?.title ||
+      strongestLexicalSource?.title ||
+      topSemantic?.title ||
+      '',
+    lexicalBreakdown: strongestLexicalBreakdown
+      ? {
+          ...strongestLexicalBreakdown
+        }
+      : null,
+    retryContext: retryContext
+      ? {
+          blockedTitles: Array.isArray(retryContext.blockedMatches)
+            ? retryContext.blockedMatches.map((match) => String(match?.title || match?.hook || '').trim()).filter(Boolean)
+            : [],
+          blockedTopics: Array.isArray(retryContext.blockedTopics) ? retryContext.blockedTopics : [],
+          crowdedTopics: Array.isArray(retryContext.crowdedTopics) ? retryContext.crowdedTopics : []
+        }
+      : null,
+    recentMatches,
+    lexicalMatches,
+    semanticMatches,
+    createdAt: new Date().toISOString()
+  });
+  return {
+    decision,
+    reason,
+    threshold,
+    queryConcept: normalizedConcept,
+    candidateEmbedding,
+    retrievalEvent,
+    recentMatches,
+    semanticMatches,
+    lexicalMatches
+  };
+};
+
+const previewEmbeddingVector = (vector = [], count = 8) =>
+  (Array.isArray(vector) ? vector : [])
+    .slice(0, count)
+    .map((value) => Number(value).toFixed(4))
+    .join(', ');
+
+const formatTikTokConceptAttemptSummary = (attempts = []) =>
+  (Array.isArray(attempts) ? attempts : [])
+    .map((attempt) =>
+      [
+        `Attempt ${attempt.attemptIndex}`,
+        attempt.concept?.title ? `title=${attempt.concept.title}` : '',
+        attempt.decision ? `decision=${attempt.decision}` : '',
+        attempt.reason || ''
+      ].filter(Boolean).join(' • ')
+    )
+    .join('\n');
+
+const runTikTokAutomationConceptPipeline = async ({
+  key,
+  seedPrompt,
+  audience = '',
+  style = '',
+  runId = '',
+  testRunKey = '',
+  maxAttempts = TIKTOK_AUTOMATION_GENERATION_ATTEMPTS,
+  persistAccepted = false,
+  memoryOverride = null,
+  embeddingsOverride = null,
+  signal = null,
+  onAttempt = null
+} = {}) => {
+  ensureTikTokConceptMemorySeeded();
+  const attempts = [];
+  for (let attemptIndex = 1; attemptIndex <= maxAttempts; attemptIndex += 1) {
+    const activeMemory = Array.isArray(memoryOverride) ? memoryOverride : tiktokAutomationConceptMemory;
+    const retryContext = buildTikTokConceptRetryContext({
+      attempts,
+      memoryEntries: activeMemory
+    });
+    const [concept] = await requestTikTokConceptsFromOpenAI({
+      key,
+      idea: seedPrompt,
+      audience,
+      style,
+      count: 1,
+      memoryEntries: activeMemory,
+      retryContext,
+      signal
+    });
+    const evaluation = await evaluateTikTokConceptAgainstMemory({
+      key,
+      candidateConcept: concept,
+      runId,
+      testRunKey,
+      attemptIndex,
+      memoryOverride,
+      embeddingsOverride,
+      retryContext
+    });
+    upsertTikTokAutomationEmbeddingEntries([evaluation.candidateEmbedding]);
+    const attempt = {
+      attemptIndex,
+      concept: evaluation.queryConcept,
+      embedding: {
+        id: evaluation.candidateEmbedding.id,
+        provider: evaluation.candidateEmbedding.provider,
+        model: evaluation.candidateEmbedding.model,
+        dimensions: evaluation.candidateEmbedding.dimensions,
+        preview: previewEmbeddingVector(evaluation.candidateEmbedding.vector)
+      },
+      retrievalEvent: evaluation.retrievalEvent,
+      decision: evaluation.decision,
+      reason: evaluation.reason,
+      recentMatches: evaluation.recentMatches,
+      semanticMatches: evaluation.semanticMatches,
+      lexicalMatches: evaluation.lexicalMatches,
+      script: null
+    };
+    attempts.push(attempt);
+    if (typeof onAttempt === 'function') onAttempt({ ...attempts[attempts.length - 1] }, attempts.map((item) => ({ ...item })));
+    if (evaluation.decision !== 'accept') continue;
+
+    const expandedScript = await requestTikTokScriptFromConceptFromOpenAI({
+      key,
+      seedPrompt,
+      concept: evaluation.queryConcept,
+      audience,
+      style,
+      signal
+    });
+    attempts[attempts.length - 1].script = expandedScript;
+    attempts[attempts.length - 1].reason = `${evaluation.reason} Full script generated from the approved concept.`;
+    if (typeof onAttempt === 'function') onAttempt({ ...attempts[attempts.length - 1] }, attempts.map((item) => ({ ...item })));
+
+    if (persistAccepted) {
+      const approvedConcept = normalizeTikTokAutomationConceptEntry({
+        ...evaluation.queryConcept,
+        runId,
+        scriptId: expandedScript?.id || '',
+        status: 'approved',
+        embeddingId: evaluation.candidateEmbedding.id,
+        updatedAt: new Date().toISOString()
+      });
+      upsertTikTokAutomationConceptEntries([approvedConcept]);
+      upsertTikTokAutomationEmbeddingEntries([
+        {
+          ...evaluation.candidateEmbedding,
+          conceptId: approvedConcept.id
+        }
+      ]);
+      mergeGeneratedTikTokScripts([expandedScript], { source: 'automatic' });
+      const match = tiktokAutomationIdeaHistory.find((entry) => String(entry.scriptId || '').trim() === String(expandedScript?.id || '').trim());
+      if (match) {
+        tiktokAutomationIdeaHistory = tiktokAutomationIdeaHistory.map((entry) =>
+          entry.id === match.id
+            ? {
+                ...entry,
+                title: approvedConcept.title || entry.title,
+                hook: approvedConcept.hook || entry.hook,
+                angle: approvedConcept.angle || entry.angle
+              }
+            : entry
+        );
+      }
+      commitTikTokAutomationState();
+      return {
+        accepted: true,
+        attempts,
+        approvedConcept,
+        script: expandedScript,
+        retrievalEvent: evaluation.retrievalEvent,
+        embedding: evaluation.candidateEmbedding
+      };
+    }
+
+    return {
+      accepted: true,
+      attempts,
+      approvedConcept: evaluation.queryConcept,
+      script: expandedScript,
+      retrievalEvent: evaluation.retrievalEvent,
+      embedding: evaluation.candidateEmbedding
+    };
+  }
+
+  return {
+    accepted: false,
+    attempts,
+    approvedConcept: null,
+    script: null,
+    retrievalEvent: attempts[attempts.length - 1]?.retrievalEvent || null,
+    embedding: attempts[attempts.length - 1]?.embedding || null,
+    reason: attempts[attempts.length - 1]?.reason || 'No concept cleared memory.'
+  };
+};
+
+const setTikTokAutomationTestStatus = (text, isError = false) => {
+  tiktokAutomationTestState.status = String(text || '').trim();
+  tiktokAutomationTestState.error = !!isError;
+};
+
+const setTikTokAutomationMemoryExportStatus = (text, isError = false) => {
+  if (!tiktokAutomationMemoryExportStatus) return;
+  tiktokAutomationMemoryExportStatus.textContent = String(text || '').trim();
+  tiktokAutomationMemoryExportStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
+};
+
+const getTikTokGeneratedConceptEntries = () => {
+  const seen = new Set();
+  return tiktokAutomationRetrievalEvents
+    .map((entry, index) => normalizeTikTokAutomationConceptEntry({
+      ...(entry?.queryConcept || {}),
+      id: String(entry?.queryConcept?.id || `generated-concept-${entry?.id || index}`).trim(),
+      status: entry?.decision === 'block' ? 'blocked' : 'generated',
+      createdAt: entry?.createdAt || new Date().toISOString(),
+      updatedAt: entry?.createdAt || new Date().toISOString()
+    }, index))
+    .filter((entry) => {
+      if (!entry.id || seen.has(entry.id)) return false;
+      seen.add(entry.id);
+      return !!(entry.title || entry.hook);
+    });
+};
+
+const getTikTokMemoryConceptIds = () =>
+  new Set(tiktokAutomationConceptMemory.map((entry) => String(entry.id || '').trim()).filter(Boolean));
+
+const getTikTokMemoryEmbeddingEntries = () => {
+  const memoryConceptIds = getTikTokMemoryConceptIds();
+  return tiktokAutomationEmbeddings.filter((entry) => memoryConceptIds.has(String(entry.conceptId || '').trim()));
+};
+
+const getTikTokQueryEmbeddingEntries = () => {
+  const memoryConceptIds = getTikTokMemoryConceptIds();
+  return tiktokAutomationEmbeddings.filter((entry) => !memoryConceptIds.has(String(entry.conceptId || '').trim()));
+};
+
+const buildTikTokAutomationAnalysisExport = () => {
+  const exportedAt = new Date().toISOString();
+  const generatedConcepts = getTikTokGeneratedConceptEntries();
+  const memoryEmbeddings = getTikTokMemoryEmbeddingEntries();
+  const queryEmbeddings = getTikTokQueryEmbeddingEntries();
+  return {
+    exportedAt,
+    app: 'Short-Form Studio',
+    type: 'automation-memory-analysis',
+    summary: {
+      concepts: tiktokAutomationConceptMemory.length,
+      generatedConcepts: generatedConcepts.length,
+      embeddings: tiktokAutomationEmbeddings.length,
+      memoryEmbeddings: memoryEmbeddings.length,
+      queryEmbeddings: queryEmbeddings.length,
+      retrievalEvents: tiktokAutomationRetrievalEvents.length,
+      runs: tiktokAutomationRuns.length,
+      testResults: tiktokAutomationTestState.results.length,
+      currentMemoryView: tiktokAutomationMemoryExplorerView,
+      currentAutomationView: tiktokAutomationView
+    },
+    config: {
+      profile: String(tiktokAutomationConfig?.profileName || '').trim(),
+      seedPrompt: String(tiktokAutomationConfig?.seedPrompt || '').trim(),
+      audience: String(tiktokAutomationConfig?.audience || '').trim(),
+      style: String(tiktokAutomationConfig?.style || '').trim(),
+      memoryStrictness: String(tiktokAutomationConfig?.memoryStrictness || 'strict').trim(),
+      approvalMode: String(tiktokAutomationConfig?.approvalMode || '').trim(),
+      postingTimezone: String(tiktokAutomationConfig?.postingTimezone || '').trim(),
+      dailyCount: Math.max(1, Math.floor(Number(tiktokAutomationConfig?.dailyCount) || 1))
+    },
+    memory: {
+      concepts: tiktokAutomationConceptMemory.map((entry) => ({ ...entry })),
+      generatedConcepts: generatedConcepts.map((entry) => ({ ...entry })),
+      embeddings: tiktokAutomationEmbeddings.map((entry) => ({ ...entry })),
+      memoryEmbeddings: memoryEmbeddings.map((entry) => ({ ...entry })),
+      queryEmbeddings: queryEmbeddings.map((entry) => ({ ...entry })),
+      retrievalEvents: tiktokAutomationRetrievalEvents.map((entry) => ({ ...entry })),
+      runs: tiktokAutomationRuns.map((entry) => ({ ...entry }))
+    },
+    currentTest: {
+      status: String(tiktokAutomationTestState.status || '').trim(),
+      error: !!tiktokAutomationTestState.error,
+      busy: !!tiktokAutomationTestState.busy,
+      results: tiktokAutomationTestState.results.map((entry) => ({ ...entry }))
+    }
+  };
+};
+
+const downloadTikTokAutomationAnalysisExport = async () => {
+  const payload = buildTikTokAutomationAnalysisExport();
+  const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+  const fileName = `short-form-automation-analysis-${stamp}.json`;
+  const json = JSON.stringify(payload, null, 2);
+  const blob = new Blob([json], { type: 'application/json' });
+  const href = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = href;
+  anchor.download = fileName;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(href);
+  setTikTokAutomationTestStatus(`Exported analysis JSON: ${fileName}`);
+  setTikTokAutomationMemoryExportStatus(`Exported analysis JSON: ${fileName}`);
+};
+
+const clearTikTokAutomationMemoryState = () => {
+  persistTikTokScripts([]);
+  tiktokAutomationIdeaHistory = [];
+  tiktokAutomationUploadHistory = [];
+  tiktokAutomationEvents = [];
+  tiktokAutomationRuns = [];
+  tiktokAutomationConceptMemory = [];
+  tiktokAutomationEmbeddings = [];
+  tiktokAutomationRetrievalEvents = [];
+  tiktokAutomationTestState = {
+    busy: false,
+    results: [],
+    status: 'Run the same automation brief multiple times to add accepted concepts into automation memory and inspect what gets accepted or blocked.',
+    error: false
+  };
+  tiktokAutomationView = 'run';
+  tiktokAutomationMemoryExplorerView = 'history';
+  tiktokAutomationState = normalizeTikTokAutomationState({
+    ...(tiktokAutomationState || {}),
+    running: false,
+    generatedByDate: {},
+    cycleCount: 0,
+    cycleStartedAt: '',
+    nextRunAt: '',
+    lastGeneratedAt: '',
+    lastError: ''
+  });
+  persistTikTokAutomationLocalState();
+  setTikTokAutomationMemoryExportStatus('Export the current memory state and test results for external analysis.');
+  renderTikTokScripts();
+  renderTikTokAutomationUi();
+  setTikTokStatus('All automation memory and test state cleared.');
+  tiktokLogs = [];
+  if (tiktokLogEl) tiktokLogEl.textContent = '';
+  setTikTokProgress(0);
+  tiktokStoryboard = null;
+  tiktokStoryboardScriptId = '';
+  renderTikTokStoryboardOutput();
+  setTikTokStoryboardStatus('');
+  tiktokClipResults = {};
+  tiktokClipLoading = {};
+  tiktokQueryScanSceneId = '';
+  tiktokQueryScanLoading = false;
+  tiktokClipValidationCache = {};
+  tiktokAutoPickLogs = {};
+  tiktokAutoPickStage = {};
+  tiktokActionFrameCache = {};
+};
+
+const clearTikTokAutomationTestOutput = () => {
+  tiktokAutomationTestState.results = [];
+  tiktokAutomationTestState.busy = false;
+  setTikTokAutomationTestStatus('Run the same automation brief multiple times to add accepted concepts into automation memory and inspect what gets accepted or blocked.');
+  renderTikTokAutomationUi();
+};
+
+const formatTikTokAutomationTestSimilarityReason = (candidate = {}, similar = null) => {
+  if (!similar?.existing) return 'No duplicate match.';
+  const candidateTitle = String(candidate?.title || '').trim().toLowerCase();
+  const existingTitle = String(similar.existing?.title || '').trim().toLowerCase();
+  const candidateHook = String(candidate?.hook || '').trim().toLowerCase();
+  const existingHook = String(similar.existing?.hook || '').trim().toLowerCase();
+  if (candidateTitle && existingTitle && candidateTitle === existingTitle) {
+    return 'Blocked because the title matches saved memory.';
+  }
+  if (candidateHook && existingHook && candidateHook === existingHook) {
+    return 'Blocked because the hook matches saved memory.';
+  }
+  const percent = Number.isFinite(Number(similar?.score)) ? Math.round(Number(similar.score) * 100) : 0;
+  return `Blocked because the overlap score hit ${percent}% against saved memory.`;
+};
+
+const buildTikTokAutomationTestMemoryLabel = (entry = {}) =>
+  [entry.title, entry.hook].filter(Boolean).join(' • ') || 'Untitled memory item';
+
+const renderTikTokAutomationTestUi = () => {
+  const memoryPreview = tiktokAutomationConceptMemory
+    .slice(0, 3)
+    .map((entry) => entry.title || entry.hook || 'Untitled concept')
+    .filter(Boolean);
+  const queryEmbeddingCount = getTikTokQueryEmbeddingEntries().length;
+  const memoryEmbeddingCount = getTikTokMemoryEmbeddingEntries().length;
+
+  if (tiktokAutomationTestMemory) {
+    tiktokAutomationTestMemory.textContent = tiktokAutomationConceptMemory.length
+      ? `Saved memory concepts: ${tiktokAutomationConceptMemory.length}. Memory embeddings: ${memoryEmbeddingCount}. Query embeddings: ${queryEmbeddingCount}. Retrieval events: ${tiktokAutomationRetrievalEvents.length}. Latest: ${memoryPreview.join(' • ')}`
+      : 'Concept memory is empty. Accepted test concepts will be added into automation memory.';
+  }
+
+  if (tiktokAutomationTestStatus) {
+    tiktokAutomationTestStatus.textContent = tiktokAutomationTestState.status;
+    tiktokAutomationTestStatus.style.color = tiktokAutomationTestState.error ? '#ff7a7a' : '#97a0b9';
+  }
+
+  if (tiktokAutomationTestPill) {
+    tiktokAutomationTestPill.className = `tiktok-status-pill ${
+      tiktokAutomationTestState.busy ? 'running' : tiktokAutomationTestState.error ? 'error' : 'ready'
+    }`;
+    tiktokAutomationTestPill.textContent = tiktokAutomationTestState.busy ? 'Testing' : tiktokAutomationTestState.error ? 'Needs attention' : 'Ready';
+  }
+
+  if (tiktokAutomationTestDryRunBtn) {
+    tiktokAutomationTestDryRunBtn.disabled =
+      tiktokAutomationTestState.busy || tiktokAutomationBusy || tiktokGenerating || !String(tiktokAutomationConfig?.seedPrompt || '').trim();
+  }
+  if (tiktokAutomationTestClearBtn) {
+    tiktokAutomationTestClearBtn.disabled = tiktokAutomationTestState.busy;
+  }
+  if (tiktokAutomationTestExportBtn) {
+    tiktokAutomationTestExportBtn.disabled =
+      tiktokAutomationTestState.busy ||
+      (!tiktokAutomationConceptMemory.length &&
+        !tiktokAutomationRetrievalEvents.length &&
+        !tiktokAutomationEmbeddings.length &&
+        !tiktokAutomationTestState.results.length);
+  }
+
+  if (!tiktokAutomationTestResults) return;
+  tiktokAutomationTestResults.innerHTML = '';
+  if (!tiktokAutomationTestState.results.length) return;
+
+  const formatRetrievalMatchLine = (match = {}) => {
+    const score = Number.isFinite(Number(match.score)) ? ` • ${Math.round(Number(match.score) * 100)}%` : '';
+    return [match.title || match.hook || 'Untitled concept', match.topic ? `topic ${match.topic}` : '', score].filter(Boolean).join(' ');
+  };
+
+  tiktokAutomationTestState.results.forEach((result) => {
+    const card = document.createElement('div');
+    card.className = 'tiktok-auto-test-result';
+
+    const top = document.createElement('div');
+    top.className = 'tiktok-history-entry__top';
+    const title = document.createElement('div');
+    title.className = 'tiktok-auto-test-result__title';
+    title.textContent = result.accepted
+      ? `Run ${result.runIndex} accepted`
+      : `Run ${result.runIndex} blocked`;
+    const pills = document.createElement('div');
+    pills.className = 'tiktok-mini-pills';
+    const statusPill = document.createElement('span');
+    statusPill.className = `tiktok-status-pill ${result.accepted ? 'ready' : 'warning'}`;
+    statusPill.textContent = result.accepted ? 'Accepted' : 'Blocked';
+    pills.appendChild(statusPill);
+    if (Number.isFinite(result?.finalMatch?.score)) {
+      const scorePill = document.createElement('span');
+      scorePill.className = 'storyboard-tag';
+      scorePill.textContent = `${Math.round(result.finalMatch.score * 100)}% overlap`;
+      pills.appendChild(scorePill);
+    }
+    if (Number.isFinite(result.memoryCountBefore)) {
+      const memoryPill = document.createElement('span');
+      memoryPill.className = 'storyboard-tag';
+      memoryPill.textContent = `${result.memoryCountBefore} in memory`;
+      pills.appendChild(memoryPill);
+    }
+    top.appendChild(title);
+    top.appendChild(pills);
+
+    card.appendChild(top);
+
+    const brief = document.createElement('div');
+    brief.className = 'small';
+    brief.style.marginTop = '8px';
+    brief.textContent = `Seed brief: ${result.seedPrompt || '—'}`;
+    card.appendChild(brief);
+
+    const pipelineNote = document.createElement('div');
+    pipelineNote.className = 'small';
+    pipelineNote.style.marginTop = '6px';
+    pipelineNote.style.color = '#7fdca5';
+    pipelineNote.textContent = 'This test is concept-first. After a concept clears retrieval and memory checks, the final script is generated in the same structured shape used by manual mode.';
+    card.appendChild(pipelineNote);
+
+    const stepList = document.createElement('div');
+    stepList.style.display = 'grid';
+    stepList.style.gap = '10px';
+    stepList.style.marginTop = '12px';
+
+    const baselineWrap = document.createElement('div');
+    baselineWrap.style.border = '1px solid rgba(136, 150, 188, 0.22)';
+    baselineWrap.style.borderRadius = '14px';
+    baselineWrap.style.padding = '12px 14px';
+    baselineWrap.style.background = 'rgba(10, 15, 33, 0.72)';
+    baselineWrap.innerHTML =
+      `<div class="tiktok-history-entry__top"><div style="font-weight:600;font-size:13px;">Memory baseline</div><span class="tiktok-status-pill ready">Loaded</span></div>` +
+      `<div class="small" style="margin-top:6px;">Started against ${result.memoryCountBefore || 0} concept${(result.memoryCountBefore || 0) === 1 ? '' : 's'}.${result.startingMemoryLabel ? ` Latest: ${result.startingMemoryLabel}` : ''}</div>`;
+    stepList.appendChild(baselineWrap);
+
+    (result.attempts || []).forEach((attempt) => {
+      const attemptWrap = document.createElement('div');
+      attemptWrap.style.border = '1px solid rgba(136, 150, 188, 0.22)';
+      attemptWrap.style.borderRadius = '14px';
+      attemptWrap.style.padding = '12px 14px';
+      attemptWrap.style.background = 'rgba(10, 15, 33, 0.72)';
+
+      const attemptHead = document.createElement('div');
+      attemptHead.className = 'tiktok-history-entry__top';
+      const attemptTitle = document.createElement('div');
+      attemptTitle.style.fontWeight = '600';
+      attemptTitle.style.fontSize = '13px';
+      attemptTitle.textContent = `Attempt ${attempt.attemptIndex}`;
+      const attemptPills = document.createElement('div');
+      attemptPills.className = 'tiktok-mini-pills';
+      const attemptStatus = document.createElement('span');
+      attemptStatus.className = `tiktok-status-pill ${attempt.script ? 'ready' : attempt.decision === 'block' ? 'warning' : 'paused'}`;
+      attemptStatus.textContent = attempt.script ? 'Accepted' : attempt.decision === 'block' ? 'Blocked' : 'Pending';
+      attemptPills.appendChild(attemptStatus);
+      attemptHead.appendChild(attemptTitle);
+      attemptHead.appendChild(attemptPills);
+      attemptWrap.appendChild(attemptHead);
+
+      const conceptMeta = document.createElement('div');
+      conceptMeta.className = 'small';
+      conceptMeta.style.marginTop = '8px';
+      conceptMeta.style.whiteSpace = 'pre-wrap';
+      conceptMeta.textContent = [
+        attempt.concept?.title ? `Title: ${attempt.concept.title}` : '',
+        attempt.concept?.hook ? `Hook: ${attempt.concept.hook}` : '',
+        attempt.concept?.angle ? `Angle: ${attempt.concept.angle}` : '',
+        attempt.concept?.topic ? `Topic: ${attempt.concept.topic}` : '',
+        Array.isArray(attempt.concept?.tags) && attempt.concept.tags.length ? `Tags: ${attempt.concept.tags.join(', ')}` : '',
+        attempt.reason || ''
+      ].filter(Boolean).join('\n');
+      attemptWrap.appendChild(conceptMeta);
+
+      const embeddingBox = document.createElement('div');
+      embeddingBox.style.marginTop = '10px';
+      embeddingBox.style.padding = '10px 12px';
+      embeddingBox.style.borderRadius = '12px';
+      embeddingBox.style.background = 'rgba(17, 24, 48, 0.82)';
+      embeddingBox.style.border = '1px solid rgba(136, 150, 188, 0.18)';
+      embeddingBox.innerHTML =
+        `<div style="font-weight:600;font-size:12px;">Embedding</div>` +
+        `<div class="small" style="margin-top:6px;white-space:pre-wrap;">Model: ${attempt.embedding?.model || '—'}\nProvider: ${attempt.embedding?.provider || '—'}\nDimensions: ${attempt.embedding?.dimensions || '—'}\nPreview: ${attempt.embedding?.preview || '—'}</div>`;
+      attemptWrap.appendChild(embeddingBox);
+
+      const retrievalBox = document.createElement('div');
+      retrievalBox.style.marginTop = '10px';
+      retrievalBox.style.padding = '10px 12px';
+      retrievalBox.style.borderRadius = '12px';
+      retrievalBox.style.background = attempt.decision === 'block' ? 'rgba(120, 56, 56, 0.18)' : 'rgba(17, 24, 48, 0.82)';
+      retrievalBox.style.border = attempt.decision === 'block'
+        ? '1px solid rgba(255, 122, 122, 0.24)'
+        : '1px solid rgba(136, 150, 188, 0.18)';
+      const retrievalLines = [
+        `Decision: ${attempt.decision}`,
+        `Threshold: ${Number.isFinite(Number(attempt.retrievalEvent?.threshold)) ? Number(attempt.retrievalEvent.threshold).toFixed(2) : '—'}`,
+        attempt.retrievalEvent?.reason || '',
+        Array.isArray(attempt.retrievalEvent?.clusterSummary) && attempt.retrievalEvent.clusterSummary.length
+          ? `Cluster summary: ${attempt.retrievalEvent.clusterSummary.map((item) => `${item.label} (${item.count})`).join(' • ')}`
+          : '',
+        (attempt.recentMatches || []).length
+          ? `Recent matches:\n${attempt.recentMatches.slice(0, 3).map((match) => `- ${formatRetrievalMatchLine(match)}`).join('\n')}`
+          : '',
+        (attempt.semanticMatches || []).length
+          ? `Semantic matches:\n${attempt.semanticMatches.slice(0, 3).map((match) => `- ${formatRetrievalMatchLine(match)}`).join('\n')}`
+          : ''
+      ].filter(Boolean);
+      retrievalBox.innerHTML =
+        `<div style="font-weight:600;font-size:12px;">Retrieval + memory check</div>` +
+        `<div class="small" style="margin-top:6px;white-space:pre-wrap;">${retrievalLines.join('\n')}</div>`;
+      attemptWrap.appendChild(retrievalBox);
+
+      if (attempt.script) {
+        const scriptBox = document.createElement('div');
+        scriptBox.style.marginTop = '10px';
+        scriptBox.style.padding = '10px 12px';
+        scriptBox.style.borderRadius = '12px';
+        scriptBox.style.background = 'rgba(17, 24, 48, 0.82)';
+        scriptBox.style.border = '1px solid rgba(136, 150, 188, 0.18)';
+        scriptBox.innerHTML =
+          `<div style="font-weight:600;font-size:12px;">Script output</div>` +
+          `<div class="small" style="margin-top:6px;white-space:pre-wrap;">${[
+            attempt.script.title ? `Title: ${attempt.script.title}` : '',
+            attempt.script.hook ? `Hook: ${attempt.script.hook}` : '',
+            attempt.script.angle ? `Angle: ${attempt.script.angle}` : '',
+            attempt.script.script || ''
+          ].filter(Boolean).join('\n')}</div>`;
+        attemptWrap.appendChild(scriptBox);
+      }
+
+      stepList.appendChild(attemptWrap);
+    });
+
+    const finalWrap = document.createElement('div');
+    finalWrap.style.border = '1px solid rgba(136, 150, 188, 0.22)';
+    finalWrap.style.borderRadius = '14px';
+    finalWrap.style.padding = '12px 14px';
+    finalWrap.style.background = 'rgba(10, 15, 33, 0.72)';
+    const finalHead = document.createElement('div');
+    finalHead.className = 'tiktok-history-entry__top';
+    const finalLabel = document.createElement('div');
+    finalLabel.style.fontWeight = '600';
+    finalLabel.style.fontSize = '13px';
+    finalLabel.textContent = '4. Final outcome';
+    const finalPill = document.createElement('span');
+    finalPill.className = `tiktok-status-pill ${result.accepted ? 'ready' : 'warning'}`;
+    finalPill.textContent = result.accepted ? 'Would be accepted' : 'Would be blocked';
+    finalHead.appendChild(finalLabel);
+    finalHead.appendChild(finalPill);
+    const finalText = document.createElement('div');
+    finalText.className = 'small';
+    finalText.style.marginTop = '6px';
+    finalText.style.whiteSpace = 'pre-wrap';
+    finalText.textContent = result.finalMessage || (result.accepted
+      ? 'This run would be accepted into temporary test memory.'
+      : 'This run would be blocked by duplicate protection.');
+    finalWrap.appendChild(finalHead);
+    finalWrap.appendChild(finalText);
+    stepList.appendChild(finalWrap);
+
+    card.appendChild(stepList);
+    tiktokAutomationTestResults.appendChild(card);
+  });
+};
+
+const runTikTokAutomationMemoryTest = async () => {
+  if (tiktokAutomationTestState.busy || tiktokAutomationBusy || tiktokGenerating) return;
+  const key = (openaiKeyInput?.value || currentOpenaiKey || '').trim();
+  if (!key) {
+    setTikTokAutomationTestStatus('OpenAI key required for the memory test.', true);
+    renderTikTokAutomationUi();
+    return;
+  }
+  const seedPrompt = String(tiktokAutomationConfig?.seedPrompt || '').trim();
+  if (!seedPrompt) {
+    setTikTokAutomationTestStatus('Add a seed brief before running the memory test.', true);
+    renderTikTokAutomationUi();
+    return;
+  }
+
+  const runCount = Math.max(1, Math.min(12, Math.floor(Number(tiktokAutomationTestRunsInput?.value || 5) || 5)));
+  ensureTikTokConceptMemorySeeded();
+  await ensureTikTokAutomationEmbeddingsBackfilled(key, { limit: 24 });
+  let simulatedMemory = tiktokAutomationConceptMemory.map((entry) => ({ ...entry }));
+  let simulatedEmbeddings = tiktokAutomationEmbeddings.map((entry) => ({ ...entry }));
+
+  tiktokAutomationTestState.busy = true;
+  tiktokAutomationTestState.results = [];
+  setTikTokAutomationTestStatus(`Running ${runCount} automatic test run${runCount === 1 ? '' : 's'} and adding accepted concepts to automation memory...`);
+  renderTikTokAutomationUi();
+
+  try {
+    for (let runIndex = 1; runIndex <= runCount; runIndex += 1) {
+      setTikTokAutomationTestStatus(`Testing run ${runIndex} of ${runCount}...`);
+      const testRunKey = `test-${Date.now()}-${runIndex}`;
+      const resultRecord = {
+        runIndex,
+        seedPrompt,
+        memoryCountBefore: simulatedMemory.length,
+        startingMemoryLabel: simulatedMemory[0] ? buildTikTokAutomationTestMemoryLabel(simulatedMemory[0]) : '',
+        accepted: false,
+        attempts: [],
+        finalMessage: 'Running concept-first memory test...'
+      };
+      tiktokAutomationTestState.results.push(resultRecord);
+      renderTikTokAutomationUi();
+
+      const pipeline = await runTikTokAutomationConceptPipeline({
+        key,
+        seedPrompt,
+        audience: String(tiktokAutomationConfig?.audience || '').trim(),
+        style: String(tiktokAutomationConfig?.style || '').trim(),
+        testRunKey,
+        maxAttempts: TIKTOK_AUTOMATION_GENERATION_ATTEMPTS,
+        persistAccepted: false,
+        memoryOverride: simulatedMemory,
+        embeddingsOverride: simulatedEmbeddings,
+        onAttempt: (_attempt, allAttempts) => {
+          resultRecord.attempts = allAttempts.map((item) => ({ ...item }));
+          renderTikTokAutomationUi();
+        }
+      });
+
+      resultRecord.accepted = !!pipeline.accepted;
+      resultRecord.approvedConcept = pipeline.approvedConcept || null;
+      resultRecord.script = pipeline.script || null;
+      resultRecord.attempts = Array.isArray(pipeline.attempts) ? pipeline.attempts.map((item) => ({ ...item })) : [];
+      resultRecord.finalMessage = pipeline.accepted
+        ? `Accepted "${pipeline.approvedConcept?.title || pipeline.script?.title || `Run ${runIndex}`}" after ${pipeline.attempts.length} attempt${pipeline.attempts.length === 1 ? '' : 's'}. Added to automation memory.`
+        : pipeline.reason || `No concept cleared memory after ${TIKTOK_AUTOMATION_GENERATION_ATTEMPTS} attempts.`;
+
+      if (pipeline.accepted && pipeline.approvedConcept && pipeline.embedding) {
+        const approvedConcept = normalizeTikTokAutomationConceptEntry({
+          ...pipeline.approvedConcept,
+          status: 'approved',
+          embeddingId: pipeline.embedding.id
+        });
+        simulatedMemory = [approvedConcept].concat(simulatedMemory).slice(0, TIKTOK_AUTOMATION_CONCEPT_LIMIT);
+        simulatedEmbeddings = [
+          normalizeTikTokAutomationEmbeddingEntry({
+            ...pipeline.embedding,
+            conceptId: approvedConcept.id
+          })
+        ].concat(simulatedEmbeddings).slice(0, TIKTOK_AUTOMATION_EMBEDDING_LIMIT);
+        upsertTikTokAutomationConceptEntries([approvedConcept]);
+        upsertTikTokAutomationEmbeddingEntries([
+          normalizeTikTokAutomationEmbeddingEntry({
+            ...pipeline.embedding,
+            conceptId: approvedConcept.id
+          })
+        ]);
+      }
+
+      const acceptedCountSoFar = tiktokAutomationTestState.results.filter((entry) => entry.accepted).length;
+      setTikTokAutomationTestStatus(`Completed run ${runIndex} of ${runCount}. Accepted into automation memory so far: ${acceptedCountSoFar}.`);
+      renderTikTokAutomationUi();
+    }
+
+    const acceptedCount = tiktokAutomationTestState.results.filter((entry) => entry.accepted).length;
+    setTikTokAutomationTestStatus(
+      `${acceptedCount} of ${tiktokAutomationTestState.results.length} test run${tiktokAutomationTestState.results.length === 1 ? '' : 's'} were accepted and added to automation memory.`
+    );
+  } catch (err) {
+    tiktokAutomationTestState.results = [];
+    setTikTokAutomationTestStatus(err?.message || 'Memory test failed.', true);
+  } finally {
+    tiktokAutomationTestState.busy = false;
+    renderTikTokAutomationUi();
+  }
+};
+
+const withTikTokAutomationQuietMode = async (fn) => {
+  tiktokAutomationQuietModeDepth += 1;
+  try {
+    return await fn();
+  } finally {
+    tiktokAutomationQuietModeDepth = Math.max(0, tiktokAutomationQuietModeDepth - 1);
+  }
+};
+
+const buildTikTokAutomationStageError = (stageKey = '', message = '') =>
+  Object.assign(new Error(String(message || 'Automation stage failed.').trim() || 'Automation stage failed.'), {
+    stageKey: String(stageKey || '').trim()
+  });
+
+const readTikTokStatusText = (...values) =>
+  values
+    .map((value) => String(value?.textContent || value || '').trim())
+    .find(Boolean) || '';
+
+const getTikTokAutomationLatestWorkspaceVideoPath = () =>
+  String(
+    tiktokSfxOutputPath ||
+      tiktokZoomOutputPath ||
+      tiktokCaptionCombinedPath ||
+      tiktokCaptionSubtitlePath ||
+      tiktokCaptionBaseRenderPath ||
+      getStep8FinalVideoPath() ||
+      tiktokBaseStitchedPath ||
+      ''
+  ).trim();
+
+const syncTikTokAutomationPublishTargetsFromConfig = () => {
+  if (tiktokPublishToTikTok) tiktokPublishToTikTok.checked = !!tiktokAutomationConfig?.platforms?.tiktok;
+  if (tiktokPublishToInstagram) tiktokPublishToInstagram.checked = !!tiktokAutomationConfig?.platforms?.instagram;
+  if (tiktokPublishToFacebook) tiktokPublishToFacebook.checked = !!tiktokAutomationConfig?.platforms?.facebook;
+};
+
+const syncTikTokAvatarSelection = (avatarName = '') => {
+  const desired = String(avatarName || '').trim();
+  const nextAvatar = desired && avatars.some((entry) => entry.name === desired) ? desired : '';
+  activeAvatarName = nextAvatar;
+  syncAvatarSelectValues(nextAvatar);
+  renderAvatarSelectPreview();
+  renderTikTokAvatarPanel();
+};
+
+const syncTikTokAutomationClipDefaultsToManualControls = () => {
+  if (!tiktokAutomationConfig) return;
+  if (tiktokAiAutoToggle) tiktokAiAutoToggle.checked = tiktokAutomationConfig.clipAutoAiImages !== false;
+  if (tiktokAutoSearchToggle) tiktokAutoSearchToggle.checked = tiktokAutomationConfig.clipAutoSearch !== false;
+  if (tiktokAutoPickToggle) tiktokAutoPickToggle.checked = tiktokAutomationConfig.clipAutoPick !== false;
+  if (tiktokYoutubeOnly) tiktokYoutubeOnly.checked = !!tiktokAutomationConfig.clipYoutubeOnly;
+  syncLibraryKeyToInput();
+};
+
+const prepareTikTokAutomationWorkspaceForScript = ({
+  scriptId = '',
+  seedPrompt = '',
+  audience = '',
+  style = ''
+} = {}) => {
+  const currentState = serializeTikTokState();
+  const emptyState = getEmptyTikTokState();
+  const currentExport = currentState.export && typeof currentState.export === 'object' ? currentState.export : {};
+  const currentPublish = currentExport.publish && typeof currentExport.publish === 'object' ? currentExport.publish : {};
+  const currentFinal = currentExport.final && typeof currentExport.final === 'object' ? currentExport.final : {};
+  const currentCaptions = currentExport.captions && typeof currentExport.captions === 'object' ? currentExport.captions : {};
+  const currentZoom = currentExport.zoom && typeof currentExport.zoom === 'object' ? currentExport.zoom : {};
+  const currentSfx = currentExport.sfx && typeof currentExport.sfx === 'object' ? currentExport.sfx : {};
+  const desiredAvatarName = String(tiktokAutomationConfig?.avatarName || '').trim();
+  const resolvedAvatarName = desiredAvatarName && avatars.some((entry) => entry.name === desiredAvatarName) ? desiredAvatarName : '';
+  const nextState = {
+    ...currentState,
+    avatar: resolvedAvatarName,
+    idea: String(seedPrompt || '').trim(),
+    audience: String(audience || '').trim(),
+    style: String(style || '').trim(),
+    storyboard: null,
+    audio: null,
+    alignment: null,
+    clipResults: {},
+    clipValidationCache: {},
+    autoPickLogs: {},
+    storyboardConfig: {
+      ...(currentState.storyboardConfig || emptyState.storyboardConfig),
+      scriptId: String(scriptId || '').trim(),
+      clipPanels: {},
+      view: 'pretty',
+      youtubeOnly: !!tiktokAutomationConfig?.clipYoutubeOnly,
+      autoAiImages: tiktokAutomationConfig?.clipAutoAiImages !== false,
+      autoClipSearch: tiktokAutomationConfig?.clipAutoSearch !== false,
+      autoClipPick: tiktokAutomationConfig?.clipAutoPick !== false
+    },
+    export: {
+      ...emptyState.export,
+      outputName: String(currentExport.outputName || '').trim(),
+      final: {
+        ...(emptyState.export.final || {}),
+        keying: { ...normalizeTikTokFinalKeyingSettings(currentFinal.keying || TIKTOK_FINAL_KEYING_DEFAULTS) }
+      },
+      captions: {
+        ...(emptyState.export.captions || {}),
+        overlayStyle: { ...normalizeTikTokCaptionOverlayStyle(currentCaptions.overlayStyle || TIKTOK_CAPTION_OVERLAY_DEFAULTS) },
+        timelineZoom: Number(currentCaptions.timelineZoom || 1) || 1,
+        editorZoom: Number(currentCaptions.editorZoom || 1) || 1
+      },
+      zoom: {
+        ...(emptyState.export.zoom || {}),
+        settings: { ...normalizeTikTokZoomSettings(currentZoom.settings || TIKTOK_ZOOM_DEFAULTS) }
+      },
+      sfx: {
+        ...(emptyState.export.sfx || {}),
+        settings: { ...normalizeTikTokSfxSettings(currentSfx.settings || TIKTOK_SFX_DEFAULTS) },
+        localLibrary: normalizeTikTokSfxLocalLibrary(currentSfx.localLibrary || []),
+        timelineZoom: Number(currentSfx.timelineZoom || 1) || 1,
+        canvasZoom: Number(currentSfx.canvasZoom || 1) || 1
+      },
+      publish: {
+        ...(emptyState.export.publish || {}),
+        toTikTok: !!tiktokAutomationConfig?.platforms?.tiktok,
+        toInstagram: !!tiktokAutomationConfig?.platforms?.instagram,
+        toFacebook: !!tiktokAutomationConfig?.platforms?.facebook,
+        tiktokToken: String(currentPublish.tiktokToken || '').trim(),
+        tiktokOpenId: String(currentPublish.tiktokOpenId || '').trim(),
+        instagramToken: String(currentPublish.instagramToken || '').trim(),
+        instagramUserId: String(currentPublish.instagramUserId || '').trim(),
+        facebookToken: String(currentPublish.facebookToken || '').trim(),
+        facebookPageId: String(currentPublish.facebookPageId || '').trim()
+      }
+    }
+  };
+  applyTikTokState(nextState);
+  syncTikTokAvatarSelection(resolvedAvatarName);
+  syncTikTokAutomationClipDefaultsToManualControls();
+  tiktokStoryboardScriptId = String(scriptId || '').trim();
+  renderTikTokStoryboardSelect();
+  if (tiktokScriptSelect) tiktokScriptSelect.value = tiktokStoryboardScriptId;
+  syncTikTokAutomationPublishTargetsFromConfig();
+  renderTikTokAutomationUi();
+};
+
+const waitForTikTokAutomationCondition = async (
+  predicate,
+  { timeoutMs = 90000, intervalMs = 250, label = 'automation stage' } = {}
+) => {
+  const start = Date.now();
+  while (true) {
+    if (predicate()) return true;
+    if (Date.now() - start >= timeoutMs) {
+      throw new Error(`${label} timed out.`);
+    }
+    await sleep(intervalMs);
+  }
+};
+
+const runTikTokAutomationManualPipeline = async ({
+  run,
+  script,
+  seedPrompt = '',
+  audience = '',
+  style = '',
+  startAtStage = 'storyboard',
+  skipPrepare = false
+} = {}) => {
+  if (!run?.id || !script?.id) return;
+  const runId = String(run.id || '').trim();
+  const scriptId = String(script.id || '').trim();
+  const stageOrder = ['storyboard', 'audio', 'assets', 'final', 'avatar', 'final_render', 'caption', 'zoom', 'sfx', 'publish'];
+  const normalizedStartStage = stageOrder.includes(String(startAtStage || '').trim())
+    ? String(startAtStage || '').trim()
+    : 'storyboard';
+  const startIndex = stageOrder.indexOf(normalizedStartStage);
+  const shouldRunStage = (stageKey = '') => {
+    const idx = stageOrder.indexOf(String(stageKey || '').trim());
+    return idx >= 0 && idx >= startIndex;
+  };
+  const ensureStoryboardReady = async ({ force = false } = {}) => {
+    const valid = Array.isArray(tiktokStoryboard?.scenes) && tiktokStoryboard.scenes.length && String(tiktokStoryboard?.source_script_id || '').trim() === scriptId;
+    if (valid && !force) return;
+    markStageRunning('storyboard', 'Generating storyboard');
+    if (force) {
+      patchTikTokAutomationRunStage(runId, 'storyboard', {
+        status: 'running',
+        detail: 'Restarting from storyboard and rebuilding scenes.'
+      });
+    }
+    await withTikTokAutomationQuietMode(() => generateTikTokStoryboard());
+    if (!Array.isArray(tiktokStoryboard?.scenes) || !tiktokStoryboard.scenes.length || String(tiktokStoryboard?.source_script_id || '').trim() !== scriptId) {
+      throw buildTikTokAutomationStageError(
+        'storyboard',
+        readTikTokStatusText(tiktokStoryboardStatus) || 'Storyboard generation did not produce scenes for the accepted script.'
+      );
+    }
+    syncTikTokAutomationStoryboardStage({ scriptId });
+  };
+  const waitForAvatarStageToSettle = async () => {
+    await waitForTikTokAutomationCondition(() => {
+      if (tiktokAvatarGenerateRunning || tiktokAvatarCompressRunning) return false;
+      if (tiktokAvatarAutoRetryTimer) return false;
+      const latest = syncTikTokAutomationAvatarStage({ scriptId, runId });
+      const status = String(latest?.status || '').trim().toLowerCase();
+      if (['success', 'skipped', 'error'].includes(status)) return true;
+      const output = latest?.output && typeof latest.output === 'object' ? latest.output : {};
+      const sceneCount = Math.max(0, Number(output.sceneCount || 0));
+      const doneCount = Math.max(0, Number(output.doneCount || 0));
+      const failedCount = Math.max(0, Number(output.failedCount || 0));
+      const hasPendingScene = Array.isArray(output.scenes)
+        ? output.scenes.some((scene) => ['running', 'queued'].includes(String(scene?.state || '').trim().toLowerCase()))
+        : false;
+      if (sceneCount > 0 && doneCount >= sceneCount && !hasPendingScene) return true;
+      if (failedCount > 0 && !hasPendingScene) return true;
+      return false;
+    }, {
+      timeoutMs: 600000,
+      intervalMs: 350,
+      label: 'avatar processing'
+    });
+  };
+  const waitForFinalRenderStageToSettle = async () => {
+    await waitForTikTokAutomationCondition(() => {
+      const latest = syncTikTokAutomationFinalRenderStage({ scriptId, runId });
+      const status = String(latest?.status || '').trim().toLowerCase();
+      if (status === 'success' || status === 'skipped') return true;
+      if (status === 'error') return true;
+      if (tiktokExportRunning || tiktokExportStarting) return false;
+      const output = latest?.output && typeof latest.output === 'object' ? latest.output : {};
+      const path = String(output.path || '').trim();
+      const preview = String(output.previewUrl || '').trim();
+      return !!(path || preview);
+    }, {
+      timeoutMs: 420000,
+      intervalMs: 300,
+      label: 'final render'
+    });
+  };
+  const canReuseCompletedAvatarStageFromWorkspace = () => {
+    if (normalizedStartStage !== 'final') return false;
+    if (!Array.isArray(tiktokStoryboard?.scenes) || !tiktokStoryboard.scenes.length) return false;
+    const storyboardScriptId = String(tiktokStoryboard?.source_script_id || '').trim();
+    if (!storyboardScriptId || storyboardScriptId !== scriptId) return false;
+    const scenes = tiktokStoryboard.scenes.filter((scene) => !!scene?.id);
+    if (!scenes.length) return false;
+    return scenes.every((scene) => hasTikTokAvatarSceneOutput(scene));
+  };
+  const markCurrent = (step, detail) => {
+    tiktokAutomationState.currentRunId = runId;
+    tiktokAutomationState.currentStep = String(step || '').trim();
+    tiktokAutomationState.currentDetail = String(detail || '').trim();
+    renderTikTokAutomationUi();
+  };
+  const markStageRunning = (stageKey, detail) => {
+    patchTikTokAutomationRunStage(runId, stageKey, {
+      status: 'running',
+      detail: String(detail || '').trim()
+    });
+    markCurrent(detail || stageKey, detail);
+  };
+  const selectedPlatforms = getTikTokAutomationSelectedPlatforms();
+  const missingPlatforms = getTikTokPlatformsMissingCredentials(selectedPlatforms);
+  const readyPlatforms = selectedPlatforms.filter((platform) => !missingPlatforms.includes(platform));
+  const runAvatarName = String(run?.avatarName || tiktokAutomationConfig?.avatarName || '').trim();
+  let exportedVideoPath = '';
+  tiktokAutomationPipelineActive = true;
+  try {
+    if (!skipPrepare) {
+      prepareTikTokAutomationWorkspaceForScript({
+        scriptId,
+        seedPrompt,
+        audience,
+        style
+      });
+      syncTikTokAvatarSelection(runAvatarName);
+    } else {
+      syncTikTokAvatarSelection(runAvatarName);
+      syncTikTokAutomationClipDefaultsToManualControls();
+      tiktokStoryboardScriptId = scriptId;
+      renderTikTokStoryboardSelect();
+      if (tiktokScriptSelect) tiktokScriptSelect.value = scriptId;
+      syncTikTokAutomationPublishTargetsFromConfig();
+    }
+
+    if (shouldRunStage('storyboard')) {
+      await ensureStoryboardReady({ force: true });
+    } else if (!Array.isArray(tiktokStoryboard?.scenes) || !tiktokStoryboard.scenes.length || String(tiktokStoryboard?.source_script_id || '').trim() !== scriptId) {
+      await ensureStoryboardReady();
+    }
+
+    if (shouldRunStage('audio')) {
+      markStageRunning('audio', 'Generating voiceover');
+      await withTikTokAutomationQuietMode(() => generateTikTokTtsAudio());
+      if (tiktokAutoAlignRunning) {
+        await waitForTikTokAutomationCondition(() => !tiktokAutoAlignRunning, {
+          timeoutMs: 120000,
+          label: 'audio alignment'
+        });
+      }
+      if (!tiktokAudio || String(tiktokAudio?.script_id || '').trim() !== scriptId) {
+        throw buildTikTokAutomationStageError(
+          'audio',
+          readTikTokStatusText(tiktokTtsStatus, tiktokAlignmentStatus, tiktokAutoAlignStatus) ||
+            'Audio generation did not finish for the accepted script.'
+        );
+      }
+      syncTikTokAutomationAudioStage({ scriptId });
+    }
+
+    if (shouldRunStage('assets')) {
+      markStageRunning('assets', 'Sourcing assets');
+      await withTikTokAutomationQuietMode(async () => {
+        const enableAutoAiImages = tiktokAutomationConfig?.clipAutoAiImages !== false;
+        const enableAutoSearch = tiktokAutomationConfig?.clipAutoSearch !== false;
+        const enableAutoPick = tiktokAutomationConfig?.clipAutoPick !== false;
+        if (enableAutoSearch && Array.isArray(tiktokStoryboard?.scenes) && tiktokStoryboard.scenes.length) {
+          const loadingMap = {};
+          tiktokStoryboard.scenes.forEach((scene) => {
+            if (!scene?.id || scene?.avatar_reserved || scene?.merge_with_prev || isSceneAiLocked(scene)) return;
+            loadingMap[String(scene.id)] = true;
+          });
+          tiktokClipLoading = loadingMap;
+          syncTikTokAutomationAssetsStage({ scriptId });
+          renderTikTokAutomationUi();
+        }
+        if (enableAutoAiImages) {
+          await suggestAiImagesForScenes();
+          await generateAiImagesForScenes();
+        }
+        const canSearchLibrary = tiktokYoutubeOnly?.checked
+          ? !!getYoutubeKey()
+          : !!(getPexelsKey() || getPixabayKey() || getTikTokLibraryKey());
+        if (enableAutoSearch && canSearchLibrary) {
+          await searchAllTikTokClips();
+        }
+        if (enableAutoPick) {
+          await autoPickClips();
+        }
+        Object.keys(tiktokClipLoading || {}).forEach((sceneId) => {
+          tiktokClipLoading[sceneId] = false;
+        });
+        syncTikTokAutomationAssetsStage({ scriptId });
+      });
+      const assetsOutput = buildTikTokAutomationAssetsOutputFromStoryboard();
+      syncTikTokAutomationAssetsStage({ scriptId });
+      if (!assetsOutput.sceneCount || assetsOutput.selectedCount < assetsOutput.sceneCount) {
+        const autoSearchEnabled = tiktokAutomationConfig?.clipAutoSearch !== false;
+        const autoAiEnabled = tiktokAutomationConfig?.clipAutoAiImages !== false;
+        throw buildTikTokAutomationStageError(
+          'assets',
+          readTikTokStatusText(tiktokClipStatus, tiktokAiStatus) ||
+            `Only ${assetsOutput.selectedCount}/${assetsOutput.sceneCount} scene assets were prepared.${!autoSearchEnabled && !autoAiEnabled ? ' Enable auto-search or auto AI images in automation settings.' : ''}`
+        );
+      }
+    }
+
+    if (shouldRunStage('final')) {
+      markStageRunning('final', 'Exporting video');
+      await withTikTokAutomationQuietMode(() => exportTikTokTimeline());
+      exportedVideoPath = String(tiktokBaseStitchedPath || '').trim();
+      if (!exportedVideoPath) {
+        throw buildTikTokAutomationStageError(
+          'final',
+          readTikTokStatusText(tiktokExportStatus, tiktokFinalStatus) || 'Timeline export did not produce a video file.'
+        );
+      }
+      syncTikTokAutomationFinalStage({ scriptId, path: exportedVideoPath });
+    }
+
+    if (shouldRunStage('avatar')) {
+      const activeAvatar = getActiveAvatar();
+      if (!activeAvatar) {
+        patchTikTokAutomationRunStage(runId, 'avatar', {
+          status: 'skipped',
+          detail: 'No avatar selected. Step 7 skipped for this run.',
+          output: { sceneCount: 0, doneCount: 0, failedCount: 0, scenes: [] }
+        });
+      } else {
+        if (canReuseCompletedAvatarStageFromWorkspace()) {
+          patchTikTokAutomationRunStage(runId, 'avatar', {
+            status: 'success',
+            detail: 'Reused previously generated Step 7 avatar clips.',
+            output: syncTikTokAutomationAvatarStage({ scriptId, runId })?.output || {}
+          });
+        } else {
+          markStageRunning('avatar', 'Generating avatar clips');
+          await withTikTokAutomationQuietMode(() => startAvatarVideoGenerationWorkflow());
+          await waitForAvatarStageToSettle();
+        }
+        const avatarStage = syncTikTokAutomationAvatarStage({ scriptId, runId });
+        const avatarStatus = String(avatarStage?.status || '').trim().toLowerCase();
+        if (!['success', 'skipped'].includes(avatarStatus)) {
+          throw buildTikTokAutomationStageError(
+            'avatar',
+            String(avatarStage?.detail || '').trim() ||
+              readTikTokStatusText(tiktokAvatarStatus) ||
+              'Avatar processing did not finish successfully.'
+          );
+        }
+      }
+    }
+
+    if (shouldRunStage('final_render')) {
+      const avatarStageStatus = String(
+        (tiktokAutomationRuns.find((entry) => entry.id === runId) || run)?.stages?.avatar?.status || ''
+      ).trim().toLowerCase();
+      if (avatarStageStatus === 'skipped') {
+        patchTikTokAutomationRunStage(runId, 'final_render', {
+          status: 'skipped',
+          detail: 'Step 8 skipped because no avatar processing is configured for this run.',
+          output: {}
+        });
+      } else {
+        markStageRunning('final_render', 'Rendering final output');
+        await withTikTokAutomationQuietMode(() => renderTikTokFinalOutput());
+        await waitForFinalRenderStageToSettle();
+        const finalRenderStage = syncTikTokAutomationFinalRenderStage({ scriptId, runId });
+        const finalRenderOutput =
+          finalRenderStage?.output && typeof finalRenderStage.output === 'object' ? finalRenderStage.output : {};
+        const finalRenderPath = String(finalRenderOutput.path || '').trim();
+        const finalRenderPreview = String(finalRenderOutput.previewUrl || '').trim();
+        if (String(finalRenderStage?.status || '').trim().toLowerCase() !== 'success' || (!finalRenderPath && !finalRenderPreview)) {
+          throw buildTikTokAutomationStageError(
+            'final_render',
+            String(finalRenderStage?.detail || '').trim() ||
+              readTikTokStatusText(tiktokFinalStatus, tiktokExportStatus) ||
+              'Final render did not produce an output.'
+          );
+        }
+      }
+    }
+
+    if (shouldRunStage('caption')) {
+      patchTikTokAutomationRunStage(runId, 'caption', {
+        status: 'running',
+        detail: 'Generating transcript, caption pack, and caption render.'
+      });
+      markCurrent('Generating captions', 'Preparing transcript and caption output.');
+      try {
+        await withTikTokAutomationQuietMode(() => generateStep9TranscriptAndCaptionPack());
+        await withTikTokAutomationQuietMode(() => generateStep10CaptionPack());
+        await withTikTokAutomationQuietMode(() => renderStep9SubtitleVideo());
+        const captionOutput = buildTikTokAutomationCaptionOutput();
+        if (!captionOutput.primaryPath) {
+          throw new Error(readTikTokStatusText(tiktokCaptionRenderStatus, tiktokCaptionStatus) || 'Caption output did not render.');
+        }
+        patchTikTokAutomationRunStage(runId, 'caption', {
+          status: 'success',
+          detail: captionOutput.status || 'Caption output ready.',
+          output: captionOutput
+        });
+      } catch (err) {
+        patchTikTokAutomationRunStage(runId, 'caption', {
+          status: 'error',
+          detail: String(err?.message || 'Caption stage failed.').trim(),
+          output: buildTikTokAutomationCaptionOutput()
+        });
+      }
+    }
+
+    if (shouldRunStage('zoom')) {
+      patchTikTokAutomationRunStage(runId, 'zoom', {
+        status: 'running',
+        detail: 'Rendering intro zoom.'
+      });
+      markCurrent('Rendering zoom', 'Preparing the zoom-enhanced output.');
+      try {
+        await withTikTokAutomationQuietMode(() => renderStep10IntroZoom());
+        const zoomOutput = buildTikTokAutomationZoomOutput();
+        if (!zoomOutput.path) {
+          throw new Error(readTikTokStatusText(tiktokZoomStatus) || 'Zoom render did not produce an output.');
+        }
+        patchTikTokAutomationRunStage(runId, 'zoom', {
+          status: 'success',
+          detail: zoomOutput.status || 'Zoom output ready.',
+          output: zoomOutput
+        });
+      } catch (err) {
+        patchTikTokAutomationRunStage(runId, 'zoom', {
+          status: 'error',
+          detail: String(err?.message || 'Zoom stage failed.').trim(),
+          output: buildTikTokAutomationZoomOutput()
+        });
+      }
+    }
+
+    if (shouldRunStage('sfx')) {
+      patchTikTokAutomationRunStage(runId, 'sfx', {
+        status: 'running',
+        detail: 'Rendering SFX mix.'
+      });
+      markCurrent('Rendering SFX', 'Preparing the sound-designed output.');
+      try {
+        await withTikTokAutomationQuietMode(() => runStep11AnalyzeAndRender());
+        const sfxOutput = buildTikTokAutomationSfxOutput();
+        if (!sfxOutput.path) {
+          throw new Error(readTikTokStatusText(tiktokSfxStatus) || 'SFX render did not produce an output.');
+        }
+        patchTikTokAutomationRunStage(runId, 'sfx', {
+          status: 'success',
+          detail: sfxOutput.status || 'SFX mix ready.',
+          output: sfxOutput
+        });
+      } catch (err) {
+        patchTikTokAutomationRunStage(runId, 'sfx', {
+          status: 'error',
+          detail: String(err?.message || 'SFX stage failed.').trim(),
+          output: buildTikTokAutomationSfxOutput()
+        });
+      }
+    }
+
+    const latestVideoPath = getTikTokAutomationLatestWorkspaceVideoPath() || exportedVideoPath;
+    const publishDraft = buildTikTokRunPublishFallbackDraft(
+      tiktokAutomationRuns.find((entry) => entry.id === runId) || run
+    );
+    if (tiktokPublishVideoPath && latestVideoPath) {
+      tiktokPublishVideoPath.value = latestVideoPath;
+    }
+    syncTikTokAutomationPublishTargetsFromConfig();
+
+    if (shouldRunStage('publish') && String(tiktokAutomationConfig?.approvalMode || '').trim() === 'full-auto') {
+      patchTikTokAutomationRunStage(runId, 'publish', {
+        status: 'running',
+        detail: 'Posting to selected destinations.'
+      });
+      markCurrent('Publishing', 'Posting the latest video output to connected destinations.');
+      await withTikTokAutomationQuietMode(() => publishStep10ToSocial());
+      const refreshedRun = tiktokAutomationRuns.find((entry) => entry.id === runId) || run;
+      const publishStage = refreshedRun.stages?.publish;
+      if (!publishStage || publishStage.status === 'idle') {
+        patchTikTokAutomationRunPublishState({
+          runId,
+          scriptId,
+          stageStatus: missingPlatforms.length ? 'pending' : 'success',
+          detail: missingPlatforms.length
+            ? `Final video saved. Posting is pending credentials for ${formatTikTokPlatformList(missingPlatforms)}.`
+            : selectedPlatforms.length
+              ? `Posted to ${formatTikTokPlatformList(readyPlatforms)}.`
+              : 'Final video saved. No destinations are selected, so this run is ready to post later.',
+          videoPath: latestVideoPath,
+          caption: publishDraft.combined,
+          hashtags: publishDraft.hashtags,
+          platforms: selectedPlatforms,
+          readyPlatforms,
+          missingPlatforms
+        });
+      }
+    } else if (shouldRunStage('publish')) {
+      patchTikTokAutomationRunPublishState({
+        runId,
+        scriptId,
+        stageStatus: 'pending',
+        detail: missingPlatforms.length
+          ? `Final video saved. Review before post is enabled, and ${formatTikTokPlatformList(missingPlatforms)} still need credentials.`
+          : 'Final video saved. Review before post is enabled.',
+        videoPath: latestVideoPath,
+        caption: publishDraft.combined,
+        hashtags: publishDraft.hashtags,
+        platforms: selectedPlatforms,
+        readyPlatforms,
+        missingPlatforms
+      });
+    }
+
+    markCurrent('Run complete', `Completed pipeline restart for "${script.title || 'Untitled'}" from ${normalizedStartStage}.`);
+  } finally {
+    tiktokAutomationPipelineActive = false;
+  }
+};
+
+const ensureTikTokScriptForAutomationRun = (run = {}) => {
+  const runScriptId = String(run.scriptId || '').trim();
+  let script = tiktokScripts.find((entry) => String(entry?.id || '').trim() === runScriptId) || null;
+  if (script) return script;
+  const output = run?.stages?.script?.output;
+  if (!output || typeof output !== 'object') return null;
+  const scriptText = String(output.script || output.fullScript || '').trim();
+  const hookText = String(output.hook || '').trim();
+  if (!scriptText && !hookText) return null;
+  script = {
+    id: runScriptId || `script-rerun-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+    title: String(output.title || run.title || 'Automation script').trim(),
+    hook: hookText,
+    angle: String(output.angle || '').trim(),
+    script: scriptText || hookText,
+    source: 'automatic',
+    createdAt: run.createdAt || new Date().toISOString()
+  };
+  persistTikTokScripts([script].concat(tiktokScripts).slice(0, 50));
+  renderTikTokScripts();
+  return script;
+};
+
+const resetTikTokAutomationRunStagesFrom = (run = {}, startStageKey = '') => {
+  const runId = String(run.id || '').trim();
+  const start = String(startStageKey || '').trim();
+  const stageKeys = getTikTokRunStageKeys();
+  const startIndex = stageKeys.indexOf(start);
+  if (!runId || startIndex < 0) return;
+  const patchStages = {};
+  stageKeys.slice(startIndex).forEach((key) => {
+    const existing = run.stages?.[key] || {};
+    patchStages[key] = normalizeTikTokAutomationRunStage(key, {
+      ...existing,
+      status: key === start ? 'running' : 'idle',
+      detail: key === start ? 'Restarting from this step…' : `Cleared by restart from ${start}.`,
+      output: ''
+    });
+  });
+  patchTikTokAutomationRun(runId, {
+    status: 'running',
+    completedAt: '',
+    error: '',
+    stages: patchStages
+  });
+};
+
+const resetTikTokAutomationWorkspaceFromStage = (startStage = '') => {
+  const stageKey = String(startStage || '').trim();
+  if (!stageKey) return;
+  const stageOrder = ['storyboard', 'audio', 'assets', 'final', 'avatar', 'final_render', 'caption', 'zoom', 'sfx', 'publish'];
+  const startIndex = stageOrder.indexOf(stageKey);
+  if (startIndex < 0) return;
+  const shouldResetFrom = (key = '') => {
+    const idx = stageOrder.indexOf(String(key || '').trim());
+    return startIndex >= 0 && idx >= 0 && idx >= startIndex;
+  };
+  const preserveAvatarStageArtifacts = stageKey === 'final';
+  const storyboardScenes = Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [];
+  if (shouldResetFrom('assets') && storyboardScenes.length) {
+    tiktokClipResults = {};
+    tiktokAutoPickLogs = {};
+    tiktokAutoPickStage = {};
+    tiktokQueryScanSceneId = '';
+    tiktokQueryScanLoading = false;
+    tiktokClipLoading = {};
+    tiktokStoryboard = {
+      ...tiktokStoryboard,
+      scenes: storyboardScenes.map((scene) => {
+        if (scene?.avatar_reserved) return scene;
+        return {
+          ...scene,
+          clip: null,
+          clip_query: '',
+          clip_validation: null,
+          merge_with_prev: '',
+          ai_image_prompt: '',
+          ai_image_reason: '',
+          ai_image_status: '',
+          ai_image_url: '',
+          avatar_talk_url: '',
+          avatar_talk_task_id: '',
+          avatar_talk_state: '',
+          avatar_talk_progress: 0,
+          avatar_talk_fail_msg: '',
+          avatar_talk_audio_url: '',
+          avatar_talk_audio_local_path: '',
+          avatar_talk_prompt: '',
+          avatar_talk_image_url: ''
+        };
+      })
+    };
+    renderTikTokStoryboardOutput();
+    syncTikTokAutomationAssetsStage({
+      scriptId: String(tiktokStoryboard?.source_script_id || tiktokStoryboardScriptId || '').trim()
+    });
+  }
+  if (shouldResetFrom('avatar') && !preserveAvatarStageArtifacts) {
+    tiktokAvatarLogs = [];
+    tiktokAvatarSceneAssets = [];
+    tiktokAvatarClips = [];
+    tiktokAvatarActiveSceneId = '';
+    tiktokAvatarCancelRequested = false;
+    if (Array.isArray(tiktokStoryboard?.scenes) && tiktokStoryboard.scenes.length) {
+      tiktokStoryboard = {
+        ...tiktokStoryboard,
+        scenes: tiktokStoryboard.scenes.map((scene) => ({
+          ...scene,
+          avatar_talk_url: '',
+          avatar_talk_task_id: '',
+          avatar_talk_state: '',
+          avatar_talk_progress: 0,
+          avatar_talk_fail_msg: '',
+          avatar_talk_audio_url: '',
+          avatar_talk_audio_local_path: '',
+          avatar_talk_prompt: '',
+          avatar_talk_image_url: ''
+        }))
+      };
+      renderTikTokStoryboardOutput();
+    }
+    if (tiktokAvatarLog) tiktokAvatarLog.textContent = '';
+    renderTikTokAvatarPanel();
+  }
+  if (shouldResetFrom('final_render')) {
+    tiktokFinalLogs = [];
+    if (tiktokFinalLog) tiktokFinalLog.textContent = '';
+    setTikTokFinalProgress(0);
+    setTikTokFinalStatus('Step 8 reset. Ready to render final output.', false, { notify: false });
+    if (tiktokFinalPreview) {
+      tiktokFinalPreview.pause?.();
+      tiktokFinalPreview.removeAttribute('src');
+      tiktokFinalPreview.style.display = 'none';
+      tiktokFinalPreview.load();
+    }
+  }
+  scheduleSave();
+};
+
+const restartTikTokAutomationRunFromStage = async (runId = '', stageKey = '') => {
+  const targetRunId = String(runId || '').trim();
+  const requestedStage = String(stageKey || '').trim();
+  if (!targetRunId || !requestedStage) return;
+  if (tiktokAutomationBusy || tiktokGenerating || tiktokAutomationPipelineActive) {
+    setTikTokStatus('Another automation task is already running. Wait for it to finish first.', true);
+    return;
+  }
+  const run = tiktokAutomationRuns.find((entry) => entry.id === targetRunId);
+  if (!run) {
+    setTikTokStatus('Run not found for restart.', true);
+    return;
+  }
+  const script = ensureTikTokScriptForAutomationRun(run);
+  if (!script?.id) {
+    setTikTokStatus('Cannot restart this run because script output is missing.', true);
+    return;
+  }
+  const safeStartStage = getTikTokAutomationPipelineRestartStartStage(requestedStage);
+  if (safeStartStage !== requestedStage) {
+    pushTikTokAutomationEvent(
+      `Restart requested from ${requestedStage}. Dependency-safe restart begins at ${safeStartStage}.`,
+      'warning'
+    );
+  }
+  resetTikTokAutomationRunStagesFrom(run, safeStartStage);
+  resetTikTokAutomationWorkspaceFromStage(safeStartStage);
+  if (tiktokAutomationState) {
+    tiktokAutomationState.currentRunId = targetRunId;
+    tiktokAutomationState.currentStep = `Restarting from ${safeStartStage}`;
+    tiktokAutomationState.currentDetail = 'Clearing downstream stages and continuing pipeline.';
+  }
+  tiktokAutomationRestartingRunId = targetRunId;
+  tiktokAutomationRestartingStageKey = safeStartStage;
+  renderTikTokAutomationUi();
+  tiktokAutomationBusy = true;
+  try {
+    tiktokStoryboardScriptId = String(script.id || '').trim();
+    renderTikTokStoryboardSelect();
+    if (tiktokScriptSelect) tiktokScriptSelect.value = tiktokStoryboardScriptId;
+    await runTikTokAutomationManualPipeline({
+      run,
+      script,
+      seedPrompt: String(run.seedPrompt || tiktokAutomationConfig?.seedPrompt || '').trim(),
+      audience: String(tiktokAutomationConfig?.audience || '').trim(),
+      style: String(tiktokAutomationConfig?.style || '').trim(),
+      startAtStage: safeStartStage,
+      skipPrepare: true
+    });
+    const refreshedRun = tiktokAutomationRuns.find((entry) => entry.id === targetRunId) || run;
+    patchTikTokAutomationRun(targetRunId, {
+      status: refreshedRun.status === 'posted' ? 'posted' : 'generated',
+      completedAt: new Date().toISOString()
+    });
+    pushTikTokAutomationEvent(
+      `Restarted "${refreshedRun.title || 'run'}" from ${safeStartStage}.`,
+      'success'
+    );
+  } catch (err) {
+    const message = String(err?.message || 'Stage restart failed.').trim();
+    patchTikTokAutomationRun(targetRunId, {
+      status: 'failed',
+      error: message,
+      completedAt: new Date().toISOString()
+    });
+    patchTikTokAutomationRunStage(targetRunId, safeStartStage, {
+      status: 'error',
+      detail: message
+    });
+    setTikTokStatus(message, true);
+    pushTikTokAutomationEvent(`Restart failed from ${safeStartStage}: ${message}`, 'error');
+  } finally {
+    tiktokAutomationBusy = false;
+    tiktokAutomationRestartingRunId = '';
+    tiktokAutomationRestartingStageKey = '';
+    renderTikTokAutomationUi();
+  }
+};
+
+const syncTikTokAutomationSchedule = ({ save = true } = {}) => {
+  if (!tiktokAutomationState) tiktokAutomationState = normalizeTikTokAutomationState();
+  tiktokAutomationState.nextRunAt = tiktokAutomationState.running ? computeTikTokAutomationNextRunAt(new Date()) : '';
+  pruneTikTokAutomationGeneratedByDate();
+  if (save) commitTikTokAutomationState();
+  else persistTikTokAutomationLocalState();
+  renderTikTokAutomationUi();
+};
+
 const generateTikTokScripts = async () => {
   if (tiktokGenerating) return;
   const key = (openaiKeyInput?.value || currentOpenaiKey || '').trim();
@@ -16876,86 +25075,21 @@ const generateTikTokScripts = async () => {
   setTikTokProgress(8);
   pushTikTokLog('Validated inputs. Preparing prompt.');
 
-  const memoryText = formatTikTokMemory(12);
-  setTikTokProgress(18);
-  pushTikTokLog('Compiled memory of prior scripts.');
-  const body = {
-    model: 'gpt-4o',
-    messages: [
-      {
-        role: 'system',
-        content:
-          'You are a TikTok scriptwriter. Generate distinct, high-retention scripts with strong hooks and clear beats. Keep each script 35–55 seconds when read aloud. Return JSON: { "scripts":[{ "title":"", "angle":"", "hook":"", "beats":["","",...], "cta":"", "full_script":"" }] }.'
-      },
-      {
-        role: 'user',
-        content:
-          `Idea: ${idea}\n` +
-          `${audience ? `Target audience: ${audience}\n` : ''}` +
-          `${style ? `Style: ${style}\n` : ''}` +
-          `Count: ${count}\n` +
-          `Avoid repeating or closely echoing any of these prior outputs:\n${memoryText}\n` +
-          'Each script must feel fresh with a different angle and hook.'
-      }
-    ],
-    temperature: 0.9,
-    response_format: { type: 'json_object' },
-    max_tokens: 1200
-  };
-
   try {
-    setTikTokProgress(28);
-    pushTikTokLog('Sending request to OpenAI...');
-    const res = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`
-      },
+    const normalized = await requestTikTokScriptsFromOpenAI({
+      key,
+      idea,
+      audience,
+      style,
+      count,
+      source: 'manual',
       signal: tiktokScriptsAbortController.signal,
-      body: JSON.stringify(body)
-    });
-    if (!res.ok) throw new Error(`OpenAI error ${res.status}`);
-    setTikTokProgress(55);
-    pushTikTokLog('Received response. Parsing JSON...');
-    const data = await res.json();
-    const content = data.choices?.[0]?.message?.content || '{}';
-    const parsed = JSON.parse(content);
-    const scripts = Array.isArray(parsed.scripts) ? parsed.scripts : [];
-    if (!scripts.length) throw new Error('No scripts returned.');
-    setTikTokProgress(75);
-    pushTikTokLog(`Normalizing ${scripts.length} script(s)...`);
-    const stamp = Date.now();
-    const normalized = scripts.slice(0, count).map((script, idx) => {
-      const title = sanitizeScriptValue(script.title) || `Script ${idx + 1}`;
-      const angle = sanitizeScriptValue(script.angle || script.idea || script.concept);
-      const hook = sanitizeScriptValue(script.hook);
-      const beats = Array.isArray(script.beats)
-        ? script.beats.map((b) => sanitizeScriptValue(b)).filter(Boolean)
-        : [];
-      const cta = sanitizeScriptValue(script.cta);
-      let fullScript = sanitizeScriptValue(script.full_script || script.script);
-      if (!fullScript) {
-        fullScript = [hook, ...beats, cta].filter(Boolean).join('\n');
+      onProgress: (message, progress) => {
+        if (Number.isFinite(progress)) setTikTokProgress(progress);
+        if (message) pushTikTokLog(message);
       }
-      return {
-        id: `${stamp}-${idx}-${Math.random().toString(16).slice(2)}`,
-        title,
-        angle,
-        hook,
-        beats,
-        cta,
-        script: fullScript,
-        createdAt: Date.now(),
-        idea,
-        audience,
-        style
-      };
     });
-    const nextList = normalized.concat(tiktokScripts).slice(0, 50);
-    persistTikTokScripts(nextList);
-    renderTikTokScripts();
-    scheduleSave();
+    mergeGeneratedTikTokScripts(normalized, { source: 'manual' });
     setTikTokProgress(100);
     pushTikTokLog('Rendered scripts and updated memory.');
     setTikTokStatus(`Generated ${normalized.length} script${normalized.length === 1 ? '' : 's'}.`);
@@ -16974,6 +25108,244 @@ const generateTikTokScripts = async () => {
     tiktokGenerating = false;
     if (tiktokSpinner) tiktokSpinner.classList.remove('active');
   }
+};
+
+const generateNextTikTokAutomationIdea = async ({ reason = 'manual-trigger' } = {}) => {
+  if (tiktokAutomationBusy || tiktokGenerating) return false;
+  const key = (openaiKeyInput?.value || currentOpenaiKey || '').trim();
+  if (!key) {
+    setTikTokStatus('OpenAI key required for automatic mode.', true);
+    pushTikTokAutomationEvent('Automatic generation blocked: missing OpenAI key.', 'error');
+    renderTikTokAutomationUi();
+    return false;
+  }
+  const idea = String(tiktokAutomationConfig?.seedPrompt || '').trim();
+  if (!idea) {
+    setTikTokStatus('Add a seed brief before starting automation.', true);
+    pushTikTokAutomationEvent('Automatic generation blocked: seed brief is empty.', 'warning');
+    renderTikTokAutomationUi();
+    return false;
+  }
+
+  ensureTikTokConceptMemorySeeded();
+  await ensureTikTokAutomationEmbeddingsBackfilled(key, { limit: 24 });
+  tiktokAutomationBusy = true;
+  tiktokScriptsAbortController = new AbortController();
+  const run = createTikTokAutomationRun({
+    reason,
+    seedPrompt: idea
+  });
+  pushTikTokAutomationEvent(`Automatic generation started (${reason}).`, 'run');
+  renderTikTokAutomationUi();
+
+  try {
+    const pipeline = await runTikTokAutomationConceptPipeline({
+      key,
+      seedPrompt: idea,
+      audience: String(tiktokAutomationConfig?.audience || '').trim(),
+      style: String(tiktokAutomationConfig?.style || '').trim(),
+      runId: run.id,
+      maxAttempts: TIKTOK_AUTOMATION_GENERATION_ATTEMPTS,
+      persistAccepted: true,
+      signal: tiktokScriptsAbortController.signal,
+      onAttempt: (attempt, allAttempts) => {
+        patchTikTokAutomationRunStage(run.id, 'concept', {
+          status: attempt.script ? 'success' : 'running',
+          detail: `Attempt ${attempt.attemptIndex} concept generated.`,
+          output: {
+            title: String(attempt.concept?.title || '').trim(),
+            hook: String(attempt.concept?.hook || '').trim(),
+            angle: String(attempt.concept?.angle || '').trim(),
+            topic: String(attempt.concept?.topic || '').trim(),
+            tags: Array.isArray(attempt.concept?.tags) ? attempt.concept.tags : []
+          }
+        });
+        patchTikTokAutomationRunStage(run.id, 'embedding', {
+          status: 'success',
+          detail: `Embedding ready for attempt ${attempt.attemptIndex}.`,
+          output: {
+            model: String(attempt.embedding?.model || '').trim(),
+            provider: String(attempt.embedding?.provider || '').trim(),
+            dimensions: Number(attempt.embedding?.dimensions || 0) || 0,
+            preview: String(attempt.embedding?.preview || '').trim()
+          }
+        });
+        patchTikTokAutomationRunStage(run.id, 'retrieval', {
+          status: attempt.decision === 'block' ? 'blocked' : 'success',
+          detail: attempt.retrievalEvent?.reason || attempt.reason || 'Retrieval complete.',
+          output: {
+            decision: String(attempt.decision || '').trim(),
+            threshold: Number(attempt.retrievalEvent?.threshold || 0) || 0,
+            clusterSummary: Array.isArray(attempt.retrievalEvent?.clusterSummary) ? attempt.retrievalEvent.clusterSummary : [],
+            semanticMatches: Array.isArray(attempt.semanticMatches) ? attempt.semanticMatches.slice(0, 6) : [],
+            recentMatches: Array.isArray(attempt.recentMatches) ? attempt.recentMatches.slice(0, 6) : [],
+            lexicalMatches: Array.isArray(attempt.lexicalMatches) ? attempt.lexicalMatches.slice(0, 6) : []
+          }
+        });
+        patchTikTokAutomationRunStage(run.id, 'memory', {
+          status: attempt.decision === 'block' ? 'blocked' : attempt.script ? 'success' : 'running',
+          detail: attempt.reason || 'Checking concept against saved memory.',
+          output: {
+            summary: formatTikTokConceptAttemptSummary(allAttempts),
+            attempts: allAttempts
+          }
+        });
+        tiktokAutomationState.currentStep = attempt.script ? 'Generating script' : `Concept attempt ${attempt.attemptIndex}`;
+        tiktokAutomationState.currentDetail = attempt.reason || 'Evaluating concept against retrieved memory.';
+        renderTikTokAutomationUi();
+      }
+    });
+
+    if (!pipeline.accepted || !pipeline.script || !pipeline.approvedConcept) {
+      tiktokAutomationState.lastError = pipeline.reason || 'All generated concepts were too close to existing memory.';
+      pushTikTokAutomationEvent('Automatic generation blocked: no concept cleared memory.', 'warning');
+      setTikTokStatus('Automatic mode blocked the concept after memory retrieval.', true);
+      patchTikTokAutomationRunStage(run.id, 'memory', {
+        status: 'blocked',
+        detail: pipeline.reason || 'No concept cleared memory.',
+        output: formatTikTokConceptAttemptSummary(pipeline.attempts)
+      });
+      patchTikTokAutomationRun(run.id, {
+        status: 'blocked',
+        error: tiktokAutomationState.lastError,
+        completedAt: new Date().toISOString()
+      });
+      tiktokAutomationState.currentStep = 'Run blocked by memory';
+      tiktokAutomationState.currentDetail = tiktokAutomationState.lastError;
+      syncTikTokAutomationSchedule();
+      return false;
+    }
+
+    incrementTikTokAutomationGeneratedToday(1);
+    tiktokAutomationState.lastError = '';
+    pushTikTokAutomationEvent(`Generated "${pipeline.script.title}" automatically from an approved concept.`, 'success');
+    setTikTokStatus(`Automatic mode generated "${pipeline.script.title}".`);
+    patchTikTokAutomationRunStage(run.id, 'memory', {
+      status: 'success',
+      detail: 'Concept retrieval and duplicate protection approved this run.',
+      output: {
+        summary: formatTikTokConceptAttemptSummary(pipeline.attempts),
+        attempts: pipeline.attempts
+      }
+    });
+    patchTikTokAutomationRunStage(run.id, 'script', {
+      status: 'success',
+      detail: pipeline.script.title || 'Script generated.',
+      output: {
+        title: String(pipeline.script.title || '').trim(),
+        hook: String(pipeline.script.hook || '').trim(),
+        angle: String(pipeline.script.angle || '').trim(),
+        script: String(pipeline.script.script || '').trim()
+      }
+    });
+    patchTikTokAutomationRun(run.id, {
+      status: 'running',
+      title: pipeline.script.title || '',
+      conceptId: pipeline.approvedConcept.id || '',
+      retrievalEventId: pipeline.retrievalEvent?.id || '',
+      scriptId: pipeline.script.id || '',
+      seedPrompt: idea
+    });
+    const selectedPlatforms = getTikTokAutomationSelectedPlatforms();
+    const missingPlatforms = getTikTokPlatformsMissingCredentials(selectedPlatforms);
+    const readyPlatforms = selectedPlatforms.filter((platform) => !missingPlatforms.includes(platform));
+    if (String(tiktokAutomationConfig?.approvalMode || '').trim() === 'full-auto' && selectedPlatforms.length && missingPlatforms.length) {
+      patchTikTokAutomationRunPublishState({
+        runId: run.id,
+        scriptId: pipeline.script.id || '',
+        stageStatus: 'pending',
+        detail: `If this run reaches a final video, it will be saved to post later because ${formatTikTokPlatformList(missingPlatforms)} still need credentials.`,
+        caption: [pipeline.script.title, pipeline.script.hook].filter(Boolean).join(' — '),
+        platforms: selectedPlatforms,
+        readyPlatforms,
+        missingPlatforms
+      });
+    }
+    tiktokAutomationState.currentRunId = run.id;
+    tiktokAutomationState.currentStep = 'Continuing pipeline';
+    tiktokAutomationState.currentDetail = `Accepted concept "${pipeline.approvedConcept.title}" and starting the downstream video pipeline.`;
+    await runTikTokAutomationManualPipeline({
+      run,
+      script: pipeline.script,
+      seedPrompt: idea,
+      audience: String(tiktokAutomationConfig?.audience || '').trim(),
+      style: String(tiktokAutomationConfig?.style || '').trim()
+    });
+    const refreshedRun = tiktokAutomationRuns.find((entry) => entry.id === run.id) || run;
+    patchTikTokAutomationRun(run.id, {
+      status: refreshedRun.status === 'posted' ? 'posted' : 'generated',
+      completedAt: new Date().toISOString()
+    });
+    tiktokAutomationState.currentStep = refreshedRun.status === 'posted' ? 'Run posted' : 'Run complete';
+    tiktokAutomationState.currentDetail = refreshedRun.status === 'posted'
+      ? `Completed and posted "${pipeline.script.title}".`
+      : `Completed the downstream pipeline for "${pipeline.script.title}".`;
+    syncTikTokAutomationSchedule();
+    return true;
+  } catch (err) {
+    if (err?.name === 'AbortError') {
+      pushTikTokAutomationEvent('Automatic generation stopped.', 'warning');
+      setTikTokStatus('Automatic generation stopped.');
+      patchTikTokAutomationRun(run.id, {
+        status: 'paused',
+        completedAt: new Date().toISOString()
+      });
+      patchTikTokAutomationRunStage(run.id, 'script', {
+        status: 'skipped',
+        detail: 'Run was stopped before a script was accepted.'
+      });
+      return false;
+    }
+    tiktokAutomationState.lastError = err?.message || 'Automatic generation failed.';
+    pushTikTokAutomationEvent(`Automatic generation failed: ${tiktokAutomationState.lastError}`, 'error');
+    setTikTokStatus(tiktokAutomationState.lastError, true);
+    if (err?.stageKey) {
+      patchTikTokAutomationRunStage(run.id, err.stageKey, {
+        status: 'error',
+        detail: tiktokAutomationState.lastError
+      });
+    }
+    patchTikTokAutomationRun(run.id, {
+      status: 'failed',
+      error: tiktokAutomationState.lastError,
+      completedAt: new Date().toISOString()
+    });
+    patchTikTokAutomationRunStage(run.id, 'script', {
+      status: 'error',
+      detail: tiktokAutomationState.lastError
+    });
+    tiktokAutomationState.currentStep = 'Generation failed';
+    tiktokAutomationState.currentDetail = tiktokAutomationState.lastError;
+    syncTikTokAutomationSchedule();
+    return false;
+  } finally {
+    tiktokScriptsAbortController = null;
+    tiktokAutomationBusy = false;
+    renderTikTokAutomationUi();
+  }
+};
+
+const tickTikTokAutomation = async () => {
+  if (tiktokMode !== 'automatic' || !tiktokAutomationState?.running || tiktokAutomationBusy || tiktokGenerating) return;
+  const nextRunAt = String(tiktokAutomationState.nextRunAt || '').trim();
+  if (!nextRunAt) {
+    syncTikTokAutomationSchedule({ save: false });
+    return;
+  }
+  const nextRunDate = new Date(nextRunAt);
+  if (Number.isNaN(nextRunDate.getTime())) {
+    syncTikTokAutomationSchedule({ save: false });
+    return;
+  }
+  if (Date.now() < nextRunDate.getTime()) return;
+  await generateNextTikTokAutomationIdea({ reason: 'scheduled-slot' });
+};
+
+const ensureTikTokAutomationTimer = () => {
+  if (tiktokAutomationTimer) clearInterval(tiktokAutomationTimer);
+  tiktokAutomationTimer = setInterval(() => {
+    tickTikTokAutomation().catch(() => {});
+  }, 30000);
 };
 
 const generateTikTokStoryboard = async () => {
@@ -17167,6 +25539,8 @@ const generateTikTokStoryboard = async () => {
 
     renderTikTokStoryboardOutput();
     setTikTokStoryboardStatus(`Storyboard ready: ${normalizedScenes.length} scenes.`);
+    syncTikTokAutomationStoryboardStage({ scriptId: script.id });
+    syncTikTokAutomationAssetsStage({ scriptId: script.id });
     applyAvatarReservedScenes();
     scheduleSave();
     maybeAutoRunClipPipeline('storyboard');
@@ -17190,26 +25564,26 @@ const formatDurationMs = (value) => {
   return `${totalSeconds}s`;
 };
 
-const setTikTokTtsStatus = (text, isError = false) => {
+const setTikTokTtsStatus = (text, isError = false, { notify = true } = {}) => {
   if (!tiktokTtsStatus) return;
   tiktokTtsStatus.textContent = text;
   tiktokTtsStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'TTS');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'TTS');
   scheduleTikTokStickyStepUpdate();
 };
 
-const setTikTokAlignmentStatus = (text, isError = false) => {
+const setTikTokAlignmentStatus = (text, isError = false, { notify = true } = {}) => {
   if (!tiktokAlignmentStatus) return;
   tiktokAlignmentStatus.textContent = text;
   tiktokAlignmentStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'Align');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Align');
 };
 
-const setTikTokAutoAlignStatus = (text, isError = false) => {
+const setTikTokAutoAlignStatus = (text, isError = false, { notify = true } = {}) => {
   if (!tiktokAutoAlignStatus) return;
   tiktokAutoAlignStatus.textContent = text;
   tiktokAutoAlignStatus.style.color = isError ? '#ff7a7a' : '#97a0b9';
-  showToast(text, isError, 'Auto-align');
+  if (notify && tiktokAutomationQuietModeDepth <= 0) showToast(text, isError, 'Auto-align');
 };
 
 const formatTimestamp = (msValue) => {
@@ -17449,10 +25823,10 @@ const syncAvatarSceneUiFromStoryboard = (scenes = []) => {
     audioUrl: String(scene.avatar_talk_audio_url || '').trim(),
     audioPreviewUrl: String(filePathToUrl(fileUrlToPath(scene.avatar_talk_audio_local_path || '')) || '').trim(),
     prompt: String(scene.avatar_talk_prompt || '').trim(),
-    status: formatKieSceneStatus(scene.avatar_talk_state || (scene.avatar_talk_url ? 'success' : 'waiting'), {
+    status: formatKieSceneStatus(scene.avatar_talk_state || (hasTikTokAvatarSceneOutput(scene) ? 'success' : 'waiting'), {
       failMsg: scene.avatar_talk_fail_msg || ''
     }),
-    state: scene.avatar_talk_url
+    state: hasTikTokAvatarSceneOutput(scene)
       ? 'done'
       : String(scene.avatar_talk_state || '').toLowerCase() === 'fail'
       ? 'failed'
@@ -17461,7 +25835,7 @@ const syncAvatarSceneUiFromStoryboard = (scenes = []) => {
       : scene.avatar_talk_task_id
       ? 'processing'
       : 'queued',
-    progress: scene.avatar_talk_url
+    progress: hasTikTokAvatarSceneOutput(scene)
       ? 100
       : normalizeKieProgressPercent(scene.avatar_talk_state || '', { progress: scene.avatar_talk_progress || 0 }),
     taskId: String(scene.avatar_talk_task_id || '').trim()
@@ -17470,20 +25844,20 @@ const syncAvatarSceneUiFromStoryboard = (scenes = []) => {
   tiktokAvatarClips = list.map((scene) => ({
     id: scene.id,
     label: `Scene ${scene.id}`,
-    url: scene.avatar_talk_url || '',
-    status: scene.avatar_talk_url
+    url: getTikTokAvatarSceneOutputUrl(scene),
+    status: hasTikTokAvatarSceneOutput(scene)
       ? 'Ready'
       : formatKieSceneStatus(scene.avatar_talk_state || (scene.avatar_talk_task_id ? 'waiting' : 'queued'), {
           failMsg: scene.avatar_talk_fail_msg || ''
         }),
-    state: scene.avatar_talk_url
+    state: hasTikTokAvatarSceneOutput(scene)
       ? 'done'
       : String(scene.avatar_talk_state || '').toLowerCase() === 'fail'
       ? 'failed'
       : scene.avatar_talk_task_id
       ? 'processing'
       : 'queued',
-    progress: scene.avatar_talk_url
+    progress: hasTikTokAvatarSceneOutput(scene)
       ? 100
       : normalizeKieProgressPercent(scene.avatar_talk_state || '', { progress: scene.avatar_talk_progress || 0 })
   }));
@@ -17494,7 +25868,7 @@ const resumePendingAvatarSceneTasks = async () => {
   const scenes = Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [];
   const pending = scenes.filter((scene) => {
     const taskId = String(scene?.avatar_talk_task_id || '').trim();
-    const hasOutput = !!String(scene?.avatar_talk_url || '').trim();
+    const hasOutput = hasTikTokAvatarSceneOutput(scene);
     const state = String(scene?.avatar_talk_state || '').toLowerCase();
     return !!taskId && !hasOutput && state !== 'fail' && state !== 'success';
   });
@@ -17681,8 +26055,12 @@ const resumePendingAvatarSceneTasks = async () => {
   }
 };
 
-const startAvatarVideoGenerationWorkflow = async () => {
+const startAvatarVideoGenerationWorkflow = async ({ autoRetry = false } = {}) => {
   if (tiktokAvatarGenerateRunning) return;
+  tiktokAvatarAutoFinalRenderPending = false;
+  if (!autoRetry) {
+    clearTikTokAvatarAutoRetry({ resetAttempts: true });
+  }
   const avatar = getActiveAvatar();
   if (!avatar) {
     setTikTokAvatarStatus('Select an avatar first.', true);
@@ -17693,7 +26071,9 @@ const startAvatarVideoGenerationWorkflow = async () => {
     setTikTokAvatarStatus('Generate storyboard scenes before avatar video gen.', true);
     return;
   }
-  if (!tiktokAudio?.file_path) {
+  const hasReusableAudio = hasTikTokAvatarReusableSceneAudio(storyboardScenes);
+  const sourceAudioPath = await resolveTikTokAvatarSplitSourceAudioPath();
+  if (!sourceAudioPath && !hasReusableAudio) {
     setTikTokAvatarStatus('Generate TTS audio + alignment first.', true);
     return;
   }
@@ -17721,16 +26101,46 @@ const startAvatarVideoGenerationWorkflow = async () => {
   });
   setTikTokAvatarStatus(`Starting avatar video generation for ${targetScenes.length} scene(s)...`);
   try {
+    const key = requireKey();
+    if (!key) {
+      throw new Error('Enter your Kie.ai key first.');
+    }
     const compressed = await ensureCompressedAvatarAssets();
     let normalUrl = compressed.normalUrl || tiktokAvatarAssets.normalUrl || avatar.compressed_normal_url || '';
     let greenUrl = compressed.greenUrl || tiktokAvatarAssets.greenUrl || avatar.compressed_green_url || '';
+    const normalResolved = await resolveAvatarAssetFromList(avatar, 'images');
+    const greenResolved = await resolveAvatarAssetFromList(avatar, 'greenScreen');
+    if (!normalUrl) normalUrl = normalResolved.url || '';
+    if (!greenUrl) greenUrl = greenResolved.url || '';
     if (!normalUrl) normalUrl = await ensureAvatarNormalImageUrl();
     if (!greenUrl) greenUrl = await ensureAvatarGreenScreenUrl();
+    const kieImageCache = new Map();
+    const normalEntry = normalResolved.entry || (Array.isArray(avatar?.images) ? avatar.images[0] : null);
+    const greenEntry = greenResolved.entry || (Array.isArray(avatar?.greenScreen) ? avatar.greenScreen[0] : null);
+    if (!isHttpUrl(normalUrl) || shouldRehostAvatarUrl(normalUrl)) {
+      const hostedNormal = normalEntry
+        ? await ensureAvatarAssetKieUrl(avatar, normalEntry, 'images', { apiKey: key, cacheMap: kieImageCache })
+        : await ensureKieAccessibleImageUrl(normalUrl, { apiKey: key, uploadPath: 'images/avatar', cacheMap: kieImageCache });
+      normalUrl = String(hostedNormal || normalUrl || '').trim();
+    }
+    if (!isHttpUrl(greenUrl) || shouldRehostAvatarUrl(greenUrl)) {
+      const hostedGreen = greenEntry
+        ? await ensureAvatarAssetKieUrl(avatar, greenEntry, 'greenScreen', { apiKey: key, cacheMap: kieImageCache })
+        : await ensureKieAccessibleImageUrl(greenUrl, { apiKey: key, uploadPath: 'images/avatar', cacheMap: kieImageCache });
+      greenUrl = String(hostedGreen || greenUrl || '').trim();
+    }
     if (!normalUrl) {
       throw new Error('Avatar normal image unavailable.');
     }
     if (!greenUrl) {
-      throw new Error('Avatar green-screen image unavailable. Add one in Avatar setup.');
+      greenUrl = normalUrl;
+      pushTikTokAvatarLog('Green-screen image unavailable. Falling back to normal avatar image.');
+    }
+    if (!isHttpUrl(normalUrl)) {
+      throw new Error('Avatar normal image must be uploaded/hosted before Step 7 can run.');
+    }
+    if (!isHttpUrl(greenUrl)) {
+      greenUrl = normalUrl;
     }
     pushTikTokAvatarLog(
       `Starting Kie video generation. Completed scenes will be skipped, and all pending scenes submit in parallel.`
@@ -17739,7 +26149,7 @@ const startAvatarVideoGenerationWorkflow = async () => {
       overwrite: false,
       getSceneImageUrl: (scene) => {
         const provider = String(scene?.clip?.provider || '').toLowerCase();
-        if (provider === 'youtube') return greenUrl;
+        if (provider === 'youtube') return greenUrl || normalUrl;
         return normalUrl;
       }
     });
@@ -17766,6 +26176,7 @@ const startAvatarVideoGenerationWorkflow = async () => {
       });
     }
   } finally {
+    const wasCancelled = tiktokAvatarCancelRequested;
     tiktokAvatarGenerateRunning = false;
     tiktokAvatarCancelRequested = false;
     tiktokAvatarActiveSceneId = '';
@@ -17776,13 +26187,22 @@ const startAvatarVideoGenerationWorkflow = async () => {
       tiktokAvatarGenerateBtn.disabled = false;
       tiktokAvatarGenerateBtn.textContent = 'Send To Kie Video Gen';
     }
+    if (wasCancelled) {
+      clearTikTokAvatarAutoRetry({ resetAttempts: true });
+    } else {
+      scheduleTikTokAvatarAutoRetry();
+      requestTikTokAvatarAutoHandoff({ source: 'step7-workflow' });
+    }
     renderTikTokAvatarPanel();
   }
 };
 
-const retryAvatarScene = async (sceneId = '') => {
-  const id = String(sceneId || '').trim();
+const retryAvatarScene = async (sceneId = '', _options = {}) => {
+  const requestedId = String(sceneId || '').trim();
+  const resolvedForLookup = resolveTikTokStoryboardSceneByRetryId(requestedId);
+  const id = String(resolvedForLookup?.id || requestedId || '').trim();
   if (!id) return;
+  clearTikTokAvatarAutoRetry({ resetAttempts: false });
   if (tiktokAvatarCompressRunning || tiktokAvatarGenerateRunning) {
     setTikTokAvatarStatus('Avatar processing is already running. Wait for it to finish first.', true);
     return;
@@ -17792,18 +26212,14 @@ const retryAvatarScene = async (sceneId = '') => {
     setTikTokAvatarStatus('Select an avatar first.', true);
     return;
   }
-  const scenes = Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [];
-  const scene = scenes.find((s) => String(s?.id || '') === id);
+  const scene = resolveTikTokStoryboardSceneByRetryId(id);
   if (!scene) {
-    setTikTokAvatarStatus(`Scene ${id} not found.`, true);
+    setTikTokAvatarStatus(`Scene ${requestedId || id} not found.`, true);
     return;
   }
-  const hasStoredSceneAudio = !!String(fileUrlToPath(scene?.avatar_talk_audio_local_path || '') || '').trim();
-  if (!tiktokAudio?.file_path && !hasStoredSceneAudio) {
-    setTikTokAvatarStatus('Generate TTS audio + alignment first, or keep scene audio segments available.', true);
-    return;
-  }
-  if (String(scene.avatar_talk_url || '').trim()) {
+  const assetIdx = tiktokAvatarSceneAssets.findIndex((a) => String(a?.id || '') === id);
+  const clipIdx = tiktokAvatarClips.findIndex((c) => String(c?.id || '') === id);
+  if (hasTikTokAvatarSceneOutputById(id)) {
     setTikTokAvatarStatus(`Scene ${id} is already completed.`, false);
     return;
   }
@@ -17830,6 +26246,10 @@ const retryAvatarScene = async (sceneId = '') => {
     const compressed = await ensureCompressedAvatarAssets();
     let normalUrl = compressed.normalUrl || tiktokAvatarAssets.normalUrl || avatar.compressed_normal_url || '';
     let greenUrl = compressed.greenUrl || tiktokAvatarAssets.greenUrl || avatar.compressed_green_url || '';
+    const normalResolved = await resolveAvatarAssetFromList(avatar, 'images');
+    const greenResolved = await resolveAvatarAssetFromList(avatar, 'greenScreen');
+    if (!normalUrl) normalUrl = normalResolved.url || '';
+    if (!greenUrl) greenUrl = greenResolved.url || '';
     if (!normalUrl) normalUrl = await ensureAvatarNormalImageUrl();
     if (!greenUrl) greenUrl = await ensureAvatarGreenScreenUrl();
     if (!normalUrl) {
@@ -17837,6 +26257,64 @@ const retryAvatarScene = async (sceneId = '') => {
     }
     const provider = String(scene?.clip?.provider || '').toLowerCase();
     const sceneImageUrl = provider === 'youtube' ? greenUrl || normalUrl : normalUrl;
+    if (assetIdx >= 0) {
+      tiktokAvatarSceneAssets[assetIdx].status = 'Checking retry inputs...';
+      tiktokAvatarSceneAssets[assetIdx].state = 'submitting';
+      tiktokAvatarSceneAssets[assetIdx].progress = 6;
+      tiktokAvatarSceneAssets[assetIdx].imageUrl = sceneImageUrl || tiktokAvatarSceneAssets[assetIdx].imageUrl || '';
+    }
+    if (clipIdx >= 0) {
+      tiktokAvatarClips[clipIdx] = {
+        ...tiktokAvatarClips[clipIdx],
+        status: 'Checking retry inputs...',
+        state: 'submitting',
+        progress: 6
+      };
+    }
+    renderTikTokAvatarPanel();
+    const inputState = await ensureTikTokAvatarRetrySceneInputs(scene, sceneImageUrl);
+    if (!inputState.hasImage || !inputState.hasAudio) {
+      const missing = [];
+      if (!inputState.hasImage) missing.push('avatar image');
+      if (!inputState.hasAudio) missing.push('scene audio');
+      const missingMsg = `Cannot retry scene ${id}: missing ${missing.join(' + ')}.`;
+      const detail = String(inputState.audioRecoveryDetail || '').trim();
+      setTikTokAvatarStatus(detail ? `${missingMsg} ${detail}` : missingMsg, true);
+      tiktokStoryboard = {
+        ...tiktokStoryboard,
+        scenes: tiktokStoryboard.scenes.map((s) =>
+          s.id === id
+            ? {
+                ...s,
+                avatar_talk_state: 'fail',
+                avatar_talk_progress: 100,
+                avatar_talk_fail_msg: detail || missingMsg
+              }
+            : s
+        )
+      };
+      if (assetIdx >= 0) {
+        tiktokAvatarSceneAssets[assetIdx].status = detail ? `Missing input • ${detail}` : 'Missing input';
+        tiktokAvatarSceneAssets[assetIdx].state = 'failed';
+        tiktokAvatarSceneAssets[assetIdx].progress = 100;
+        tiktokAvatarSceneAssets[assetIdx].audioPreviewUrl = inputState.audioPreviewUrl || '';
+        tiktokAvatarSceneAssets[assetIdx].audioUrl = inputState.audioUrl || '';
+      }
+      if (clipIdx >= 0) {
+        tiktokAvatarClips[clipIdx] = {
+          ...tiktokAvatarClips[clipIdx],
+          status: 'Missing required retry inputs',
+          state: 'failed',
+          progress: 100
+        };
+      }
+      renderTikTokAvatarPanel();
+      scheduleSave();
+      return;
+    }
+    if (inputState.audioRebuilt) {
+      pushTikTokAvatarLog(`Scene ${id}: ${inputState.audioRecoveryDetail}`);
+    }
     const fallbackPrompt = [
       'Generate a natural talking-avatar performance.',
       'Make the avatar expressive and animated with clear facial emotion changes.',
@@ -17857,6 +26335,8 @@ const retryAvatarScene = async (sceneId = '') => {
               avatar_talk_task_id: '',
               avatar_talk_prompt: prompt,
               avatar_talk_image_url: sceneImageUrl || '',
+              avatar_talk_audio_url: inputState.audioUrl || String(s.avatar_talk_audio_url || '').trim(),
+              avatar_talk_audio_local_path: inputState.audioLocalPath || '',
               avatar_talk_state: 'retrying',
               avatar_talk_progress: 0,
               avatar_talk_fail_msg: ''
@@ -17864,6 +26344,13 @@ const retryAvatarScene = async (sceneId = '') => {
           : s
       )
     };
+    if (assetIdx >= 0) {
+      tiktokAvatarSceneAssets[assetIdx].audioPreviewUrl = inputState.audioPreviewUrl || '';
+      tiktokAvatarSceneAssets[assetIdx].audioUrl = inputState.audioUrl || '';
+      tiktokAvatarSceneAssets[assetIdx].status = inputState.audioRebuilt ? 'Inputs ready • audio rebuilt' : 'Inputs ready';
+      tiktokAvatarSceneAssets[assetIdx].state = 'ready';
+      tiktokAvatarSceneAssets[assetIdx].progress = 10;
+    }
     syncAvatarSceneUiFromStoryboard(tiktokStoryboard.scenes);
     renderTikTokAvatarPanel();
     scheduleSave();
@@ -17894,6 +26381,7 @@ const retryAvatarScene = async (sceneId = '') => {
       tiktokAvatarGenerateBtn.disabled = false;
       tiktokAvatarGenerateBtn.textContent = 'Send To Kie Video Gen';
     }
+    requestTikTokAvatarAutoHandoff({ source: 'scene-retry' });
     renderTikTokAvatarPanel();
     scheduleSave();
   }
@@ -17982,6 +26470,301 @@ const hasActiveMediaPlayback = (root) => {
     }
   }
   return false;
+};
+
+const resolveAvatarPanelPreviewUrl = (avatar = null, { preferGreen = false } = {}) => {
+  const normalEntry = avatar?.images?.[0] || null;
+  const greenEntry = avatar?.greenScreen?.[0] || null;
+  const normalLocal = getAvatarEntryDisplayUrl(normalEntry);
+  const greenLocal = getAvatarEntryDisplayUrl(greenEntry);
+  const normalCompressedPreview = String(avatar?.compressed_normal_preview || '').trim();
+  const greenCompressedPreview = String(avatar?.compressed_green_preview || '').trim();
+  const normalRemote = String(tiktokAvatarAssets?.normalUrl || '').trim();
+  const greenRemote = String(tiktokAvatarAssets?.greenUrl || '').trim();
+  if (preferGreen) {
+    return greenCompressedPreview || greenLocal || normalCompressedPreview || normalLocal || greenRemote || normalRemote || '';
+  }
+  return normalCompressedPreview || normalLocal || greenCompressedPreview || greenLocal || normalRemote || greenRemote || '';
+};
+
+const getTikTokAvatarToneClass = ({ state = '', isActive = false } = {}) => {
+  if (isActive) return 'active';
+  const raw = String(state || '').trim().toLowerCase();
+  if (raw === 'done' || raw === 'completed' || raw === 'success') return 'done';
+  if (raw === 'failed' || raw === 'error' || raw === 'fail') return 'failed';
+  return 'idle';
+};
+
+const renderTikTokAvatarSceneAssetsList = ({
+  container = null,
+  assets = [],
+  avatar = null,
+  sceneLookup = new Map(),
+  activeSceneId = '',
+  generating = false,
+  disableRetry = false,
+  expandedState = null,
+  onToggleExpanded = null,
+  onRetryScene = null,
+  priorAudioState = null,
+  emptyText = 'No avatar assets yet.'
+} = {}) => {
+  if (!container) return;
+  container.innerHTML = '';
+  const rows = Array.isArray(assets) ? assets : [];
+  if (!rows.length) {
+    const empty = document.createElement('div');
+    empty.className = 'small';
+    empty.textContent = String(emptyText || 'No avatar assets yet.');
+    container.appendChild(empty);
+    return;
+  }
+  rows.forEach((assetRaw, index) => {
+    const asset = assetRaw && typeof assetRaw === 'object' ? assetRaw : {};
+    const sceneId = String(asset.id || `scene-${index + 1}`).trim();
+    const sceneContext = sceneLookup instanceof Map ? sceneLookup.get(sceneId) || null : null;
+    const stateRaw = String(asset.state || '').trim().toLowerCase();
+    const taskStateRaw = String(asset.taskState || sceneContext?.avatar_talk_state || '').trim().toLowerCase();
+    const isDone = stateRaw === 'done' || stateRaw === 'completed' || stateRaw === 'success';
+    const isFailed = stateRaw === 'failed' || stateRaw === 'error' || stateRaw === 'fail';
+    const isProcessingState = stateRaw === 'processing' || stateRaw === 'submitting' || stateRaw === 'running';
+    const isWaitingState = taskStateRaw === 'waiting' || taskStateRaw === 'queuing';
+    const isRetryingState = taskStateRaw === 'retrying';
+    const isActive =
+      !!asset.active ||
+      isProcessingState ||
+      (!!generating && !!activeSceneId && String(activeSceneId) === sceneId);
+    const toneClass = getTikTokAvatarToneClass({ state: stateRaw, isActive });
+    const isRetryable = asset.retryable === true || isFailed || isWaitingState || isRetryingState;
+    const canToggle = expandedState && typeof expandedState === 'object' && typeof onToggleExpanded === 'function';
+    const isExpandedByUser = canToggle ? !!expandedState[sceneId] : false;
+    const autoExpanded = isActive || isFailed;
+    const isCollapsed = canToggle ? !(autoExpanded || isExpandedByUser) : false;
+
+    const row = document.createElement('div');
+    row.className = `avatar-scene-card ${toneClass}${isCollapsed ? ' collapsed' : ''}`.trim();
+    const head = document.createElement('div');
+    head.className = 'avatar-scene-head';
+    const title = document.createElement('strong');
+    title.textContent = asset.label || asset.title || sceneId || `Scene ${index + 1}`;
+    head.appendChild(title);
+    const headRight = document.createElement('div');
+    headRight.style.display = 'flex';
+    headRight.style.alignItems = 'center';
+    headRight.style.gap = '8px';
+    const badge = document.createElement('span');
+    badge.className = `avatar-scene-state ${toneClass}`.trim();
+    badge.textContent = isActive
+      ? 'Processing'
+      : isDone
+      ? 'Done'
+      : isFailed
+      ? 'Needs attention'
+      : 'Waiting';
+    headRight.appendChild(badge);
+    if (typeof onRetryScene === 'function' && isRetryable && sceneId) {
+      const retryBtn = document.createElement('button');
+      retryBtn.type = 'button';
+      retryBtn.className = 'secondary';
+      retryBtn.textContent = isWaitingState || isRetryingState ? 'Retry now' : 'Retry';
+      retryBtn.setAttribute('data-avatar-retry-scene', sceneId);
+      retryBtn.disabled = !!disableRetry;
+      retryBtn.addEventListener('click', () => {
+        onRetryScene(sceneId);
+      });
+      headRight.appendChild(retryBtn);
+    }
+    if (canToggle && sceneId) {
+      const toggleBtn = document.createElement('button');
+      toggleBtn.type = 'button';
+      toggleBtn.className = 'step6-expand';
+      toggleBtn.textContent = isCollapsed ? 'Show' : 'Hide';
+      toggleBtn.addEventListener('click', () => {
+        onToggleExpanded(sceneId);
+      });
+      headRight.appendChild(toggleBtn);
+    }
+    head.appendChild(headRight);
+    row.appendChild(head);
+
+    const meta = document.createElement('div');
+    meta.className = 'small avatar-scene-meta';
+    meta.textContent = String(asset.status || '').trim() || 'Waiting';
+    row.appendChild(meta);
+    const sceneAudioLocalPath = String(fileUrlToPath(sceneContext?.avatar_talk_audio_local_path || '') || '').trim();
+    const imageInputReady = !!String(asset.imageUrl || sceneContext?.avatar_talk_image_url || '').trim();
+    const audioUrlRaw = String(asset.audioUrl || sceneContext?.avatar_talk_audio_url || '').trim();
+    const localAudioRaw = String(
+      asset.audioPreviewUrl ||
+      (sceneAudioLocalPath ? filePathToUrl(sceneAudioLocalPath) : '') ||
+      ''
+    ).trim();
+    const audioInputReady = !!String(audioUrlRaw || localAudioRaw).trim();
+    let audioInputBadge = null;
+    if (!isDone) {
+      const inputRow = document.createElement('div');
+      inputRow.className = 'avatar-scene-inputs';
+      const imageInputBadge = document.createElement('span');
+      imageInputBadge.className = `avatar-scene-state ${imageInputReady ? 'done' : 'failed'}`.trim();
+      imageInputBadge.textContent = imageInputReady ? 'Image ready' : 'Image missing';
+      audioInputBadge = document.createElement('span');
+      audioInputBadge.className = `avatar-scene-state ${audioInputReady ? 'done' : 'failed'}`.trim();
+      audioInputBadge.textContent = audioInputReady ? 'Audio ready' : 'Audio missing';
+      inputRow.appendChild(imageInputBadge);
+      inputRow.appendChild(audioInputBadge);
+      row.appendChild(inputRow);
+    }
+
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'avatar-scene-progress';
+    const progressFill = document.createElement('div');
+    progressFill.className = `avatar-scene-progress-fill ${toneClass}`.trim();
+    const pct = Math.max(0, Math.min(100, Number(asset.progress) || 0));
+    progressFill.style.width = `${pct}%`;
+    progressWrap.appendChild(progressFill);
+    row.appendChild(progressWrap);
+
+    const progressMeta = document.createElement('div');
+    progressMeta.className = 'small avatar-scene-progress-meta';
+    progressMeta.textContent = `${Math.round(pct)}%`;
+    row.appendChild(progressMeta);
+
+    const media = document.createElement('div');
+    media.className = 'avatar-scene-body';
+    const imageSrc = normalizeTikTokRunMediaUrl(String(asset.imageUrl || '').trim());
+    if (imageSrc) {
+      const provider = String(asset.provider || sceneContext?.clip?.provider || '').toLowerCase();
+      const fallbackImageUrl = resolveAvatarPanelPreviewUrl(avatar, { preferGreen: provider === 'youtube' });
+      const img = document.createElement('img');
+      img.className = 'avatar-scene-thumb';
+      img.src = imageSrc;
+      img.alt = `${asset.label || asset.title || sceneId || 'Scene'} image`;
+      img.addEventListener('error', () => {
+        if (fallbackImageUrl && img.src !== fallbackImageUrl) {
+          img.src = fallbackImageUrl;
+        }
+      }, { once: true });
+      media.appendChild(img);
+    }
+    const primaryAudioSrc = normalizeTikTokRunMediaUrl(audioUrlRaw || localAudioRaw);
+    const fallbackAudioSrc = normalizeTikTokRunMediaUrl(localAudioRaw && localAudioRaw !== primaryAudioSrc ? localAudioRaw : '');
+    const markAudioMissing = () => {
+      if (!audioInputBadge) return;
+      audioInputBadge.className = 'avatar-scene-state failed';
+      audioInputBadge.textContent = 'Audio missing';
+    };
+    if (primaryAudioSrc) {
+      const audio = document.createElement('audio');
+      audio.controls = true;
+      audio.preload = 'metadata';
+      audio.src = primaryAudioSrc;
+      audio.className = 'avatar-scene-audio';
+      let attemptedFallback = false;
+      const tryFallback = () => {
+        if (!fallbackAudioSrc || attemptedFallback || String(audio.src || '').trim() === fallbackAudioSrc) return false;
+        attemptedFallback = true;
+        audio.src = fallbackAudioSrc;
+        audio.load();
+        return true;
+      };
+      audio.addEventListener('error', () => {
+        if (!tryFallback()) markAudioMissing();
+      });
+      audio.addEventListener('loadedmetadata', () => {
+        const duration = Number(audio.duration || 0);
+        if (Number.isFinite(duration) && duration > 0) return;
+        if (!tryFallback()) markAudioMissing();
+      });
+      if (priorAudioState instanceof Map && priorAudioState.size) {
+        restoreMediaPlayback(audio, priorAudioState);
+      }
+      media.appendChild(audio);
+    }
+    if (String(asset.videoUrl || '').trim()) {
+      const video = document.createElement('video');
+      video.controls = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.className = 'avatar-scene-video';
+      video.src = normalizeTikTokRunMediaUrl(String(asset.videoUrl || '').trim());
+      media.appendChild(video);
+    }
+    if (media.childNodes.length) row.appendChild(media);
+
+    const promptText = String(asset.prompt || '').trim();
+    const prompt = document.createElement('div');
+    prompt.className = 'small avatar-scene-prompt';
+    prompt.textContent = promptText ? `Kie prompt: ${promptText}` : 'Kie prompt will appear after payload preparation.';
+    if (!promptText) prompt.classList.add('muted');
+    row.appendChild(prompt);
+    container.appendChild(row);
+  });
+};
+
+const renderTikTokAvatarClipCards = ({
+  container = null,
+  clips = [],
+  avatar = null,
+  activeSceneId = '',
+  generating = false,
+  priorClipVideoState = null,
+  emptyText = 'No avatar clips yet.'
+} = {}) => {
+  if (!container) return;
+  container.innerHTML = '';
+  const list = Array.isArray(clips) ? clips : [];
+  if (!list.length) {
+    const empty = document.createElement('div');
+    empty.className = 'small';
+    empty.textContent = String(emptyText || 'No avatar clips yet.');
+    container.appendChild(empty);
+    return;
+  }
+  const rail = document.createElement('div');
+  rail.className = 'avatar-clips-carousel';
+  list.forEach((clipRaw, index) => {
+    const clip = clipRaw && typeof clipRaw === 'object' ? clipRaw : {};
+    const clipId = String(clip.id || `clip-${index + 1}`).trim();
+    const clipState = String(clip.state || '').toLowerCase();
+    const isActiveClip =
+      !!clip.active ||
+      clipState === 'processing' ||
+      clipState === 'submitting' ||
+      (!!generating && !!activeSceneId && String(activeSceneId) === clipId);
+    const isDone = String(clip.status || '').toLowerCase().includes('ready') || clipState === 'done';
+    const isFailed = String(clip.status || '').toLowerCase().includes('fail') || clipState === 'failed';
+    const row = document.createElement('div');
+    row.className = `avatar-clip-card ${isDone ? 'done' : ''} ${isFailed ? 'failed' : ''}${isActiveClip ? ' active' : ''}`.trim();
+    const title = document.createElement('strong');
+    title.textContent = clip.label || clip.title || clipId || 'Avatar clip';
+    const meta = document.createElement('div');
+    meta.className = 'avatar-clip-status';
+    meta.textContent = String(clip.status || '').trim() || 'Waiting';
+    row.appendChild(title);
+    row.appendChild(meta);
+    const thumbWrap = document.createElement('div');
+    const videoSrc = normalizeTikTokRunMediaUrl(String(clip.url || clip.videoUrl || '').trim());
+    thumbWrap.className = `avatar-clip-thumb ${videoSrc ? '' : 'pending'}`.trim();
+    if (videoSrc) {
+      const video = document.createElement('video');
+      video.controls = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.src = videoSrc;
+      if (priorClipVideoState instanceof Map && priorClipVideoState.size) {
+        restoreMediaPlayback(video, priorClipVideoState);
+      }
+      thumbWrap.appendChild(video);
+    } else {
+      const img = document.createElement('img');
+      img.src = resolveAvatarPanelPreviewUrl(avatar, { preferGreen: false }) || resolveAvatarPreviewUrl(avatar) || '';
+      img.alt = 'Avatar preview';
+      thumbWrap.appendChild(img);
+    }
+    row.appendChild(thumbWrap);
+    rail.appendChild(row);
+  });
+  container.appendChild(rail);
 };
 
 const renderTikTokAvatarPanel = () => {
@@ -18080,171 +26863,48 @@ const renderTikTokAvatarPanel = () => {
   }
   renderAvatarCompressionQueue();
   if (tiktokAvatarNormalPreview) {
-    tiktokAvatarNormalPreview.src = tiktokAvatarAssets.normalUrl || getAvatarEntryDisplayUrl(avatar?.images?.[0]) || '';
+    tiktokAvatarNormalPreview.src = resolveAvatarPanelPreviewUrl(avatar, { preferGreen: false });
   }
   if (tiktokAvatarGreenPreview) {
-    tiktokAvatarGreenPreview.src = tiktokAvatarAssets.greenUrl || getAvatarEntryDisplayUrl(avatar?.greenScreen?.[0]) || '';
+    tiktokAvatarGreenPreview.src = resolveAvatarPanelPreviewUrl(avatar, { preferGreen: true });
   }
+  const storyboardScenes = Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : [];
+  const sceneLookup = new Map(storyboardScenes.map((scene) => [String(scene?.id || '').trim(), scene]));
   if (tiktokAvatarAssetsList && !freezeMediaLists) {
-    tiktokAvatarAssetsList.innerHTML = '';
-    if (!tiktokAvatarSceneAssets.length) {
-      tiktokAvatarAssetsList.innerHTML = '<div class="small">No avatar assets yet.</div>';
-    } else {
-      tiktokAvatarSceneAssets.forEach((asset) => {
-        const stateRaw = String(asset.state || '').toLowerCase();
-        const isDone = stateRaw === 'done' || stateRaw === 'completed';
-        const isFailed = stateRaw === 'failed';
-        const isProcessingState = stateRaw === 'processing' || stateRaw === 'submitting';
-        const storyboardScene = (Array.isArray(tiktokStoryboard?.scenes) ? tiktokStoryboard.scenes : []).find(
-          (s) => String(s?.id || '') === String(asset.id || '')
-        );
-        const taskState = String(storyboardScene?.avatar_talk_state || '').toLowerCase();
-        const isWaitingState = taskState === 'waiting' || taskState === 'queuing';
-        const isRetryingState = taskState === 'retrying';
-        const isRetryable = isFailed || isWaitingState || isRetryingState;
-        const isActive =
-          isProcessingState ||
-          (!!tiktokAvatarGenerateRunning && String(tiktokAvatarActiveSceneId || '') === String(asset.id || ''));
-        const toneClass = isActive ? 'active' : isDone ? 'done' : isFailed ? 'failed' : 'idle';
-        const isExpandedByUser = !!tiktokAvatarSceneExpanded[String(asset.id || '')];
-        const autoExpanded = isActive || isFailed;
-        const isCollapsed = !(autoExpanded || isExpandedByUser);
-        const row = document.createElement('div');
-        row.className = `avatar-scene-card ${toneClass}${isCollapsed ? ' collapsed' : ''}`;
-        const head = document.createElement('div');
-        head.className = 'avatar-scene-head';
-        const title = document.createElement('strong');
-        title.textContent = asset.label || asset.id || 'Scene';
-        head.appendChild(title);
-        const headRight = document.createElement('div');
-        headRight.style.display = 'flex';
-        headRight.style.alignItems = 'center';
-        headRight.style.gap = '8px';
-        const badge = document.createElement('span');
-        badge.className = `avatar-scene-state ${toneClass}`;
-        badge.textContent = isActive
-          ? 'Processing'
-          : isDone
-          ? 'Done'
-          : isFailed
-          ? 'Needs attention'
-          : 'Waiting';
-        headRight.appendChild(badge);
-        if (isRetryable) {
-          const retryBtn = document.createElement('button');
-          retryBtn.type = 'button';
-          retryBtn.className = 'secondary';
-          retryBtn.textContent = (isWaitingState || isRetryingState) ? 'Retry now' : 'Retry';
-          retryBtn.setAttribute('data-avatar-retry-scene', String(asset.id || ''));
-          retryBtn.disabled = tiktokAvatarGenerateRunning || tiktokAvatarCompressRunning;
-          retryBtn.addEventListener('click', () => {
-            retryAvatarScene(asset.id);
-          });
-          headRight.appendChild(retryBtn);
-        }
-        const toggleBtn = document.createElement('button');
-        toggleBtn.type = 'button';
-        toggleBtn.className = 'step6-expand';
-        toggleBtn.textContent = isCollapsed ? 'Show' : 'Hide';
-        toggleBtn.addEventListener('click', () => {
-          const key = String(asset.id || '');
-          if (!key) return;
-          tiktokAvatarSceneExpanded[key] = !tiktokAvatarSceneExpanded[key];
-          renderTikTokAvatarPanel();
-        });
-        headRight.appendChild(toggleBtn);
-        head.appendChild(headRight);
-        const meta = document.createElement('div');
-        meta.className = 'small avatar-scene-meta';
-        meta.textContent = asset.status || '';
-        const progressWrap = document.createElement('div');
-        progressWrap.className = 'avatar-scene-progress';
-        const progressFill = document.createElement('div');
-        progressFill.className = `avatar-scene-progress-fill ${toneClass}`;
-        const pct = Math.max(0, Math.min(100, Number(asset.progress) || 0));
-        progressFill.style.width = `${pct}%`;
-        progressWrap.appendChild(progressFill);
-        const progressMeta = document.createElement('div');
-        progressMeta.className = 'small avatar-scene-progress-meta';
-        progressMeta.textContent = `${Math.round(pct)}%`;
-        const media = document.createElement('div');
-        media.className = 'avatar-scene-body';
-        if (asset.imageUrl) {
-          const img = document.createElement('img');
-          img.className = 'avatar-scene-thumb';
-          img.src = asset.imageUrl;
-          media.appendChild(img);
-        }
-        const audioSrc = asset.audioPreviewUrl || asset.audioUrl || '';
-        if (audioSrc) {
-          const audio = document.createElement('audio');
-          audio.controls = true;
-          audio.preload = 'metadata';
-          audio.src = audioSrc;
-          audio.className = 'avatar-scene-audio';
-          restoreMediaPlayback(audio, priorAudioState);
-          media.appendChild(audio);
-        }
-        const prompt = document.createElement('div');
-        prompt.className = 'small avatar-scene-prompt';
-        prompt.textContent = asset.prompt ? `Kie prompt: ${asset.prompt}` : 'Kie prompt will appear after payload preparation.';
-        if (!asset.prompt) prompt.classList.add('muted');
-        row.appendChild(head);
-        row.appendChild(meta);
-        row.appendChild(progressWrap);
-        row.appendChild(progressMeta);
-        row.appendChild(prompt);
-        row.appendChild(media);
-        tiktokAvatarAssetsList.appendChild(row);
-      });
-    }
+    renderTikTokAvatarSceneAssetsList({
+      container: tiktokAvatarAssetsList,
+      assets: tiktokAvatarSceneAssets,
+      avatar,
+      sceneLookup,
+      activeSceneId: String(tiktokAvatarActiveSceneId || '').trim(),
+      generating: !!tiktokAvatarGenerateRunning,
+      disableRetry: !!(tiktokAvatarGenerateRunning || tiktokAvatarCompressRunning),
+      expandedState: tiktokAvatarSceneExpanded,
+      onToggleExpanded: (sceneId) => {
+        const key = String(sceneId || '').trim();
+        if (!key) return;
+        tiktokAvatarSceneExpanded[key] = !tiktokAvatarSceneExpanded[key];
+        renderTikTokAvatarPanel();
+      },
+      onRetryScene: (sceneId) => {
+        retryAvatarScene(sceneId);
+      },
+      priorAudioState
+    });
   }
   if (tiktokAvatarClipsList && !freezeMediaLists) {
-    tiktokAvatarClipsList.innerHTML = '';
-    if (!tiktokAvatarClips.length) {
-      tiktokAvatarClipsList.innerHTML = '<div class="small">No avatar clips yet.</div>';
-    } else {
-      const rail = document.createElement('div');
-      rail.className = 'avatar-clips-carousel';
-      tiktokAvatarClips.forEach((clip) => {
-        const clipState = String(clip.state || '').toLowerCase();
-        const isActiveClip =
-          clipState === 'processing' ||
-          clipState === 'submitting' ||
-          (!!tiktokAvatarGenerateRunning && String(tiktokAvatarActiveSceneId || '') === String(clip.id || ''));
-        const row = document.createElement('div');
-        row.className = `avatar-clip-card ${String(clip.status || '').toLowerCase().includes('ready') ? 'done' : ''} ${String(clip.status || '').toLowerCase().includes('fail') ? 'failed' : ''}${isActiveClip ? ' active' : ''}`;
-        const title = document.createElement('strong');
-        title.textContent = clip.label || clip.id || 'Avatar clip';
-        const meta = document.createElement('div');
-        meta.className = 'avatar-clip-status';
-        meta.textContent = clip.status || '';
-        row.appendChild(title);
-        row.appendChild(meta);
-        const thumbWrap = document.createElement('div');
-        thumbWrap.className = `avatar-clip-thumb ${clip.url ? '' : 'pending'}`;
-        if (clip.url) {
-          const video = document.createElement('video');
-          video.controls = true;
-          video.playsInline = true;
-          video.setAttribute('playsinline', '');
-          video.src = clip.url;
-          restoreMediaPlayback(video, priorClipVideoState);
-          thumbWrap.appendChild(video);
-        } else {
-          const img = document.createElement('img');
-          img.src = tiktokAvatarAssets.normalUrl || resolveAvatarPreviewUrl(avatar) || '';
-          img.alt = 'Avatar preview';
-          thumbWrap.appendChild(img);
-        }
-        row.appendChild(thumbWrap);
-        rail.appendChild(row);
-      });
-      tiktokAvatarClipsList.appendChild(rail);
-    }
+    renderTikTokAvatarClipCards({
+      container: tiktokAvatarClipsList,
+      clips: tiktokAvatarClips,
+      avatar,
+      activeSceneId: String(tiktokAvatarActiveSceneId || '').trim(),
+      generating: !!tiktokAvatarGenerateRunning,
+      priorClipVideoState
+    });
   }
   syncRetryButtonsState();
   refreshTikTokFinalKeyPreviewSource().catch(() => {});
+  refreshTikTokRunDetailsLiveView();
 };
 
 const pushTikTokAlignLog = (message) => {
@@ -18536,6 +27196,7 @@ const generateTikTokTtsAudio = async () => {
     };
     renderTikTokAudio();
     setTikTokTtsStatus('Audio ready.');
+    syncTikTokAutomationAudioStage({ scriptId: script.id });
     scheduleSave();
     runLocalTikTokAlignment();
   } catch (err) {
@@ -18627,15 +27288,41 @@ const runLocalTikTokAlignment = async () => {
 
 const draftBatchPlan = async () => {
   if (batchRunning) return;
+  const batchType = getBatchType();
+  const carouselCount = Math.min(7, Math.max(1, Number(batchCarouselCount?.value || 1)));
+  if (batchType === 'standard') {
+    const prompt = (batchDayInput?.value || '').trim();
+    if (!prompt) {
+      setBatchStatus('Enter a batch prompt first', true);
+      setStatus('Batch prompt required', true);
+      return;
+    }
+    batchOutfitsEnabled = false;
+    if (batchOutfitToggle) batchOutfitToggle.checked = false;
+    batchOutfits = [];
+    batchManualOutfits = false;
+    renderBatchOutfits();
+    batchPlan = Array.from({ length: carouselCount }, (_item, idx) => ({
+      kind: 'Batch',
+      prompt,
+      title: `Batch ${idx + 1}`,
+      useClothes: false,
+      outfit: null
+    }));
+    renderBatchPlan();
+    setBatchStatus(`Prepared ${batchPlan.length} image${batchPlan.length === 1 ? '' : 's'} with the same prompt.`);
+    setStatus('Batch plan ready');
+    return;
+  }
+
   const key = (batchOpenaiKey?.value || currentOpenaiKey || '').trim();
   if (!key) {
     setStatus('Enter your OpenAI key for batch drafting', true);
     setBatchStatus('OpenAI key required', true);
     return;
   }
-  const batchType = getBatchType();
-  const carouselCount = Math.min(7, Math.max(1, Number(batchCarouselCount?.value || 1)));
-  if (batchType !== 'story') {
+
+  if (batchType === 'object') {
     const diffText = (batchDiffPrompt?.value || '').trim();
     if (!diffText) {
       setBatchStatus('Add a differences prompt', true);
@@ -18970,19 +27657,7 @@ async function generateOutfitImage(idx) {
   try {
     const { payload, promptText } = buildOutfitPayload({ theme });
     outfit.lastPrompt = promptText;
-    const res = await fetch(`${API_BASE}/jobs/createTask`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`
-      },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if (data.code !== 200) {
-      throw new Error(data.message || `Error ${data.code}`);
-    }
-    const taskId = data.data?.taskId;
+    const { taskId } = await submitCreateTaskRequest({ key, payload });
     if (!taskId) throw new Error('No taskId returned');
     setOutfitStatus(idx, 'Queued at Kie.ai');
     const urls = await pollOutfitTask(taskId, idx);
@@ -19010,11 +27685,15 @@ async function generateOutfitImage(idx) {
   }
 }
 
-const createTaskFromPlan = async (item, idx, { objectUrls = [], isStory = true } = {}) => {
+const createTaskFromPlan = async (
+  item,
+  idx,
+  { objectUrls = [], includeAvatar = true, allowOutfits = false, waitForResult = true } = {}
+) => {
   setStatus(`Submitting ${item.kind} (${item.title || ''})`);
   const key = requireKey();
   if (!key) throw new Error('Kie API key missing');
-  if (isStory && activeAvatarName) {
+  if (includeAvatar && activeAvatarName) {
     await ensureAvatarHostedUrls();
   }
 
@@ -19025,7 +27704,7 @@ const createTaskFromPlan = async (item, idx, { objectUrls = [], isStory = true }
 
   let payload;
   try {
-    const allowOutfit = isStory && item.useClothes && batchOutfitsEnabled;
+    const allowOutfit = allowOutfits && item.useClothes && batchOutfitsEnabled;
     const promptWithOutfit =
       allowOutfit && item.outfit?.desc
         ? `${item.prompt}\n\nOutfit: ${item.outfit.desc}`
@@ -19040,7 +27719,7 @@ const createTaskFromPlan = async (item, idx, { objectUrls = [], isStory = true }
       outfitImage: allowOutfit ? outfitImage : undefined,
       anchorImage,
       objectUrls,
-      includeAvatar: isStory
+      includeAvatar
     });
   } catch (err) {
     setStatus(err.message, true);
@@ -19048,27 +27727,20 @@ const createTaskFromPlan = async (item, idx, { objectUrls = [], isStory = true }
     throw err;
   }
 
-  const imageList = payload.input.image_input || [];
+  const imageList = payload.input.image_input || payload.input.image_urls || [];
   log(`Batch submitting (${item.kind}) with ${imageList.length} image URL(s).`);
 
   setStatus('Submitting...');
-
-  const res = await fetch(`${API_BASE}/jobs/createTask`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${key}`
-    },
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json();
-  if (data.code !== 200) {
-    const text = formatKieError(data.code, data.message);
+  let taskId = '';
+  try {
+    const submitted = await submitCreateTaskRequest({ key, payload });
+    taskId = String(submitted?.taskId || '').trim();
+  } catch (err) {
+    const text = String(err?.message || 'Submit failed').trim();
     setStatus(text, true);
     setStageState('submit', 'error');
     throw new Error(text);
   }
-  const taskId = data.data?.taskId;
   if (!taskId) {
     const text = 'No taskId returned';
     setStatus(text, true);
@@ -19082,8 +27754,11 @@ const createTaskFromPlan = async (item, idx, { objectUrls = [], isStory = true }
   batchRunState[idx].taskId = taskId;
   batchRunState[idx].status = 'queued';
   renderBatchProgress();
+  if (!waitForResult) {
+    return { taskId, urls: [] };
+  }
   const urls = await pollTaskForBatch(taskId, idx);
-  return urls;
+  return { taskId, urls };
 };
 
 const runBatchGeneration = async () => {
@@ -19092,8 +27767,12 @@ const runBatchGeneration = async () => {
     setBatchStatus('Draft a batch plan first', true);
     return;
   }
-  const isStory = getBatchType() === 'story';
-  const mode = isStory ? batchModeSelect?.value || 'creative' : 'creative';
+  const batchType = getBatchType();
+  const isInstagramBatch = batchType === 'instagram';
+  const isObjectBatch = batchType === 'object';
+  const mode = isInstagramBatch ? batchModeSelect?.value || 'creative' : 'creative';
+  const includeAvatar = !isObjectBatch;
+  const allowOutfits = isInstagramBatch;
   batchRunning = true;
   setBatchStatus('Running batch...');
   if (batchGenerateSpinner) batchGenerateSpinner.classList.add('active');
@@ -19103,7 +27782,7 @@ const runBatchGeneration = async () => {
   renderResults([]);
   try {
     let objectUrls = [];
-    if (!isStory) {
+    if (isObjectBatch) {
       if (!activeObjectName) {
         throw new Error('Select an object for batch variations');
       }
@@ -19112,26 +27791,80 @@ const runBatchGeneration = async () => {
         throw new Error('Selected object has no saved images');
       }
     }
-    let anchorImage = '';
-    for (let i = 0; i < batchRunState.length; i++) {
-      const item = batchRunState[i];
-      if (mode === 'simple' && i > 0) {
-        item.anchorImage = anchorImage || item.anchorImage || '';
+    if (isInstagramBatch && mode === 'simple') {
+      let anchorImage = '';
+      for (let i = 0; i < batchRunState.length; i++) {
+        const item = batchRunState[i];
+        if (i > 0) {
+          item.anchorImage = anchorImage || item.anchorImage || '';
+        }
+        batchRunState[i].status = 'submitting';
+        renderBatchProgress();
+        const result = await createTaskFromPlan(item, i, { objectUrls, includeAvatar, allowOutfits, waitForResult: true });
+        const urls = Array.isArray(result?.urls) ? result.urls : [];
+        batchRunState[i].urls = urls;
+        batchRunState[i].status = 'success';
+        const concise = (item.title || `${item.kind} ${i + 1}`).split(' ').slice(0, 4).join(' ');
+        setResults(urls, { append: true, name: concise });
+        renderBatchProgress();
+        if (!anchorImage && urls?.length) {
+          anchorImage = urls[0];
+        }
       }
-      batchRunState[i].status = 'submitting';
+      setBatchStatus('Batch complete');
+      setStatus('Batch complete');
+    } else {
+      const submitted = [];
+      for (let i = 0; i < batchRunState.length; i += 1) {
+        const item = batchRunState[i];
+        batchRunState[i].status = 'submitting';
+        renderBatchProgress();
+        const result = await createTaskFromPlan(item, i, {
+          objectUrls,
+          includeAvatar,
+          allowOutfits,
+          waitForResult: false
+        });
+        const taskId = String(result?.taskId || '').trim();
+        if (taskId) {
+          submitted.push({ idx: i, item, taskId });
+        } else {
+          batchRunState[i].status = 'fail';
+        }
+      }
+      if (!submitted.length) {
+        throw new Error('No tasks were submitted.');
+      }
+      setBatchStatus(`Queued ${submitted.length} task${submitted.length === 1 ? '' : 's'} — polling in parallel...`);
+      const settled = await Promise.allSettled(
+        submitted.map(async ({ idx, item, taskId }) => {
+          const urls = await pollTaskForBatch(taskId, idx);
+          return { idx, item, urls };
+        })
+      );
+      let successCount = 0;
+      let failCount = 0;
+      settled.forEach((entry) => {
+        if (entry.status === 'fulfilled') {
+          const { idx, item, urls } = entry.value;
+          batchRunState[idx].urls = Array.isArray(urls) ? urls : [];
+          batchRunState[idx].status = 'success';
+          const concise = (item.title || `${item.kind} ${idx + 1}`).split(' ').slice(0, 4).join(' ');
+          setResults(urls, { append: true, name: concise });
+          successCount += 1;
+        } else {
+          failCount += 1;
+        }
+      });
       renderBatchProgress();
-      const urls = await createTaskFromPlan(item, i, { objectUrls, isStory });
-      batchRunState[i].urls = urls;
-      batchRunState[i].status = 'success';
-      const concise = (item.title || `${item.kind} ${i + 1}`).split(' ').slice(0, 4).join(' ');
-      setResults(urls, { append: true, name: concise });
-      renderBatchProgress();
-      if (mode === 'simple' && !anchorImage && urls?.length) {
-        anchorImage = urls[0];
+      if (failCount > 0) {
+        setBatchStatus(`Batch finished: ${successCount} succeeded, ${failCount} failed.`, true);
+        setStatus('Batch finished with some failures', true);
+      } else {
+        setBatchStatus('Batch complete');
+        setStatus('Batch complete');
       }
     }
-    setBatchStatus('Batch complete');
-    setStatus('Batch complete');
   } catch (err) {
     setBatchStatus(`Batch stopped: ${err.message}`, true);
     setStatus('Batch stopped', true);
@@ -19249,7 +27982,7 @@ const renderAvatarList = () => {
     selectBtn.textContent = 'Select';
     selectBtn.addEventListener('click', () => {
       activeAvatarName = a.name;
-      if (avatarSelect) avatarSelect.value = a.name;
+      syncAvatarSelectValues(a.name);
       setActiveView('builder');
       setCreateView('image');
       scheduleSave();
@@ -19261,7 +27994,7 @@ const renderAvatarList = () => {
     editBtn.textContent = 'Edit';
     editBtn.addEventListener('click', () => {
       activeAvatarName = a.name;
-      if (avatarSelect) avatarSelect.value = a.name;
+      syncAvatarSelectValues(a.name);
       loadAvatarIntoBuilder(a.name);
       openCreatorPanel('avatar', { title: `Edit avatar "${a.name}"` });
     });
@@ -19274,7 +28007,7 @@ const renderAvatarList = () => {
       persistAvatars(avatars);
       if (activeAvatarName === a.name) {
         activeAvatarName = '';
-        if (avatarSelect) avatarSelect.value = '';
+        syncAvatarSelectValues('');
       }
       renderAvatarOptions();
       renderAvatarList();
@@ -19419,9 +28152,7 @@ const applyState = (state) => {
     }
   });
   activeAvatarName = state.avatar || '';
-  if (avatarSelect) {
-    avatarSelect.value = activeAvatarName;
-  }
+  syncAvatarSelectValues(activeAvatarName);
   activeObjectName = state.object || '';
   if (activeObjectName && !getActiveObject()) {
     activeObjectName = '';
@@ -19503,7 +28234,7 @@ const applyBatchState = (data = {}) => {
     activeAvatarName = data.avatar;
   }
   const b = data.batch || {};
-  if (batchTypeSelect) batchTypeSelect.value = b.type || 'story';
+  if (batchTypeSelect) batchTypeSelect.value = normalizeBatchType(b.type || 'standard');
   if (batchDayInput) batchDayInput.value = b.day || '';
   if (batchCarouselCount) batchCarouselCount.value = b.carousel || 0;
   if (batchStoryCount) batchStoryCount.value = b.story || 0;
@@ -19531,16 +28262,59 @@ const applyBatchState = (data = {}) => {
 };
 
 const applyTikTokState = (data = {}) => {
+  const incomingAutomationState = data.automation && typeof data.automation === 'object' ? data.automation : {};
+  debugTrace('tiktok.state.apply.start', {
+    mode: String(incomingAutomationState.mode || '').trim(),
+    view: String(incomingAutomationState.view || '').trim(),
+    runs: Number(incomingAutomationState?.runs?.length || 0),
+    concepts: Number(incomingAutomationState?.concepts?.length || 0),
+    embeddings: Number(incomingAutomationState?.embeddings?.length || 0),
+    retrievalEvents: Number(incomingAutomationState?.retrievalEvents?.length || 0),
+    scripts: Number(data?.scripts?.length || 0),
+    storyboardScenes: Number(data?.storyboard?.scenes?.length || 0),
+    hasAudio: !!data?.audio,
+    clipSceneCount: Number(Object.keys(data?.clipResults || {}).length || 0)
+  });
   const savedAvatar = String(data.avatar || '').trim();
   activeAvatarName = savedAvatar && avatars.some((a) => a.name === savedAvatar) ? savedAvatar : '';
-  if (avatarSelect) avatarSelect.value = activeAvatarName;
-  if (tiktokAvatarSelect) tiktokAvatarSelect.value = activeAvatarName;
-  if (tiktokAvatarProcessingSelect) tiktokAvatarProcessingSelect.value = activeAvatarName;
+  syncAvatarSelectValues(activeAvatarName);
   if (tiktokIdeaInput) tiktokIdeaInput.value = data.idea || '';
   if (tiktokAudienceInput) tiktokAudienceInput.value = data.audience || '';
   if (tiktokStyleInput) tiktokStyleInput.value = data.style || '';
   if (tiktokCountInput) tiktokCountInput.value = data.variations || 3;
   tiktokScripts = Array.isArray(data.scripts) ? data.scripts.map((s) => ({ ...s })) : [];
+  try {
+    localStorage.setItem(TIKTOK_SCRIPT_MEMORY_KEY, JSON.stringify(tiktokScripts));
+  } catch (_err) {}
+  const automationState = incomingAutomationState;
+  tiktokMode = automationState.mode === 'automatic' ? 'automatic' : 'manual';
+  tiktokAutomationConfig = normalizeTikTokAutomationConfig(automationState.config || {});
+  tiktokAutomationState = normalizeTikTokAutomationState(automationState.state || {});
+  tiktokAutomationIdeaHistory = Array.isArray(automationState.ideaHistory)
+    ? automationState.ideaHistory.map((entry, index) => normalizeTikTokIdeaHistoryEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_IDEA_LIMIT)
+    : buildTikTokIdeaHistoryFromScripts(tiktokScripts);
+  tiktokAutomationUploadHistory = Array.isArray(automationState.uploadHistory)
+    ? automationState.uploadHistory.map((entry, index) => normalizeTikTokUploadHistoryEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_UPLOAD_LIMIT)
+    : [];
+  tiktokAutomationEvents = Array.isArray(automationState.events)
+    ? automationState.events.map((entry, index) => normalizeTikTokAutomationEventEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_EVENT_LIMIT)
+    : [];
+  tiktokAutomationRuns = Array.isArray(automationState.runs)
+    ? automationState.runs.map((entry, index) => normalizeTikTokAutomationRunEntry(entry, index)).slice(0, 40)
+    : [];
+  tiktokAutomationConceptMemory = Array.isArray(automationState.concepts)
+    ? automationState.concepts.map((entry, index) => normalizeTikTokAutomationConceptEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_CONCEPT_LIMIT)
+    : [];
+  tiktokAutomationEmbeddings = Array.isArray(automationState.embeddings)
+    ? automationState.embeddings.map((entry, index) => normalizeTikTokAutomationEmbeddingEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_EMBEDDING_LIMIT)
+    : [];
+  tiktokAutomationRetrievalEvents = Array.isArray(automationState.retrievalEvents)
+    ? automationState.retrievalEvents.map((entry, index) => normalizeTikTokAutomationRetrievalEntry(entry, index)).slice(0, TIKTOK_AUTOMATION_RETRIEVAL_LIMIT)
+    : [];
+  tiktokAutomationView = ['run', 'settings', 'test', 'memory'].includes(automationState.view) ? automationState.view : 'run';
+  tiktokAutomationMemoryExplorerView = ['history', 'concepts', 'retrieval', 'embeddings'].includes(automationState.memoryExplorerView)
+    ? automationState.memoryExplorerView
+    : 'history';
   tiktokStoryboard = data.storyboard || null;
   tiktokAudio = data.audio || null;
   tiktokAlignment = data.alignment || null;
@@ -19554,6 +28328,7 @@ const applyTikTokState = (data = {}) => {
   tiktokAvatarActiveSceneId = '';
   tiktokAvatarResumeRunToken = 0;
   tiktokAvatarSceneExpanded = {};
+  clearTikTokAvatarAutoRetry({ resetAttempts: true });
   tiktokAutoPickStage = {};
   tiktokActionFrameCache = {};
   tiktokClipLoading = {};
@@ -19941,6 +28716,8 @@ const applyTikTokState = (data = {}) => {
   renderTikTokScripts();
   renderTikTokAssetsPanel();
   renderTikTokTimeline();
+  syncTikTokAutomationSchedule({ save: false });
+  renderTikTokAutomationUi();
   applyAvatarReservedScenes();
   renderTikTokAvatarPanel();
   ensureStoryboardLocalMedia().catch(() => {});
@@ -19949,77 +28726,150 @@ const applyTikTokState = (data = {}) => {
       resumePendingAvatarSceneTasks();
     }, 120);
   }
+  debugTrace('tiktok.state.apply.complete', buildTikTokAutomationDebugSnapshot({
+    phase: 'apply-complete',
+    restoredStoryboardScenes: Number(tiktokStoryboard?.scenes?.length || 0),
+    restoredClipScenes: Number(Object.keys(tiktokClipResults || {}).length || 0),
+    restoredHasAudio: !!tiktokAudio
+  }));
+};
+
+const normalizeTikTokSavedProjectData = (data = {}) => {
+  const raw = data && typeof data === 'object' ? data : {};
+  const nestedState = raw.tiktokState && typeof raw.tiktokState === 'object' ? raw.tiktokState : null;
+  const candidate = nestedState || raw;
+  const source =
+    candidate.data && typeof candidate.data === 'object' && candidate.data.automation && typeof candidate.data.automation === 'object'
+      ? candidate.data
+      : candidate;
+  const empty = getEmptyTikTokState();
+  const sourceAutomation = source.automation && typeof source.automation === 'object' ? source.automation : {};
+  const emptyAutomation = empty.automation && typeof empty.automation === 'object' ? empty.automation : {};
+  const sourceConfig = sourceAutomation.config && typeof sourceAutomation.config === 'object' ? sourceAutomation.config : {};
+  const emptyConfig = emptyAutomation.config && typeof emptyAutomation.config === 'object' ? emptyAutomation.config : {};
+  const sourceState = sourceAutomation.state && typeof sourceAutomation.state === 'object' ? sourceAutomation.state : {};
+  const emptyState = emptyAutomation.state && typeof emptyAutomation.state === 'object' ? emptyAutomation.state : {};
+  return {
+    ...empty,
+    ...source,
+    automation: {
+      ...emptyAutomation,
+      ...sourceAutomation,
+      config: {
+        ...emptyConfig,
+        ...sourceConfig
+      },
+      state: {
+        ...emptyState,
+        ...sourceState
+      }
+    }
+  };
+};
+
+const restoreTikTokProjectState = (data = {}) => {
+  const normalized = normalizeTikTokSavedProjectData(data);
+  try {
+    applyTikTokState(normalized);
+    return { ok: true, usedFallback: false };
+  } catch (primaryErr) {
+    debugTrace('tiktok.state.apply.error', {
+      message: String(primaryErr?.message || primaryErr || '').trim(),
+      keys: Object.keys(normalized || {}).slice(0, 20)
+    });
+    try {
+      applyTikTokState(getEmptyTikTokState());
+      return { ok: true, usedFallback: true, error: primaryErr };
+    } catch (fallbackErr) {
+      return { ok: false, error: primaryErr, fallbackError: fallbackErr };
+    }
+  }
+};
+
+const persistRememberedAccessKey = ({
+  rememberFlag = '',
+  storageKey = '',
+  rememberChecked = false,
+  keyValue = ''
+} = {}) => {
+  const nextValue = String(keyValue || '').trim();
+  if (rememberChecked) {
+    localStorage.setItem(rememberFlag, 'true');
+    if (nextValue) {
+      localStorage.setItem(storageKey, nextValue);
+    } else {
+      localStorage.removeItem(storageKey);
+    }
+    return;
+  }
+  localStorage.setItem(rememberFlag, 'false');
+  if (!nextValue) {
+    localStorage.removeItem(storageKey);
+  }
 };
 
 const persistKeyIfNeeded = (keyValue) => {
-  if (rememberKeyCheckbox.checked && keyValue) {
-    localStorage.setItem('rememberKey', 'true');
-    localStorage.setItem('kieApiKey', keyValue);
-  } else {
-    localStorage.removeItem('rememberKey');
-    localStorage.removeItem('kieApiKey');
-  }
+  persistRememberedAccessKey({
+    rememberFlag: 'rememberKey',
+    storageKey: 'kieApiKey',
+    rememberChecked: !!rememberKeyCheckbox?.checked,
+    keyValue
+  });
 };
 
 const persistOpenaiKeyIfNeeded = (keyValue) => {
-  if (rememberOpenaiCheckbox.checked && keyValue) {
-    localStorage.setItem('rememberOpenai', 'true');
-    localStorage.setItem(OPENAI_KEY, keyValue);
-  } else {
-    localStorage.removeItem('rememberOpenai');
-    localStorage.removeItem(OPENAI_KEY);
-  }
+  persistRememberedAccessKey({
+    rememberFlag: 'rememberOpenai',
+    storageKey: OPENAI_KEY,
+    rememberChecked: !!rememberOpenaiCheckbox?.checked,
+    keyValue
+  });
 };
 
 const persistFreesoundKeyIfNeeded = (keyValue) => {
-  if (rememberFreesoundCheckbox?.checked && keyValue) {
-    localStorage.setItem('rememberFreesound', 'true');
-    localStorage.setItem(FREESOUND_KEY, keyValue);
-  } else {
-    localStorage.removeItem('rememberFreesound');
-    localStorage.removeItem(FREESOUND_KEY);
-  }
+  persistRememberedAccessKey({
+    rememberFlag: 'rememberFreesound',
+    storageKey: FREESOUND_KEY,
+    rememberChecked: !!rememberFreesoundCheckbox?.checked,
+    keyValue
+  });
   syncTikTokSfxTokenPrompt();
 };
 
 const persistPexelsKeyIfNeeded = (keyValue) => {
-  if (rememberPexelsCheckbox?.checked && keyValue) {
-    localStorage.setItem('rememberPexels', 'true');
-    localStorage.setItem(PEXELS_KEY, keyValue);
-  } else {
-    localStorage.removeItem('rememberPexels');
-    localStorage.removeItem(PEXELS_KEY);
-  }
+  persistRememberedAccessKey({
+    rememberFlag: 'rememberPexels',
+    storageKey: PEXELS_KEY,
+    rememberChecked: !!rememberPexelsCheckbox?.checked,
+    keyValue
+  });
 };
 
 const persistPixabayKeyIfNeeded = (keyValue) => {
-  if (rememberPixabayCheckbox?.checked && keyValue) {
-    localStorage.setItem('rememberPixabay', 'true');
-    localStorage.setItem(PIXABAY_KEY, keyValue);
-  } else {
-    localStorage.removeItem('rememberPixabay');
-    localStorage.removeItem(PIXABAY_KEY);
-  }
+  persistRememberedAccessKey({
+    rememberFlag: 'rememberPixabay',
+    storageKey: PIXABAY_KEY,
+    rememberChecked: !!rememberPixabayCheckbox?.checked,
+    keyValue
+  });
 };
 
 const persistYoutubeKeyIfNeeded = (keyValue) => {
-  if (rememberYoutubeCheckbox?.checked && keyValue) {
-    localStorage.setItem('rememberYoutube', 'true');
-    localStorage.setItem(YOUTUBE_KEY, keyValue);
-  } else {
-    localStorage.removeItem('rememberYoutube');
-    localStorage.removeItem(YOUTUBE_KEY);
-  }
+  persistRememberedAccessKey({
+    rememberFlag: 'rememberYoutube',
+    storageKey: YOUTUBE_KEY,
+    rememberChecked: !!rememberYoutubeCheckbox?.checked,
+    keyValue
+  });
 };
 
 const persistElevenlabsKeyIfNeeded = (keyValue) => {
-  if (rememberElevenlabsCheckbox?.checked && keyValue) {
-    localStorage.setItem('rememberElevenlabs', 'true');
-    localStorage.setItem(ELEVENLABS_KEY, keyValue);
-  } else {
-    localStorage.removeItem('rememberElevenlabs');
-    localStorage.removeItem(ELEVENLABS_KEY);
-  }
+  persistRememberedAccessKey({
+    rememberFlag: 'rememberElevenlabs',
+    storageKey: ELEVENLABS_KEY,
+    rememberChecked: !!rememberElevenlabsCheckbox?.checked,
+    keyValue
+  });
 };
 
 const log = (message) => {
@@ -20032,6 +28882,66 @@ const log = (message) => {
     window.electronAPI.sendLog('log', message);
   }
 };
+
+const debugTrace = (scope = 'app', payload = {}) => {
+  let serialized = 'trace-serialize-failed';
+  try {
+    serialized = typeof payload === 'string' ? payload : JSON.stringify(payload);
+  } catch (_err) {}
+  try {
+    console.log(`[trace:${scope}] ${serialized}`);
+  } catch (_err) {}
+  try {
+    if (window.electronAPI?.sendLog) {
+      window.electronAPI.sendLog('trace', `[trace:${scope}] ${serialized}`);
+    }
+  } catch (_err) {}
+};
+
+window.addEventListener('error', (event) => {
+  debugTrace('window.error', {
+    message: String(event?.message || '').trim(),
+    source: String(event?.filename || '').trim(),
+    line: Number(event?.lineno || 0),
+    column: Number(event?.colno || 0),
+    stack: String(event?.error?.stack || '').trim()
+  });
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+  const reason = event?.reason;
+  debugTrace('window.unhandledrejection', {
+    message: String(reason?.message || reason || '').trim(),
+    stack: String(reason?.stack || '').trim()
+  });
+});
+
+const buildTikTokAutomationDebugSnapshot = (extra = {}) => ({
+  activeView,
+  currentCreateView,
+  activeSaveName: String(activeSaveName || '').trim(),
+  activeSaveIsSession: !!activeSaveIsSession,
+  tiktokMode,
+  automationView: tiktokAutomationView,
+  running: !!tiktokAutomationState?.running,
+  currentRunId: String(tiktokAutomationState?.currentRunId || '').trim(),
+  currentStep: String(tiktokAutomationState?.currentStep || '').trim(),
+  runs: Array.isArray(tiktokAutomationRuns) ? tiktokAutomationRuns.length : 0,
+  concepts: Array.isArray(tiktokAutomationConceptMemory) ? tiktokAutomationConceptMemory.length : 0,
+  retrievalEvents: Array.isArray(tiktokAutomationRetrievalEvents) ? tiktokAutomationRetrievalEvents.length : 0,
+  scripts: Array.isArray(tiktokScripts) ? tiktokScripts.length : 0,
+  firstRunId: String(tiktokAutomationRuns?.[0]?.id || '').trim(),
+  firstRunTitle: String(tiktokAutomationRuns?.[0]?.title || '').trim(),
+  automationCardHidden: !!tiktokAutomationCard?.classList.contains('hidden'),
+  manualCardHidden: !!tiktokManualModeCard?.classList.contains('hidden'),
+  runViewHidden: !!tiktokAutomationRunView?.classList.contains('hidden'),
+  settingsViewHidden: !!tiktokAutomationSettingsView?.classList.contains('hidden'),
+  testViewHidden: !!tiktokAutomationTestView?.classList.contains('hidden'),
+  memoryViewHidden: !!tiktokAutomationMemoryView?.classList.contains('hidden'),
+  modeHeroTitle: String(tiktokModeHeroTitle?.textContent || '').trim(),
+  runTitle: String(tiktokAutomationRunTitle?.textContent || '').trim(),
+  ...extra
+});
 
 const copyTextToClipboardSafe = async (text = '') => {
   const value = String(text || '').trim();
@@ -20061,6 +28971,30 @@ const showToast = (text, isError = false, label = 'Status') => {
   if (!toastContainer) return;
   const message = String(text || '').trim();
   if (!message) return;
+  if (
+    tiktokAutomationQuietModeDepth > 0 &&
+    [
+      'TikTok',
+      'Storyboard',
+      'TTS',
+      'Align',
+      'Auto-align',
+      'Clips',
+      'AI',
+      'Final',
+      'Export',
+      'Captions',
+      'Caption Overlay',
+      'Intro Mask',
+      'Step 9',
+      'Step 10',
+      'Step 11',
+      'Publish',
+      'Avatar'
+    ].includes(String(label || '').trim())
+  ) {
+    return;
+  }
   const now = Date.now();
   const key = `${label}|${isError ? 'err' : 'ok'}|${message}`;
   const seenAt = recentToasts.get(key) || 0;
@@ -20144,44 +29078,828 @@ const draftPrompt = () => {
   setStatus('Drafted prompt. Edit as needed.');
   scheduleSave();
 };
+
+const slugifyLoraToken = (value = '', fallback = 'character') => {
+  const normalized = String(value || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+  return normalized || fallback;
+};
+
+const parseLoraInteger = (value, fallback) => {
+  const parsed = Math.floor(Number(value));
+  if (!Number.isFinite(parsed) || parsed <= 0) return fallback;
+  return parsed;
+};
+
+const parseLoraResolutionList = (value = '') => {
+  const list = String(value || '')
+    .split(/[,\s]+/)
+    .map((part) => Math.floor(Number(part)))
+    .filter((num) => Number.isFinite(num) && num >= 256 && num <= 2048);
+  if (!list.length) return [512, 768, 1024];
+  return [...new Set(list)].sort((a, b) => a - b);
+};
+
+const sanitizeLoraLearningRate = (value = '') => {
+  const raw = String(value || '').trim();
+  if (!raw) return '1e-4';
+  if (/^\d+(\.\d+)?e-\d+$/i.test(raw)) return raw.toLowerCase();
+  const parsed = Number(raw);
+  if (!Number.isFinite(parsed) || parsed <= 0) return '1e-4';
+  return parsed.toExponential(0).replace('e', 'e');
+};
+
+const escapeYamlString = (value = '') => String(value || '').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+
+const sanitizeLoraToolkitUrl = (value = '') => {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  try {
+    const parsed = new URL(raw);
+    if (!/^https?:$/i.test(parsed.protocol)) return '';
+    return parsed.toString();
+  } catch (_err) {
+    return '';
+  }
+};
+
+const loadLoraLabState = () => {
+  try {
+    const raw = localStorage.getItem(LORA_LAB_STATE_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch (_err) {
+    return {};
+  }
+};
+
+const readLoraLabState = () => {
+  const characterName = String(loraCharacterNameInput?.value || '').trim();
+  const characterSlug = slugifyLoraToken(characterName, 'character');
+  const configName = slugifyLoraToken(loraConfigNameInput?.value || `${characterSlug}_wan22`, `${characterSlug}_wan22`);
+  const datasetPath = String(loraDatasetPathInput?.value || '').trim() || `/workspace/datasets/${characterSlug}`;
+  const outputPath = String(loraOutputPathInput?.value || '').trim() || `/workspace/outputs/${characterSlug}_wan22`;
+  const steps = parseLoraInteger(loraStepsInput?.value, 2000);
+  const saveEvery = parseLoraInteger(loraSaveEveryInput?.value, 250);
+  const batchSize = parseLoraInteger(loraBatchSizeInput?.value, 1);
+  const rank = parseLoraInteger(loraRankInput?.value, 32);
+  const alpha = parseLoraInteger(loraAlphaInput?.value, 32);
+  const learningRate = sanitizeLoraLearningRate(loraLearningRateInput?.value);
+  const resolutions = parseLoraResolutionList(loraResolutionsInput?.value);
+  const cacheTextEmbeddings = !!loraCacheEmbeddingsToggle?.checked;
+  const runpodPodId = String(loraRunpodPodSelect?.value || '').trim();
+  const runpodToolkitUrl = sanitizeLoraToolkitUrl(loraRunpodToolkitUrlInput?.value || '');
+  return {
+    characterName,
+    characterSlug,
+    configName,
+    datasetPath,
+    outputPath,
+    steps,
+    saveEvery,
+    batchSize,
+    rank,
+    alpha,
+    learningRate,
+    resolutions,
+    cacheTextEmbeddings,
+    runpodPodId,
+    runpodToolkitUrl
+  };
+};
+
+const persistLoraLabState = () => {
+  const state = readLoraLabState();
+  try {
+    localStorage.setItem(LORA_LAB_STATE_KEY, JSON.stringify(state));
+  } catch (_err) {}
+};
+
+const applyLoraLabState = (state = {}) => {
+  if (!loraCharacterNameInput) return;
+  const next = state && typeof state === 'object' ? state : {};
+  loraCharacterNameInput.value = String(next.characterName || '').trim();
+  loraConfigNameInput.value = String(next.configName || '').trim();
+  loraDatasetPathInput.value = String(next.datasetPath || '').trim();
+  loraOutputPathInput.value = String(next.outputPath || '').trim();
+  loraStepsInput.value = String(parseLoraInteger(next.steps, 2000));
+  loraSaveEveryInput.value = String(parseLoraInteger(next.saveEvery, 250));
+  loraBatchSizeInput.value = String(parseLoraInteger(next.batchSize, 1));
+  loraLearningRateInput.value = sanitizeLoraLearningRate(next.learningRate || '1e-4');
+  loraRankInput.value = String(parseLoraInteger(next.rank, 32));
+  loraAlphaInput.value = String(parseLoraInteger(next.alpha, 32));
+  loraResolutionsInput.value = Array.isArray(next.resolutions) && next.resolutions.length ? next.resolutions.join(',') : '512,768,1024';
+  loraCacheEmbeddingsToggle.checked = next.cacheTextEmbeddings !== false;
+  if (loraRunpodToolkitUrlInput) {
+    loraRunpodToolkitUrlInput.value = sanitizeLoraToolkitUrl(next.runpodToolkitUrl || '');
+  }
+};
+
+const buildLoraLabConfigYaml = (state = readLoraLabState()) => {
+  const safeName = escapeYamlString(state.configName);
+  const safeDataset = escapeYamlString(state.datasetPath);
+  const safeOutput = escapeYamlString(state.outputPath);
+  const safeCharacter = escapeYamlString(state.characterName || state.characterSlug || 'character');
+  const resolutionText = state.resolutions.join(', ');
+  const sampleWidth = state.resolutions[Math.min(1, Math.max(0, state.resolutions.length - 1))] || 768;
+  const sampleHeight = state.resolutions[state.resolutions.length - 1] || 1024;
+  return `# ${safeName}.yml
+job: extension
+config:
+  name: "${safeName}"
+  process:
+    - type: train
+      training_folder: "${safeOutput}"
+      network:
+        type: lora
+        linear: ${state.rank}
+        linear_alpha: ${state.alpha}
+      save:
+        dtype: float16
+        save_every: ${state.saveEvery}
+        max_step_saves_to_keep: 4
+      datasets:
+        - folder_path: "${safeDataset}"
+          caption_ext: txt
+          cache_text_embeddings: ${state.cacheTextEmbeddings ? 'true' : 'false'}
+          resolution: [${resolutionText}]
+      train:
+        batch_size: ${state.batchSize}
+        steps: ${state.steps}
+        optimizer: adamw8bit
+        lr: ${state.learningRate}
+        dtype: bf16
+      model:
+        name_or_path: "Wan-AI/Wan2.2-14B"
+      sample:
+        sample_every: ${state.saveEvery}
+        width: ${sampleWidth}
+        height: ${sampleHeight}
+        prompts:
+          - "${safeCharacter}, clean studio portrait, detailed skin texture, cinematic key light"
+meta:
+  generated_by: "Content Studio LoRA Lab"
+`;
+};
+
+const buildLoraLabCommands = (state = readLoraLabState()) => `# 1) Create Pod in RunPod (RTX 4090 Community Cloud, expose HTTP 8675)
+# 2) Inside Pod terminal:
+git clone https://github.com/ostris/ai-toolkit.git
+cd ai-toolkit
+python3 -m venv venv
+source venv/bin/activate
+pip3 install --no-cache-dir torch==2.7.0 torchvision==0.22.0 torchaudio==2.7.0 --index-url https://download.pytorch.org/whl/cu126
+pip3 install -r requirements.txt
+
+# 3) Start AI Toolkit UI (open http://<pod-ip>:8675)
+cd ui
+npm run build_and_start
+
+# 4) In a second terminal session, run training:
+cd /workspace/ai-toolkit
+source venv/bin/activate
+python run.py config/${state.configName}.yml`;
+
+const LORA_SETUP_WIZARD_STEPS = [
+  {
+    title: 'Create your RunPod pod',
+    description: 'Start with a dedicated training machine optimized for Wan 2.2 LoRA fine-tuning.',
+    points: ['GPU: 1x RTX 4090', 'Cloud tier: Community Cloud', 'Base image: Linux/PyTorch']
+  },
+  {
+    title: 'Configure storage and network',
+    description: 'Prepare enough disk and expose the toolkit interface before installation.',
+    points: ['Allocate disk for dataset, caches, checkpoints, and outputs', 'Expose HTTP port 8675', 'Confirm pod reaches running state']
+  },
+  {
+    title: 'Install AI Toolkit',
+    description: 'Use the generated terminal commands in this page to install dependencies exactly once per pod.',
+    points: ['Clone `ostris/ai-toolkit`', 'Create + activate python venv', 'Install torch + toolkit requirements']
+  },
+  {
+    title: 'Upload dataset pairs',
+    description: 'Place image and caption files in matched pairs for consistent LoRA training behavior.',
+    points: ['Supported image files: .png / .jpg / .jpeg', 'Each image needs same-name .txt caption', 'Use stable folder paths like `/workspace/datasets/<name>`']
+  },
+  {
+    title: 'Validate and launch',
+    description: 'Before training, verify the endpoint and pod health from the live tools section.',
+    points: ['Use `Validate connection` in Step 4', 'Load AI Toolkit in-app or external browser', 'Run `python run.py config/<file>.yml`']
+  }
+];
+
+const getLoraWizardStep = (index = 0) => {
+  if (!LORA_SETUP_WIZARD_STEPS.length) return null;
+  const safeIndex = Math.min(LORA_SETUP_WIZARD_STEPS.length - 1, Math.max(0, Number(index) || 0));
+  return LORA_SETUP_WIZARD_STEPS[safeIndex];
+};
+
+const isLoraWizardOpen = () => !!(loraWizardModal && loraWizardModal.classList.contains('show'));
+
+const renderLoraWizard = () => {
+  const total = LORA_SETUP_WIZARD_STEPS.length;
+  if (!total) return;
+  const safeIndex = Math.min(total - 1, Math.max(0, Number(loraWizardStepIndex) || 0));
+  loraWizardStepIndex = safeIndex;
+  const current = getLoraWizardStep(safeIndex);
+  if (!current) return;
+  const stepNumber = safeIndex + 1;
+  if (loraWizardStepLabel) loraWizardStepLabel.textContent = `Step ${stepNumber}`;
+  if (loraWizardStepEyebrow) loraWizardStepEyebrow.textContent = `Step ${stepNumber}`;
+  if (loraWizardTitle) loraWizardTitle.textContent = current.title;
+  if (loraWizardDescription) loraWizardDescription.textContent = current.description;
+  if (loraWizardProgressText) loraWizardProgressText.textContent = `Step ${stepNumber} of ${total}`;
+  if (loraWizardProgressFill) {
+    const progress = (stepNumber / total) * 100;
+    loraWizardProgressFill.style.width = `${Math.min(100, Math.max(0, progress)).toFixed(0)}%`;
+  }
+  if (loraWizardPoints) {
+    loraWizardPoints.innerHTML = '';
+    const points = Array.isArray(current.points) ? current.points : [];
+    points.forEach((point) => {
+      const item = document.createElement('li');
+      item.textContent = String(point || '').trim();
+      if (item.textContent) loraWizardPoints.appendChild(item);
+    });
+  }
+  if (loraWizardBackBtn) loraWizardBackBtn.disabled = safeIndex <= 0;
+  if (loraWizardNextBtn) loraWizardNextBtn.textContent = safeIndex >= total - 1 ? 'Done' : 'Next';
+  if (loraWizardStatus) {
+    loraWizardStatus.textContent =
+      safeIndex >= total - 1
+        ? 'Final step: validate connection, then load AI Toolkit and start training.'
+        : `Current focus: ${current.title}`;
+  }
+};
+
+const closeLoraWizard = () => {
+  if (!loraWizardModal) return;
+  loraWizardModal.classList.remove('show');
+};
+
+const openLoraWizard = (stepIndex = 0) => {
+  if (!loraWizardModal) return;
+  loraWizardStepIndex = Math.min(LORA_SETUP_WIZARD_STEPS.length - 1, Math.max(0, Number(stepIndex) || 0));
+  renderLoraWizard();
+  loraWizardModal.classList.add('show');
+};
+
+const goToLoraWizardStep = (stepIndex = 0) => {
+  loraWizardStepIndex = Math.min(LORA_SETUP_WIZARD_STEPS.length - 1, Math.max(0, Number(stepIndex) || 0));
+  renderLoraWizard();
+};
+
+const renderLoraLab = () => {
+  if (!loraConfigOutput || !loraCommandsOutput) return;
+  const state = readLoraLabState();
+  const yaml = buildLoraLabConfigYaml(state);
+  const commands = buildLoraLabCommands(state);
+  loraConfigOutput.value = yaml;
+  loraCommandsOutput.value = commands;
+  const estimatedHours = Math.max(0.5, Number(state.steps || 2000) / 1000);
+  const estimatedCost = estimatedHours * 0.34;
+  if (loraEstimatedCost) {
+    loraEstimatedCost.textContent = `Est. cost: $${estimatedCost.toFixed(2)} for ${estimatedHours.toFixed(1)}h @ $0.34/hr`;
+  }
+};
+
+const copyLoraChecklistText = async () => {
+  const items = LORA_SETUP_WIZARD_STEPS.map((step, index) => {
+    const title = String(step?.title || '').trim();
+    const points = Array.isArray(step?.points) ? step.points.map((point) => String(point || '').trim()).filter(Boolean) : [];
+    if (!title && !points.length) return '';
+    if (!points.length) return `${index + 1}. ${title}`;
+    return `${index + 1}. ${title}: ${points.join('; ')}`;
+  }).filter(Boolean);
+  const text = items.length ? items.map((item) => `- ${item}`).join('\n') : '';
+  if (!text) return false;
+  return copyTextToClipboardSafe(text);
+};
+
+const setLoraRunpodStatus = (text = 'Idle.', isError = false) => {
+  if (!loraRunpodStatus) return;
+  loraRunpodStatus.textContent = String(text || '').trim() || 'Idle.';
+  loraRunpodStatus.style.color = isError ? 'var(--error)' : 'var(--muted)';
+};
+
+const setLoraRunpodBusy = (busy = false) => {
+  const isBusy = !!busy;
+  if (loraRunpodLoadPodsBtn) loraRunpodLoadPodsBtn.disabled = isBusy;
+  if (loraRunpodRefreshPodBtn) loraRunpodRefreshPodBtn.disabled = isBusy;
+  if (loraRunpodValidateBtn) loraRunpodValidateBtn.disabled = isBusy;
+  if (loraRunpodConnectBtn) loraRunpodConnectBtn.disabled = isBusy;
+  if (loraRunpodOpenExternalBtn) loraRunpodOpenExternalBtn.disabled = isBusy;
+};
+
+const setLoraToolkitFrameUrl = (url = '') => {
+  if (!loraToolkitFrame || !loraToolkitPlaceholder) return;
+  const next = sanitizeLoraToolkitUrl(url);
+  if (!next) {
+    loraToolkitFrame.classList.remove('ready');
+    loraToolkitFrame.removeAttribute('src');
+    loraToolkitPlaceholder.style.display = 'grid';
+    return;
+  }
+  loraToolkitFrame.classList.add('ready');
+  loraToolkitFrame.src = next;
+  loraToolkitPlaceholder.style.display = 'none';
+};
+
+const deriveLoraToolkitUrlsFromPod = (pod = {}) => {
+  const runtime = pod?.runtime && typeof pod.runtime === 'object' ? pod.runtime : {};
+  const ports = Array.isArray(runtime.ports) ? runtime.ports : [];
+  const sorted = [...ports].sort((a, b) => {
+    const score = (port = {}) => {
+      let total = 0;
+      const privatePort = Number(port.privatePort || 0);
+      const publicPort = Number(port.publicPort || 0);
+      const type = String(port.type || '').toLowerCase();
+      if (privatePort === 8675) total += 100;
+      if (publicPort === 8675) total += 80;
+      if (type.includes('http')) total += 30;
+      if (type.includes('tcp')) total += 10;
+      return total;
+    };
+    return score(b) - score(a);
+  });
+  const candidates = new Set();
+  const add = (value = '') => {
+    const clean = sanitizeLoraToolkitUrl(value);
+    if (clean) candidates.add(clean);
+  };
+  sorted.forEach((entry) => {
+    const ipRaw = String(entry?.ip || '').trim();
+    const publicPort = Number(entry?.publicPort || 0);
+    const privatePort = Number(entry?.privatePort || 0);
+    if (!ipRaw) return;
+    if (/^https?:\/\//i.test(ipRaw)) {
+      add(ipRaw);
+      try {
+        const parsed = new URL(ipRaw);
+        if (publicPort > 0 && !parsed.port) add(`${parsed.protocol}//${parsed.hostname}:${publicPort}`);
+      } catch (_err) {}
+      return;
+    }
+    const host = ipRaw;
+    if (publicPort > 0) {
+      if (publicPort === 443) add(`https://${host}`);
+      add(`https://${host}:${publicPort}`);
+      add(`http://${host}:${publicPort}`);
+    }
+    if (privatePort > 0 && privatePort !== publicPort) {
+      if (privatePort === 443) add(`https://${host}`);
+      add(`https://${host}:${privatePort}`);
+      add(`http://${host}:${privatePort}`);
+    }
+    add(`https://${host}`);
+  });
+  return [...candidates];
+};
+
+const getSelectedLoraRunpodPod = () => {
+  const podId = String(loraRunpodPodSelect?.value || '').trim();
+  if (!podId) return null;
+  return loraRunpodPods.find((pod) => String(pod?.id || '').trim() === podId) || null;
+};
+
+const renderLoraRunpodPodMeta = () => {
+  if (!loraRunpodPodMeta) return;
+  const pod = getSelectedLoraRunpodPod();
+  if (!pod) {
+    loraRunpodPodMeta.textContent = loraRunpodPods.length ? 'Select a pod to view runtime details.' : 'No pod loaded.';
+    return;
+  }
+  const runtime = pod.runtime && typeof pod.runtime === 'object' ? pod.runtime : {};
+  const ports = Array.isArray(runtime.ports) ? runtime.ports : [];
+  const portText = ports.length
+    ? ports
+        .map((entry) => {
+          const ip = String(entry?.ip || '').trim();
+          const pub = Number(entry?.publicPort || 0);
+          const priv = Number(entry?.privatePort || 0);
+          const type = String(entry?.type || '').trim();
+          return `${type || 'port'} ${ip || '—'} ${pub || 0}/${priv || 0}`.trim();
+        })
+        .join(' • ')
+    : 'No exposed ports reported by API yet.';
+  const status = String(pod.desiredStatus || 'unknown').trim() || 'unknown';
+  loraRunpodPodMeta.textContent = `${pod.name || pod.id} (${status}) • ${portText}`;
+};
+
+const renderLoraRunpodPodOptions = (preferredPodId = '') => {
+  if (!loraRunpodPodSelect) return;
+  const requested = String(preferredPodId || loraRunpodPodSelect.value || '').trim();
+  loraRunpodPodSelect.innerHTML = '';
+  if (!loraRunpodPods.length) {
+    loraRunpodPodSelect.innerHTML = '<option value="">No pods found</option>';
+    renderLoraRunpodPodMeta();
+    return;
+  }
+  loraRunpodPods.forEach((pod) => {
+    const option = document.createElement('option');
+    option.value = pod.id;
+    option.textContent = `${pod.name || pod.id} (${pod.desiredStatus || 'unknown'})`;
+    loraRunpodPodSelect.appendChild(option);
+  });
+  const matched = loraRunpodPods.some((pod) => pod.id === requested) ? requested : loraRunpodPods[0].id;
+  loraRunpodPodSelect.value = matched;
+  renderLoraRunpodPodMeta();
+};
+
+const applyLoraToolkitUrlFromPod = ({ force = false } = {}) => {
+  const pod = getSelectedLoraRunpodPod();
+  if (!pod || !loraRunpodToolkitUrlInput) return;
+  const currentUrl = sanitizeLoraToolkitUrl(loraRunpodToolkitUrlInput.value || '');
+  if (!force && currentUrl) return;
+  const candidates = deriveLoraToolkitUrlsFromPod(pod);
+  if (candidates.length) {
+    loraRunpodToolkitUrlInput.value = candidates[0];
+  }
+};
+
+const loadStoredRunpodKey = () => {
+  if (!loraRunpodApiKeyInput || !loraRunpodRememberToggle) return;
+  const remember = localStorage.getItem(RUNPOD_API_REMEMBER_KEY) === '1';
+  loraRunpodRememberToggle.checked = remember;
+  if (!remember) {
+    loraRunpodApiKeyInput.value = '';
+    return;
+  }
+  loraRunpodApiKeyInput.value = localStorage.getItem(RUNPOD_API_KEY_KEY) || '';
+};
+
+const persistRunpodKey = () => {
+  if (!loraRunpodApiKeyInput || !loraRunpodRememberToggle) return;
+  const remember = !!loraRunpodRememberToggle.checked;
+  localStorage.setItem(RUNPOD_API_REMEMBER_KEY, remember ? '1' : '0');
+  if (!remember) {
+    localStorage.removeItem(RUNPOD_API_KEY_KEY);
+    return;
+  }
+  const key = String(loraRunpodApiKeyInput.value || '').trim();
+  if (key) localStorage.setItem(RUNPOD_API_KEY_KEY, key);
+  else localStorage.removeItem(RUNPOD_API_KEY_KEY);
+};
+
+const fetchRunpodPodsForLora = async () => {
+  const key = String(loraRunpodApiKeyInput?.value || '').trim();
+  if (!key) {
+    setLoraRunpodStatus('Enter your RunPod API key first.', true);
+    return;
+  }
+  if (!window.electronAPI?.runpodListPods) {
+    setLoraRunpodStatus('RunPod integration is not available in this build.', true);
+    return;
+  }
+  setLoraRunpodBusy(true);
+  setLoraRunpodStatus('Loading pods from RunPod...');
+  try {
+    const res = await window.electronAPI.runpodListPods({ apiKey: key });
+    if (!res?.success) {
+      setLoraRunpodStatus(String(res?.error || 'Could not load pods.').trim() || 'Could not load pods.', true);
+      return;
+    }
+    loraRunpodPods = Array.isArray(res.pods) ? res.pods : [];
+    const preferredPodId = String(readLoraLabState().runpodPodId || '').trim();
+    renderLoraRunpodPodOptions(preferredPodId);
+    applyLoraToolkitUrlFromPod({ force: !sanitizeLoraToolkitUrl(loraRunpodToolkitUrlInput?.value || '') });
+    persistRunpodKey();
+    persistLoraLabState();
+    renderLoraLab();
+    setLoraRunpodStatus(loraRunpodPods.length ? `Loaded ${loraRunpodPods.length} pod(s).` : 'No pods found for this RunPod account.');
+  } catch (err) {
+    setLoraRunpodStatus(String(err?.message || 'Could not load pods.').trim() || 'Could not load pods.', true);
+  } finally {
+    setLoraRunpodBusy(false);
+  }
+};
+
+const refreshSelectedRunpodPodForLora = async () => {
+  const key = String(loraRunpodApiKeyInput?.value || '').trim();
+  const podId = String(loraRunpodPodSelect?.value || '').trim();
+  if (!key) {
+    setLoraRunpodStatus('Enter your RunPod API key first.', true);
+    return;
+  }
+  if (!podId) {
+    setLoraRunpodStatus('Select a pod first.', true);
+    return;
+  }
+  if (!window.electronAPI?.runpodGetPod) {
+    setLoraRunpodStatus('RunPod integration is not available in this build.', true);
+    return;
+  }
+  setLoraRunpodBusy(true);
+  setLoraRunpodStatus(`Refreshing pod ${podId}...`);
+  try {
+    const res = await window.electronAPI.runpodGetPod({ apiKey: key, podId });
+    if (!res?.success || !res?.pod) {
+      setLoraRunpodStatus(String(res?.error || 'Could not refresh pod.').trim() || 'Could not refresh pod.', true);
+      return;
+    }
+    const idx = loraRunpodPods.findIndex((entry) => String(entry?.id || '').trim() === podId);
+    if (idx >= 0) loraRunpodPods[idx] = res.pod;
+    else loraRunpodPods.unshift(res.pod);
+    renderLoraRunpodPodOptions(podId);
+    applyLoraToolkitUrlFromPod({ force: false });
+    persistLoraLabState();
+    renderLoraLab();
+    setLoraRunpodStatus(`Pod "${res.pod.name || res.pod.id}" refreshed.`);
+  } catch (err) {
+    setLoraRunpodStatus(String(err?.message || 'Could not refresh pod.').trim() || 'Could not refresh pod.', true);
+  } finally {
+    setLoraRunpodBusy(false);
+  }
+};
+
+const validateLoraRunpodConnection = async () => {
+  const key = String(loraRunpodApiKeyInput?.value || '').trim();
+  if (!key) {
+    setLoraRunpodStatus('Enter your RunPod API key first.', true);
+    return;
+  }
+  if (!window.electronAPI?.runpodListPods || !window.electronAPI?.runpodProbeUrl) {
+    setLoraRunpodStatus('RunPod validation is not available in this build.', true);
+    return;
+  }
+  setLoraRunpodBusy(true);
+  setLoraRunpodStatus('Running RunPod + AI Toolkit validation...');
+  try {
+    const checks = [];
+    const issues = [];
+    const listRes = await window.electronAPI.runpodListPods({ apiKey: key });
+    if (!listRes?.success) {
+      setLoraRunpodStatus(String(listRes?.error || 'Could not load pods for validation.').trim() || 'Could not load pods for validation.', true);
+      return;
+    }
+    loraRunpodPods = Array.isArray(listRes.pods) ? listRes.pods : [];
+    const selectedPodId = String(loraRunpodPodSelect?.value || readLoraLabState().runpodPodId || '').trim();
+    renderLoraRunpodPodOptions(selectedPodId);
+    persistRunpodKey();
+    checks.push(`API key valid (${loraRunpodPods.length} pod${loraRunpodPods.length === 1 ? '' : 's'} found)`);
+    if (!loraRunpodPods.length) {
+      setLoraRunpodStatus('Validation failed: no pods found for this RunPod account.', true);
+      persistLoraLabState();
+      renderLoraLab();
+      return;
+    }
+
+    let pod = getSelectedLoraRunpodPod();
+    if (!pod) {
+      pod = loraRunpodPods[0] || null;
+      if (pod && loraRunpodPodSelect) {
+        loraRunpodPodSelect.value = pod.id;
+      }
+    }
+    if (!pod) {
+      setLoraRunpodStatus('Validation failed: could not resolve a pod for checks.', true);
+      return;
+    }
+    if (window.electronAPI?.runpodGetPod) {
+      const podRes = await window.electronAPI.runpodGetPod({ apiKey: key, podId: pod.id });
+      if (podRes?.success && podRes?.pod) {
+        const idx = loraRunpodPods.findIndex((entry) => String(entry?.id || '').trim() === pod.id);
+        if (idx >= 0) loraRunpodPods[idx] = podRes.pod;
+        else loraRunpodPods.unshift(podRes.pod);
+        pod = podRes.pod;
+        renderLoraRunpodPodOptions(pod.id);
+      } else {
+        issues.push(`Could not refresh pod details (${podRes?.error || 'unknown error'}).`);
+      }
+    }
+
+    const status = String(pod?.desiredStatus || 'unknown').trim() || 'unknown';
+    checks.push(`Pod status: ${status}`);
+    if (!/running|run|active|ready/i.test(status)) {
+      issues.push(`Pod is "${status}" and may not be ready.`);
+    }
+
+    const ports = Array.isArray(pod?.runtime?.ports) ? pod.runtime.ports : [];
+    const has8675 = ports.some((port) => Number(port?.privatePort || 0) === 8675 || Number(port?.publicPort || 0) === 8675);
+    if (has8675) {
+      checks.push('Port 8675 exposed');
+    } else {
+      issues.push('Port 8675 was not found in pod runtime ports.');
+    }
+
+    let toolkitUrl = sanitizeLoraToolkitUrl(loraRunpodToolkitUrlInput?.value || '');
+    if (!toolkitUrl) {
+      const candidates = deriveLoraToolkitUrlsFromPod(pod);
+      if (candidates.length) {
+        toolkitUrl = candidates[0];
+        if (loraRunpodToolkitUrlInput) loraRunpodToolkitUrlInput.value = toolkitUrl;
+        checks.push('Toolkit URL auto-derived from pod runtime ports');
+      }
+    }
+    if (!toolkitUrl) {
+      issues.push('Toolkit URL is missing. Enter it manually or expose an HTTP endpoint.');
+      persistLoraLabState();
+      renderLoraLab();
+      setLoraRunpodStatus(`Validation found issues: ${issues.join(' ')}`, true);
+      return;
+    }
+
+    const probeRes = await window.electronAPI.runpodProbeUrl({ url: toolkitUrl });
+    if (!probeRes?.success) {
+      issues.push(`Toolkit URL probe failed (${probeRes?.error || 'unknown error'}).`);
+    } else {
+      const statusCode = Number(probeRes.status || 0);
+      if (statusCode > 0) {
+        checks.push(`Toolkit endpoint reachable (HTTP ${statusCode})`);
+      } else {
+        checks.push('Toolkit endpoint reachable');
+      }
+      if (statusCode >= 400) {
+        issues.push(`Toolkit endpoint returned HTTP ${statusCode}.`);
+      }
+      const finalUrl = sanitizeLoraToolkitUrl(probeRes.finalUrl || '');
+      if (finalUrl && finalUrl !== toolkitUrl && loraRunpodToolkitUrlInput) {
+        loraRunpodToolkitUrlInput.value = finalUrl;
+      }
+    }
+
+    persistLoraLabState();
+    renderLoraLab();
+    if (issues.length) {
+      setLoraRunpodStatus(`Validation found issues: ${issues.join(' ')}`, true);
+      return;
+    }
+    setLoraRunpodStatus(`Validation passed: ${checks.join(' • ')}`);
+  } catch (err) {
+    setLoraRunpodStatus(String(err?.message || 'Validation failed.').trim() || 'Validation failed.', true);
+  } finally {
+    setLoraRunpodBusy(false);
+  }
+};
+
+const loadLoraToolkitFrame = async () => {
+  const rawUrl = String(loraRunpodToolkitUrlInput?.value || '').trim();
+  const url = sanitizeLoraToolkitUrl(rawUrl);
+  if (!url) {
+    setLoraRunpodStatus('Enter a valid AI Toolkit URL first.', true);
+    return;
+  }
+  setLoraRunpodBusy(true);
+  setLoraRunpodStatus('Checking AI Toolkit endpoint...');
+  try {
+    let finalUrl = url;
+    if (window.electronAPI?.runpodProbeUrl) {
+      const probe = await window.electronAPI.runpodProbeUrl({ url });
+      if (!probe?.success) {
+        setLoraRunpodStatus(`Probe failed: ${probe?.error || 'Endpoint unreachable'}. Loading anyway...`, true);
+      } else {
+        if (sanitizeLoraToolkitUrl(probe.finalUrl || '')) {
+          finalUrl = sanitizeLoraToolkitUrl(probe.finalUrl || '');
+          if (loraRunpodToolkitUrlInput) loraRunpodToolkitUrlInput.value = finalUrl;
+        }
+        const statusCode = Number(probe.status || 0);
+        setLoraRunpodStatus(statusCode ? `Endpoint responded (HTTP ${statusCode}). Loading UI...` : 'Endpoint reachable. Loading UI...');
+      }
+    }
+    setLoraToolkitFrameUrl(finalUrl);
+    persistLoraLabState();
+    renderLoraLab();
+  } finally {
+    setLoraRunpodBusy(false);
+  }
+};
+
+const openLoraToolkitExternally = async () => {
+  const url = sanitizeLoraToolkitUrl(loraRunpodToolkitUrlInput?.value || '');
+  if (!url) {
+    setLoraRunpodStatus('Enter a valid AI Toolkit URL first.', true);
+    return;
+  }
+  if (window.electronAPI?.openExternalUrl) {
+    const res = await window.electronAPI.openExternalUrl({ url });
+    if (!res?.success) {
+      setLoraRunpodStatus(String(res?.error || 'Could not open URL.').trim() || 'Could not open URL.', true);
+      return;
+    }
+    setLoraRunpodStatus('Opened AI Toolkit in your browser.');
+    return;
+  }
+  window.open(url, '_blank', 'noopener,noreferrer');
+  setLoraRunpodStatus('Opened AI Toolkit in your browser.');
+};
+
+const openRunpodPodConsole = async () => {
+  const url = RUNPOD_POD_CONSOLE_URL;
+  if (window.electronAPI?.openExternalUrl) {
+    const res = await window.electronAPI.openExternalUrl({ url });
+    if (!res?.success) {
+      setLoraRunpodStatus(String(res?.error || 'Could not open RunPod console.').trim() || 'Could not open RunPod console.', true);
+      return;
+    }
+    setLoraRunpodStatus('Opened RunPod console in your browser.');
+    return;
+  }
+  window.open(url, '_blank', 'noopener,noreferrer');
+  setLoraRunpodStatus('Opened RunPod console in your browser.');
+};
+
 const setActiveSaveDisplay = () => {
   if (!activeSaveName) {
     activeSaveDisplay.textContent = 'No save active';
     return;
   }
-  const suffix = activeSaveIsSession ? ' (session)' : '';
+  const activeType = getActiveSaveType();
+  const persisted = saves.find((s) => s.name === activeSaveName && (s.type || 'image') === activeType);
+  const suffix = activeSaveIsSession && !persisted ? ' (session)' : '';
   activeSaveDisplay.textContent = `Save: ${activeSaveName}${suffix}`;
 };
 
-const getBatchType = () => (batchTypeSelect?.value || 'story');
+const updateAppHeaderVisibility = () => {
+  const showCreateHeader = activeView === 'create';
+  if (appHeader) appHeader.classList.toggle('hidden', !showCreateHeader);
+  if (appHeaderTitleBadge) appHeaderTitleBadge.classList.toggle('hidden', showCreateHeader);
+  if (appHeaderTagline) appHeaderTagline.classList.toggle('hidden', showCreateHeader);
+};
+
+const applySideNavCollapsedState = (collapsed = false) => {
+  const compactViewport = window.matchMedia('(max-width: 980px)').matches;
+  const offset = collapsed ? (compactViewport ? '94px' : '106px') : compactViewport ? '94px' : '260px';
+  document.documentElement.style.setProperty('--sidebar-offset', offset);
+  if (sideNav) sideNav.classList.toggle('collapsed', !!collapsed);
+};
+
+const normalizeBatchType = (value = '') => {
+  const raw = String(value || '').trim().toLowerCase();
+  if (raw === 'story') return 'instagram';
+  if (raw === 'instagram' || raw === 'object' || raw === 'standard') return raw;
+  return 'standard';
+};
+
+const getBatchType = () => normalizeBatchType(batchTypeSelect?.value || 'standard');
 
 const updateBatchModeUI = () => {
-  const isStory = getBatchType() === 'story';
-  if (batchStoryThemeWrap) batchStoryThemeWrap.classList.toggle('hidden', !isStory);
-  if (batchStoryCountWrap) batchStoryCountWrap.classList.toggle('hidden', !isStory);
-  if (batchModeWrap) batchModeWrap.classList.toggle('hidden', !isStory);
-  if (batchDiffWrap) batchDiffWrap.classList.toggle('hidden', isStory);
-  if (batchObjectWrap) batchObjectWrap.classList.toggle('hidden', isStory);
-  if (batchOutfitSection) batchOutfitSection.classList.toggle('hidden', !isStory);
-  if (batchCarouselLabel) {
-    batchCarouselLabel.textContent = isStory ? 'Carousel images (1-7)' : 'Variations (1-7)';
+  const batchType = getBatchType();
+  const isInstagramBatch = batchType === 'instagram';
+  const isObjectBatch = batchType === 'object';
+  const isStandardBatch = batchType === 'standard';
+  if (batchStoryThemeWrap) batchStoryThemeWrap.classList.toggle('hidden', isObjectBatch);
+  if (batchStoryCountWrap) batchStoryCountWrap.classList.toggle('hidden', !isInstagramBatch);
+  if (batchModeWrap) batchModeWrap.classList.toggle('hidden', !isInstagramBatch);
+  if (batchDiffWrap) batchDiffWrap.classList.toggle('hidden', !isObjectBatch);
+  if (batchObjectWrap) batchObjectWrap.classList.toggle('hidden', !isObjectBatch);
+  if (batchOutfitSection) batchOutfitSection.classList.toggle('hidden', !isInstagramBatch);
+  if (batchPromptLabel) {
+    batchPromptLabel.textContent = isInstagramBatch ? 'Story theme' : 'Batch prompt';
   }
-  if (!isStory) {
+  if (batchPromptHint) {
+    batchPromptHint.textContent = isInstagramBatch
+      ? 'Use one clear daily concept so every image feels part of the same set.'
+      : 'This exact prompt is reused for every generated image.';
+  }
+  if (batchCarouselLabel) {
+    batchCarouselLabel.textContent = isInstagramBatch
+      ? 'Carousel images (1-7)'
+      : isObjectBatch
+        ? 'Variations (1-7)'
+        : 'Images to generate (1-7)';
+  }
+  if (batchCarouselHint) {
+    batchCarouselHint.textContent = isInstagramBatch
+      ? 'Controls the primary sequence count.'
+      : isObjectBatch
+        ? 'How many object variations to create.'
+        : 'How many times to run the same prompt.';
+  }
+  if (batchStoryLabel) {
+    batchStoryLabel.textContent = 'Story images (0-7)';
+  }
+  if (batchStoryHint) {
+    batchStoryHint.textContent = 'Adds supporting shots around the carousel.';
+  }
+  if (!isInstagramBatch) {
     if (batchUseClothes) batchUseClothes.checked = false;
     if (batchOutfitToggle) batchOutfitToggle.checked = false;
     batchOutfitsEnabled = false;
+  } else if (batchOutfitToggle && !batchOutfitsEnabled) {
+    batchOutfitToggle.checked = true;
+    batchOutfitsEnabled = true;
   }
-  if (batchUseClothes) batchUseClothes.disabled = !isStory;
-  if (batchOutfitToggle) batchOutfitToggle.disabled = !isStory;
+  if (batchUseClothes) batchUseClothes.disabled = !isInstagramBatch;
+  if (batchOutfitToggle) batchOutfitToggle.disabled = !isInstagramBatch;
+  if (batchThemeSuggestBtn) {
+    batchThemeSuggestBtn.disabled = isObjectBatch;
+    batchThemeSuggestBtn.textContent = isInstagramBatch ? 'Suggest theme' : 'Suggest prompt';
+  }
+  if (batchDraftBtn) {
+    batchDraftBtn.textContent = isStandardBatch ? 'Build batch plan' : 'Draft batch plan';
+  }
   if (avatarRow) {
-    avatarRow.classList.toggle('hidden', currentCreateView === 'batch' && !isStory);
+    avatarRow.classList.toggle('hidden', currentCreateView === 'batch' && isObjectBatch);
   }
   if (clothesRow) {
-    clothesRow.classList.toggle('hidden', currentCreateView === 'batch' && !isStory);
+    clothesRow.classList.toggle('hidden', currentCreateView === 'batch' && !isInstagramBatch);
   }
 };
 
-const setCreateView = (view) => {
+const setCreateView = (view, { skipTikTokInit = false } = {}) => {
   const normalized = ['chooser', 'image', 'video', 'batch', 'tiktok'].includes(view) ? view : 'image';
   currentCreateView = normalized;
   if (normalized) {
@@ -20200,12 +29918,31 @@ const setCreateView = (view) => {
   if (normalized === 'video') syncVideoFrameFromObject();
   if (normalized === 'batch') updateBatchModeUI();
   if (normalized === 'tiktok') {
-    fetchElevenlabsVoices({ silent: true, force: true });
-    syncLibraryKeyToInput();
-    tiktokStickyTargets = collectTikTokStickyTargets();
+    try {
+      if (!skipTikTokInit) {
+        fetchElevenlabsVoices({ silent: true, force: true });
+        syncLibraryKeyToInput();
+        tiktokStickyTargets = collectTikTokStickyTargets();
+        renderTikTokAutomationUi();
+      }
+    } catch (err) {
+      debugTrace('ui.createView.error', {
+        requestedView: String(view || '').trim(),
+        normalizedView: normalized,
+        skipTikTokInit: !!skipTikTokInit,
+        message: String(err?.message || err || '').trim()
+      });
+      throw err;
+    }
   }
   updateTaskVisibility();
+  updateAppHeaderVisibility();
   scheduleTikTokStickyStepUpdate();
+  debugTrace('ui.createView', buildTikTokAutomationDebugSnapshot({
+    requestedView: String(view || '').trim(),
+    normalizedView: normalized,
+    skipTikTokInit: !!skipTikTokInit
+  }));
 };
 
 const getCreatorTitle = (mode, explicitTitle = '') => {
@@ -20261,7 +29998,7 @@ const closeCreatorPanel = () => {
 };
 
 const getActiveSaveType = () => {
-  const record = findSaveByName(activeSaveName).save;
+  const record = findSaveByName(activeSaveName, { preferSession: activeSaveIsSession }).save;
   if (record?.type) return record.type;
   if (currentCreateView === 'batch') return 'batch';
   if (currentCreateView === 'video') return 'video';
@@ -20277,11 +30014,12 @@ const buildCurrentStateByType = (type = 'image') => {
 };
 
 const persistLastActiveProject = () => {
+  if (saveRestoreInProgress) return;
   if (!activeSaveName) {
     localStorage.removeItem(LAST_ACTIVE_PROJECT_KEY);
     return;
   }
-  const { save, session } = findSaveByName(activeSaveName);
+  const { save, session } = findSaveByName(activeSaveName, { preferSession: activeSaveIsSession });
   const type = save?.type || getActiveSaveType();
   const persisted = saves.find((s) => s.name === activeSaveName);
   const payload = {
@@ -20309,8 +30047,9 @@ const persistLastActiveProject = () => {
 };
 
 const captureActiveSaveState = () => {
+  if (saveRestoreInProgress) return;
   if (!activeSaveName) return;
-  const { save, session } = findSaveByName(activeSaveName);
+  const { save, session } = findSaveByName(activeSaveName, { preferSession: activeSaveIsSession });
   const isSession = session || activeSaveIsSession;
   const type = save?.type || getActiveSaveType();
   const sessionId = isSession ? save?.id || generateSessionId() : '';
@@ -20369,7 +30108,7 @@ const setActiveSave = (name, { session = false, skipCapture = false } = {}) => {
     sessionStorage.removeItem(ACTIVE_SESSION_SAVE_KEY);
   }
   setActiveSaveDisplay();
-  if (activeSaveName) startAutosave();
+  if (activeSaveName && !saveRestoreInProgress) startAutosave();
   else stopAutosave();
   persistLastActiveProject();
   updateTaskVisibility();
@@ -20382,7 +30121,14 @@ const setActiveSave = (name, { session = false, skipCapture = false } = {}) => {
   }
 };
 
+window.addEventListener('focus', () => {
+  syncSavesFromDisk();
+  if (activeView === 'history') renderSavesList();
+  renderOpenTabs();
+});
+
 const scheduleSave = () => {
+  if (saveRestoreInProgress) return;
   if (!activeSaveName) {
     const inBuilder = activeView === 'builder';
     if (!inBuilder) return;
@@ -20494,6 +30240,7 @@ const shouldShowTikTokStickyStep = () =>
   !!tiktokView &&
   activeView === 'builder' &&
   currentCreateView === 'tiktok' &&
+  tiktokMode !== 'automatic' &&
   !tiktokView.classList.contains('hidden');
 
 const getActiveTikTokPipelineRunState = () => {
@@ -20832,7 +30579,7 @@ const resetImageBuilder = () => {
   promptInput.value = '';
   imageSources = [];
   activeAvatarName = '';
-  if (avatarSelect) avatarSelect.value = '';
+  syncAvatarSelectValues('');
   resetClothesSelection(false);
   supabaseCleanup = [];
   setCurrentTask('');
@@ -20864,7 +30611,7 @@ const resetBatchBuilder = () => {
   if (batchDayInput) batchDayInput.value = '';
   if (batchCarouselCount) batchCarouselCount.value = 3;
   if (batchStoryCount) batchStoryCount.value = 2;
-  if (batchTypeSelect) batchTypeSelect.value = 'story';
+  if (batchTypeSelect) batchTypeSelect.value = 'standard';
   if (batchDiffPrompt) batchDiffPrompt.value = '';
   if (batchModeSelect) batchModeSelect.value = 'creative';
   if (batchNameInput) batchNameInput.value = '';
@@ -20938,6 +30685,7 @@ const resetTikTokBuilder = () => {
   tiktokAvatarActiveSceneId = '';
   tiktokAvatarResumeRunToken = 0;
   tiktokAvatarSceneExpanded = {};
+  clearTikTokAvatarAutoRetry({ resetAttempts: true });
   tiktokAvatarAssets = { normalUrl: '', greenUrl: '' };
   if (tiktokAvatarLog) tiktokAvatarLog.textContent = '';
   setTikTokAvatarStatus('Idle.');
@@ -21336,16 +31084,42 @@ const restoreWindowScrollY = ({ retries = 20, delayMs = 120 } = {}) => {
 
 const setActiveView = (name, { force = false, reason = '' } = {}) => {
   console.log('[ui] setActiveView', name, 'activeSave:', activeSaveName, reason ? `reason=${reason}` : '');
-  if (Date.now() < viewLockUntil && viewLockTarget && name !== viewLockTarget && !force) return;
-  if (name === 'history' && Date.now() < viewLockUntil) return;
+  if (Date.now() < viewLockUntil && viewLockTarget && name !== viewLockTarget && !force) {
+    debugTrace('ui.view.blocked', {
+      requestedView: String(name || '').trim(),
+      previousView: String(activeView || '').trim(),
+      reason: 'view-lock',
+      viewLockTarget: String(viewLockTarget || '').trim(),
+      force: !!force
+    });
+    return;
+  }
+  if (name === 'history' && Date.now() < viewLockUntil) {
+    debugTrace('ui.view.blocked', {
+      requestedView: String(name || '').trim(),
+      previousView: String(activeView || '').trim(),
+      reason: 'history-locked',
+      force: !!force
+    });
+    return;
+  }
   if (!force && name === 'history' && activeView !== 'auth') {
     console.warn('[ui] blocked history switch');
     console.trace('[ui] history switch trace');
     log(`Blocked history switch. reason=${reason || 'unknown'}`);
+    debugTrace('ui.view.blocked', {
+      requestedView: String(name || '').trim(),
+      previousView: String(activeView || '').trim(),
+      reason: 'history-blocked',
+      force: !!force
+    });
     return;
   }
   const previousView = activeView;
   activeView = name;
+  if (activeView === 'history') {
+    savesFilter = 'all';
+  }
   if (name && name !== 'auth') {
     localStorage.setItem(LAST_VIEW_KEY, name);
   }
@@ -21356,9 +31130,16 @@ const setActiveView = (name, { force = false, reason = '' } = {}) => {
     const view = btn.getAttribute('data-view');
     btn.classList.toggle('active', view === activeView);
   });
+  updateAppHeaderVisibility();
   if (activeView === 'builder') {
     renderTikTokSfxEvents();
     requestSfxTimelineRender();
+  }
+  if (activeView === 'avatars') {
+    renderAvatarList();
+  }
+  if (activeView === 'objects') {
+    renderObjectList();
   }
   if (activeView === 'activity') {
     if (previousView !== 'activity') {
@@ -21413,10 +31194,16 @@ const setActiveView = (name, { force = false, reason = '' } = {}) => {
     clearTimeout(activityViewEntryRefreshTimer);
     activityViewEntryRefreshTimer = null;
   }
-  if (builderTopBar) builderTopBar.classList.toggle('hidden', activeView !== 'builder');
+  if (builderTopBar) builderTopBar.classList.toggle('hidden', activeView !== 'builder' || currentCreateView === 'tiktok');
   if (statusCard) statusCard.classList.toggle('hidden', activeView !== 'builder');
   if (resultsCard) resultsCard.classList.toggle('hidden', activeView !== 'builder');
   updateTaskVisibility();
+  debugTrace('ui.view', buildTikTokAutomationDebugSnapshot({
+    requestedView: String(name || '').trim(),
+    previousView: String(previousView || '').trim(),
+    reason: String(reason || '').trim(),
+    force: !!force
+  }));
 };
 
 const unlockApp = (fromLoad = false) => {
@@ -21654,7 +31441,17 @@ const saveApiKey = () => {
 };
 
 const renderSavesList = () => {
+  syncSavesFromDisk();
   historyList.innerHTML = '';
+  [
+    ['all', saveFilterAll],
+    ['image', saveFilterImage],
+    ['batch', saveFilterBatch],
+    ['shortform', saveFilterShortForm]
+  ].forEach(([key, button]) => {
+    if (!button) return;
+    button.classList.toggle('active', savesFilter === key);
+  });
   const combined = getCombinedSaves();
   if (!combined.length) {
     historyList.innerHTML = '<div class="small">No saves yet.</div>';
@@ -21667,6 +31464,7 @@ const renderSavesList = () => {
       if (savesFilter === 'all') return true;
       if (savesFilter === 'image') return type === 'image' || type === 'video';
       if (savesFilter === 'batch') return type === 'batch';
+      if (savesFilter === 'shortform') return type === 'tiktok';
       return true;
     })
     .forEach((save) => {
@@ -21711,10 +31509,19 @@ const renderSavesList = () => {
     loadBtn.className = 'secondary';
     loadBtn.textContent = 'Open';
     loadBtn.addEventListener('click', () => {
+      debugTrace('saves.open.click', {
+        name: String(save.name || '').trim(),
+        type: String(save.type || 'image').trim(),
+        session: !!save.session,
+        runs: Number(save?.data?.automation?.runs?.length || 0),
+        concepts: Number(save?.data?.automation?.concepts?.length || 0),
+        view: String(save?.data?.automation?.view || '').trim(),
+        mode: String(save?.data?.automation?.mode || '').trim()
+      });
       if (save.session) {
         activateSaveRecord(save, { session: true, reason: 'activate' });
       } else {
-        openSaveInSession(save);
+        activateSaveRecord(save, { session: false, reason: 'activate-saved' });
       }
     });
 
@@ -21756,19 +31563,26 @@ const saveCurrentState = (showStatus = true) => {
   if (saveTick) saveTick.classList.remove('show');
   if (saveStatusText) saveStatusText.textContent = 'Saving...';
   captureActiveSaveState();
-  // Persist TikTok session saves to disk so they survive app restarts.
-  if (activeSaveIsSession && getActiveSaveType() === 'tiktok') {
-    const data = serializeTikTokState();
-    const existingIdx = saves.findIndex((s) => s.name === activeSaveName && (s.type || 'tiktok') === 'tiktok');
+  const activeType = getActiveSaveType();
+  const persistedIdx = activeSaveIsSession
+    ? saves.findIndex((s) => s.name === activeSaveName && (s.type || 'image') === activeType)
+    : -1;
+  if (persistedIdx >= 0) {
+    let data;
+    try {
+      data = buildCurrentStateByType(activeType);
+    } catch (_err) {
+      data = saves[persistedIdx]?.data || {};
+    }
     const record = {
+      ...saves[persistedIdx],
       name: activeSaveName,
-      type: 'tiktok',
+      type: activeType,
       data,
       updatedAt: Date.now(),
-      createdAt: saves[existingIdx]?.createdAt || Date.now()
+      createdAt: saves[persistedIdx]?.createdAt || Date.now()
     };
-    if (existingIdx >= 0) saves[existingIdx] = record;
-    else saves.unshift(record);
+    saves[persistedIdx] = record;
     persistSaves(saves.slice(0, 50));
   }
   const isHistoryVisible = !!views?.history && !views.history.classList.contains('hidden');
@@ -21782,8 +31596,10 @@ const saveCurrentState = (showStatus = true) => {
   }
   const stamp = new Date().toLocaleTimeString();
   if (saveStatusText) {
-    saveStatusText.textContent = activeSaveIsSession ? `Session saved at ${stamp}` : `Last saved at ${stamp}`;
+    saveStatusText.textContent =
+      activeSaveIsSession && persistedIdx === -1 ? `Session saved at ${stamp}` : `Last saved at ${stamp}`;
   }
+  setActiveSaveDisplay();
   setTimeout(() => {
     if (saveSpinner) saveSpinner.classList.remove('active');
     if (saveTick) saveTick.classList.add('show');
@@ -22696,16 +32512,182 @@ const exportImageWithMetadata = async (url) => {
 };
 
 const uploadLocalFiles = async ({ auto = false, sources = imageSources, touchStages = true, collectCleanup = true } = {}) => {
+  const isRasterImageMime = (mime = '') => {
+    const value = String(mime || '').trim().toLowerCase();
+    if (!value.startsWith('image/')) return false;
+    return value !== 'image/svg+xml';
+  };
+
+  const isRasterImagePath = (value = '') => {
+    const text = String(value || '')
+      .trim()
+      .split('?')[0]
+      .toLowerCase();
+    if (!text) return false;
+    return /\.(png|jpe?g|bmp|gif|webp|avif|heic|heif|tiff?)$/i.test(text);
+  };
+
+  const isWebpPath = (value = '') => {
+    const text = String(value || '')
+      .trim()
+      .split('?')[0]
+      .toLowerCase();
+    return !!text && text.endsWith('.webp');
+  };
+
+  const inferSourceFileName = (source = {}) => {
+    const explicit = String(source.name || '').trim();
+    if (explicit) return explicit;
+    const fromPath = String(source.localPath || source.path || '').trim();
+    if (fromPath) {
+      const slash = Math.max(fromPath.lastIndexOf('/'), fromPath.lastIndexOf('\\'));
+      return slash >= 0 ? fromPath.slice(slash + 1) : fromPath;
+    }
+    return 'image';
+  };
+
+  const sourceNeedsWebpConversion = (source = {}) => {
+    if (!source || source.type !== 'file') return false;
+    if (source.blob instanceof Blob && String(source.blob.type || '').toLowerCase() === 'image/webp') return false;
+    if (String(source.mime || '').toLowerCase() === 'image/webp') return false;
+    const localPath = String(source.localPath || source.path || '').trim();
+    const name = String(source.name || '').trim();
+    if (isWebpPath(localPath) || isWebpPath(name)) return false;
+    if (source.blob instanceof Blob) {
+      if (isRasterImageMime(source.blob.type || source.mime || '')) return true;
+      if (isRasterImagePath(name)) return true;
+      return false;
+    }
+    if (localPath && isRasterImagePath(localPath)) return true;
+    if (name && isRasterImagePath(name)) return true;
+    return isRasterImageMime(source.mime || '');
+  };
+
+  const resolveConversionCacheKey = (source = {}) => {
+    const localPath = String(source.localPath || source.path || '').trim();
+    if (localPath) return `path:${localPath}`;
+    if (source.blob instanceof Blob) {
+      return `blob:${inferSourceFileName(source)}:${Number(source.blob.size || 0)}:${String(source.blob.type || source.mime || '')}`;
+    }
+    return '';
+  };
+
+  const persistWebpBlobForSource = async (source = {}, webpBlob = null) => {
+    if (!(webpBlob instanceof Blob)) return '';
+    if (!window.electronAPI?.persistBlobFile) return '';
+    try {
+      const buffer = await webpBlob.arrayBuffer();
+      const suggestedName = ensureWebpFilename(inferSourceFileName(source) || 'image.webp');
+      const persisted = await window.electronAPI.persistBlobFile({
+        name: suggestedName,
+        data: Array.from(new Uint8Array(buffer))
+      });
+      if (persisted?.success && persisted.path) return persisted.path;
+    } catch (err) {
+      log(`WEBP persist failed: ${err.message}`);
+    }
+    return '';
+  };
+
+  const hydrateSourceWithWebp = async (source = {}, webpBlob = null, persistedPath = '') => {
+    const nextName = ensureWebpFilename(inferSourceFileName(source) || 'image.webp');
+    source.name = nextName;
+    source.mime = 'image/webp';
+    source.uploadedUrl = '';
+    source.forceUpload = true;
+    if (persistedPath) {
+      source.path = persistedPath;
+      source.localPath = persistedPath;
+      source.blob = null;
+      source.preview = `file://${persistedPath}`;
+      source.thumbData = '';
+      return;
+    }
+    if (webpBlob instanceof Blob) {
+      source.path = '';
+      source.localPath = '';
+      source.blob = webpBlob;
+      const previewUrl = await blobToDataUrl(webpBlob);
+      if (previewUrl) source.preview = previewUrl;
+    }
+  };
+
+  const ensureSourceWebpLocal = async (source = {}) => {
+    if (!sourceNeedsWebpConversion(source)) return false;
+    const cacheKey = resolveConversionCacheKey(source);
+    if (cacheKey && localWebpConversionCache.has(cacheKey)) {
+      const cachedPath = String(localWebpConversionCache.get(cacheKey) || '').trim();
+      if (cachedPath && window.electronAPI?.pathExists) {
+        try {
+          const exists = await window.electronAPI.pathExists(cachedPath);
+          if (exists?.exists) {
+            await hydrateSourceWithWebp(source, null, cachedPath);
+            return true;
+          }
+        } catch (_err) {}
+      }
+    }
+
+    let sourceBlob = null;
+    if (source.blob instanceof Blob) {
+      sourceBlob = source.blob;
+    } else {
+      const localPath = String(source.localPath || source.path || '').trim();
+      if (localPath) {
+        try {
+          sourceBlob = await readBlobFromLocalPath(localPath);
+        } catch (err) {
+          log(`WEBP conversion read failed (${localPath}): ${err.message}`);
+        }
+      }
+      if (!sourceBlob) {
+        const dataUrl =
+          (typeof source.preview === 'string' && source.preview.startsWith('data:') ? source.preview : '') ||
+          (typeof source.thumbData === 'string' && source.thumbData.startsWith('data:') ? source.thumbData : '');
+        const parsed = parseDataUrl(dataUrl);
+        if (parsed) {
+          sourceBlob = new Blob([parsed.bytes], { type: parsed.mime || source.mime || 'image/png' });
+        }
+      }
+    }
+    if (!(sourceBlob instanceof Blob)) return false;
+
+    try {
+      const webpBlob = await convertImageBlobToWebp(sourceBlob, 0.9);
+      const persistedPath = await persistWebpBlobForSource(source, webpBlob);
+      await hydrateSourceWithWebp(source, webpBlob, persistedPath);
+      if (cacheKey && persistedPath) {
+        localWebpConversionCache.set(cacheKey, persistedPath);
+      }
+      return true;
+    } catch (err) {
+      log(`WEBP conversion failed: ${err.message}`);
+      return false;
+    }
+  };
+
   if (touchStages) setStageState('upload', 'active');
-  const withPath = sources.filter((s) => s.type === 'file' && s.path && !s.blob);
-  const withBlob = sources.filter((s) => s.type === 'file' && s.blob);
+  const fileSources = sources.filter((s) => s.type === 'file');
+  for (const source of fileSources) {
+    await ensureSourceWebpLocal(source);
+  }
+  const needsUpload = (source = {}) => {
+    if (!source || source.type !== 'file') return false;
+    if (!(source.path || source.localPath || source.blob)) return false;
+    if (source.forceUpload) return true;
+    const existingUrl = String(source.uploadedUrl || '').trim();
+    return !isHttpUrl(existingUrl);
+  };
+  const uploadTargets = fileSources.filter((s) => needsUpload(s));
+  const withPath = uploadTargets.filter((s) => (s.path || s.localPath) && !s.blob);
+  const withBlob = uploadTargets.filter((s) => s.blob);
   if (!withPath.length && !withBlob.length) {
     if (!auto) log('No local files to upload.');
     if (touchStages) setStageState('upload', 'done');
     return { uploaded: 0, failed: 0 };
   }
 
-  const missing = sources.filter((s) => s.type === 'file' && !s.path && !s.blob);
+  const missing = fileSources.filter((s) => !isHttpUrl(String(s.uploadedUrl || '')) && !s.path && !s.localPath && !s.blob);
   if (missing.length) {
     const names = missing.map((m) => m.name || 'unknown').join(', ');
     const msg = `Some local files are unavailable (no path/blob): ${names}`;
@@ -22736,17 +32718,20 @@ const uploadLocalFiles = async ({ auto = false, sources = imageSources, touchSta
       failCount += withPath.length;
       return;
     }
-    const results = await window.electronAPI.uploadFiles(withPath.map((f) => f.path), { apiKey: uploadKey });
+    const results = await window.electronAPI.uploadFiles(
+      withPath.map((f) => f.path || f.localPath).filter(Boolean),
+      { apiKey: uploadKey }
+    );
     results.forEach((res) => {
       if (res.success && res.url) {
         successCount += 1;
-        const idx = sources.findIndex((s) => (s.path || s.localPath) === res.path);
-        if (idx >= 0) {
-          const target = sources[idx];
+        const targets = sources.filter((s) => (s.path || s.localPath) === res.path);
+        targets.forEach((target) => {
           target.type = 'file';
           target.uploadedUrl = res.url;
           target.label = target.label || res.url;
-        }
+          target.forceUpload = false;
+        });
         if (collectCleanup && res.remotePath) supabaseCleanup.push(res.remotePath);
         log(`Uploaded (path) ${res.path} -> ${res.url}`);
       } else {
@@ -22780,6 +32765,7 @@ const uploadLocalFiles = async ({ auto = false, sources = imageSources, touchSta
           const target = sources[idx];
           target.uploadedUrl = res.url;
           target.label = res.url;
+          target.forceUpload = false;
         } else {
           sources.push({ type: 'file', uploadedUrl: res.url, label: res.url, originalType: 'file', name: res.name });
         }
@@ -23712,44 +33698,61 @@ const saveAvatar = async () => {
     setStatus('Upload failed — saving locally instead.', true);
     log(uploadWarning);
   }
-  const record = {
-    name,
-    description,
-    gender,
-    age,
-    images: serializeAvatarImages(),
-    profile: serializeAvatarProfile(),
-    clothes: serializeClothesImages(),
-    greenScreen: serializeGreenScreenImages(),
-    updatedAt: Date.now(),
-    createdAt: Date.now()
-  };
-  const existingIdx = avatars.findIndex((a) => a.name === name);
-  if (existingIdx >= 0) {
-    record.createdAt = avatars[existingIdx].createdAt || record.createdAt;
-    avatars[existingIdx] = record;
-  } else {
-    avatars.unshift(record);
+  try {
+    const record = {
+      name,
+      description,
+      gender,
+      age,
+      images: serializeAvatarImages(),
+      profile: serializeAvatarProfile(),
+      clothes: serializeClothesImages(),
+      greenScreen: serializeGreenScreenImages(),
+      updatedAt: Date.now(),
+      createdAt: Date.now()
+    };
+    const existingIdx = avatars.findIndex((a) => a.name === name);
+    if (existingIdx >= 0) {
+      record.createdAt = avatars[existingIdx].createdAt || record.createdAt;
+      avatars[existingIdx] = record;
+    } else {
+      avatars.unshift(record);
+    }
+    avatars = avatars.slice(0, 50);
+    activeAvatarName = name;
+    renderAvatarOptions();
+    renderAvatarList();
+    updateAvatarStatusHint();
+    syncAvatarSelectValues(name);
+    renderAvatarSelectPreview();
+    const persisted = persistAvatars(avatars);
+    scheduleSave();
+    const stamp = new Date().toLocaleTimeString();
+    if (persisted) {
+      setStatus(uploadWarning ? `Avatar "${name}" saved locally at ${stamp}` : `Avatar "${name}" saved at ${stamp}`);
+      if (avatarStatus) {
+        avatarStatus.textContent = uploadWarning
+          ? `Saved "${name}" locally (upload failed).`
+          : `Saved avatar "${name}".`;
+      }
+      log(`Avatar "${name}" saved with ${avatarSources.length} image(s).`);
+      if (saveStatusText) saveStatusText.textContent = `Saved avatar "${name}" at ${stamp}`;
+    } else {
+      const warning = `Avatar "${name}" saved in session but could not be written to browser storage.`;
+      if (avatarStatus) avatarStatus.textContent = warning;
+      setAvatarStatus(warning, true);
+      setStatus(warning, true);
+      log(warning);
+    }
+  } catch (err) {
+    const message = String(err?.message || 'Avatar save failed.').trim();
+    if (avatarStatus) avatarStatus.textContent = message;
+    setAvatarStatus(message, true);
+    setStatus(message, true);
+    log(`Avatar save failed: ${message}`);
+  } finally {
+    setButtonSaving(avatarSaveSpinner, false);
   }
-  persistAvatars(avatars.slice(0, 50));
-  activeAvatarName = name;
-  renderAvatarOptions();
-  renderAvatarList();
-  if (avatarStatus) {
-    avatarStatus.textContent = uploadWarning
-      ? `Saved "${name}" locally (upload failed)`
-      : `Saved avatar "${name}"`;
-  }
-  updateAvatarStatusHint();
-  if (avatarSelect) avatarSelect.value = name;
-  renderAvatarSelectPreview();
-  scheduleSave();
-  const stamp = new Date().toLocaleTimeString();
-  setStatus(uploadWarning ? `Avatar "${name}" saved locally at ${stamp}` : `Avatar "${name}" saved at ${stamp}`);
-  log(`Avatar "${name}" saved with ${avatarSources.length} image(s).`);
-  if (saveStatusText) saveStatusText.textContent = `Saved avatar "${name}" at ${stamp}`;
-  setButtonSaving(avatarSaveSpinner, false);
-  closeCreatorPanel();
 };
 
 const persistObjectLocalFiles = async () => {
@@ -23846,12 +33849,23 @@ const buildPayload = ({
     }
   });
 
-  const input = {
-    prompt: finalPrompt,
-    aspect_ratio: aspectRatioSelect.value || 'auto',
-    resolution: resolutionSelect.value || '1K',
-    output_format: formatSelect.value || 'png'
-  };
+  const model = (modelInput?.value || '').trim() || 'nano-banana-pro';
+  const isSeedreamImageEdit =
+    model === 'seedream/4.5-edit' || model === 'seedream/5-lite-image-to-image';
+  const aspectRatio = aspectRatioSelect?.value || 'auto';
+  const seedreamAspectRatio = aspectRatio === 'auto' ? '1:1' : aspectRatio;
+  const input = isSeedreamImageEdit
+    ? {
+        prompt: finalPrompt,
+        quality: 'basic',
+        aspect_ratio: seedreamAspectRatio
+      }
+    : {
+        prompt: finalPrompt,
+        aspect_ratio: aspectRatio,
+        resolution: resolutionSelect.value || '1K',
+        output_format: formatSelect.value || 'png'
+      };
 
   const invalidImageUrls = imageSources
     .filter((s) => s.type === 'url' && s.value)
@@ -23916,7 +33930,13 @@ const buildPayload = ({
     input.prompt = `${input.prompt}\n\nUse the last image strictly as outfit reference; make her wear those clothes. No people in that reference image.`;
   }
   if (urlImages.length) {
-    input.image_input = urlImages;
+    if (isSeedreamImageEdit) {
+      input.image_urls = urlImages;
+    } else {
+      input.image_input = urlImages;
+    }
+  } else if (isSeedreamImageEdit) {
+    throw new Error('Seedream image editing requires at least one source image');
   }
   const pendingLocal = imageSources.filter((s) => s.type === 'file' && !s.uploadedUrl).length;
   if (pendingLocal) {
@@ -23924,7 +33944,7 @@ const buildPayload = ({
   }
 
   const payload = {
-    model: modelInput.value.trim() || 'nano-banana-pro',
+    model,
     input
   };
 
@@ -23980,7 +34000,8 @@ const ensureAvatarHostedUrls = async () => {
 
 const ensureAvatarAssetUrl = async (avatar, entry, listKey = 'images') => {
   if (!avatar || !entry) return '';
-  const localPath = fileUrlToPath(entry.localPath || entry.path || '');
+  const previewPath = fileUrlToPath(entry.preview || '');
+  const localPath = fileUrlToPath(entry.localPath || entry.path || previewPath || '');
   if (localPath) {
     if (!window.electronAPI?.pathExists) return filePathToUrl(localPath);
     try {
@@ -23989,50 +34010,106 @@ const ensureAvatarAssetUrl = async (avatar, entry, listKey = 'images') => {
     } catch (_err) {}
   }
 
-  const remoteUrl = entry.uploadedUrl || entry.value || '';
-  if (isHttpUrl(remoteUrl) && window.electronAPI?.cacheRemoteFile) {
-    try {
-      const list = Array.isArray(avatar[listKey]) ? avatar[listKey] : [];
-      const idx = Math.max(0, list.indexOf(entry));
-      const cached = await window.electronAPI.cacheRemoteFile({
-        url: remoteUrl,
-        sceneId: `${avatar.name || 'avatar'}-${listKey}-${idx + 1}`,
-        kind: 'image'
-      });
-      if (cached?.success && cached.path) {
-        entry.path = cached.path;
-        entry.localPath = cached.path;
-        entry.preview = filePathToUrl(cached.path);
-        if (shouldRehostAvatarUrl(remoteUrl)) {
-          entry.uploadedUrl = '';
-          entry.value = '';
+  const remoteCandidates = [entry.uploadedUrl, entry.value, entry.preview, entry.thumbData]
+    .map((value) => String(value || '').trim())
+    .filter((value) => isHttpUrl(value));
+  const list = Array.isArray(avatar[listKey]) ? avatar[listKey] : [];
+  const idx = Math.max(0, list.indexOf(entry));
+  for (const remoteUrl of remoteCandidates) {
+    if (window.electronAPI?.cacheRemoteFile) {
+      try {
+        const cached = await window.electronAPI.cacheRemoteFile({
+          url: remoteUrl,
+          sceneId: `${avatar.name || 'avatar'}-${listKey}-${idx + 1}`,
+          kind: 'image'
+        });
+        if (cached?.success && cached.path) {
+          entry.path = cached.path;
+          entry.localPath = cached.path;
+          entry.preview = filePathToUrl(cached.path);
+          if (shouldRehostAvatarUrl(remoteUrl)) {
+            entry.uploadedUrl = '';
+            entry.value = '';
+          } else if (!entry.uploadedUrl) {
+            entry.uploadedUrl = remoteUrl;
+            entry.value = remoteUrl;
+          }
+          avatar.updatedAt = Date.now();
+          persistAvatars(avatars.slice(0, 50));
+          return filePathToUrl(cached.path);
         }
-        avatar.updatedAt = Date.now();
-        persistAvatars(avatars.slice(0, 50));
-        return filePathToUrl(cached.path);
+      } catch (err) {
+        log(`Avatar asset local cache failed: ${err.message}`);
       }
-    } catch (err) {
-      log(`Avatar asset local cache failed: ${err.message}`);
     }
+    return remoteUrl;
   }
 
-  return isHttpUrl(remoteUrl) ? remoteUrl : '';
+  const inlineDataUrl =
+    (typeof entry.preview === 'string' && entry.preview.startsWith('data:') ? entry.preview : '') ||
+    (typeof entry.thumbData === 'string' && entry.thumbData.startsWith('data:') ? entry.thumbData : '') ||
+    (typeof entry.uploadedUrl === 'string' && entry.uploadedUrl.startsWith('data:') ? entry.uploadedUrl : '') ||
+    (typeof entry.value === 'string' && entry.value.startsWith('data:') ? entry.value : '');
+  if (inlineDataUrl) {
+    if (!entry.preview) entry.preview = inlineDataUrl;
+    return inlineDataUrl;
+  }
+
+  return '';
+};
+
+const ensureAvatarAssetKieUrl = async (avatar, entry, listKey = 'images', { apiKey = '', cacheMap = null } = {}) => {
+  if (!avatar || !entry) return '';
+  const key = String(apiKey || '').trim();
+  const cache = cacheMap instanceof Map ? cacheMap : null;
+  const existingRemote = String(entry.uploadedUrl || entry.value || entry.preview || entry.thumbData || '').trim();
+  if (isHttpUrl(existingRemote) && !shouldRehostAvatarUrl(existingRemote)) {
+    if (cache) cache.set(existingRemote, existingRemote);
+    return existingRemote;
+  }
+  const resolved = String(await ensureAvatarAssetUrl(avatar, entry, listKey) || '').trim();
+  const hosted = String(
+    await ensureKieAccessibleImageUrl(resolved || existingRemote, {
+      apiKey: key,
+      uploadPath: 'images/avatar',
+      cacheMap: cache
+    }) || ''
+  ).trim();
+  if (isHttpUrl(hosted) && hosted !== existingRemote) {
+    entry.uploadedUrl = hosted;
+    entry.value = hosted;
+    avatar.updatedAt = Date.now();
+    persistAvatars(avatars.slice(0, 50));
+  }
+  return hosted || resolved || existingRemote;
+};
+
+const resolveAvatarAssetFromList = async (avatar, listKey = 'images') => {
+  if (!avatar) return { url: '', entry: null };
+  const list = Array.isArray(avatar[listKey]) ? avatar[listKey] : [];
+  for (const entry of list) {
+    const resolved = String(await ensureAvatarAssetUrl(avatar, entry, listKey) || '').trim();
+    if (resolved) return { url: resolved, entry };
+  }
+  return { url: '', entry: null };
 };
 
 const ensureAvatarNormalImageUrl = async () => {
   if (!activeAvatarName) return '';
   const avatar = getActiveAvatar();
-  if (!avatar?.images?.length) return '';
-  const first = avatar.images[0];
-  return ensureAvatarAssetUrl(avatar, first, 'images');
+  const resolved = await resolveAvatarAssetFromList(avatar, 'images');
+  if (resolved.url) return resolved.url;
+  if (avatar?.profile) {
+    return ensureAvatarAssetUrl(avatar, avatar.profile, 'profile');
+  }
+  return '';
 };
 
 const ensureAvatarGreenScreenUrl = async () => {
   if (!activeAvatarName) return '';
   const avatar = getActiveAvatar();
-  if (!avatar?.greenScreen?.length) return '';
-  const first = avatar.greenScreen[0];
-  return ensureAvatarAssetUrl(avatar, first, 'greenScreen');
+  const resolved = await resolveAvatarAssetFromList(avatar, 'greenScreen');
+  return resolved.url;
 };
 
 const loadImageBlobFromUrl = async (url) => {
@@ -24231,27 +34308,7 @@ const createObjectEnvironmentTask = async () => {
   envPanelLogLine('Submitting to Nano Banana...');
 
   try {
-    const res = await fetch(`${API_BASE}/jobs/createTask`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`
-      },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if (data.code !== 200) {
-      const text = formatKieError(data.code, data.message);
-      setStatus(text, true);
-      setObjectEnvStatus(text, true);
-      log(`Environment create failed: ${data.message || 'Unknown error'}`);
-      setStageState('submit', 'error');
-      envSetStageState('submit', 'error');
-      envPanelLogLine(`Failed: ${data.message || 'Unknown error'}`);
-      return;
-    }
-
-    const taskId = data.data?.taskId;
+    const { taskId } = await submitCreateTaskRequest({ key, payload });
     if (!taskId) {
       const text = 'No taskId returned';
       setStatus(text, true);
@@ -24275,7 +34332,7 @@ const createObjectEnvironmentTask = async () => {
     envPanelLogLine(`Task queued: ${taskId}`);
     startPolling(taskId);
   } catch (err) {
-    const text = 'Network error';
+    const text = String(err?.message || 'Network error').trim() || 'Network error';
     setStatus(text, true);
     setObjectEnvStatus(text, true);
     log(`Network error: ${err.message}`);
@@ -24402,16 +34459,28 @@ const buildOutfitPayload = ({ theme = '' }) => {
   promptParts.push('Using all of this information, design and show a single cohesive outfit she would wear. Neutral white room backdrop, full body, centered, uncropped. Make her wear the clothes you design.');
 
   const final = promptParts.join('\n\n');
+  const model = (modelInput?.value || '').trim() || 'nano-banana-pro';
+  const isSeedreamImageEdit =
+    model === 'seedream/4.5-edit' || model === 'seedream/5-lite-image-to-image';
+  const aspectRatio = aspectRatioSelect?.value || 'auto';
+  const seedreamAspectRatio = aspectRatio === 'auto' ? '1:1' : aspectRatio;
 
   const payload = {
-    model: modelInput.value.trim() || 'nano-banana-pro',
-    input: {
-      prompt: final,
-      aspect_ratio: aspectRatioSelect.value || 'auto',
-      resolution: resolutionSelect.value || '1K',
-      output_format: formatSelect.value || 'png',
-      image_input: avatarUrls
-    }
+    model,
+    input: isSeedreamImageEdit
+      ? {
+          prompt: final,
+          quality: 'basic',
+          aspect_ratio: seedreamAspectRatio,
+          image_urls: avatarUrls
+        }
+      : {
+          prompt: final,
+          aspect_ratio: aspectRatio,
+          resolution: resolutionSelect.value || '1K',
+          output_format: formatSelect.value || 'png',
+          image_input: avatarUrls
+        }
   };
   return { payload, promptText: final };
 };
@@ -27442,18 +37511,94 @@ const ensureActivityFeedLoaded = async ({ forceReconnect = false, source = 'auto
   clearActivityStartupRetry();
 };
 
+const normalizePayloadImageUrlsToWebp = async ({ key = '', payload = null, uploadPath = 'images/reference' } = {}) => {
+  if (!payload || typeof payload !== 'object') return payload;
+  const input = payload.input && typeof payload.input === 'object' ? payload.input : null;
+  if (!input) return payload;
+  const current =
+    Array.isArray(input.image_input) ? input.image_input :
+    Array.isArray(input.image_urls) ? input.image_urls :
+    null;
+  if (!Array.isArray(current) || !current.length) return payload;
+  const cache = new Map();
+  const next = [];
+  for (const value of current) {
+    const raw = String(value || '').trim();
+    if (!raw) continue;
+    const shouldAttempt =
+      raw.startsWith('data:') ||
+      raw.startsWith('file://') ||
+      isHttpUrl(raw) ||
+      raw.startsWith('/') ||
+      /^[A-Za-z]:[\\/]/.test(raw);
+    if (!shouldAttempt) {
+      next.push(raw);
+      continue;
+    }
+    const converted = await ensureKieAccessibleImageUrl(raw, {
+      apiKey: key,
+      uploadPath,
+      cacheMap: cache
+    });
+    next.push(String(converted || raw).trim() || raw);
+  }
+  if (Array.isArray(input.image_input)) input.image_input = next;
+  if (Array.isArray(input.image_urls)) input.image_urls = next;
+  if (typeof input.image_url === 'string' && String(input.image_url || '').trim()) {
+    const single = String(input.image_url || '').trim();
+    const convertedSingle = await ensureKieAccessibleImageUrl(single, {
+      apiKey: key,
+      uploadPath,
+      cacheMap: cache
+    });
+    input.image_url = String(convertedSingle || single).trim() || single;
+  }
+  return payload;
+};
+
 const submitCreateTaskRequest = async ({ key, payload }) => {
-  const res = await fetch(`${API_BASE}/jobs/createTask`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${key}`
-    },
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json().catch(() => ({}));
-  if (data.code !== 200) {
-    throw new Error(formatKieError(data.code, data.message));
+  const rawPayload = JSON.parse(JSON.stringify(payload || {}));
+  let normalizedPayload = rawPayload;
+  let normalizationUsed = false;
+  try {
+    normalizedPayload = await normalizePayloadImageUrlsToWebp({
+      key,
+      payload: JSON.parse(JSON.stringify(rawPayload)),
+      uploadPath: 'images/reference'
+    });
+    normalizationUsed = JSON.stringify(normalizedPayload || {}) !== JSON.stringify(rawPayload || {});
+  } catch (err) {
+    normalizationUsed = false;
+    normalizedPayload = rawPayload;
+    log(`Image normalization skipped: ${String(err?.message || err || 'unknown error')}`);
+  }
+
+  const postCreateTask = async (outgoingPayload) => {
+    const res = await fetch(`${API_BASE}/jobs/createTask`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${key}`
+      },
+      body: JSON.stringify(outgoingPayload || {})
+    });
+    const data = await res.json().catch(() => ({}));
+    return data;
+  };
+
+  let data = await postCreateTask(normalizedPayload);
+  const message = String(data?.message || data?.msg || '').trim();
+  const shouldRetryRaw =
+    normalizationUsed &&
+    Number(data?.code || 0) !== 200 &&
+    (/get_token_error/i.test(message) || Number(data?.code || 0) >= 500);
+  if (shouldRetryRaw) {
+    log(`createTask failed after normalization (${message || data?.code}); retrying raw payload.`);
+    data = await postCreateTask(rawPayload);
+  }
+
+  if (Number(data?.code || 0) !== 200) {
+    throw new Error(formatKieError(data.code, data.message || data?.msg || 'Create task failed'));
   }
   const taskId = data.data?.taskId;
   if (!taskId) {
@@ -27735,25 +37880,7 @@ const createVideoTask = async () => {
   setResults([]);
 
   try {
-    const res = await fetch(`${API_BASE}/jobs/createTask`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${key}`
-      },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
-    if (data.code !== 200) {
-      const text = formatKieError(data.code, data.message);
-      setStatus(text, true);
-      log(`Video create failed: ${data.message || 'Unknown error'}`);
-      setStageState('submit', 'error');
-      await cleanupSupabaseUploads('video-submit');
-      return;
-    }
-
-    const taskId = data.data?.taskId;
+    const { taskId } = await submitCreateTaskRequest({ key, payload });
     if (!taskId) {
       const text = 'No taskId returned';
       setStatus(text, true);
@@ -27770,7 +37897,7 @@ const createVideoTask = async () => {
     setStageState('queue', 'active');
     startPolling(taskId);
   } catch (err) {
-    const text = 'Network error';
+    const text = String(err?.message || 'Network error').trim() || 'Network error';
     setStatus(text, true);
     log(`Network error: ${err.message}`);
     setStageState('submit', 'error');
@@ -27830,7 +37957,7 @@ const createTask = async () => {
     return;
   }
 
-  const imageList = payload.input.image_input || [];
+  const imageList = payload.input.image_input || payload.input.image_urls || [];
   const batchSize = normalizeImageBatchSize(imageBatchSizeInput?.value);
   log(`Submitting task with ${imageList.length} image URL(s), batch size ${batchSize}.`);
 
@@ -28049,42 +38176,42 @@ if (checkVideoBtn) {
 saveKeyBtn.addEventListener('click', saveApiKey);
 
 rememberKeyCheckbox.addEventListener('change', () => {
-  persistKeyIfNeeded(currentApiKey);
+  persistKeyIfNeeded(apiKeyInput?.value?.trim() || currentApiKey);
   updateKeyBadges();
 });
 
 rememberOpenaiCheckbox.addEventListener('change', () => {
-  persistOpenaiKeyIfNeeded(currentOpenaiKey);
+  persistOpenaiKeyIfNeeded(openaiKeyInput?.value?.trim() || currentOpenaiKey);
   updateKeyBadges();
 });
 
 if (rememberFreesoundCheckbox) {
   rememberFreesoundCheckbox.addEventListener('change', () => {
-    persistFreesoundKeyIfNeeded(currentFreesoundKey);
+    persistFreesoundKeyIfNeeded(freesoundKeyInput?.value?.trim() || currentFreesoundKey);
   });
 }
 
 if (rememberPexelsCheckbox) {
   rememberPexelsCheckbox.addEventListener('change', () => {
-    persistPexelsKeyIfNeeded(currentPexelsKey);
+    persistPexelsKeyIfNeeded(pexelsKeyInput?.value?.trim() || currentPexelsKey);
   });
 }
 
 if (rememberPixabayCheckbox) {
   rememberPixabayCheckbox.addEventListener('change', () => {
-    persistPixabayKeyIfNeeded(currentPixabayKey);
+    persistPixabayKeyIfNeeded(pixabayKeyInput?.value?.trim() || currentPixabayKey);
   });
 }
 
 if (rememberYoutubeCheckbox) {
   rememberYoutubeCheckbox.addEventListener('change', () => {
-    persistYoutubeKeyIfNeeded(currentYoutubeKey);
+    persistYoutubeKeyIfNeeded(youtubeKeyInput?.value?.trim() || currentYoutubeKey);
   });
 }
 
 if (rememberElevenlabsCheckbox) {
   rememberElevenlabsCheckbox.addEventListener('change', () => {
-    persistElevenlabsKeyIfNeeded(currentElevenlabsKey);
+    persistElevenlabsKeyIfNeeded(elevenlabsKeyInput?.value?.trim() || currentElevenlabsKey);
     updateKeyBadges();
   });
 }
@@ -28252,6 +38379,22 @@ if (accessPanelBackdrop) {
 
 if (accessPanelClose) {
   accessPanelClose.addEventListener('click', closeAccessPanel);
+}
+
+if (automationCredentialsPanelBackdrop) {
+  automationCredentialsPanelBackdrop.addEventListener('click', closeAutomationCredentialsPanel);
+}
+
+if (automationCredentialsPanelClose) {
+  automationCredentialsPanelClose.addEventListener('click', closeAutomationCredentialsPanel);
+}
+
+if (tiktokRunDetailsPanelBackdrop) {
+  tiktokRunDetailsPanelBackdrop.addEventListener('click', closeTikTokRunDetailsPanel);
+}
+
+if (tiktokRunDetailsPanelClose) {
+  tiktokRunDetailsPanelClose.addEventListener('click', closeTikTokRunDetailsPanel);
 }
 
 if (kieKeyBadge) {
@@ -28465,6 +38608,182 @@ navButtons.forEach((btn) => {
   });
 });
 
+const loraLabInputs = [
+  loraCharacterNameInput,
+  loraConfigNameInput,
+  loraDatasetPathInput,
+  loraOutputPathInput,
+  loraStepsInput,
+  loraSaveEveryInput,
+  loraBatchSizeInput,
+  loraLearningRateInput,
+  loraRankInput,
+  loraAlphaInput,
+  loraResolutionsInput
+].filter(Boolean);
+
+const handleLoraLabInputChange = () => {
+  persistLoraLabState();
+  renderLoraLab();
+};
+
+loraLabInputs.forEach((el) => {
+  el.addEventListener('input', handleLoraLabInputChange);
+});
+
+if (loraCacheEmbeddingsToggle) {
+  loraCacheEmbeddingsToggle.addEventListener('change', handleLoraLabInputChange);
+}
+
+if (loraGenerateConfigBtn) {
+  loraGenerateConfigBtn.addEventListener('click', () => {
+    persistLoraLabState();
+    renderLoraLab();
+    showToast('Wan 2.2 config refreshed.', false, 'LoRA Lab');
+  });
+}
+
+if (loraCopyConfigBtn) {
+  loraCopyConfigBtn.addEventListener('click', async () => {
+    const ok = await copyTextToClipboardSafe(loraConfigOutput?.value || '');
+    showToast(ok ? 'Config copied.' : 'Nothing to copy yet.', !ok, 'LoRA Lab');
+  });
+}
+
+if (loraCopyCommandsBtn) {
+  loraCopyCommandsBtn.addEventListener('click', async () => {
+    const ok = await copyTextToClipboardSafe(loraCommandsOutput?.value || '');
+    showToast(ok ? 'Commands copied.' : 'Nothing to copy yet.', !ok, 'LoRA Lab');
+  });
+}
+
+if (loraCopyChecklistBtn) {
+  loraCopyChecklistBtn.addEventListener('click', async () => {
+    const ok = await copyLoraChecklistText();
+    showToast(ok ? 'Checklist copied.' : 'Checklist not available.', !ok, 'LoRA Lab');
+  });
+}
+
+if (loraOpenWizardBtn) {
+  loraOpenWizardBtn.addEventListener('click', () => {
+    openLoraWizard(0);
+  });
+}
+
+if (loraOpenRunpodBtn) {
+  loraOpenRunpodBtn.addEventListener('click', () => {
+    openRunpodPodConsole();
+  });
+}
+
+if (loraWizardCloseBtn) {
+  loraWizardCloseBtn.addEventListener('click', () => {
+    closeLoraWizard();
+  });
+}
+
+if (loraWizardOpenRunpodBtn) {
+  loraWizardOpenRunpodBtn.addEventListener('click', () => {
+    openRunpodPodConsole();
+  });
+}
+
+if (loraWizardBackBtn) {
+  loraWizardBackBtn.addEventListener('click', () => {
+    goToLoraWizardStep(loraWizardStepIndex - 1);
+  });
+}
+
+if (loraWizardNextBtn) {
+  loraWizardNextBtn.addEventListener('click', () => {
+    const lastIndex = Math.max(0, LORA_SETUP_WIZARD_STEPS.length - 1);
+    if (loraWizardStepIndex >= lastIndex) {
+      closeLoraWizard();
+      showToast('Wizard complete. Continue with config + connection validation.', false, 'LoRA Lab');
+      return;
+    }
+    goToLoraWizardStep(loraWizardStepIndex + 1);
+  });
+}
+
+if (loraWizardModal) {
+  loraWizardModal.addEventListener('click', (event) => {
+    if (event.target === loraWizardModal) {
+      closeLoraWizard();
+    }
+  });
+}
+
+window.addEventListener('keydown', (event) => {
+  if (!event || event.defaultPrevented) return;
+  if (event.key !== 'Escape') return;
+  if (!isLoraWizardOpen()) return;
+  closeLoraWizard();
+});
+
+if (loraRunpodRememberToggle) {
+  loraRunpodRememberToggle.addEventListener('change', () => {
+    persistRunpodKey();
+  });
+}
+
+if (loraRunpodApiKeyInput) {
+  loraRunpodApiKeyInput.addEventListener('input', () => {
+    persistRunpodKey();
+  });
+}
+
+if (loraRunpodPodSelect) {
+  loraRunpodPodSelect.addEventListener('change', () => {
+    renderLoraRunpodPodMeta();
+    applyLoraToolkitUrlFromPod({ force: false });
+    persistLoraLabState();
+    renderLoraLab();
+  });
+}
+
+if (loraRunpodToolkitUrlInput) {
+  loraRunpodToolkitUrlInput.addEventListener('input', () => {
+    persistLoraLabState();
+  });
+}
+
+if (loraRunpodLoadPodsBtn) {
+  loraRunpodLoadPodsBtn.addEventListener('click', fetchRunpodPodsForLora);
+}
+
+if (loraRunpodRefreshPodBtn) {
+  loraRunpodRefreshPodBtn.addEventListener('click', refreshSelectedRunpodPodForLora);
+}
+
+if (loraRunpodValidateBtn) {
+  loraRunpodValidateBtn.addEventListener('click', validateLoraRunpodConnection);
+}
+
+if (loraRunpodConnectBtn) {
+  loraRunpodConnectBtn.addEventListener('click', loadLoraToolkitFrame);
+}
+
+if (loraRunpodOpenExternalBtn) {
+  loraRunpodOpenExternalBtn.addEventListener('click', openLoraToolkitExternally);
+}
+
+if (loraToolkitFrame) {
+  loraToolkitFrame.addEventListener('load', () => {
+    const loadedUrl = sanitizeLoraToolkitUrl(loraToolkitFrame.src || '');
+    if (loadedUrl) {
+      setLoraRunpodStatus(`AI Toolkit loaded: ${loadedUrl}`);
+    } else {
+      setLoraRunpodStatus('AI Toolkit frame loaded.');
+    }
+  });
+  loraToolkitFrame.addEventListener('error', () => {
+    setLoraRunpodStatus('AI Toolkit frame failed to load. Try Open in browser.', true);
+  });
+}
+
+applySideNavCollapsedState(window.matchMedia('(max-width: 980px)').matches);
+
 window.addEventListener(
   'scroll',
   () => {
@@ -28475,6 +38794,7 @@ window.addEventListener(
 );
 
 window.addEventListener('resize', () => {
+  applySideNavCollapsedState(window.matchMedia('(max-width: 980px)').matches);
   tiktokStickyTargets = [];
   scheduleTikTokStickyStepUpdate();
   applyCaptionEditorZoom(tiktokCaptionEditorZoom || 1, {
@@ -28486,7 +38806,7 @@ window.addEventListener('resize', () => {
 
 const startAvatarCreation = () => {
   activeAvatarName = '';
-  if (avatarSelect) avatarSelect.value = '';
+  syncAvatarSelectValues('');
   resetAvatarBuilder();
   resetClothesSelection(false);
   openCreatorPanel('avatar', { title: 'Create new avatar' });
@@ -28502,20 +38822,30 @@ const ensureTikTokAvatarSelectedAtStart = () => {
   const firstAvatar = avatars[0]?.name || '';
   if (!firstAvatar) return;
   activeAvatarName = firstAvatar;
-  if (avatarSelect) avatarSelect.value = firstAvatar;
-  if (tiktokAvatarSelect) tiktokAvatarSelect.value = firstAvatar;
+  syncAvatarSelectValues(firstAvatar);
   renderAvatarSelectPreview();
   resetClothesSelection(useClothesToggle?.checked ?? false);
 };
 
-const startTikTokCreation = () => {
+const startTikTokCreation = (event) => {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
   captureActiveSaveState();
-  resetTikTokBuilder();
-  ensureTikTokAvatarSelectedAtStart();
   currentCreateView = 'tiktok';
   createUntitledSave('tiktok', { skipCapture: true });
   setActiveView('builder', { force: true, reason: 'new-tiktok' });
   setCreateView('tiktok');
+  window.setTimeout(() => {
+    try {
+      resetTikTokBuilder();
+      ensureTikTokAvatarSelectedAtStart();
+    } catch (err) {
+      console.error('[short-form] failed to initialize builder', err);
+      setStatus(err?.message || 'Failed to open Short-Form Studio.', true);
+    }
+  }, 0);
 };
 
 if (goAvatar) {
@@ -28539,7 +38869,9 @@ if (createNewObjectBtn) {
 }
 
 if (goImage) {
-  goImage.addEventListener('click', () => {
+  goImage.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     captureActiveSaveState();
     resetImageBuilder();
     currentCreateView = 'image';
@@ -28550,7 +38882,9 @@ if (goImage) {
 }
 
 if (goVideo) {
-  goVideo.addEventListener('click', () => {
+  goVideo.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     captureActiveSaveState();
     resetVideoBuilder();
     currentCreateView = 'video';
@@ -28561,7 +38895,9 @@ if (goVideo) {
 }
 
 if (goBatch) {
-  goBatch.addEventListener('click', () => {
+  goBatch.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
     captureActiveSaveState();
     resetBatchBuilder();
     currentCreateView = 'batch';
@@ -28597,6 +38933,13 @@ if (builderTikTokTab) {
 
 if (builderBack) {
   builderBack.addEventListener('click', () => {
+    setCreateView('chooser');
+    setActiveView('create');
+  });
+}
+
+if (tiktokStudioBackBtn) {
+  tiktokStudioBackBtn.addEventListener('click', () => {
     setCreateView('chooser');
     setActiveView('create');
   });
@@ -28722,8 +39065,19 @@ if (clothesUploadBtn) {
 if (avatarSelect) {
   avatarSelect.addEventListener('change', (e) => {
     activeAvatarName = e.target.value || '';
-    if (tiktokAvatarSelect) tiktokAvatarSelect.value = activeAvatarName;
-    if (tiktokAvatarProcessingSelect) tiktokAvatarProcessingSelect.value = activeAvatarName;
+    syncAvatarSelectValues(activeAvatarName);
+    scheduleSave();
+    renderAvatarSelectPreview();
+    resetTikTokAvatarGenerationResults();
+    renderTikTokAvatarPanel();
+    resetClothesSelection(useClothesToggle?.checked ?? false);
+  });
+}
+
+if (batchAvatarSelect) {
+  batchAvatarSelect.addEventListener('change', (e) => {
+    activeAvatarName = e.target.value || '';
+    syncAvatarSelectValues(activeAvatarName);
     scheduleSave();
     renderAvatarSelectPreview();
     resetTikTokAvatarGenerationResults();
@@ -28735,8 +39089,7 @@ if (avatarSelect) {
 if (tiktokAvatarSelect) {
   tiktokAvatarSelect.addEventListener('change', (e) => {
     activeAvatarName = e.target.value || '';
-    if (avatarSelect) avatarSelect.value = activeAvatarName;
-    if (tiktokAvatarProcessingSelect) tiktokAvatarProcessingSelect.value = activeAvatarName;
+    syncAvatarSelectValues(activeAvatarName);
     scheduleSave();
     renderAvatarSelectPreview();
     resetTikTokAvatarGenerationResults();
@@ -28749,8 +39102,7 @@ if (tiktokAvatarSelect) {
 if (tiktokAvatarProcessingSelect) {
   tiktokAvatarProcessingSelect.addEventListener('change', (e) => {
     activeAvatarName = e.target.value || '';
-    if (avatarSelect) avatarSelect.value = activeAvatarName;
-    if (tiktokAvatarSelect) tiktokAvatarSelect.value = activeAvatarName;
+    syncAvatarSelectValues(activeAvatarName);
     scheduleSave();
     renderAvatarSelectPreview();
     resetTikTokAvatarGenerationResults();
@@ -28768,9 +39120,20 @@ if (tiktokAvatarProcessingSelect) {
 if (clearAvatarBtn) {
   clearAvatarBtn.addEventListener('click', () => {
     activeAvatarName = '';
-    if (avatarSelect) avatarSelect.value = '';
-    if (tiktokAvatarSelect) tiktokAvatarSelect.value = '';
-    if (tiktokAvatarProcessingSelect) tiktokAvatarProcessingSelect.value = '';
+    syncAvatarSelectValues('');
+    scheduleSave();
+    renderAvatarSelectPreview();
+    resetTikTokAvatarGenerationResults();
+    renderTikTokAvatarPanel();
+    resetClothesSelection(false);
+    applyAvatarReservedScenes().then(() => syncStep6DownloadQueueFromStoryboard());
+  });
+}
+
+if (batchClearAvatarBtn) {
+  batchClearAvatarBtn.addEventListener('click', () => {
+    activeAvatarName = '';
+    syncAvatarSelectValues('');
     scheduleSave();
     renderAvatarSelectPreview();
     resetTikTokAvatarGenerationResults();
@@ -28782,6 +39145,17 @@ if (clearAvatarBtn) {
 
 if (editAvatarBtn) {
   editAvatarBtn.addEventListener('click', () => {
+    if (!activeAvatarName) {
+      setStatus('Select an avatar first', true);
+      return;
+    }
+    loadAvatarIntoBuilder(activeAvatarName);
+    openCreatorPanel('avatar', { title: `Edit avatar "${activeAvatarName}"` });
+  });
+}
+
+if (batchEditAvatarBtn) {
+  batchEditAvatarBtn.addEventListener('click', () => {
     if (!activeAvatarName) {
       setStatus('Select an avatar first', true);
       return;
@@ -29031,150 +39405,236 @@ if (tiktokGenerateBtn) {
 
 if (tiktokClearBtn) {
   tiktokClearBtn.addEventListener('click', () => {
-    persistTikTokScripts([]);
-    renderTikTokScripts();
-    setTikTokStatus('Memory cleared.');
-    tiktokLogs = [];
-    if (tiktokLogEl) tiktokLogEl.textContent = '';
-    setTikTokProgress(0);
-    tiktokStoryboard = null;
-    tiktokStoryboardScriptId = '';
-    renderTikTokStoryboardOutput();
-    setTikTokStoryboardStatus('');
-    tiktokClipResults = {};
-    tiktokClipLoading = {};
-    tiktokQueryScanSceneId = '';
-    tiktokQueryScanLoading = false;
-    tiktokClipValidationCache = {};
-    tiktokAutoPickLogs = {};
-    tiktokAutoPickStage = {};
-    tiktokActionFrameCache = {};
-    tiktokAutoPickFits = {};
-    tiktokAutoPickValidationMode = {};
-    setTikTokClipStatus('');
-    tiktokAlignment = null;
-    if (tiktokAlignmentInput) tiktokAlignmentInput.value = '';
-    setTikTokAlignmentStatus('');
-    clearTikTokAudio();
-    setTikTokAutoAlignStatus('');
-    renderAlignmentUI();
-    setTikTokAlignProgress(0);
-    setTikTokAlignStep('');
-    tiktokAlignLogs = [];
-    if (tiktokAlignLog) tiktokAlignLog.textContent = '';
-    tiktokExportLogs = [];
-    if (tiktokExportLog) tiktokExportLog.textContent = '';
-    setTikTokExportStatus('');
-    tiktokCaptionWords = [];
-    tiktokCaptionTimingSource = 'estimated';
-    tiktokCaptionChunkOverrides = {};
-    tiktokCaptionTimelineZoom = 1;
-    tiktokCaptionEditorZoom = 1;
-    tiktokCaptionEditorChunks = [];
-    tiktokCaptionEditorSourcePath = '';
-    tiktokCaptionBaseRenderPath = '';
-    tiktokCaptionSubtitlePath = '';
-    tiktokCaptionCombinedPath = '';
-    tiktokCaptionLogs = [];
-    tiktokCaptionOverlayStyle = { ...TIKTOK_CAPTION_OVERLAY_DEFAULTS };
-    tiktokCaptionRenderPlanDirty = true;
-    tiktokCaptionRenderPlan = null;
-    tiktokCaptionRenderRunId = '';
-    tiktokCaptionIntroMaskPreviewPath = '';
-    tiktokCaptionIntroMaskOutputPath = '';
-    tiktokCaptionIntroMaskApplied = false;
-    tiktokCaptionIntroMaskPreparedColorPath = '';
-    tiktokCaptionIntroMaskPreparedMaskPath = '';
-    tiktokCaptionIntroMaskPreparedColorPathFull = '';
-    tiktokCaptionIntroMaskPreparedMaskPathFull = '';
-    tiktokCaptionIntroMaskPreviewRunning = false;
-    tiktokCaptionIntroMaskRunMode = '';
-    tiktokCaptionCombineRunning = false;
-    tiktokZoomRenderRunning = false;
-    tiktokZoomRenderRunId = '';
-    tiktokZoomOutputPath = '';
-    tiktokZoomSettings = { ...TIKTOK_ZOOM_DEFAULTS };
-    tiktokSfxRenderRunning = false;
-    tiktokSfxAnalyzeRunning = false;
-    tiktokSfxRenderRunId = '';
-    tiktokSfxOutputPath = '';
-    tiktokSfxSettings = { ...TIKTOK_SFX_DEFAULTS };
-    tiktokSfxEvents = [];
-    tiktokSfxLocalLibrary = [];
-    tiktokSfxTimelineZoom = 1;
-    tiktokSfxCanvasZoom = 1;
-    tiktokSfxInputDurationSec = 0;
-    tiktokSfxInputSourcePath = '';
-    resetTikTokZoomProgress();
-    resetTikTokSfxProgress();
-    setTikTokSfxResultsLoading(false);
-    resetTikTokCaptionRenderProgress();
-    syncTikTokCaptionOverlayInputs();
-    syncTikTokZoomInputs();
-    syncTikTokSfxInputs();
-    applyCaptionEditorZoom(1, { syncInput: true, refreshOverlay: false, refreshTimeline: false });
-    setTikTokCaptionIntroMaskPreviewPath('');
-    setTikTokCaptionIntroMaskOutputPath('');
-    setTikTokCaptionIntroMaskStatus('Use Scene 1 output from Step 7 to build the mask.', false, { notify: false });
-    setTikTokCaptionCombineStatus('Section 3: combines caption output + masked intro video.', false, { notify: false });
-    if (tiktokCaptionEditorHint) {
-      tiktokCaptionEditorHint.textContent = 'Editor loads Step 8 final video as the canvas background. Intro caption effect can be toggled in Timing.';
+    clearTikTokAutomationMemoryState();
+  });
+}
+
+if (tiktokModeManualBtn) {
+  tiktokModeManualBtn.addEventListener('click', () => {
+    setTikTokAutomationMode('manual');
+  });
+}
+
+if (tiktokModeAutomaticBtn) {
+  tiktokModeAutomaticBtn.addEventListener('click', () => {
+    setTikTokAutomationMode('automatic');
+  });
+}
+
+[
+  tiktokAutomationWorkspaceInput,
+  tiktokAutomationProfileInput,
+  tiktokAutomationPromptInput,
+  tiktokAutomationAvatarSelect,
+  tiktokAutomationAudienceInput,
+  tiktokAutomationStyleInput,
+  tiktokAutomationDailyCountInput,
+  tiktokAutomationPostingStartInput,
+  tiktokAutomationPostingEndInput
+].forEach((input) => {
+  if (!input) return;
+  input.addEventListener('input', () => {
+    syncTikTokAutomationConfigFromInputs();
+  });
+});
+
+[
+  tiktokAutomationPostingTimezoneSelect,
+  tiktokAutomationPostingModeSelect,
+  tiktokAutomationReviewBeforePostToggle,
+  tiktokAutomationAiAutoToggle,
+  tiktokAutomationAutoSearchToggle,
+  tiktokAutomationAutoPickToggle,
+  tiktokAutomationYoutubeOnlyToggle,
+  tiktokAutomationMemorySelect,
+  tiktokAutomationPlatformTikTok,
+  tiktokAutomationPlatformInstagram,
+  tiktokAutomationPlatformFacebook
+].forEach((input) => {
+  if (!input) return;
+  input.addEventListener('change', () => {
+    syncTikTokAutomationConfigFromInputs();
+  });
+});
+
+[
+  automationTikTokTokenInput,
+  automationTikTokOpenIdInput,
+  automationInstagramTokenInput,
+  automationInstagramUserIdInput,
+  automationFacebookTokenInput,
+  automationFacebookPageIdInput
+].forEach((input) => {
+  if (!input) return;
+  input.addEventListener('input', () => {
+    syncPublishInputsFromAutomationCredentialsPanel();
+  });
+  input.addEventListener('change', () => {
+    syncPublishInputsFromAutomationCredentialsPanel();
+  });
+});
+
+if (tiktokAutomationStartBtn) {
+  tiktokAutomationStartBtn.addEventListener('click', () => {
+    startTikTokAutomation();
+  });
+}
+
+if (tiktokAutomationPauseBtn) {
+  tiktokAutomationPauseBtn.addEventListener('click', () => {
+    pauseTikTokAutomation();
+  });
+}
+
+if (tiktokAutomationGenerateBtn) {
+  tiktokAutomationGenerateBtn.addEventListener('click', () => {
+    generateNextTikTokAutomationIdea({ reason: 'manual-trigger' }).catch(() => {});
+  });
+}
+
+if (tiktokAutomationSimulateBtn) {
+  tiktokAutomationSimulateBtn.addEventListener('click', () => {
+    simulateTikTokAutomationRun().catch(() => {});
+  });
+}
+
+if (tiktokAutomationOpenActiveRunBtn) {
+  tiktokAutomationOpenActiveRunBtn.addEventListener('click', () => {
+    const run = getTikTokAutomationActiveRun();
+    if (run) openTikTokRunDetailsPanel(run.id);
+  });
+}
+
+if (tiktokAutomationActiveRunCard) {
+  tiktokAutomationActiveRunCard.addEventListener('click', (event) => {
+    if (event?.target && typeof event.target.closest === 'function' && event.target.closest('button')) return;
+    const run = getTikTokAutomationActiveRun();
+    if (run) openTikTokRunDetailsPanel(run.id);
+  });
+}
+
+if (tiktokAutomationShowAllHistoryBtn) {
+  tiktokAutomationShowAllHistoryBtn.addEventListener('click', () => {
+    tiktokAutomationRunHistoryPageOpen = true;
+    renderTikTokAutomationUi();
+  });
+}
+
+if (tiktokAutomationHistoryBackBtn) {
+  tiktokAutomationHistoryBackBtn.addEventListener('click', () => {
+    tiktokAutomationRunHistoryPageOpen = false;
+    renderTikTokAutomationUi();
+  });
+}
+
+if (tiktokAutomationTestDryRunBtn) {
+  tiktokAutomationTestDryRunBtn.addEventListener('click', () => {
+    runTikTokAutomationMemoryTest().catch(() => {});
+  });
+}
+
+if (tiktokAutomationTestClearBtn) {
+  tiktokAutomationTestClearBtn.addEventListener('click', () => {
+    clearTikTokAutomationTestOutput();
+  });
+}
+
+if (tiktokAutomationTestExportBtn) {
+  tiktokAutomationTestExportBtn.addEventListener('click', () => {
+    downloadTikTokAutomationAnalysisExport().catch((err) => {
+      setTikTokAutomationTestStatus(err?.message || 'Failed to export analysis JSON.', true);
+      setTikTokAutomationMemoryExportStatus(err?.message || 'Failed to export analysis JSON.', true);
+    });
+  });
+}
+
+const setTikTokAutomationView = (nextView = 'run', event = null) => {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  const normalized = ['run', 'settings', 'test', 'memory'].includes(nextView) ? nextView : 'run';
+  debugTrace('tiktok.automation.tab', buildTikTokAutomationDebugSnapshot({
+    previousAutomationView: String(tiktokAutomationView || '').trim(),
+    nextAutomationView: normalized
+  }));
+  tiktokAutomationView = normalized;
+  try {
+    commitTikTokAutomationState();
+  } catch (err) {
+    console.error('[short-form] failed to persist automation tab state', err);
+  }
+  renderTikTokAutomationUi();
+};
+
+if (tiktokAutomationRunTabBtn) {
+  tiktokAutomationRunTabBtn.addEventListener('click', (event) => {
+    setTikTokAutomationView('run', event);
+  });
+}
+
+if (tiktokAutomationSettingsTabBtn) {
+  tiktokAutomationSettingsTabBtn.addEventListener('click', (event) => {
+    setTikTokAutomationView('settings', event);
+  });
+}
+
+if (tiktokAutomationTestTabBtn) {
+  tiktokAutomationTestTabBtn.addEventListener('click', (event) => {
+    setTikTokAutomationView('test', event);
+  });
+}
+
+if (tiktokAutomationMemoryTabBtn) {
+  tiktokAutomationMemoryTabBtn.addEventListener('click', (event) => {
+    setTikTokAutomationView('memory', event);
+  });
+}
+
+[
+  ['history', tiktokMemoryExplorerHistoryBtn],
+  ['concepts', tiktokMemoryExplorerConceptsBtn],
+  ['retrieval', tiktokMemoryExplorerRetrievalBtn],
+  ['embeddings', tiktokMemoryExplorerEmbeddingsBtn]
+].forEach(([view, button]) => {
+  if (!button) return;
+  button.addEventListener('click', () => {
+    tiktokAutomationMemoryExplorerView = view;
+    commitTikTokAutomationState();
+    renderTikTokAutomationUi();
+  });
+});
+
+if (tiktokAutomationMemoryExportBtn) {
+  tiktokAutomationMemoryExportBtn.addEventListener('click', () => {
+    downloadTikTokAutomationAnalysisExport().catch((err) => {
+      setTikTokAutomationTestStatus(err?.message || 'Failed to export analysis JSON.', true);
+      setTikTokAutomationMemoryExportStatus(err?.message || 'Failed to export analysis JSON.', true);
+    });
+  });
+}
+
+if (tiktokAutomationMemoryClearBtn) {
+  tiktokAutomationMemoryClearBtn.addEventListener('click', () => {
+    clearTikTokAutomationMemoryState();
+  });
+}
+
+if (tiktokAutomationJumpPublishBtn) {
+  tiktokAutomationJumpPublishBtn.addEventListener('click', () => {
+    openAutomationCredentialsPanel();
+    if (automationCredentialsPanelStatus) {
+      automationCredentialsPanelStatus.textContent = 'Credentials update the social posting system immediately.';
     }
-    if (tiktokCaptionEditorVideo) {
-      tiktokCaptionEditorVideo.removeAttribute('src');
-      tiktokCaptionEditorVideo.load();
+  });
+}
+
+if (tiktokAutomationSettingsJumpPublishBtn) {
+  tiktokAutomationSettingsJumpPublishBtn.addEventListener('click', () => {
+    openAutomationCredentialsPanel();
+    if (automationCredentialsPanelStatus) {
+      automationCredentialsPanelStatus.textContent = 'Credentials update the social posting system immediately.';
     }
-    setCaptionEditorLoadingState(false);
-    updateCaptionEditorOverlayPreview();
-    requestCaptionTimelineRender();
-    updateCaptionEditorTransportUi();
-    setCaptionToolPanel('');
-    setSfxToolPanel('mix');
-    if (tiktokCaptionLog) tiktokCaptionLog.textContent = '';
-    if (tiktokCaptionLogWrap) tiktokCaptionLogWrap.open = false;
-    if (tiktokCaptionTranscript) tiktokCaptionTranscript.value = '';
-    setTikTokCaptionStatus('Idle.', false, { notify: false });
-    setTikTokCaptionRenderStatus('No Step 9 render output yet.', false, { notify: false });
-    if (tiktokCaptionPreview) {
-      clearStep9VideoOutput(tiktokCaptionPreview, null);
-    }
-    if (tiktokCaptionCombinedPreview) {
-      clearStep9VideoOutput(tiktokCaptionCombinedPreview, null);
-    }
-    if (tiktokZoomPreview) {
-      clearStep9VideoOutput(tiktokZoomPreview, null);
-    }
-    if (tiktokSfxPreview) {
-      clearStep9VideoOutput(tiktokSfxPreview, null);
-    }
-    if (tiktokSfxInputPreview) {
-      tiktokSfxInputPreview.removeAttribute('src');
-      tiktokSfxInputPreview.load();
-    }
-    updateSfxTransportUi();
-    setSfxTimelineZoom(1);
-    requestSfxTimelineRender();
-    if (tiktokSfxAnalyzeSpinner) tiktokSfxAnalyzeSpinner.classList.remove('active');
-    if (tiktokSfxRenderSpinner) tiktokSfxRenderSpinner.classList.remove('active');
-    if (tiktokSfxAnalyzeBtn) tiktokSfxAnalyzeBtn.disabled = false;
-    if (tiktokSfxRenderBtn) tiktokSfxRenderBtn.disabled = false;
-    tiktokPublishLogs = [];
-    tiktokPublishDraftRunning = false;
-    if (tiktokPublishLog) tiktokPublishLog.textContent = '';
-    if (tiktokPublishGeneratePackSpinner) tiktokPublishGeneratePackSpinner.classList.remove('active');
-    if (tiktokPublishGeneratePackBtn) {
-      tiktokPublishGeneratePackBtn.disabled = false;
-      tiktokPublishGeneratePackBtn.textContent = 'Generate caption + hashtags';
-    }
-    if (tiktokPublishVideoPath) tiktokPublishVideoPath.value = '';
-    if (tiktokPublishCaption) tiktokPublishCaption.value = '';
-    if (tiktokPublishHashtags) tiktokPublishHashtags.value = '';
-    setTikTokPublishDraftStatus('Draft generator idle.', false);
-    setTikTokPublishStatus('Idle.', false, { notify: false });
-    setTikTokZoomStatus('Idle.', false, { notify: false });
-    setTikTokSfxStatus('Idle.', false, { notify: false });
-    scheduleSave();
-    renderTikTokTimeline();
   });
 }
 
@@ -30034,6 +40494,7 @@ if (tiktokPublishHashtags) {
   const evt = el.tagName === 'INPUT' && el.type === 'checkbox' ? 'change' : 'input';
   el.addEventListener(evt, () => {
     scheduleSave();
+    renderTikTokAutomationUi();
   });
 });
 
@@ -30288,6 +40749,12 @@ if (saveFilterImage) {
 if (saveFilterBatch) {
   saveFilterBatch.addEventListener('click', () => {
     savesFilter = 'batch';
+    renderSavesList();
+  });
+}
+if (saveFilterShortForm) {
+  saveFilterShortForm.addEventListener('click', () => {
+    savesFilter = 'shortform';
     renderSavesList();
   });
 }
@@ -30589,6 +41056,16 @@ window.addEventListener(
 document.addEventListener('keydown', (event) => {
   if (activeView !== 'activity') return;
   if (!event?.isTrusted || event.defaultPrevented) return;
+  const target = event.target;
+  if (
+    target instanceof HTMLElement &&
+    (target.isContentEditable ||
+      target.tagName === 'INPUT' ||
+      target.tagName === 'TEXTAREA' ||
+      target.tagName === 'SELECT')
+  ) {
+    return;
+  }
   const key = String(event.key || '');
   if (!key) return;
   if (key === 'PageDown' || key === 'End' || key === 'ArrowDown' || key === ' ') {
@@ -31096,9 +41573,21 @@ initializeThemeMode();
 renderBatchPlan();
 renderSavedBatches();
 loadStoredKey();
+const initialLoraState = loadLoraLabState();
+applyLoraLabState(initialLoraState);
+loadStoredRunpodKey();
+renderLoraRunpodPodOptions(String(initialLoraState.runpodPodId || '').trim());
+renderLoraLab();
+renderLoraWizard();
+const initialLoraToolkitUrl = sanitizeLoraToolkitUrl(initialLoraState.runpodToolkitUrl || '');
+if (initialLoraToolkitUrl) {
+  setLoraToolkitFrameUrl(initialLoraToolkitUrl);
+  setLoraRunpodStatus('Saved AI Toolkit URL restored. Load AI Toolkit to verify endpoint availability.');
+}
 saves = loadSaves();
 sessionSaves = loadSessionSaves();
 ensureSessionSaveIds();
+reconcileSessionSavesWithPersisted();
 avatars = loadAvatars();
 objects = loadObjects();
 loadObjectDraft();
@@ -31114,8 +41603,14 @@ if (!ACTIVITY_CACHE_ENABLED) {
 savedBatches = loadBatches();
 presets = loadPresets();
 tiktokScripts = loadTikTokScripts();
+loadTikTokAutomationLocalState();
 ensureKnownTaskIdsBackfilled();
 renderSavesList();
+Promise.all([
+  recoverSavesFromStorageSnapshot(),
+  recoverAvatarsFromStorageSnapshot(),
+  recoverObjectsFromStorageSnapshot()
+]).catch(() => {});
 renderAvatarOptions();
 renderAvatarList();
 renderObjectOptions();
@@ -31131,6 +41626,7 @@ renderClothesPicker();
 renderBatchProgress();
 renderPresets();
 renderTikTokScripts();
+renderTikTokAutomationUi();
 tiktokFinalKeyingSettings = loadTikTokFinalKeyingSettings();
 syncTikTokFinalKeyingInputs();
 refreshTikTokFinalKeyPreviewSource().catch(() => {});
@@ -31180,6 +41676,7 @@ resetTikTokCaptionRenderProgress();
 setTikTokPublishStatus('Idle.', false, { notify: false });
 setTikTokPublishDraftStatus('Draft generator idle.', false);
 renderElevenlabsVoiceOptions();
+ensureTikTokAutomationTimer();
 updateBatchModeUI();
 if (batchOutfitToggle) {
   batchOutfitToggle.addEventListener('change', () => {

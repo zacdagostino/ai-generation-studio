@@ -67,6 +67,7 @@
       --side-panel-backdrop: rgba(4, 8, 16, 0.72);
       --side-panel-shadow: -18px 0 40px rgba(0, 0, 0, 0.45);
       --side-panel-close-bg: color-mix(in srgb, var(--surface-2) 72%, transparent);
+      --sidebar-offset: 260px;
       --space-1: 6px;
       --space-2: 10px;
       --space-3: 14px;
@@ -79,7 +80,7 @@
 
     body {
       margin: 0;
-      padding: 24px;
+      padding: 0;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -184,11 +185,26 @@
     }
 
     .shell {
-      max-width: 1400px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: none;
+      margin: 0;
       display: flex;
       flex-direction: column;
+      gap: 0;
+    }
+
+    .app-layout {
+      display: block;
+      min-height: 100vh;
+    }
+
+    .app-main {
+      min-width: 0;
+      display: grid;
       gap: var(--space-4);
+      padding: 20px 24px 24px;
+      margin-left: var(--sidebar-offset);
+      transition: margin-left 0.2s ease;
     }
 
     header {
@@ -196,6 +212,9 @@
       align-items: baseline;
       justify-content: space-between;
       gap: 12px;
+      margin-left: var(--sidebar-offset);
+      padding: 20px 24px 0;
+      transition: margin-left 0.2s ease;
     }
 
     h1 {
@@ -276,6 +295,172 @@
     .workflow-step span {
       font-size: 12px;
       color: var(--muted);
+    }
+
+    .workflow-overview {
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.025);
+      overflow: hidden;
+    }
+
+    .workflow-overview summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .workflow-overview summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .workflow-overview__copy {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .workflow-overview__title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .studio-hero {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .studio-hero__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .studio-hero__title {
+      margin: 0;
+      font-size: clamp(28px, 3vw, 40px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: var(--text-strong);
+    }
+
+    .studio-hero__text {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .studio-inline-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--text-strong);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .studio-inline-back:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .studio-inline-back__arrow {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .builder-nav {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      margin-bottom: 6px;
+    }
+
+    .builder-nav__row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .builder-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-strong);
+      font-weight: 600;
+    }
+
+    .builder-back:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .builder-back__arrow {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .workflow-overview__text {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .workflow-overview__meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .workflow-overview__count {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 12px;
+      color: var(--text-strong);
+      white-space: nowrap;
+    }
+
+    .workflow-overview__chevron {
+      font-size: 12px;
+      color: var(--muted);
+      transition: transform 0.18s ease;
+    }
+
+    .workflow-overview[open] .workflow-overview__chevron {
+      transform: rotate(180deg);
+    }
+
+    .workflow-overview__body {
+      padding: 0 16px 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .workflow-overview[open] summary {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
     }
 
     .tiktok-sticky-step {
@@ -850,6 +1035,13 @@
       color: #d1def6;
     }
 
+    .avatar-scene-inputs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
     .avatar-scene-state {
       font-size: 11px;
       padding: 3px 8px;
@@ -959,6 +1151,14 @@
       overflow-x: auto;
       padding-bottom: 4px;
       scroll-snap-type: x proximity;
+    }
+
+    .avatar-clip-inputs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 2px;
     }
 
     .avatar-clip-card {
@@ -1803,6 +2003,1414 @@
       padding: 3px 8px;
     }
 
+    .tiktok-mode-shell {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tiktok-mode-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-mode-switch {
+      display: inline-grid;
+      grid-template-columns: repeat(2, minmax(120px, 1fr));
+      gap: 6px;
+      padding: 6px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      min-width: min(100%, 290px);
+    }
+
+    .tiktok-mode-switch button {
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+      padding: 10px 14px;
+    }
+
+    .tiktok-mode-switch button.active {
+      background: linear-gradient(135deg, rgba(126, 242, 157, 0.94), rgba(126, 192, 242, 0.94));
+      color: #07111f;
+      box-shadow: 0 10px 24px rgba(40, 84, 126, 0.2);
+    }
+
+    .tiktok-run-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(126, 192, 242, 0.18);
+      background:
+        radial-gradient(circle at top left, rgba(126, 242, 157, 0.16), transparent 38%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+    }
+
+    .tiktok-run-banner__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-strong);
+      margin-bottom: 4px;
+    }
+
+    .tiktok-run-banner__meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tiktok-summary-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+
+    .tiktok-summary-card {
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.035);
+      display: grid;
+      gap: 6px;
+    }
+
+    .tiktok-summary-label {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tiktok-summary-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-strong);
+      line-height: 1;
+    }
+
+    .tiktok-summary-note {
+      font-size: 12px;
+      color: var(--muted);
+      min-height: 16px;
+    }
+
+    .tiktok-auto-layout {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      align-items: start;
+    }
+
+    .tiktok-auto-main {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .tiktok-auto-operator-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      align-items: end;
+    }
+
+    .tiktok-auto-operator-grid--wide {
+      grid-template-columns: minmax(0, 1.5fr) repeat(3, minmax(160px, 1fr));
+    }
+
+    .tiktok-auto-stack {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .tiktok-auto-panel {
+      display: grid;
+      gap: 14px;
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-3) 88%, var(--surface-1));
+      box-shadow: 0 14px 28px rgba(5, 10, 18, 0.12);
+    }
+
+    .tiktok-auto-panel--highlight {
+      background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--accent-2) 16%, transparent), transparent 42%),
+        linear-gradient(180deg, color-mix(in srgb, var(--surface-3) 92%, var(--surface-1)), color-mix(in srgb, var(--surface-3) 88%, var(--surface-1)));
+      border-color: color-mix(in srgb, var(--accent-2) 26%, var(--border));
+    }
+
+    .tiktok-auto-panel h4 {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-strong);
+    }
+
+    .tiktok-auto-advanced {
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.025);
+      overflow: hidden;
+    }
+
+    .tiktok-auto-advanced summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 14px;
+      font-weight: 700;
+      color: var(--text-strong);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tiktok-auto-advanced summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .tiktok-auto-advanced[open] summary {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tiktok-auto-advanced__body {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .tiktok-auto-run-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-auto-run-actions button {
+      flex: 1 1 170px;
+      min-width: 0;
+    }
+
+    .tiktok-auto-nav {
+      position: relative;
+      z-index: 3;
+      display: inline-flex;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 14px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-3) 84%, var(--surface-1));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .tiktok-auto-nav button {
+      position: relative;
+      z-index: 1;
+      pointer-events: auto;
+      min-width: 96px;
+      padding: 9px 14px;
+      border-radius: 11px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .tiktok-auto-nav button:hover {
+      background: color-mix(in srgb, var(--surface-2) 55%, transparent);
+      color: var(--text-strong);
+    }
+
+    .tiktok-auto-nav button.active {
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 18%, transparent), color-mix(in srgb, var(--accent) 14%, transparent)),
+        color-mix(in srgb, var(--surface-2) 62%, transparent);
+      border-color: color-mix(in srgb, var(--accent-2) 34%, transparent);
+      color: var(--text-strong);
+      box-shadow: 0 8px 18px rgba(6, 12, 22, 0.14);
+    }
+
+    .tiktok-auto-view {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tiktok-auto-history-page {
+      display: grid;
+      gap: 16px;
+    }
+
+    .tiktok-auto-run-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+      align-items: start;
+    }
+
+    .tiktok-auto-run-main {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .tiktok-auto-run-side {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tiktok-auto-hero {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid color-mix(in srgb, var(--accent-2) 22%, var(--border));
+      background:
+        radial-gradient(circle at top right, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 40%),
+        radial-gradient(circle at bottom left, color-mix(in srgb, var(--accent) 10%, transparent), transparent 38%),
+        linear-gradient(180deg, color-mix(in srgb, var(--surface-3) 94%, var(--surface-1)), color-mix(in srgb, var(--surface-3) 88%, var(--surface-1)));
+      box-shadow: 0 16px 32px rgba(6, 12, 22, 0.18);
+    }
+
+    .tiktok-auto-hero__top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-auto-hero__title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-strong);
+      letter-spacing: -0.03em;
+    }
+
+    .tiktok-auto-hero__text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      max-width: 64ch;
+    }
+
+    .tiktok-auto-current__step {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-strong);
+      letter-spacing: -0.02em;
+    }
+
+    .tiktok-auto-current__detail {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .tiktok-auto-current-run {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid color-mix(in srgb, var(--accent-2) 18%, var(--border));
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 44%, transparent), color-mix(in srgb, var(--surface-3) 88%, var(--surface-1)));
+      transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .tiktok-auto-current-run.is-clickable {
+      cursor: pointer;
+    }
+
+    .tiktok-auto-current-run.is-clickable:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--accent-2) 34%, var(--border));
+      box-shadow: 0 12px 24px rgba(7, 17, 31, 0.16);
+    }
+
+    .tiktok-auto-current-run__top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-auto-current-run__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .tiktok-auto-current-run__meta {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .tiktok-auto-current-run__body {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .tiktok-auto-current-compact {
+      display: grid;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+      background: color-mix(in srgb, var(--surface-1) 78%, transparent);
+    }
+
+    .tiktok-auto-current-compact__progress {
+      display: grid;
+      gap: 6px;
+    }
+
+    .tiktok-auto-current-compact__progress-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .tiktok-auto-current-compact__progress-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 700;
+    }
+
+    .tiktok-auto-current-compact__progress-value {
+      font-size: 12px;
+      color: var(--text-strong);
+      font-weight: 700;
+    }
+
+    .tiktok-auto-current-compact__progress-bar {
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-1) 72%, var(--surface-2));
+      overflow: hidden;
+    }
+
+    .tiktok-auto-current-compact__progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--accent-2) 86%, #7cc7f0), color-mix(in srgb, #76f2b4 86%, var(--accent-2)));
+      transition: width 0.24s ease;
+    }
+
+    .tiktok-auto-current-compact__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tiktok-auto-current-stage-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+      background: color-mix(in srgb, var(--surface-2) 68%, transparent);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+
+    .tiktok-auto-current-stage-chip::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(155, 166, 193, 0.7);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+    }
+
+    .tiktok-auto-current-stage-chip.running::before {
+      background: rgba(126, 192, 242, 0.96);
+      box-shadow: 0 0 0 3px rgba(126, 192, 242, 0.22);
+    }
+
+    .tiktok-auto-current-stage-chip.success::before {
+      background: rgba(126, 242, 157, 0.96);
+    }
+
+    .tiktok-auto-current-stage-chip.pending::before,
+    .tiktok-auto-current-stage-chip.blocked::before {
+      background: rgba(255, 209, 102, 0.98);
+    }
+
+    .tiktok-auto-current-stage-chip.error::before {
+      background: rgba(255, 122, 122, 0.98);
+    }
+
+    .tiktok-auto-current-compact__summary {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+      padding-top: 2px;
+      border-top: 1px solid color-mix(in srgb, var(--border) 68%, transparent);
+      margin-top: 2px;
+    }
+
+    .tiktok-auto-stage-progress-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tiktok-auto-stage-progress {
+      display: grid;
+      gap: 6px;
+    }
+
+    .tiktok-auto-stage-progress__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11px;
+    }
+
+    .tiktok-auto-stage-progress__label {
+      color: var(--text-strong);
+      font-weight: 700;
+    }
+
+    .tiktok-auto-stage-progress__meta {
+      color: var(--muted);
+    }
+
+    .tiktok-auto-stage-progress__bar {
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-1) 78%, var(--surface-2));
+      position: relative;
+    }
+
+    .tiktok-auto-stage-progress__fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      background: rgba(151, 160, 185, 0.85);
+      transition: width 0.24s ease;
+    }
+
+    .tiktok-auto-stage-progress.running .tiktok-auto-stage-progress__fill {
+      background: linear-gradient(90deg, rgba(126, 192, 242, 0.9), rgba(126, 242, 157, 0.7), rgba(126, 192, 242, 0.9));
+      background-size: 180% 100%;
+      animation: tiktok-auto-progress-flow 1.2s linear infinite;
+    }
+
+    .tiktok-auto-stage-progress.success .tiktok-auto-stage-progress__fill {
+      background: rgba(126, 242, 157, 0.95);
+    }
+
+    .tiktok-auto-stage-progress.pending .tiktok-auto-stage-progress__fill,
+    .tiktok-auto-stage-progress.blocked .tiktok-auto-stage-progress__fill {
+      background: rgba(255, 209, 102, 0.95);
+    }
+
+    .tiktok-auto-stage-progress.error .tiktok-auto-stage-progress__fill {
+      background: rgba(255, 122, 122, 0.95);
+    }
+
+    @keyframes tiktok-auto-progress-flow {
+      0% { background-position: 0% 0; }
+      100% { background-position: 180% 0; }
+    }
+
+    .tiktok-auto-cycle-groups {
+      display: grid;
+      gap: 12px;
+    }
+
+    .tiktok-auto-cycle-group {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-3) 82%, var(--surface-1));
+    }
+
+    .tiktok-auto-cycle-group__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-bottom: 10px;
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 86%, transparent);
+    }
+
+    .tiktok-auto-cycle-group__title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-strong);
+      letter-spacing: 0.01em;
+    }
+
+    .tiktok-auto-cycle-group__meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tiktok-auto-health-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+
+    .tiktok-auto-health-card {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      border-radius: 16px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-2) 34%, var(--surface-3));
+    }
+
+    .tiktok-auto-health-card__label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tiktok-auto-health-card__value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .tiktok-auto-health-card__note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tiktok-auto-run-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tiktok-auto-day-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tiktok-auto-day-card {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 18%, transparent), color-mix(in srgb, var(--surface-3) 82%, var(--surface-1)));
+      text-align: left;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .tiktok-auto-day-card:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--accent-2) 22%, var(--border));
+      box-shadow: 0 10px 22px rgba(5, 10, 18, 0.14);
+    }
+
+    .tiktok-auto-day-card.active {
+      border-color: color-mix(in srgb, var(--accent-2) 34%, var(--border));
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 12%, transparent), color-mix(in srgb, var(--accent) 10%, transparent)),
+        linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 24%, transparent), color-mix(in srgb, var(--surface-3) 84%, var(--surface-1)));
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-2) 12%, transparent), 0 12px 24px rgba(5, 10, 18, 0.14);
+    }
+
+    .tiktok-auto-day-card__title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-strong);
+      letter-spacing: -0.02em;
+    }
+
+    .tiktok-auto-day-card__meta {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .tiktok-auto-day-card__stats {
+      font-size: 11px;
+      color: var(--text-strong);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .tiktok-auto-history-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tiktok-auto-run-card {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 22%, transparent), color-mix(in srgb, var(--surface-3) 82%, var(--surface-1)));
+      cursor: pointer;
+      text-align: left;
+      overflow: hidden;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .tiktok-auto-run-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: color-mix(in srgb, var(--muted) 32%, transparent);
+    }
+
+    .tiktok-auto-run-card.ready::before {
+      background: color-mix(in srgb, var(--accent) 92%, transparent);
+    }
+
+    .tiktok-auto-run-card.running::before {
+      background: color-mix(in srgb, var(--accent-2) 96%, transparent);
+    }
+
+    .tiktok-auto-run-card.warning::before {
+      background: rgba(255, 209, 102, 0.95);
+    }
+
+    .tiktok-auto-run-card.error::before {
+      background: rgba(255, 122, 122, 0.95);
+    }
+
+    .tiktok-auto-run-card.is-current {
+      border-color: color-mix(in srgb, var(--accent-2) 34%, var(--border));
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-2) 12%, transparent), 0 12px 26px rgba(5, 10, 18, 0.16);
+    }
+
+    .tiktok-auto-run-card:hover {
+      transform: translateY(-1px);
+      border-color: color-mix(in srgb, var(--accent-2) 22%, var(--border));
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 34%, transparent), color-mix(in srgb, var(--surface-3) 86%, var(--surface-1)));
+      box-shadow: 0 12px 26px rgba(5, 10, 18, 0.16);
+    }
+
+    .tiktok-auto-run-card:focus-visible {
+      outline: none;
+      border-color: color-mix(in srgb, var(--accent-2) 42%, var(--border));
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 18%, transparent);
+    }
+
+    .tiktok-auto-run-card__top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .tiktok-auto-run-card__lead {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .tiktok-auto-run-card__eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .tiktok-auto-run-card__aside {
+      display: grid;
+      justify-items: end;
+      gap: 8px;
+    }
+
+    .tiktok-auto-run-card__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-strong);
+      letter-spacing: -0.02em;
+    }
+
+    .tiktok-auto-run-card__meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tiktok-auto-run-card__text {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 72ch;
+    }
+
+    .tiktok-auto-run-card__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-auto-run-card__footer {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tiktok-auto-run-card__signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-2) 44%, transparent);
+      font-size: 11px;
+      color: var(--text-strong);
+      white-space: nowrap;
+    }
+
+    .tiktok-auto-run-card__open {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-strong);
+    }
+
+    .tiktok-auto-stage-strip {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-auto-stage-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: color-mix(in srgb, var(--surface-2) 46%, transparent);
+    }
+
+    .tiktok-auto-stage-chip::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(151, 160, 185, 0.9);
+    }
+
+    .tiktok-auto-stage-chip.success::before,
+    .tiktok-auto-stage-chip.ready::before {
+      background: rgba(126, 242, 157, 0.95);
+    }
+
+    .tiktok-auto-stage-chip.blocked::before,
+    .tiktok-auto-stage-chip.warning::before,
+    .tiktok-auto-stage-chip.pending::before {
+      background: rgba(255, 209, 102, 0.95);
+    }
+
+    .tiktok-auto-stage-chip.error::before {
+      background: rgba(255, 122, 122, 0.95);
+    }
+
+    .tiktok-auto-stage-chip.running::before {
+      background: color-mix(in srgb, var(--accent-2) 96%, transparent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-2) 16%, transparent);
+    }
+
+    .tiktok-run-detail {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tiktok-run-detail__header {
+      display: grid;
+      gap: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+    }
+
+    .tiktok-run-detail__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .tiktok-run-detail__meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tiktok-run-detail__stages {
+      display: grid;
+      gap: 12px;
+    }
+
+    .tiktok-run-detail__hero {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid color-mix(in srgb, var(--accent-2) 18%, var(--border));
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface-2) 36%, transparent), color-mix(in srgb, var(--surface-3) 88%, var(--surface-1)));
+    }
+
+    .tiktok-run-detail__result {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tiktok-run-detail__result video,
+    .tiktok-run-detail__result audio,
+    .tiktok-run-detail__result img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 13, 22, 0.8);
+    }
+
+    .tiktok-run-detail__result img {
+      max-height: 280px;
+      object-fit: contain;
+    }
+
+    .tiktok-run-stage {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-3) 84%, var(--surface-1));
+    }
+
+    .tiktok-run-stage.success {
+      border-color: color-mix(in srgb, var(--accent) 20%, var(--border));
+    }
+
+    .tiktok-run-stage.blocked {
+      border-color: rgba(255, 209, 102, 0.24);
+    }
+
+    .tiktok-run-stage.pending {
+      border-color: rgba(255, 209, 102, 0.24);
+    }
+
+    .tiktok-run-stage.error {
+      border-color: rgba(255, 122, 122, 0.26);
+    }
+
+    .tiktok-run-stage.running {
+      border-color: color-mix(in srgb, var(--accent-2) 22%, var(--border));
+    }
+
+    .tiktok-run-stage__top {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-run-stage__title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .tiktok-run-stage__body {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .tiktok-run-stage__detail {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .tiktok-run-artifact {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-2) 26%, var(--surface-3));
+    }
+
+    .tiktok-run-artifact__label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tiktok-run-artifact__text {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .tiktok-run-artifact__grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .tiktok-run-clip-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .tiktok-run-scene-card {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-2) 22%, var(--surface-3));
+    }
+
+    .tiktok-run-scene-card__title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .tiktok-run-scene-card__meta {
+      font-size: 11px;
+      color: var(--muted);
+      white-space: pre-wrap;
+      line-height: 1.45;
+    }
+
+    .tiktok-run-clip-placeholder {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      border: 1px dashed color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-1) 80%, var(--surface-2));
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .tiktok-run-artifact__mini {
+      display: grid;
+      gap: 6px;
+      padding: 10px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--border) 100%, transparent);
+      background: color-mix(in srgb, var(--surface-2) 18%, var(--surface-3));
+    }
+
+    #tiktokRunDetailsPanel .side-panel__panel {
+      width: min(92vw, 780px);
+      padding: 22px;
+      gap: 16px;
+      background: color-mix(in srgb, var(--surface-3) 96%, var(--surface-2));
+    }
+
+    .tiktok-run-artifact__mini video,
+    .tiktok-run-artifact__mini audio,
+    .tiktok-run-artifact__mini img {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(8, 13, 22, 0.8);
+    }
+
+    .tiktok-run-artifact__mini img {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .tiktok-run-artifact__mini--scene-selected {
+      width: clamp(120px, 26vw, 190px);
+      min-width: 120px;
+    }
+
+    .tiktok-run-artifact__mini--scene-selected video,
+    .tiktok-run-artifact__mini--scene-selected img {
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+    }
+
+    .tiktok-run-artifact__mini--scene-selected .tiktok-run-artifact__mini-title {
+      font-size: 11px;
+    }
+
+    .tiktok-run-artifact__mini--scene-selected .tiktok-run-artifact__mini-meta {
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    #tiktokRunDetailsPanel .clip-selected {
+      align-items: flex-start;
+      padding: 6px 8px;
+      gap: 6px;
+    }
+
+    #tiktokRunDetailsPanel .clip-selected .tiktok-run-artifact__mini {
+      width: clamp(104px, 22vw, 150px);
+      min-width: 104px;
+      max-width: 150px;
+      padding: 8px;
+      gap: 4px;
+    }
+
+    #tiktokRunDetailsPanel .clip-selected .tiktok-run-artifact__mini img,
+    #tiktokRunDetailsPanel .clip-selected .tiktok-run-artifact__mini video {
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+    }
+
+    #tiktokRunDetailsPanel .clip-selected .tiktok-run-artifact__mini-title {
+      font-size: 10px;
+    }
+
+    #tiktokRunDetailsPanel .clip-results {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 8px;
+    }
+
+    #tiktokRunDetailsPanel .clip-thumb {
+      max-height: 170px;
+    }
+
+    .tiktok-run-artifact__mini-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .tiktok-run-artifact__mini-meta {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.45;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .tiktok-destination-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+
+    .tiktok-destination-chip {
+      min-width: 0;
+    }
+
+    .tiktok-destination-tile {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.028)),
+        rgba(11, 18, 34, 0.84);
+      cursor: pointer;
+      min-height: 112px;
+    }
+
+    .tiktok-destination-tile input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .tiktok-destination-tile:has(input:checked) {
+      border-color: rgba(126, 192, 242, 0.45);
+      box-shadow: inset 0 0 0 1px rgba(126, 192, 242, 0.22);
+      background:
+        radial-gradient(circle at top right, rgba(126, 192, 242, 0.18), transparent 46%),
+        linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+        rgba(11, 18, 34, 0.92);
+    }
+
+    .tiktok-destination-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .tiktok-destination-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .tiktok-destination-logo svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
+    .tiktok-destination-copy {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .tiktok-destination-name {
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .tiktok-destination-hint {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tiktok-destination-state {
+      display: inline-flex;
+      align-items: center;
+      justify-self: flex-start;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+    }
+
+    .tiktok-destination-state::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(151, 160, 185, 0.9);
+      box-shadow: 0 0 0 3px rgba(151, 160, 185, 0.18);
+    }
+
+    .tiktok-destination-state.connected::before {
+      background: rgba(126, 242, 157, 0.95);
+      box-shadow: 0 0 0 3px rgba(126, 242, 157, 0.18);
+    }
+
+    .tiktok-destination-state.warning::before {
+      background: rgba(255, 209, 102, 0.95);
+      box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.18);
+    }
+
+    .tiktok-destination-tile--tiktok .tiktok-destination-logo {
+      background: linear-gradient(145deg, rgba(37, 244, 238, 0.16), rgba(254, 44, 85, 0.16));
+    }
+
+    .tiktok-destination-tile--instagram .tiktok-destination-logo {
+      background: linear-gradient(145deg, rgba(131, 58, 180, 0.24), rgba(253, 29, 29, 0.18), rgba(252, 176, 69, 0.16));
+    }
+
+    .tiktok-destination-tile--facebook .tiktok-destination-logo {
+      background: linear-gradient(145deg, rgba(24, 119, 242, 0.26), rgba(24, 119, 242, 0.1));
+    }
+
+    .tiktok-mini-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .tiktok-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text);
+    }
+
+    .tiktok-status-pill::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(151, 160, 185, 0.9);
+      box-shadow: 0 0 0 3px rgba(151, 160, 185, 0.18);
+    }
+
+    .tiktok-status-pill.ready::before,
+    .tiktok-status-pill.running::before,
+    .tiktok-status-pill.connected::before {
+      background: rgba(126, 242, 157, 0.95);
+      box-shadow: 0 0 0 3px rgba(126, 242, 157, 0.18);
+    }
+
+    .tiktok-status-pill.warning::before,
+    .tiktok-status-pill.paused::before {
+      background: rgba(255, 209, 102, 0.95);
+      box-shadow: 0 0 0 3px rgba(255, 209, 102, 0.18);
+    }
+
+    .tiktok-status-pill.error::before {
+      background: rgba(255, 122, 122, 0.95);
+      box-shadow: 0 0 0 3px rgba(255, 122, 122, 0.18);
+    }
+
+    .tiktok-history-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tiktok-history-feed {
+      display: grid;
+      gap: 10px;
+      max-height: 340px;
+      overflow: auto;
+      padding-right: 4px;
+    }
+
+    .tiktok-history-feed--compact {
+      max-height: 220px;
+    }
+
+    .tiktok-history-entry {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .tiktok-history-entry__top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-history-entry__title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .tiktok-history-entry__meta {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .tiktok-history-entry__text {
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .tiktok-history-empty {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.02);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .tiktok-section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tiktok-script-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+    }
+
+    .tiktok-script-source.automatic {
+      color: #d9f8e3;
+      border-color: rgba(126, 242, 157, 0.4);
+      background: rgba(126, 242, 157, 0.12);
+    }
+
+    .tiktok-script-source.manual {
+      color: #dce9ff;
+      border-color: rgba(126, 192, 242, 0.35);
+      background: rgba(126, 192, 242, 0.12);
+    }
+
     .timeline-clip {
       display: grid;
       gap: 6px;
@@ -2036,6 +3644,462 @@
     }
 
     button:active { transform: translateY(1px); }
+
+    .batch-generator-card {
+      border-radius: 18px;
+      border: 1px solid color-mix(in srgb, var(--border) 78%, rgba(126, 192, 242, 0.22));
+      background:
+        radial-gradient(120% 140% at 100% -20%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 52%),
+        linear-gradient(155deg, color-mix(in srgb, var(--surface-2) 78%, transparent), color-mix(in srgb, var(--surface-1) 92%, transparent));
+      box-shadow: 0 18px 36px rgba(2, 6, 16, 0.28);
+    }
+
+    .batch-generator-intro {
+      display: grid;
+      gap: 4px;
+      margin-bottom: 14px;
+    }
+
+    .batch-generator-intro .section-title {
+      margin-bottom: 0;
+      font-size: 21px;
+      letter-spacing: 0.01em;
+    }
+
+    .batch-generator-grid {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .batch-field {
+      display: grid;
+      gap: 7px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid color-mix(in srgb, var(--border) 78%, rgba(255, 255, 255, 0.06));
+      background: color-mix(in srgb, var(--surface-1) 92%, transparent);
+      min-width: 0;
+    }
+
+    .batch-field > label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--muted) 88%, #e6efff 12%);
+    }
+
+    .batch-field-hint {
+      font-size: 12px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .batch-inline {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .batch-inline > input {
+      flex: 1 1 220px;
+      min-width: 0;
+    }
+
+    .batch-field-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .batch-field-actions > select {
+      flex: 1 1 240px;
+      min-width: 200px;
+      max-width: 340px;
+    }
+
+    .batch-field-actions > .small {
+      display: inline-flex !important;
+      align-items: center;
+      gap: 8px;
+      min-height: 28px;
+    }
+
+    .batch-generator-card :is(input:not([type="checkbox"]), select, textarea) {
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--border) 74%, rgba(126, 192, 242, 0.18));
+      background: color-mix(in srgb, var(--surface-input) 88%, rgba(8, 15, 30, 0.28));
+    }
+
+    .batch-generator-card :is(input:not([type="checkbox"]), select, textarea):focus {
+      border-color: color-mix(in srgb, var(--accent-2) 62%, var(--accent) 38%);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-2) 18%, transparent);
+      background: color-mix(in srgb, var(--surface-2) 84%, transparent);
+    }
+
+    .batch-primary-actions {
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid color-mix(in srgb, var(--border) 84%, rgba(126, 242, 157, 0.18));
+      background: color-mix(in srgb, var(--surface-1) 92%, transparent);
+      margin-bottom: 10px;
+    }
+
+    .batch-status {
+      margin-left: auto;
+      min-width: 220px;
+      text-align: right;
+      color: var(--muted);
+    }
+
+    .batch-panel {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid color-mix(in srgb, var(--border) 82%, rgba(255, 255, 255, 0.06));
+      background: color-mix(in srgb, var(--surface-1) 92%, transparent);
+    }
+
+    .batch-panel .section-title {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 760px) {
+      .batch-status {
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+        text-align: left;
+      }
+
+      .batch-inline {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .batch-inline > button {
+        width: 100%;
+      }
+    }
+
+    .lora-lab {
+      display: grid;
+      gap: 16px;
+    }
+
+    .lora-lab__intro {
+      display: grid;
+      gap: 8px;
+    }
+
+    .lora-lab__top {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(290px, 0.92fr) minmax(0, 1.08fr);
+      align-items: start;
+    }
+
+    .lora-lab__bottom {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      align-items: start;
+    }
+
+    .lora-card {
+      border: 1px solid color-mix(in srgb, var(--border) 80%, rgba(126, 192, 242, 0.18));
+      border-radius: 16px;
+      padding: 14px;
+      background:
+        radial-gradient(120% 110% at 100% 0%, color-mix(in srgb, var(--accent-2) 10%, transparent), transparent 55%),
+        color-mix(in srgb, var(--surface-1) 94%, transparent);
+      display: grid;
+      gap: 12px;
+    }
+
+    .lora-card h4 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--text-strong);
+    }
+
+    .lora-quick-header {
+      display: grid;
+      gap: 5px;
+    }
+
+    .lora-quick-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-strong);
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .lora-quick-text {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .lora-quick-points {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .lora-quick-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .lora-form {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    }
+
+    .lora-field {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .lora-field--wide {
+      grid-column: 1 / -1;
+    }
+
+    .lora-field > label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--muted) 86%, #e6efff 14%);
+    }
+
+    .lora-lab :is(input:not([type="checkbox"]), textarea, select) {
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--border) 82%, rgba(126, 192, 242, 0.18));
+      background: color-mix(in srgb, var(--surface-input) 90%, transparent);
+    }
+
+    .lora-lab textarea {
+      min-height: 160px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+      font-size: 12px;
+      line-height: 1.45;
+      resize: vertical;
+    }
+
+    .lora-checklist {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+      color: var(--text);
+    }
+
+    .lora-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .lora-metric-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--border) 80%, rgba(126, 242, 157, 0.25));
+      background: color-mix(in srgb, var(--surface-2) 78%, transparent);
+      font-size: 12px;
+      color: var(--text-strong);
+      white-space: nowrap;
+    }
+
+    .lora-code-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .lora-live-tools {
+      display: grid;
+      gap: 10px;
+    }
+
+    .lora-frame-shell {
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--border) 80%, rgba(126, 192, 242, 0.2));
+      background: color-mix(in srgb, var(--surface-1) 92%, transparent);
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lora-frame-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      pointer-events: none;
+    }
+
+    .lora-toolkit-frame {
+      width: 100%;
+      min-height: 420px;
+      border: 0;
+      background: #0b1020;
+      display: none;
+    }
+
+    .lora-toolkit-frame.ready {
+      display: block;
+    }
+
+    .lora-live-status {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .lora-wizard-modal {
+      width: min(760px, 92vw);
+      max-height: 84vh;
+      overflow: auto;
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    .lora-wizard-modal__head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .lora-wizard-modal__title {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      color: var(--text-strong);
+      line-height: 1.1;
+    }
+
+    .lora-wizard-progress {
+      display: grid;
+      gap: 8px;
+    }
+
+    .lora-wizard-progress__text {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .lora-wizard-progress__bar {
+      height: 9px;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--border) 80%, rgba(126, 192, 242, 0.28));
+      background: color-mix(in srgb, var(--surface-1) 82%, transparent);
+      overflow: hidden;
+    }
+
+    .lora-wizard-progress__fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(126, 242, 157, 0.95), rgba(126, 192, 242, 0.95));
+      transition: width 0.22s ease;
+    }
+
+    .lora-wizard-step {
+      border: 1px solid color-mix(in srgb, var(--border) 84%, rgba(126, 192, 242, 0.26));
+      border-radius: 14px;
+      padding: 14px;
+      background: color-mix(in srgb, var(--surface-2) 84%, transparent);
+      display: grid;
+      gap: 10px;
+    }
+
+    .lora-wizard-step__eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .lora-wizard-step__title {
+      margin: 0;
+      font-size: 18px;
+      color: var(--text-strong);
+      line-height: 1.2;
+      font-weight: 700;
+    }
+
+    .lora-wizard-step__desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .lora-wizard-step__points {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .lora-wizard-modal__footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .lora-wizard-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .lora-wizard-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    @media (max-width: 960px) {
+      .lora-lab__top {
+        grid-template-columns: 1fr;
+      }
+    }
 
     .status {
       display: flex;
@@ -3529,9 +5593,25 @@
     .autosave {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      flex-wrap: wrap;
       color: var(--muted);
       font-size: 12px;
+    }
+
+    .autosave__row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+
+    .autosave__eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.8;
     }
 
     .save-icon {
@@ -3554,15 +5634,37 @@
 
     .save-tick.show { display: inline-block; }
 
-    .top-save {
-      margin-left: auto;
-      background: rgba(255,255,255,0.04);
-      padding: 6px 10px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
+    .workspace-bar {
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-bottom: 2px;
+      flex-wrap: wrap;
+    }
+
+    .workspace-save {
+      min-width: 0;
+      max-width: 100%;
+      padding: 6px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface-1) 96%, #ffffff 4%);
+      box-shadow: none;
+    }
+
+    .workspace-save #saveStatusText {
+      color: var(--text-strong);
+      font-weight: 600;
+    }
+
+    .workspace-save #activeSaveDisplay {
+      color: var(--muted) !important;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: min(56vw, 440px);
     }
 
     .key-badge-group {
@@ -3611,15 +5713,57 @@
     .theme-toggle {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: linear-gradient(135deg, rgba(126, 192, 242, 0.18), rgba(126, 242, 157, 0.16));
-      color: var(--text);
+      justify-content: center;
+      width: 100%;
+      gap: 10px;
+      min-height: 44px;
+      padding: 8px 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: color-mix(in srgb, var(--surface-2) 96%, #1b2436 4%);
+      color: var(--text-strong);
       font-size: 12px;
       font-weight: 600;
       cursor: pointer;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .theme-toggle::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 48%),
+        linear-gradient(135deg, rgba(126, 192, 242, 0.95), rgba(126, 242, 157, 0.88));
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+      flex: 0 0 18px;
+    }
+
+    .theme-toggle:hover {
+      background: color-mix(in srgb, var(--surface-2) 92%, rgba(126, 192, 242, 0.12) 8%);
+      border-color: rgba(126, 192, 242, 0.22);
+      transform: translateY(-1px);
+    }
+
+    body.light-mode .theme-toggle::before {
+      background:
+        radial-gradient(circle at 50% 50%, rgba(255, 215, 98, 0.98), rgba(255, 191, 64, 0.9) 62%, rgba(255, 160, 64, 0.72));
+    }
+
+    .side-nav.collapsed .theme-toggle {
+      font-size: 0;
+      color: transparent;
+      min-height: 44px;
+      padding: 8px;
+      gap: 0;
+    }
+
+    .side-nav.collapsed .theme-toggle::before {
+      margin: 0;
     }
 
     @keyframes spin {
@@ -5240,6 +7384,381 @@
       border-color: rgba(126, 242, 157, 0.5);
     }
 
+    .side-nav {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: 236px;
+      border-right: 1px solid var(--border);
+      border-radius: 0;
+      background: color-mix(in srgb, var(--surface-3) 94%, transparent);
+      padding: 16px 12px;
+      display: grid;
+      grid-template-rows: auto 1fr auto auto;
+      gap: 10px;
+      transition: width 0.2s ease, padding 0.2s ease;
+      min-width: 0;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    body.light-mode .side-nav {
+      background: color-mix(in srgb, var(--surface-2) 98%, white 2%);
+    }
+
+    .side-nav.collapsed {
+      width: 82px;
+      padding: 16px 10px;
+    }
+
+    .side-nav__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .side-nav__brand {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .side-nav__brand-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-strong);
+    }
+
+    .side-nav__brand-subtitle {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .side-nav__toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-strong);
+      font-weight: 600;
+    }
+
+    .side-nav__toggle-icon {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1;
+    }
+
+    .side-nav__menu {
+      display: grid;
+      gap: 8px;
+    }
+
+    .side-nav__spacer {
+      min-height: 0;
+    }
+
+    .side-nav__menu button {
+      width: 100%;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      border-radius: 14px;
+      padding: 10px 12px;
+      text-align: left;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .side-nav__menu button:hover {
+      background: color-mix(in srgb, var(--surface-2) 90%, rgba(126, 192, 242, 0.12) 10%);
+      border-color: color-mix(in srgb, var(--accent-2) 30%, var(--border));
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(7, 17, 31, 0.14);
+    }
+
+    .side-nav__menu button:hover .side-nav__icon {
+      background: color-mix(in srgb, var(--surface-3) 84%, rgba(126, 192, 242, 0.16) 16%);
+    }
+
+    .side-nav__menu .nav-button--primary {
+      background: linear-gradient(135deg, rgba(126, 242, 157, 0.9), rgba(126, 192, 242, 0.86));
+      color: #07111f;
+      border-color: rgba(126, 242, 157, 0.68);
+      box-shadow: 0 12px 28px rgba(36, 94, 126, 0.3);
+    }
+
+    .side-nav__menu .nav-button--primary .side-nav__icon {
+      background: rgba(7, 17, 31, 0.14);
+      color: #07111f;
+    }
+
+    .side-nav__menu .nav-button--primary.active {
+      color: #07111f;
+      background: linear-gradient(135deg, rgba(126, 242, 157, 0.92), rgba(126, 192, 242, 0.88));
+      border-color: rgba(126, 242, 157, 0.72);
+      box-shadow: 0 12px 28px rgba(36, 94, 126, 0.34);
+    }
+
+    .side-nav__menu .nav-button--primary.active .side-nav__icon {
+      background: rgba(7, 17, 31, 0.14);
+      color: #07111f;
+    }
+
+    .side-nav__icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-strong);
+      flex: 0 0 28px;
+    }
+
+    .side-nav__icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .nav-button__label {
+      white-space: nowrap;
+    }
+
+    .create-launcher {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 4px;
+    }
+
+    .create-launcher__card {
+      width: 100%;
+      min-height: 124px;
+      border-radius: 18px;
+      border: 1px solid color-mix(in srgb, var(--border) 92%, transparent);
+      background: color-mix(in srgb, var(--surface-2) 100%, #20283a 0%);
+      padding: 18px;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 14px;
+      text-align: left;
+      box-shadow: none;
+      transition: border-color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+    }
+
+    .create-launcher__card:hover {
+      border-color: color-mix(in srgb, var(--accent-2) 34%, var(--border));
+      background: color-mix(in srgb, var(--surface-2) 96%, rgba(126, 192, 242, 0.04) 4%);
+      transform: translateY(-1px);
+    }
+
+    .create-launcher__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: color-mix(in srgb, var(--surface-3) 84%, #1b2436 16%);
+      color: var(--text-strong);
+      flex: 0 0 44px;
+    }
+
+    .create-launcher__icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .create-launcher__content {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .create-launcher__title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-strong);
+      letter-spacing: -0.02em;
+    }
+
+    .create-launcher__text {
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted);
+      max-width: 30ch;
+    }
+
+    .create-launcher__meta {
+      font-size: 11px;
+      color: color-mix(in srgb, var(--text-strong) 86%, transparent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      align-self: end;
+      justify-self: end;
+      white-space: nowrap;
+    }
+
+    .create-panel {
+      display: grid;
+      gap: 16px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .create-panel__title {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--text-strong);
+    }
+
+    .create-panel__text {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 52ch;
+      line-height: 1.55;
+    }
+
+    .create-panel__section {
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      padding: 0;
+    }
+
+    .create-launcher__card--image .create-launcher__icon {
+      color: #8fd6ff;
+    }
+
+    .create-launcher__card--video .create-launcher__icon {
+      color: #91f0bf;
+    }
+
+    .create-launcher__card--batch .create-launcher__icon {
+      color: #f4d38b;
+    }
+
+    .create-launcher__card--shortform .create-launcher__icon {
+      color: #d8b1ff;
+    }
+
+    .side-nav.collapsed .side-nav__brand,
+    .side-nav.collapsed .side-nav__toggle-label,
+    .side-nav.collapsed .nav-button__label {
+      display: none;
+    }
+
+    .side-nav.collapsed .side-nav__menu button,
+    .side-nav.collapsed .side-nav__toggle {
+      justify-content: center;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    @media (max-width: 980px) {
+      .side-nav,
+      .side-nav.collapsed {
+        position: fixed;
+        inset: 0 auto 0 0;
+        width: 78px;
+        padding: 10px 8px;
+      }
+
+      .app-main,
+      .side-nav.collapsed + .app-main {
+        margin-left: 94px;
+        padding: 16px 18px 20px;
+      }
+
+      .side-nav .side-nav__brand,
+      .side-nav .side-nav__toggle-label,
+      .side-nav .nav-button__label {
+        display: none;
+      }
+
+      .side-nav__menu {
+        grid-template-columns: 1fr;
+      }
+
+      .side-nav:hover,
+      .side-nav:focus-within {
+        width: 220px;
+        padding: 12px;
+      }
+
+      .side-nav:hover .side-nav__brand,
+      .side-nav:hover .side-nav__toggle-label,
+      .side-nav:hover .nav-button__label,
+      .side-nav:focus-within .side-nav__brand,
+      .side-nav:focus-within .side-nav__toggle-label,
+      .side-nav:focus-within .nav-button__label {
+        display: initial;
+      }
+
+      .side-nav:hover .theme-toggle,
+      .side-nav:focus-within .theme-toggle {
+        font-size: 12px;
+        color: var(--text-strong);
+        min-height: 44px;
+        padding: 8px 12px;
+        gap: 10px;
+      }
+
+      .side-nav__top {
+        justify-content: center;
+      }
+
+      .side-nav.collapsed .side-nav__menu button,
+      .side-nav.collapsed .side-nav__toggle,
+      .side-nav .side-nav__menu button,
+      .side-nav .side-nav__toggle {
+        justify-content: center;
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      .side-nav:hover .side-nav__menu button,
+      .side-nav:hover .side-nav__toggle,
+      .side-nav:focus-within .side-nav__menu button,
+      .side-nav:focus-within .side-nav__toggle {
+        justify-content: flex-start;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .workspace-bar {
+        margin-bottom: 4px;
+      }
+
+      .workspace-save {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
     .view {
       display: none;
     }
@@ -5605,9 +8124,40 @@
       .activity-loading-stages {
         grid-template-columns: 1fr;
       }
+
+      .tiktok-auto-layout,
+      .tiktok-auto-run-grid,
+      .tiktok-history-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tiktok-auto-run-actions,
+      .tiktok-auto-operator-grid--wide {
+        grid-template-columns: 1fr;
+      }
+
+      .tiktok-auto-run-actions {
+        display: grid;
+      }
+
+      .tiktok-auto-day-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 760px) {
+      .create-launcher {
+        grid-template-columns: 1fr;
+      }
+
+      .create-launcher__card {
+        grid-template-columns: auto minmax(0, 1fr);
+      }
+
+      .create-launcher__meta {
+        justify-self: start;
+      }
+
       .activity-records {
         grid-template-columns: 1fr;
       }
@@ -5619,58 +8169,69 @@
       .activity-item-media-box .result-img {
         min-height: var(--activity-tile-media-size, 220px);
       }
+
+      .tiktok-mode-switch {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .tiktok-mode-switch button {
+        padding: 9px 10px;
+      }
+
+      .tiktok-summary-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .tiktok-run-banner {
+        padding: 12px;
+      }
     }
   </style>
 </head>
 <body>
   <div id="toastContainer" class="toast-stack" aria-live="polite" aria-atomic="false"></div>
   <div class="shell">
-    <header>
-      <div>
-        <h1>Content Studio <span>desktop</span></h1>
-        <p class="tagline">Generate and monitor tasks via the Kie AI Nano Banana APIs without using the playground.</p>
-      </div>
-      <div class="key-badge-group">
-        <button id="themeModeToggle" class="theme-toggle" type="button">Theme: Dark</button>
-        <button id="kieKeyBadge" class="key-badge" type="button">
-          <span class="dot"></span>
-          Kie.ai
-        </button>
-        <button id="openaiKeyBadge" class="key-badge" type="button">
-          <span class="dot"></span>
-          OpenAI
-        </button>
-        <button id="elevenlabsKeyBadge" class="key-badge" type="button">
-          <span class="dot"></span>
-          ElevenLabs
-        </button>
-        <div class="top-save">
-          <div class="small">Credits</div>
-          <div id="creditValue" class="small" style="color:#7ef29d;">—</div>
-          <span id="creditSpinner" class="save-icon" style="width:14px;height:14px;border-width:2px;"></span>
-        </div>
+    <header id="appHeader">
+      <div id="appHeaderTitleWrap">
+        <h1>Content Studio <span id="appHeaderTitleBadge">desktop</span></h1>
+        <p id="appHeaderTagline" class="tagline">Generate and monitor tasks via the Kie AI Nano Banana APIs without using the playground.</p>
       </div>
     </header>
 
-    <div id="openTabs" class="tab-strip hidden"></div>
+    <div class="app-layout">
+      <aside id="sideNav" class="side-nav">
+        <div class="menu side-nav__menu">
+          <button data-view="create" class="nav-button--primary"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg></span><span class="nav-button__label">Create</span></button>
+          <button data-view="history"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h10"/></svg></span><span class="nav-button__label">Saves</span></button>
+          <button data-view="genhistory"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="8"/></svg></span><span class="nav-button__label">History</span></button>
+          <button data-view="activity"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 18V9"></path><path d="M12 18V6"></path><path d="M18 18v-4"></path></svg></span><span class="nav-button__label">Activity</span></button>
+          <button data-view="avatars"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 19a7 7 0 0 1 14 0"/></svg></span><span class="nav-button__label">Avatars</span></button>
+          <button data-view="objects"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Z"/><path d="m12 12 8-4.5"/><path d="m12 12-8-4.5"/><path d="M12 12v9"/></svg></span><span class="nav-button__label">Objects</span></button>
+          <button data-view="prompts"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4h10a2 2 0 0 1 2 2v12l-4-2-4 2-4-2-4 2V6a2 2 0 0 1 2-2h2"/><path d="M9 9h6"/><path d="M9 13h6"/></svg></span><span class="nav-button__label">Prompts</span></button>
+          <button data-view="lora"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m4 8 8-4 8 4-8 4-8-4Z"/><path d="M4 12l8 4 8-4"/><path d="M4 16l8 4 8-4"/></svg></span><span class="nav-button__label">LoRA Lab</span></button>
+          <button id="localSoundsNavBtn" type="button"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 14h2"></path><path d="M9 10h2"></path><path d="M13 7h2"></path><path d="M17 12h2"></path><path d="M5 18h14"></path></svg></span><span class="nav-button__label">Local Sounds</span></button>
+        </div>
+        <div class="side-nav__spacer"></div>
+        <button id="themeModeToggle" class="theme-toggle" type="button">Theme: Dark</button>
+        <div class="menu side-nav__menu">
+          <button data-view="auth"><span class="side-nav__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 11V8a5 5 0 0 1 10 0v3"/><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M12 15v2"/></svg></span><span class="nav-button__label">Access Key</span></button>
+        </div>
+      </aside>
 
-	    <div class="menu">
-	      <button data-view="auth" class="active">Access Key</button>
-	      <button data-view="create">Create</button>
-	      <button data-view="history">Saves</button>
-	      <button data-view="genhistory">History</button>
-	      <button data-view="activity">Activity</button>
-	      <button data-view="avatars">Avatars</button>
-	      <button data-view="objects">Objects</button>
-	      <button data-view="prompts">Prompts</button>
-	      <button id="localSoundsNavBtn" type="button">Local Sounds</button>
-      <div class="autosave top-save">
-        <span id="saveSpinner" class="save-icon"></span>
-        <span id="saveTick" class="save-tick hidden">✔</span>
-        <span id="saveStatusText" class="small">No save active</span>
-        <span id="activeSaveDisplay" class="small" style="color:#97a0b9;">No save</span>
-      </div>
-    </div>
+      <main class="app-main">
+        <div class="workspace-bar">
+          <div class="autosave workspace-save" aria-live="polite">
+            <div class="autosave__eyebrow">Project</div>
+            <div class="autosave__row">
+              <span id="saveSpinner" class="save-icon"></span>
+              <span id="saveTick" class="save-tick hidden">✔</span>
+              <span id="saveStatusText" class="small">No save active</span>
+            </div>
+            <div id="activeSaveDisplay" class="small">No save</div>
+          </div>
+        </div>
+        <div id="openTabs" class="tab-strip hidden"></div>
 
     <section id="view-auth" class="view active card">
       <div class="step">Access Key</div>
@@ -5680,36 +8241,79 @@
       </div>
     </section>
 
-    <section id="view-create" class="view card">
-      <div class="step" style="display:flex;align-items:center;gap:8px;">
-        Create
-        <button id="kieInlineBadge" class="key-badge inline hidden" type="button">
-          <span class="dot"></span>
-          Kie.ai key missing
-        </button>
-      </div>
-      <div class="small">Pick what you want to build.</div>
-      <div id="createChooser" class="card">
-        <div class="controls" style="grid-template-columns:1fr; gap:12px;">
-          <button id="goImage" style="padding:18px; font-size:16px; display:flex; align-items:center; gap:10px; width:100%; justify-content:flex-start;">
-            <span style="font-size:22px;">🖼️</span> Create an Image
+    <section id="view-create" class="view create-panel">
+      <div class="step">Create</div>
+      <h2 class="create-panel__title">Pick What You Want To Build</h2>
+      <div class="create-panel__text">Choose the workflow you want to open. Each option takes you straight into a focused builder instead of layering extra setup panels first.</div>
+      <div id="createChooser" class="create-panel__section">
+        <div class="create-launcher">
+          <button id="goImage" class="create-launcher__card create-launcher__card--image" type="button">
+            <span class="create-launcher__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="4" y="5" width="16" height="14" rx="2"></rect>
+                <circle cx="9" cy="10" r="1.5"></circle>
+                <path d="m6 16 4-4 3 3 3-5 2 3"></path>
+              </svg>
+            </span>
+            <span class="create-launcher__content">
+              <span class="create-launcher__title">Image</span>
+              <span class="create-launcher__text">Generate still images with reference inputs, avatars, objects, and batch size controls.</span>
+            </span>
+            <span class="create-launcher__meta">Nano Banana · Seedream</span>
           </button>
-          <button id="goVideo" style="padding:18px; font-size:16px; display:flex; align-items:center; gap:10px; width:100%; justify-content:flex-start;">
-            <span style="font-size:22px;">🎥</span> Create a Video (Sora)
+          <button id="goVideo" class="create-launcher__card create-launcher__card--video" type="button">
+            <span class="create-launcher__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="4" y="6" width="12" height="12" rx="2"></rect>
+                <path d="m16 10 4-2v8l-4-2"></path>
+                <path d="m10 10 3 2-3 2z" fill="currentColor" stroke="none"></path>
+              </svg>
+            </span>
+            <span class="create-launcher__content">
+              <span class="create-launcher__title">Video</span>
+              <span class="create-launcher__text">Turn a starting frame into motion output and manage character, object, and quality settings.</span>
+            </span>
+            <span class="create-launcher__meta">Sora workflow</span>
           </button>
-          <button id="goBatch" style="padding:18px; font-size:16px; display:flex; align-items:center; gap:10px; width:100%; justify-content:flex-start;">
-            <span style="font-size:22px;">📑</span> Create a Batch
+          <button id="goBatch" class="create-launcher__card create-launcher__card--batch" type="button">
+            <span class="create-launcher__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="5" y="5" width="14" height="4" rx="1.5"></rect>
+                <rect x="5" y="10" width="14" height="4" rx="1.5"></rect>
+                <rect x="5" y="15" width="14" height="4" rx="1.5"></rect>
+              </svg>
+            </span>
+            <span class="create-launcher__content">
+              <span class="create-launcher__title">Batch</span>
+              <span class="create-launcher__text">Draft multi-image plans for stories, object variations, and repeatable themed generation runs.</span>
+            </span>
+            <span class="create-launcher__meta">Story sets · Variations</span>
           </button>
-          <button id="goTikTok" style="padding:18px; font-size:16px; display:flex; align-items:center; gap:10px; width:100%; justify-content:flex-start;">
-            <span style="font-size:22px;">🎬</span> TikTok Script Lab
+          <button id="goTikTok" class="create-launcher__card create-launcher__card--shortform" type="button">
+            <span class="create-launcher__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M5 7h3l2 10h4l2-10h3"></path>
+                <path d="M9 7V5"></path>
+                <path d="M15 7V5"></path>
+                <path d="M9 19h6"></path>
+              </svg>
+            </span>
+            <span class="create-launcher__content">
+              <span class="create-launcher__title">Short-Form</span>
+              <span class="create-launcher__text">Build short-form videos from script to posting, or run the automatic studio with memory and scheduling.</span>
+            </span>
+            <span class="create-launcher__meta">Manual + automation</span>
           </button>
         </div>
       </div>
   </section>
 
-    <section class="card hidden" id="builderTopBar">
-      <div class="actions" style="gap:10px; align-items:center;">
-        <button id="builderBack" class="secondary" type="button">← Back</button>
+    <section class="builder-nav hidden" id="builderTopBar">
+      <div class="builder-nav__row">
+        <button id="builderBack" class="builder-back" type="button">
+          <span class="builder-back__arrow" aria-hidden="true">←</span>
+          <span>Back</span>
+        </button>
       </div>
     </section>
 
@@ -5723,6 +8327,8 @@
             <select id="model">
               <option value="nano-banana-pro">nano-banana-pro</option>
               <option value="nano-banana-2">nano-banana-2</option>
+              <option value="seedream/4.5-edit">seedream/4.5-edit</option>
+              <option value="seedream/5-lite-image-to-image">seedream/5-lite-image-to-image</option>
             </select>
           </div>
           <div>
@@ -5962,83 +8568,102 @@
       </div>
 
       <div id="batchView" class="grid hidden">
-        <section class="card">
-          <h3 class="section-title">Batch generator</h3>
-          <div class="small">Choose story mode or object variations, then draft prompts with OpenAI.</div>
-          <div class="controls" style="grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); margin-bottom:12px;">
-            <div>
+        <section class="card batch-generator-card">
+          <div class="batch-generator-intro">
+            <h3 class="section-title">Batch generator</h3>
+            <div class="small">Build polished image sets with clear controls for theme, identity, and variation depth.</div>
+          </div>
+          <div class="controls batch-generator-grid">
+            <div class="batch-field">
               <label for="batchTypeSelect">Batch type</label>
               <select id="batchTypeSelect">
-                <option value="story" selected>Story generator</option>
+                <option value="standard" selected>Standard batch</option>
+                <option value="instagram">Instagram batch (carousel + stories)</option>
                 <option value="object">Object variations</option>
               </select>
+              <div class="batch-field-hint">Standard repeats one prompt. Instagram unlocks carousel + story planning. Object mode generates product/object variations.</div>
             </div>
-            <div id="batchStoryThemeWrap">
-              <label>Story theme</label>
-              <div class="add-url" style="align-items:center; gap:8px;">
+            <div id="batchStoryThemeWrap" class="batch-field">
+              <label id="batchPromptLabel">Batch prompt</label>
+              <div class="batch-inline">
                 <input id="batchDayInput" placeholder="e.g., exploring a night market, rainy cafe day..." />
                 <button id="batchThemeSuggestBtn" class="secondary" type="button">Suggest theme</button>
                 <span id="batchThemeSpinner" class="btn-spinner"></span>
               </div>
+              <div id="batchPromptHint" class="batch-field-hint">In standard mode, this exact prompt is reused for each image.</div>
             </div>
-            <div id="batchCarouselCountWrap">
-              <label id="batchCarouselLabel">Carousel images (1-7)</label>
+            <div id="batchCarouselCountWrap" class="batch-field">
+              <label id="batchCarouselLabel">Images to generate (1-7)</label>
               <input id="batchCarouselCount" type="number" min="1" max="7" value="3" />
+              <div id="batchCarouselHint" class="batch-field-hint">How many times to run the same prompt.</div>
             </div>
-            <div id="batchStoryCountWrap">
-              <label>Story images (0-7)</label>
+            <div id="batchStoryCountWrap" class="batch-field">
+              <label id="batchStoryLabel">Story images (0-7)</label>
               <input id="batchStoryCount" type="number" min="0" max="7" value="2" />
+              <div id="batchStoryHint" class="batch-field-hint">Adds supporting shots around the carousel.</div>
             </div>
-            <div>
+            <div id="batchAvatarWrap" class="batch-field">
+              <label for="batchAvatarSelect">Use avatar (optional)</label>
+              <div class="batch-field-actions">
+                <select id="batchAvatarSelect">
+                  <option value="">No avatar</option>
+                </select>
+                <div id="batchAvatarSelectPreview" class="small"></div>
+                <button id="batchEditAvatarBtn" class="secondary" type="button">Edit</button>
+                <button id="batchClearAvatarBtn" class="secondary" type="button">Clear</button>
+              </div>
+              <div class="batch-field-hint">Keeps identity and visual consistency across the full batch.</div>
             </div>
-            <div id="batchModeWrap">
+            <div id="batchModeWrap" class="batch-field">
               <label>Batch mode</label>
               <select id="batchModeSelect">
                 <option value="creative" selected>Creative (varied scenes)</option>
                 <option value="simple">Simple series (same scene, subtle changes)</option>
               </select>
+              <div class="batch-field-hint">Creative explores broader scene changes. Simple keeps output tightly matched.</div>
             </div>
-            <div id="batchNameWrap">
+            <div id="batchNameWrap" class="batch-field">
               <label>Batch name</label>
-              <div class="add-url" style="align-items:center; gap:8px;">
+              <div class="batch-inline">
                 <input id="batchNameInput" placeholder="e.g., market-night-v1" />
                 <span id="batchNameSpinner" class="btn-spinner"></span>
               </div>
+              <div class="batch-field-hint">Used in saved batches so you can reopen quickly.</div>
             </div>
           </div>
-          <div id="batchDiffWrap" class="row hidden">
+          <div id="batchDiffWrap" class="row batch-panel hidden">
             <label for="batchDiffPrompt">Differences prompt</label>
             <textarea id="batchDiffPrompt" placeholder="Describe what changes between each image (scenes, lighting, camera, environment, actions)."></textarea>
             <div class="small">ChatGPT will turn this into per-image prompts.</div>
           </div>
-          <div id="batchObjectWrap" class="row hidden">
+          <div id="batchObjectWrap" class="row batch-panel hidden">
             <label for="batchObjectSelect">Object (required for variations)</label>
-            <div class="actions" style="flex-wrap:wrap; gap:8px; align-items:center;">
-              <select id="batchObjectSelect" style="flex:1; min-width:220px; max-width:320px;">
+            <div class="batch-field-actions">
+              <select id="batchObjectSelect">
                 <option value="">No object</option>
               </select>
-              <div id="batchObjectSelectPreview" class="small" style="display:flex; align-items:center; gap:8px;"></div>
+              <div id="batchObjectSelectPreview" class="small"></div>
               <button id="batchEditObjectBtn" class="secondary" type="button">Edit</button>
               <button id="batchClearObjectBtn" class="secondary" type="button">Clear</button>
               <button id="batchObjectEnvBtn" class="secondary" type="button">Change environment</button>
               <button id="batchObjectBaseBtn" class="secondary" type="button">Use base image</button>
             </div>
-            <div id="batchObjectEnvStatus" class="small" style="margin-top:6px;"></div>
+            <div id="batchObjectEnvStatus" class="small"></div>
           </div>
-          <div class="actions" style="flex-wrap:wrap; gap:10px; margin-bottom:8px;">
+          <div class="actions batch-primary-actions">
             <button id="batchDraftBtn" type="button">Draft batch plan</button>
             <button id="batchGenerateBtn" class="secondary" type="button">
               <span id="batchGenerateSpinner" class="btn-spinner"></span>
               <span>Generate batch</span>
             </button>
             <button id="batchSaveBtn" class="secondary" type="button">Save batch</button>
-            <div id="batchStatus" class="small"></div>
+            <div id="batchStatus" class="small batch-status"></div>
           </div>
-          <div>
+          <div class="batch-panel">
             <h4 class="section-title">Drafted plan</h4>
             <div id="batchPlanList" class="history"></div>
           </div>
-          <div id="batchOutfitSection" style="margin-top:12px;">
+          <div id="batchOutfitSection" class="batch-panel">
             <h4 class="section-title">Outfits for the day</h4>
             <label class="remember" style="margin-bottom:8px; display:inline-flex; gap:6px; align-items:center;">
               <input id="batchOutfitToggle" type="checkbox" checked />
@@ -6048,7 +8673,7 @@
             <div id="batchOutfitStatus" class="small"></div>
             <div class="small">Outfits are generated from the theme via ChatGPT to keep attire consistent across all prompts.</div>
           </div>
-          <div style="margin-top:12px;">
+          <div class="batch-panel">
             <h4 class="section-title">Saved batches</h4>
             <div class="history" id="batchSavedList"><div class="small">No saved batches.</div></div>
           </div>
@@ -6076,50 +8701,534 @@
           </div>
         </div>
         <section class="card">
-          <div class="step">TikTok Video Farm Workflow</div>
-          <h3 class="section-title">Cat TikTok production pipeline</h3>
-          <div class="small">Work in steps. Generate scripts, then turn them into timed scenes with stock video guidance.</div>
-          <div class="workflow-steps">
-            <div class="workflow-step">
-              <strong>Step 1 · Idea + style</strong>
-              <span>Define hook, audience, and tone.</span>
+          <div class="step">Studio Guide</div>
+          <div class="studio-hero">
+            <div class="studio-hero__top">
+              <h2 class="studio-hero__title">Short-Form Studio</h2>
+              <button id="tiktokStudioBackBtn" class="studio-inline-back" type="button">
+                <span class="studio-inline-back__arrow" aria-hidden="true">←</span>
+                <span>Back</span>
+              </button>
             </div>
-            <div class="workflow-step">
-              <strong>Step 2 · Script drafts</strong>
-              <span>Generate and review multiple scripts.</span>
-            </div>
-            <div class="workflow-step">
-              <strong>Step 3 · Storyboard + library</strong>
-              <span>Split into scenes and prep clip search.</span>
-            </div>
-            <div class="workflow-step">
-              <strong>Step 4 · Audio alignment</strong>
-              <span>Sync cuts to final TTS timing.</span>
-            </div>
-            <div class="workflow-step">
-              <strong>Step 5 · Clip sourcing</strong>
-              <span>Search and assign clips per scene.</span>
-            </div>
-            <div class="workflow-step">
-              <strong>Step 6 · Timeline + export</strong>
-              <span>Assemble the cut list and render.</span>
-            </div>
-            <div class="workflow-step">
-              <strong>Step 7 · Avatar processing</strong>
-              <span>Generate per-scene avatar talking clips.</span>
-            </div>
+            <div class="studio-hero__text">Build short-form videos from idea through publishing across connected platforms, then switch to automation when you want the system to run on a schedule.</div>
           </div>
-          <div class="asset-panel" style="margin-top:12px;">
-            <button id="tiktokAssetsToggle" class="asset-toggle" type="button">
-              <span>Generated assets</span>
-              <span id="tiktokAssetsChevron" class="small">▼</span>
-            </button>
-            <div id="tiktokAssetsPanel" class="asset-list">
-              <div class="asset-item">No assets yet.</div>
+          <details class="workflow-overview">
+            <summary>
+              <div class="workflow-overview__copy">
+                <div class="workflow-overview__title">Workflow overview</div>
+                <div class="workflow-overview__text">Use this as a quick refresher on the full production flow, then collapse it once you know the path.</div>
+              </div>
+              <div class="workflow-overview__meta">
+                <span class="workflow-overview__count">7 workflow steps</span>
+                <span class="workflow-overview__chevron" aria-hidden="true">▼</span>
+              </div>
+            </summary>
+            <div class="workflow-overview__body">
+              <div class="small">Build short-form videos from idea through publishing across connected platforms.</div>
+              <div class="workflow-steps">
+                <div class="workflow-step">
+                  <strong>Step 1 · Idea + style</strong>
+                  <span>Define hook, audience, and tone.</span>
+                </div>
+                <div class="workflow-step">
+                  <strong>Step 2 · Script drafts</strong>
+                  <span>Generate and review multiple scripts.</span>
+                </div>
+                <div class="workflow-step">
+                  <strong>Step 3 · Storyboard + library</strong>
+                  <span>Split into scenes and prep clip search.</span>
+                </div>
+                <div class="workflow-step">
+                  <strong>Step 4 · Audio alignment</strong>
+                  <span>Sync cuts to final TTS timing.</span>
+                </div>
+                <div class="workflow-step">
+                  <strong>Step 5 · Clip sourcing</strong>
+                  <span>Search and assign clips per scene.</span>
+                </div>
+                <div class="workflow-step">
+                  <strong>Step 6 · Timeline + export</strong>
+                  <span>Assemble the cut list and render.</span>
+                </div>
+                <div class="workflow-step">
+                  <strong>Step 7 · Avatar processing</strong>
+                  <span>Generate per-scene avatar talking clips.</span>
+                </div>
+              </div>
+            </div>
+          </details>
+        </section>
+        <section class="card">
+          <div class="step">Control center</div>
+          <div class="tiktok-mode-shell">
+            <div class="tiktok-mode-head">
+              <div>
+                <h3 class="section-title">Manual or automatic</h3>
+                <div class="small">Use the current hands-on lab, or switch to an automatic profile with memory, schedule, and posting history.</div>
+              </div>
+              <div class="tiktok-mode-switch">
+                <button id="tiktokModeManualBtn" class="active" type="button">Manual</button>
+                <button id="tiktokModeAutomaticBtn" type="button">Automatic</button>
+              </div>
+            </div>
+            <div class="tiktok-run-banner">
+              <div>
+                <div id="tiktokModeHeroTitle" class="tiktok-run-banner__title">Manual workflow active</div>
+                <div id="tiktokModeHeroText" class="small">Draft ideas yourself, then push them through storyboard, timing, clip search, and publish.</div>
+              </div>
+              <div class="tiktok-run-banner__meta">
+                <span id="tiktokModeStatusBadge" class="tiktok-status-pill">Idle</span>
+                <span id="tiktokModeNextBadge" class="tiktok-status-pill">Next run —</span>
+              </div>
+            </div>
+            <div class="tiktok-summary-grid">
+              <div class="tiktok-summary-card">
+                <div class="tiktok-summary-label">Mode</div>
+                <div id="tiktokSummaryModeValue" class="tiktok-summary-value">Manual</div>
+                <div id="tiktokSummaryModeNote" class="tiktok-summary-note">Step-by-step creation</div>
+              </div>
+              <div class="tiktok-summary-card">
+                <div class="tiktok-summary-label">Idea memory</div>
+                <div id="tiktokSummaryMemoryValue" class="tiktok-summary-value">0</div>
+                <div id="tiktokSummaryMemoryNote" class="tiktok-summary-note">No ideas stored yet</div>
+              </div>
+              <div class="tiktok-summary-card">
+                <div class="tiktok-summary-label">Uploads</div>
+                <div id="tiktokSummaryUploadsValue" class="tiktok-summary-value">0</div>
+                <div id="tiktokSummaryUploadsNote" class="tiktok-summary-note">No publishing history yet</div>
+              </div>
+              <div class="tiktok-summary-card">
+                <div class="tiktok-summary-label">Destinations</div>
+                <div id="tiktokSummaryDestinationsValue" class="tiktok-summary-value">0/3</div>
+                <div id="tiktokSummaryDestinationsNote" class="tiktok-summary-note">No social destinations linked</div>
+              </div>
             </div>
           </div>
         </section>
-        <section class="card">
+        <section id="tiktokAutomationCard" class="card hidden">
+          <div class="step">Automatic mode</div>
+          <h3 class="section-title">Automation operator</h3>
+          <div class="small">Operate the automation here, then move into settings, testing, or memory only when needed.</div>
+          <div class="tiktok-auto-nav" style="margin-top:12px;">
+            <button id="tiktokAutomationRunTabBtn" type="button">Run</button>
+            <button id="tiktokAutomationSettingsTabBtn" class="secondary" type="button">Settings</button>
+            <button id="tiktokAutomationTestTabBtn" class="secondary" type="button">Test</button>
+            <button id="tiktokAutomationMemoryTabBtn" class="secondary" type="button">Memory</button>
+          </div>
+          <div id="tiktokAutomationRunView" class="tiktok-auto-view" style="margin-top:12px;">
+            <div id="tiktokAutomationRunOverview" class="tiktok-auto-view">
+            <div class="tiktok-auto-run-grid">
+              <div class="tiktok-auto-run-main">
+                <div class="tiktok-auto-hero">
+                  <div class="tiktok-auto-hero__top">
+                    <div>
+                      <div id="tiktokAutomationRunTitle" class="tiktok-auto-hero__title">Automation offline</div>
+                      <div id="tiktokAutomationRunText" class="tiktok-auto-hero__text">Open settings, define the profile, then start the automation.</div>
+                    </div>
+                    <div class="tiktok-mini-pills">
+                      <span id="tiktokAutomationRunPill" class="tiktok-status-pill paused">Paused</span>
+                      <span id="tiktokAutomationMemoryPill" class="tiktok-status-pill">Memory empty</span>
+                    </div>
+                  </div>
+                  <div class="tiktok-auto-run-actions">
+                    <button id="tiktokAutomationStartBtn" type="button">Start automation</button>
+                    <button id="tiktokAutomationPauseBtn" class="secondary" type="button">Pause</button>
+                    <button id="tiktokAutomationGenerateBtn" class="secondary" type="button">Generate now</button>
+                    <button id="tiktokAutomationSimulateBtn" class="secondary" type="button">Simulate run</button>
+                  </div>
+                </div>
+                <div class="tiktok-auto-panel tiktok-auto-panel--current">
+                  <div class="tiktok-section-head">
+                    <h4>Active run</h4>
+                    <div class="tiktok-mini-pills">
+                      <span id="tiktokAutomationNextBadge" class="tiktok-status-pill">Next run —</span>
+                      <button id="tiktokAutomationOpenActiveRunBtn" class="secondary" type="button">Inspect</button>
+                    </div>
+                  </div>
+                  <div id="tiktokAutomationCurrentStep" class="tiktok-auto-current__step">Waiting for the next instruction.</div>
+                  <div id="tiktokAutomationCurrentDetail" class="tiktok-auto-current__detail">Start automation or trigger the next run manually to create the first run record.</div>
+                  <div id="tiktokAutomationActiveRunCard" class="tiktok-auto-current-run">
+                    <div class="tiktok-auto-current-run__top">
+                      <div>
+                        <div id="tiktokAutomationActiveRunTitle" class="tiktok-auto-current-run__title">No run in progress</div>
+                        <div id="tiktokAutomationActiveRunMeta" class="tiktok-auto-current-run__meta">Start automation to begin the next burst cycle.</div>
+                      </div>
+                      <span id="tiktokAutomationCycleBadge" class="tiktok-status-pill">Cycle —</span>
+                    </div>
+                    <div id="tiktokAutomationActiveRunBody" class="tiktok-auto-current-run__body">The active run panel will show the current video generation and its latest output as it moves through each stage.</div>
+                    <div id="tiktokAutomationActiveRunStages" class="tiktok-auto-stage-strip"></div>
+                  </div>
+                </div>
+                <div class="tiktok-auto-panel tiktok-auto-panel--runs">
+                  <div class="tiktok-section-head">
+                    <h4>Run history</h4>
+                    <div class="tiktok-mini-pills">
+                      <div id="tiktokAutomationRunCount" class="small">0 runs</div>
+                      <button id="tiktokAutomationShowAllHistoryBtn" class="secondary" type="button">Show all</button>
+                    </div>
+                  </div>
+                  <div id="tiktokAutomationDayList" class="tiktok-auto-day-grid"></div>
+                  <div class="tiktok-section-head">
+                    <h4 id="tiktokAutomationSelectedDayTitle">Latest day</h4>
+                    <div id="tiktokAutomationSelectedDayMeta" class="small">0 runs</div>
+                  </div>
+                  <div id="tiktokAutomationRunList" class="tiktok-auto-run-list"></div>
+                </div>
+              </div>
+              <div class="tiktok-auto-run-side">
+                <div class="tiktok-auto-panel tiktok-auto-panel--overview">
+                  <div class="tiktok-section-head">
+                    <h4>Overview</h4>
+                    <span id="tiktokAutomationStatusBadge" class="tiktok-status-pill">Idle</span>
+                  </div>
+                  <div class="tiktok-auto-health-grid">
+                    <div class="tiktok-auto-health-card">
+                      <div class="tiktok-auto-health-card__label">Today</div>
+                      <div id="tiktokAutomationProgressText" class="tiktok-auto-health-card__value">0 / 3</div>
+                      <div id="tiktokAutomationStatusText" class="tiktok-auto-health-card__note">Automatic mode is paused.</div>
+                    </div>
+                    <div class="tiktok-auto-health-card">
+                      <div class="tiktok-auto-health-card__label">Memory</div>
+                      <div id="tiktokAutomationIdeaCount" class="tiktok-auto-health-card__value">0</div>
+                      <div id="tiktokAutomationMemoryNote" class="tiktok-auto-health-card__note">No ideas stored yet.</div>
+                    </div>
+                    <div class="tiktok-auto-health-card">
+                      <div class="tiktok-auto-health-card__label">Uploads</div>
+                      <div id="tiktokAutomationUploadCount" class="tiktok-auto-health-card__value">0</div>
+                      <div id="tiktokAutomationUploadNote" class="tiktok-auto-health-card__note">No publishing history yet.</div>
+                    </div>
+                    <div class="tiktok-auto-health-card">
+                      <div class="tiktok-auto-health-card__label">Destinations</div>
+                      <div id="tiktokAutomationDestinationCount" class="tiktok-auto-health-card__value">0/0</div>
+                      <div id="tiktokAutomationDestinationNote" class="tiktok-auto-health-card__note">No social destinations selected.</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tiktok-auto-panel tiktok-auto-panel--publishing">
+                  <div class="tiktok-section-head">
+                    <h4>Destinations</h4>
+                    <button id="tiktokAutomationJumpPublishBtn" class="secondary" type="button">Manage credentials</button>
+                  </div>
+                  <div class="tiktok-destination-grid">
+                    <div class="tiktok-destination-chip">
+                      <div class="tiktok-destination-tile tiktok-destination-tile--tiktok">
+                        <span class="tiktok-destination-brand">
+                          <span class="tiktok-destination-logo" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M14.2 4c.7 2 2 3.3 4.1 3.8v2.8a7.5 7.5 0 0 1-3.3-1v5.3a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .8.1v3a2.7 2.7 0 1 0 1.9 2.5V4h2.1Z" fill="#fff"/>
+                            </svg>
+                          </span>
+                          <span class="tiktok-destination-copy">
+                            <span class="tiktok-destination-name">TikTok</span>
+                            <span class="tiktok-destination-hint">Short-form vertical</span>
+                          </span>
+                        </span>
+                        <span id="tiktokAutomationPlatformTikTokState" class="tiktok-destination-state warning">Credentials needed</span>
+                      </div>
+                    </div>
+                    <div class="tiktok-destination-chip">
+                      <div class="tiktok-destination-tile tiktok-destination-tile--instagram">
+                        <span class="tiktok-destination-brand">
+                          <span class="tiktok-destination-logo" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <rect x="4.5" y="4.5" width="15" height="15" rx="4.5" stroke="#fff" stroke-width="1.8"/>
+                              <circle cx="12" cy="12" r="3.6" stroke="#fff" stroke-width="1.8"/>
+                              <circle cx="17.1" cy="6.9" r="1.1" fill="#fff"/>
+                            </svg>
+                          </span>
+                          <span class="tiktok-destination-copy">
+                            <span class="tiktok-destination-name">Instagram</span>
+                            <span class="tiktok-destination-hint">Reels publishing</span>
+                          </span>
+                        </span>
+                        <span id="tiktokAutomationPlatformInstagramState" class="tiktok-destination-state warning">Credentials needed</span>
+                      </div>
+                    </div>
+                    <div class="tiktok-destination-chip">
+                      <div class="tiktok-destination-tile tiktok-destination-tile--facebook">
+                        <span class="tiktok-destination-brand">
+                          <span class="tiktok-destination-logo" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M13.4 20v-6h2.1l.3-2.5h-2.4V9.9c0-.7.2-1.3 1.3-1.3h1.2V6.4c-.2 0-.9-.1-1.8-.1-1.8 0-3 1.1-3 3.2v2h-2v2.5h2v6h2.3Z" fill="#fff"/>
+                            </svg>
+                          </span>
+                          <span class="tiktok-destination-copy">
+                            <span class="tiktok-destination-name">Facebook</span>
+                            <span class="tiktok-destination-hint">Page video posting</span>
+                          </span>
+                        </span>
+                        <span id="tiktokAutomationPlatformFacebookState" class="tiktok-destination-state warning">Credentials needed</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tiktok-auto-panel">
+                  <div class="tiktok-section-head">
+                    <h4>Recent activity</h4>
+                    <div id="tiktokAutomationEventCount" class="small">0 events</div>
+                  </div>
+                  <div id="tiktokAutomationEventList" class="tiktok-history-feed tiktok-history-feed--compact"></div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div id="tiktokAutomationRunHistoryPage" class="tiktok-auto-history-page hidden">
+              <div class="tiktok-auto-panel tiktok-auto-panel--runs">
+                <div class="tiktok-section-head">
+                  <div>
+                    <h4>Run history</h4>
+                    <div id="tiktokAutomationHistoryMeta" class="small" style="margin-top:4px;">All recorded days</div>
+                  </div>
+                  <button id="tiktokAutomationHistoryBackBtn" class="secondary" type="button">Back to overview</button>
+                </div>
+                <div id="tiktokAutomationHistoryList" class="tiktok-auto-history-list"></div>
+              </div>
+            </div>
+          </div>
+          <div id="tiktokAutomationSettingsView" class="tiktok-auto-view hidden" style="margin-top:12px;">
+            <div class="tiktok-auto-layout">
+              <div class="tiktok-auto-main">
+                <div class="tiktok-auto-panel tiktok-auto-panel--highlight">
+                  <div class="tiktok-section-head">
+                    <h4>Automation settings</h4>
+                    <div class="tiktok-mini-pills">
+                      <span id="tiktokAutomationSettingsModePill" class="tiktok-status-pill paused">Paused</span>
+                    </div>
+                  </div>
+                  <div class="tiktok-auto-operator-grid tiktok-auto-operator-grid--wide">
+                    <div>
+                      <label for="tiktokAutomationPromptInput">Seed brief</label>
+                      <textarea id="tiktokAutomationPromptInput" placeholder="e.g., cat fact video ideas with surprising hooks and short educational payoffs"></textarea>
+                    </div>
+                    <div>
+                      <label for="tiktokAutomationProfileInput">Profile name</label>
+                      <input id="tiktokAutomationProfileInput" placeholder="e.g., Daily cat facts" />
+                    </div>
+                    <div>
+                      <label for="tiktokAutomationDailyCountInput">Videos per day</label>
+                      <input id="tiktokAutomationDailyCountInput" type="number" min="1" max="48" value="3" />
+                    </div>
+                  </div>
+                  <div class="tiktok-auto-operator-grid">
+                    <div>
+                      <label for="tiktokAutomationAvatarSelect">Avatar (optional)</label>
+                      <select id="tiktokAutomationAvatarSelect">
+                        <option value="">No avatar</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="tiktokAutomationMemorySelect">Duplicate protection</label>
+                      <select id="tiktokAutomationMemorySelect">
+                        <option value="strict">High</option>
+                        <option value="balanced">Normal</option>
+                        <option value="relaxed">Low</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div style="margin-top:12px;">
+                    <div class="small" style="margin-bottom:8px; color:var(--text-strong);">Clip sourcing defaults (Step 5)</div>
+                    <div class="step5-toggle-wrap">
+                      <label class="toggle step5-toggle-chip">
+                        <input id="tiktokAutomationAiAutoToggle" type="checkbox" checked>
+                        <span class="toggle-track">
+                          <span class="toggle-thumb"></span>
+                        </span>
+                        <span class="toggle-label">Auto-suggest + generate AI images</span>
+                      </label>
+                      <label class="toggle step5-toggle-chip">
+                        <input id="tiktokAutomationAutoSearchToggle" type="checkbox" checked>
+                        <span class="toggle-track">
+                          <span class="toggle-thumb"></span>
+                        </span>
+                        <span class="toggle-label">Auto-search clips after storyboard</span>
+                      </label>
+                      <label class="toggle step5-toggle-chip">
+                        <input id="tiktokAutomationAutoPickToggle" type="checkbox" checked>
+                        <span class="toggle-track">
+                          <span class="toggle-thumb"></span>
+                        </span>
+                        <span class="toggle-label">Auto-pick clips after search</span>
+                      </label>
+                      <label class="toggle step5-toggle-chip">
+                        <input id="tiktokAutomationYoutubeOnlyToggle" type="checkbox">
+                        <span class="toggle-track">
+                          <span class="toggle-thumb"></span>
+                        </span>
+                        <span class="toggle-label">YouTube only (vertical/shorts)</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="small" style="margin-top:10px;">Generation runs immediately when automation is active, then waits 24 hours after the burst cycle starts before running the next daily batch.</div>
+                </div>
+                <details class="tiktok-auto-advanced">
+                  <summary>
+                    <span>Advanced settings</span>
+                    <span class="small">Audience, style, workspace</span>
+                  </summary>
+                  <div class="tiktok-auto-advanced__body">
+                    <div class="tiktok-auto-operator-grid">
+                      <div>
+                        <label for="tiktokAutomationWorkspaceInput">Workspace</label>
+                        <input id="tiktokAutomationWorkspaceInput" placeholder="e.g., Cat Facts Network" />
+                      </div>
+                      <div>
+                        <label for="tiktokAutomationAudienceInput">Audience</label>
+                        <input id="tiktokAutomationAudienceInput" placeholder="e.g., animal lovers, TikTok scrollers" />
+                      </div>
+                      <div>
+                        <label for="tiktokAutomationStyleInput">Style</label>
+                        <input id="tiktokAutomationStyleInput" placeholder="e.g., punchy facts, curiosity first" />
+                      </div>
+                    </div>
+                  </div>
+                </details>
+              </div>
+              <div class="tiktok-auto-stack">
+                <div class="tiktok-auto-panel">
+                  <div class="tiktok-section-head">
+                    <h4>Distribution</h4>
+                    <button id="tiktokAutomationSettingsJumpPublishBtn" class="secondary" type="button">Manage credentials</button>
+                  </div>
+                  <div class="small">Choose the destinations the automation is allowed to use.</div>
+                  <div class="tiktok-auto-operator-grid" style="margin-top:12px;">
+                    <div>
+                      <label for="tiktokAutomationPostingModeSelect">Posting timing</label>
+                      <select id="tiktokAutomationPostingModeSelect">
+                        <option value="follow-generation">Post when each run is ready</option>
+                        <option value="spread-window">Spread posts through window</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="tiktokAutomationPostingTimezoneSelect">Posting timezone</label>
+                      <select id="tiktokAutomationPostingTimezoneSelect"></select>
+                    </div>
+                    <div>
+                      <label for="tiktokAutomationPostingStartInput">Posting window starts</label>
+                      <select id="tiktokAutomationPostingStartInput"></select>
+                    </div>
+                    <div>
+                      <label for="tiktokAutomationPostingEndInput">Posting window ends</label>
+                      <select id="tiktokAutomationPostingEndInput"></select>
+                    </div>
+                  </div>
+                  <div class="step5-toggle-wrap" style="margin-top:12px;">
+                    <label class="step5-toggle-chip" for="tiktokAutomationReviewBeforePostToggle">
+                      <span class="toggle">
+                        <input type="checkbox" id="tiktokAutomationReviewBeforePostToggle" />
+                        <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                      </span>
+                      <span class="toggle-label">Review before post</span>
+                    </label>
+                  </div>
+                  <div class="small" style="margin-top:10px;">Posting timing is stored now and is intended for full-auto publishing. Current automatic mode still only schedules generation inside the app.</div>
+                  <div class="tiktok-destination-grid">
+                    <div class="tiktok-destination-chip">
+                      <label class="tiktok-destination-tile tiktok-destination-tile--tiktok">
+                        <input id="tiktokAutomationPlatformTikTok" type="checkbox" checked />
+                        <span class="tiktok-destination-brand">
+                          <span class="tiktok-destination-logo" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M14.2 4c.7 2 2 3.3 4.1 3.8v2.8a7.5 7.5 0 0 1-3.3-1v5.3a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .8.1v3a2.7 2.7 0 1 0 1.9 2.5V4h2.1Z" fill="#fff"/>
+                            </svg>
+                          </span>
+                          <span class="tiktok-destination-copy">
+                            <span class="tiktok-destination-name">TikTok</span>
+                            <span class="tiktok-destination-hint">Short-form vertical</span>
+                          </span>
+                        </span>
+                        <span id="tiktokAutomationPlatformTikTokStateSettings" class="tiktok-destination-state warning">Credentials needed</span>
+                      </label>
+                    </div>
+                    <div class="tiktok-destination-chip">
+                      <label class="tiktok-destination-tile tiktok-destination-tile--instagram">
+                        <input id="tiktokAutomationPlatformInstagram" type="checkbox" />
+                        <span class="tiktok-destination-brand">
+                          <span class="tiktok-destination-logo" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <rect x="4.5" y="4.5" width="15" height="15" rx="4.5" stroke="#fff" stroke-width="1.8"/>
+                              <circle cx="12" cy="12" r="3.6" stroke="#fff" stroke-width="1.8"/>
+                              <circle cx="17.1" cy="6.9" r="1.1" fill="#fff"/>
+                            </svg>
+                          </span>
+                          <span class="tiktok-destination-copy">
+                            <span class="tiktok-destination-name">Instagram</span>
+                            <span class="tiktok-destination-hint">Reels publishing</span>
+                          </span>
+                        </span>
+                        <span id="tiktokAutomationPlatformInstagramStateSettings" class="tiktok-destination-state warning">Credentials needed</span>
+                      </label>
+                    </div>
+                    <div class="tiktok-destination-chip">
+                      <label class="tiktok-destination-tile tiktok-destination-tile--facebook">
+                        <input id="tiktokAutomationPlatformFacebook" type="checkbox" />
+                        <span class="tiktok-destination-brand">
+                          <span class="tiktok-destination-logo" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M13.4 20v-6h2.1l.3-2.5h-2.4V9.9c0-.7.2-1.3 1.3-1.3h1.2V6.4c-.2 0-.9-.1-1.8-.1-1.8 0-3 1.1-3 3.2v2h-2v2.5h2v6h2.3Z" fill="#fff"/>
+                            </svg>
+                          </span>
+                          <span class="tiktok-destination-copy">
+                            <span class="tiktok-destination-name">Facebook</span>
+                            <span class="tiktok-destination-hint">Page video posting</span>
+                          </span>
+                        </span>
+                        <span id="tiktokAutomationPlatformFacebookStateSettings" class="tiktok-destination-state warning">Credentials needed</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="tiktok-auto-panel">
+                  <h4>Settings notes</h4>
+                  <div class="small">These inputs define the content engine only. The live automation state, output history, and run details are shown in the Run view.</div>
+                  <div class="small">Duplicate protection compares new hooks, titles, angles, and script text against the saved memory before a run is accepted.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="tiktokAutomationTestView" class="tiktok-auto-view hidden" style="margin-top:12px;">
+            <div class="tiktok-auto-panel">
+              <div class="tiktok-section-head">
+                <h4>Memory test</h4>
+                <span id="tiktokAutomationTestPill" class="tiktok-status-pill">Ready</span>
+              </div>
+              <div class="small">Run repeated automatic tests from the current seed brief, inspect every generated output, and add accepted concepts into automation memory.</div>
+              <div class="tiktok-auto-test-grid">
+                <div>
+                  <label for="tiktokAutomationTestRunsInput">Test runs</label>
+                  <input id="tiktokAutomationTestRunsInput" type="number" min="1" max="12" value="5" />
+                </div>
+              </div>
+              <div class="tiktok-auto-test-actions">
+                <button id="tiktokAutomationTestDryRunBtn" class="secondary" type="button">Run memory test</button>
+                <button id="tiktokAutomationTestClearBtn" class="secondary" type="button">Clear</button>
+                <button id="tiktokAutomationTestExportBtn" class="secondary" type="button">Export analysis JSON</button>
+              </div>
+              <div id="tiktokAutomationTestStatus" class="small">Run the same automation brief multiple times to see what gets accepted or blocked by memory.</div>
+              <div id="tiktokAutomationTestMemory" class="tiktok-auto-test-memory"></div>
+              <div id="tiktokAutomationTestResults" class="tiktok-auto-test-results"></div>
+            </div>
+          </div>
+          <div id="tiktokAutomationMemoryView" class="tiktok-auto-view hidden" style="margin-top:12px;">
+            <div class="tiktok-auto-panel">
+              <div class="tiktok-section-head">
+                <h4>Memory explorer</h4>
+                <div id="tiktokMemoryExplorerSummary" class="small">Runs 0 • Concepts 0 • Embeddings 0 • Retrieval events 0</div>
+              </div>
+              <div class="small">Inspect the stored automation history, compact concept memory, retrieval decisions, and embedding records.</div>
+              <div class="tiktok-auto-nav" style="margin-top:12px;">
+                <button id="tiktokMemoryExplorerHistoryBtn" type="button">History</button>
+                <button id="tiktokMemoryExplorerConceptsBtn" class="secondary" type="button">Concepts</button>
+                <button id="tiktokMemoryExplorerRetrievalBtn" class="secondary" type="button">Retrieval</button>
+                <button id="tiktokMemoryExplorerEmbeddingsBtn" class="secondary" type="button">Embeddings</button>
+                <button id="tiktokAutomationMemoryExportBtn" class="secondary" type="button">Export analysis JSON</button>
+                <button id="tiktokAutomationMemoryClearBtn" class="secondary" type="button">Clear all memory</button>
+              </div>
+              <div id="tiktokAutomationMemoryExportStatus" class="small" style="margin-top:10px;">Export the current memory state and test results for external analysis.</div>
+              <div id="tiktokMemoryExplorerContent" class="tiktok-auto-test-results" style="margin-top:14px;"></div>
+            </div>
+          </div>
+        </section>
+        <section id="tiktokManualModeCard" class="card">
           <div class="step">Step 1 · Idea + style</div>
           <h3 class="section-title" style="display:flex; align-items:center; gap:8px;">
             Draft the prompt
@@ -6467,6 +9576,11 @@
             <button id="tiktokFinalRenderBtn" type="button">Produce final output</button>
             <span id="tiktokFinalRenderSpinner" class="btn-spinner"></span>
             <div class="small">Uses Step 6 timeline + Step 7 avatar clips (green/black keyed, bottom-left overlay).</div>
+          </div>
+          <div id="tiktokFinalYoutubeCheck" class="step6-downloads" style="margin-top:10px;">
+            <div class="small" style="color:#f4f7ff;">YouTube local clip preflight</div>
+            <div id="tiktokFinalYoutubeCheckSummary" class="small">Not checked yet.</div>
+            <div id="tiktokFinalYoutubeCheckList" class="timeline-list"></div>
           </div>
           <div class="row" style="margin-top:10px;">
             <label>Manual keying controls (Step 8)</label>
@@ -7197,6 +10311,7 @@
         <button id="saveFilterAll" class="secondary" type="button">All</button>
         <button id="saveFilterImage" class="secondary" type="button">Image saves</button>
         <button id="saveFilterBatch" class="secondary" type="button">Batch saves</button>
+        <button id="saveFilterShortForm" class="secondary" type="button">Short-Form saves</button>
       </div>
       <div class="history" id="historyList">
         <div class="small">No saves yet.</div>
@@ -7221,6 +10336,164 @@
       </div>
       <div class="history" id="presetList">
         <div class="small">No presets yet.</div>
+      </div>
+    </section>
+
+    <section id="view-lora" class="view card">
+      <div class="step">LoRA Lab</div>
+      <h3 class="section-title">RunPod + AI Toolkit trainer</h3>
+      <div class="small">Plan and prepare Wan 2.2 character LoRA training directly in Content Studio, then copy the config and commands into your Pod.</div>
+      <div class="lora-lab">
+        <div class="lora-card lora-lab__intro">
+          <div class="lora-metrics">
+            <span class="lora-metric-pill">GPU: 1x RTX 4090</span>
+            <span class="lora-metric-pill">Cloud: RunPod Community</span>
+            <span class="lora-metric-pill">AI Toolkit UI: port 8675</span>
+            <span class="lora-metric-pill" id="loraEstimatedCost">Est. cost: $0.68 for 2h @ $0.34/hr</span>
+          </div>
+        </div>
+
+        <div class="lora-lab__top">
+          <div class="lora-card">
+            <div class="lora-quick-header">
+              <h4>1) Pod setup wizard</h4>
+              <h5 class="lora-quick-title">Guided setup before training</h5>
+              <p class="lora-quick-text">Use the popup wizard to walk through pod provisioning, toolkit install, dataset prep, and final connection checks.</p>
+            </div>
+            <ul class="lora-quick-points lora-checklist" id="loraChecklistText">
+              <li>Provision a RunPod 4090 Community Cloud pod</li>
+              <li>Expose AI Toolkit UI on port 8675</li>
+              <li>Upload paired image + caption dataset files</li>
+              <li>Validate endpoint before launching training</li>
+            </ul>
+            <div class="lora-quick-footer">
+              <button id="loraOpenWizardBtn" type="button">Open setup wizard</button>
+              <button id="loraOpenRunpodBtn" class="secondary" type="button">Open RunPod console</button>
+              <div class="small">Tip: run the validator in Step 4 before launching training.</div>
+            </div>
+          </div>
+
+          <div class="lora-card">
+            <h4>2) Wan 2.2 config builder</h4>
+            <div class="lora-form">
+              <div class="lora-field">
+                <label for="loraCharacterNameInput">Character name</label>
+                <input id="loraCharacterNameInput" placeholder="e.g., seleneva" />
+              </div>
+              <div class="lora-field">
+                <label for="loraConfigNameInput">Config filename</label>
+                <input id="loraConfigNameInput" placeholder="e.g., seleneva_wan22" />
+              </div>
+              <div class="lora-field lora-field--wide">
+                <label for="loraDatasetPathInput">Dataset path in Pod</label>
+                <input id="loraDatasetPathInput" placeholder="/workspace/datasets/seleneva" />
+              </div>
+              <div class="lora-field lora-field--wide">
+                <label for="loraOutputPathInput">Output path in Pod</label>
+                <input id="loraOutputPathInput" placeholder="/workspace/outputs/seleneva_wan22" />
+              </div>
+              <div class="lora-field">
+                <label for="loraStepsInput">Steps</label>
+                <input id="loraStepsInput" type="number" min="100" step="50" value="2000" />
+              </div>
+              <div class="lora-field">
+                <label for="loraSaveEveryInput">Save every</label>
+                <input id="loraSaveEveryInput" type="number" min="50" step="50" value="250" />
+              </div>
+              <div class="lora-field">
+                <label for="loraBatchSizeInput">Batch size</label>
+                <input id="loraBatchSizeInput" type="number" min="1" step="1" value="1" />
+              </div>
+              <div class="lora-field">
+                <label for="loraLearningRateInput">Learning rate</label>
+                <input id="loraLearningRateInput" value="1e-4" />
+              </div>
+              <div class="lora-field">
+                <label for="loraRankInput">LoRA rank</label>
+                <input id="loraRankInput" type="number" min="1" step="1" value="32" />
+              </div>
+              <div class="lora-field">
+                <label for="loraAlphaInput">LoRA alpha</label>
+                <input id="loraAlphaInput" type="number" min="1" step="1" value="32" />
+              </div>
+              <div class="lora-field lora-field--wide">
+                <label for="loraResolutionsInput">Resolutions</label>
+                <input id="loraResolutionsInput" value="512,768,1024" />
+              </div>
+              <div class="lora-field lora-field--wide">
+                <label class="remember" style="margin:0;">
+                  <input id="loraCacheEmbeddingsToggle" type="checkbox" checked />
+                  Cache text embeddings
+                </label>
+              </div>
+            </div>
+            <div class="lora-code-actions">
+              <button id="loraGenerateConfigBtn" type="button">Generate config</button>
+              <button id="loraCopyConfigBtn" class="secondary" type="button">Copy config</button>
+            </div>
+            <div class="lora-field lora-field--wide">
+              <label for="loraConfigOutput">Generated `config/*.yml`</label>
+              <textarea id="loraConfigOutput" readonly></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="lora-lab__bottom">
+          <div class="lora-card">
+          <h4>3) Terminal commands for the Pod</h4>
+          <div class="lora-code-actions">
+            <button id="loraCopyCommandsBtn" class="secondary" type="button">Copy commands</button>
+            <button id="loraCopyChecklistBtn" class="secondary" type="button">Copy checklist</button>
+          </div>
+          <div class="lora-field lora-field--wide">
+            <label for="loraCommandsOutput">Commands</label>
+            <textarea id="loraCommandsOutput" readonly></textarea>
+          </div>
+        </div>
+
+        <div class="lora-card">
+          <h4>4) Live AI Toolkit (real pod UI)</h4>
+          <div class="small">Connect to RunPod, select your pod, then load the actual AI Toolkit UI here. This is not a mock.</div>
+          <div class="lora-live-tools">
+            <div class="lora-form">
+              <div class="lora-field lora-field--wide">
+                <label for="loraRunpodApiKeyInput">RunPod API key</label>
+                <input id="loraRunpodApiKeyInput" type="password" placeholder="rpa_..." autocomplete="off" />
+              </div>
+              <div class="lora-field lora-field--wide">
+                <label class="remember" style="margin:0;">
+                  <input id="loraRunpodRememberToggle" type="checkbox" />
+                  Remember RunPod key on this device
+                </label>
+              </div>
+              <div class="lora-field">
+                <label for="loraRunpodPodSelect">Pod</label>
+                <select id="loraRunpodPodSelect">
+                  <option value="">Load pods first</option>
+                </select>
+              </div>
+              <div class="lora-field">
+                <label for="loraRunpodToolkitUrlInput">AI Toolkit URL</label>
+                <input id="loraRunpodToolkitUrlInput" placeholder="https://<pod-ip>:8675" />
+              </div>
+            </div>
+            <div class="lora-code-actions">
+              <button id="loraRunpodLoadPodsBtn" type="button">Load pods</button>
+              <button id="loraRunpodRefreshPodBtn" class="secondary" type="button">Refresh selected pod</button>
+              <button id="loraRunpodValidateBtn" class="secondary" type="button">Validate connection</button>
+              <button id="loraRunpodConnectBtn" class="secondary" type="button">Load AI Toolkit</button>
+              <button id="loraRunpodOpenExternalBtn" class="secondary" type="button">Open in browser</button>
+            </div>
+            <div id="loraRunpodPodMeta" class="small">No pod loaded.</div>
+            <div id="loraRunpodStatus" class="lora-live-status">Idle.</div>
+            <div class="lora-frame-shell">
+              <iframe id="loraToolkitFrame" class="lora-toolkit-frame" title="AI Toolkit"></iframe>
+              <div id="loraToolkitPlaceholder" class="lora-frame-placeholder">
+                Connect to a pod and load the AI Toolkit URL to embed the real training UI.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -7313,6 +10586,40 @@
         <div class="small">No objects yet.</div>
       </div>
     </section>
+      </main>
+    </div>
+  </div>
+
+  <div id="loraWizardModal" class="modal-backdrop">
+    <div class="modal lora-wizard-modal">
+      <div class="lora-wizard-modal__head">
+        <div>
+          <h4 class="lora-wizard-modal__title">LoRA Setup Wizard</h4>
+          <div id="loraWizardStepLabel" class="small">Step 1</div>
+        </div>
+        <button id="loraWizardCloseBtn" class="secondary" type="button">Close</button>
+      </div>
+      <div class="lora-wizard-progress">
+        <div id="loraWizardProgressText" class="lora-wizard-progress__text">Step 1 of 5</div>
+        <div class="lora-wizard-progress__bar">
+          <div id="loraWizardProgressFill" class="lora-wizard-progress__fill"></div>
+        </div>
+      </div>
+      <div class="lora-wizard-step">
+        <div id="loraWizardStepEyebrow" class="lora-wizard-step__eyebrow">Step 1</div>
+        <h5 id="loraWizardTitle" class="lora-wizard-step__title">Create your RunPod pod</h5>
+        <p id="loraWizardDescription" class="lora-wizard-step__desc"></p>
+        <ul id="loraWizardPoints" class="lora-wizard-step__points"></ul>
+      </div>
+      <div class="lora-wizard-modal__footer">
+        <div id="loraWizardStatus" class="lora-wizard-note">Follow the wizard in order for the smoothest setup.</div>
+        <div class="lora-wizard-controls">
+          <button id="loraWizardOpenRunpodBtn" class="secondary" type="button">Open RunPod</button>
+          <button id="loraWizardBackBtn" class="secondary" type="button">Back</button>
+          <button id="loraWizardNextBtn" type="button">Next</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="saveModal" class="modal-backdrop">
@@ -7494,6 +10801,67 @@
         <button id="saveKeyBtn">Save key & continue</button>
       </div>
       <div class="small" id="accessPanelStatus">Keys update immediately after saving.</div>
+    </div>
+  </div>
+
+  <div id="automationCredentialsPanel" class="side-panel">
+    <div id="automationCredentialsPanelBackdrop" class="side-panel__backdrop"></div>
+    <div class="side-panel__panel">
+      <div class="side-panel__header">
+        <div class="side-panel__title">Automation credentials</div>
+        <button id="automationCredentialsPanelClose" class="side-panel__close" type="button">Close</button>
+      </div>
+      <section class="card">
+        <h4 class="section-title">Social posting credentials</h4>
+        <div class="small">Add the tokens and IDs needed for automated posting. The automation destination tiles decide which platforms actually run.</div>
+      </section>
+      <section class="card">
+        <h4 class="section-title">TikTok</h4>
+        <div class="row">
+          <label for="automationTikTokToken">Access token</label>
+          <input id="automationTikTokToken" type="password" placeholder="TikTok user access token" autocomplete="off" />
+        </div>
+        <div class="row">
+          <label for="automationTikTokOpenId">open_id</label>
+          <input id="automationTikTokOpenId" placeholder="open_id" autocomplete="off" />
+        </div>
+      </section>
+      <section class="card">
+        <h4 class="section-title">Instagram</h4>
+        <div class="row">
+          <label for="automationInstagramToken">Graph token</label>
+          <input id="automationInstagramToken" type="password" placeholder="Meta access token" autocomplete="off" />
+        </div>
+        <div class="row">
+          <label for="automationInstagramUserId">User ID</label>
+          <input id="automationInstagramUserId" placeholder="1784..." autocomplete="off" />
+        </div>
+      </section>
+      <section class="card">
+        <h4 class="section-title">Facebook</h4>
+        <div class="row">
+          <label for="automationFacebookToken">Graph token</label>
+          <input id="automationFacebookToken" type="password" placeholder="Meta access token" autocomplete="off" />
+        </div>
+        <div class="row">
+          <label for="automationFacebookPageId">Page ID</label>
+          <input id="automationFacebookPageId" placeholder="Page ID" autocomplete="off" />
+        </div>
+      </section>
+      <div id="automationCredentialsPanelStatus" class="small">Credentials update the social posting system immediately.</div>
+    </div>
+  </div>
+
+  <div id="tiktokRunDetailsPanel" class="side-panel">
+    <div id="tiktokRunDetailsPanelBackdrop" class="side-panel__backdrop"></div>
+    <div class="side-panel__panel">
+      <div class="side-panel__header">
+        <div class="side-panel__title">Run details</div>
+        <button id="tiktokRunDetailsPanelClose" class="side-panel__close" type="button">Close</button>
+      </div>
+      <div id="tiktokRunDetailsContent" class="tiktok-run-detail">
+        <div class="small">Select a run to inspect its outputs and stage history.</div>
+      </div>
     </div>
   </div>
 

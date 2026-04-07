@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 const { Blob, File } = require('buffer');
-const { spawn } = require('child_process');
+const { spawn, spawnSync } = require('child_process');
 
 // Electron/Node combos may not expose File globally; undici expects it on load.
 if (typeof globalThis.Blob === 'undefined') globalThis.Blob = Blob;
@@ -16,6 +16,7 @@ const LEGACY_USER_DATA_DIR = path.join(app.getPath('appData'), 'amelia_app');
 
 const FILE_STREAM_UPLOAD_URL = 'https://kieai.redpandaai.co/api/file-stream-upload';
 const DEFAULT_UPLOAD_PATH = 'images/user-uploads';
+const RUNPOD_GRAPHQL_URL = 'https://api.runpod.io/graphql';
 const KIE_LOGS_AUTH_PARTITION = 'persist:kie-logs-auth';
 const KIE_LOGS_URL = 'https://kie.ai/logs';
 const KIE_LOGS_CONNECT_PROGRESS_CHANNEL = 'kie-logs-connect-progress';
@@ -23,9 +24,12 @@ const KIE_LOGS_SCRAPE_PROGRESS_CHANNEL = 'kie-logs-scrape-progress';
 const KIE_LOGS_BRIDGE_VISIBLE = false;
 // Store persisted blobs outside the project root to avoid dev reloads on file writes.
 const CACHE_DIR = path.join(app.getPath('userData'), 'cache_uploads');
+const SAVED_PROJECTS_FILE = path.join(app.getPath('userData'), 'saved_projects_v1.json');
+const DEBUG_TRACE_FILE = path.join(app.getPath('userData'), 'debug_trace.log');
 const YOUTUBE_CACHE_DIR = path.join(app.getPath('userData'), 'youtube_cache');
 const TIKTOK_MEDIA_CACHE_DIR = path.join(app.getPath('userData'), 'tiktok_media_cache');
 const TIKTOK_SFX_PREVIEW_CACHE_DIR = path.join(app.getPath('userData'), 'tiktok_sfx_preview_cache');
+const TIKTOK_AUDIO_SEGMENTS_CACHE_DIR = path.join(app.getPath('userData'), 'tiktok_audio_segments_cache');
 
 if (process.platform === 'linux') {
   // Avoid GPU/VAAPI startup crashes on older Linux stacks.
@@ -48,6 +52,22 @@ let kieLogsAuthCaptureBound = false;
 let kieLogsBridgeEnsureInFlight = null;
 const activeTikTokExports = new Map();
 const CAPTION_RENDER_PIPELINE_VERSION = 'caption-render-2026-02-09m';
+
+const appendDebugTrace = (source = 'main', message = '') => {
+  const text = String(message || '').trim();
+  if (!text) return;
+  try {
+    const line = `[${new Date().toISOString()}] [${source}] ${text}\n`;
+    try {
+      const stat = fs.statSync(DEBUG_TRACE_FILE);
+      if (stat.size > 2 * 1024 * 1024) {
+        fs.writeFileSync(DEBUG_TRACE_FILE, line, 'utf8');
+        return;
+      }
+    } catch (_err) {}
+    fs.appendFileSync(DEBUG_TRACE_FILE, line, 'utf8');
+  } catch (_err) {}
+};
 
 const copyTextToClipboardSafe = (text = '') => {
   const value = String(text || '').trim();
@@ -178,6 +198,170 @@ const sanitizeFfmpegArgs = (args = []) => {
   }
   return sanitized;
 };
+
+const sanitizeHttpUrl = (value = '') => {
+  const raw = String(value || '').trim();
+  if (!raw) return '';
+  try {
+    const parsed = new URL(raw);
+    if (!/^https?:$/i.test(parsed.protocol)) return '';
+    return parsed.toString();
+  } catch (_err) {
+    return '';
+  }
+};
+
+const sanitizeRunpodApiKey = (value = '') => String(value || '').trim();
+
+const normalizeRunpodPort = (port = {}) => {
+  if (!port || typeof port !== 'object') return null;
+  const ip = String(port.ip || '').trim();
+  const privatePort = Number(port.privatePort || 0);
+  const publicPort = Number(port.publicPort || 0);
+  const type = String(port.type || '').trim();
+  if (!ip && !privatePort && !publicPort) return null;
+  return {
+    ip,
+    isIpPublic: !!port.isIpPublic,
+    privatePort: Number.isFinite(privatePort) ? privatePort : 0,
+    publicPort: Number.isFinite(publicPort) ? publicPort : 0,
+    type
+  };
+};
+
+const normalizeRunpodPod = (pod = {}) => {
+  if (!pod || typeof pod !== 'object') return null;
+  const id = String(pod.id || '').trim();
+  if (!id) return null;
+  const runtime = pod.runtime && typeof pod.runtime === 'object' ? pod.runtime : {};
+  const ports = Array.isArray(runtime.ports) ? runtime.ports.map(normalizeRunpodPort).filter(Boolean) : [];
+  return {
+    id,
+    name: String(pod.name || '').trim() || id,
+    desiredStatus: String(pod.desiredStatus || pod.status || '').trim(),
+    imageName: String(pod.imageName || '').trim(),
+    machine: pod.machine && typeof pod.machine === 'object' ? pod.machine : {},
+    runtime: {
+      uptimeInSeconds: Number(runtime.uptimeInSeconds || 0) || 0,
+      ports
+    }
+  };
+};
+
+const extractRunpodPods = (data = {}) => {
+  const direct = Array.isArray(data?.myself?.pods) ? data.myself.pods : null;
+  if (direct) return direct.map(normalizeRunpodPod).filter(Boolean);
+  const alt = Array.isArray(data?.pods) ? data.pods : null;
+  if (alt) return alt.map(normalizeRunpodPod).filter(Boolean);
+  return [];
+};
+
+const runpodGraphqlRequest = async (apiKey = '', query = '', variables = {}) => {
+  const key = sanitizeRunpodApiKey(apiKey);
+  if (!key) throw new Error('RunPod API key is required.');
+  const queryText = String(query || '').trim();
+  if (!queryText) throw new Error('RunPod query is empty.');
+  const body = JSON.stringify({ query: queryText, variables: variables && typeof variables === 'object' ? variables : {} });
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20_000);
+  try {
+    const res = await fetch(RUNPOD_GRAPHQL_URL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${key}`,
+        'Api-Key': key
+      },
+      body,
+      signal: controller.signal
+    });
+    const text = await res.text();
+    let payload = {};
+    try {
+      payload = text ? JSON.parse(text) : {};
+    } catch (_err) {
+      throw new Error(`RunPod returned invalid JSON (HTTP ${res.status}).`);
+    }
+    if (!res.ok) {
+      const errMsg =
+        String(payload?.errors?.[0]?.message || payload?.message || `RunPod API returned HTTP ${res.status}.`).trim() ||
+        `RunPod API returned HTTP ${res.status}.`;
+      throw new Error(errMsg);
+    }
+    if (Array.isArray(payload?.errors) && payload.errors.length) {
+      throw new Error(String(payload.errors[0]?.message || 'RunPod GraphQL error.').trim() || 'RunPod GraphQL error.');
+    }
+    return payload?.data && typeof payload.data === 'object' ? payload.data : {};
+  } catch (err) {
+    if (err?.name === 'AbortError') throw new Error('RunPod request timed out.');
+    throw err;
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
+const RUNPOD_LIST_PODS_QUERY = `
+query ContentStudioPods {
+  myself {
+    pods {
+      id
+      name
+      desiredStatus
+      imageName
+      runtime {
+        uptimeInSeconds
+        ports {
+          ip
+          isIpPublic
+          privatePort
+          publicPort
+          type
+        }
+      }
+      machine {
+        gpuDisplayName
+      }
+    }
+  }
+}
+`;
+
+const RUNPOD_LIST_PODS_QUERY_FALLBACK = `
+query ContentStudioPodsFallback {
+  myself {
+    pods {
+      id
+      name
+      desiredStatus
+    }
+  }
+}
+`;
+
+const RUNPOD_GET_POD_QUERY = `
+query ContentStudioPodById($podId: String!) {
+  pod(input: { podId: $podId }) {
+    id
+    name
+    desiredStatus
+    imageName
+    runtime {
+      uptimeInSeconds
+      ports {
+        ip
+        isIpPublic
+        privatePort
+        publicPort
+        type
+      }
+    }
+    machine {
+      gpuDisplayName
+    }
+  }
+}
+`;
 
 const runAvatarForegroundExtraction = async ({
   inputPath = '',
@@ -438,25 +622,144 @@ const hasLevelDbData = (dirPath) => {
   }
 };
 
+const hasStorageKeyInLevelDb = (dirPath, storageKey = '') => {
+  const targetKey = String(storageKey || '').trim();
+  if (!targetKey) return false;
+  const levelDbDir = path.join(dirPath, 'Local Storage', 'leveldb');
+  if (!fs.existsSync(levelDbDir)) return false;
+  let files = [];
+  try {
+    files = fs
+      .readdirSync(levelDbDir)
+      .filter((name) => /\.(ldb|log)$/i.test(name))
+      .map((name) => path.join(levelDbDir, name));
+  } catch (_err) {
+    return false;
+  }
+  if (!files.length) return false;
+  try {
+    const result = spawnSync('strings', ['-a', ...files], {
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024
+    });
+    const output = String(result?.stdout || '');
+    if (!output) return false;
+    if (output.includes(`\n${targetKey}\n`)) return true;
+    return output.includes(targetKey);
+  } catch (_err) {
+    return false;
+  }
+};
+
 const migrateLegacyUserData = () => {
   const currentUserData = app.getPath('userData');
   if (currentUserData === LEGACY_USER_DATA_DIR) return;
   if (!fs.existsSync(LEGACY_USER_DATA_DIR)) return;
   const legacyHasData = hasLevelDbData(LEGACY_USER_DATA_DIR);
   const currentHasData = hasLevelDbData(currentUserData);
-  if (!legacyHasData || currentHasData) return;
+  if (!legacyHasData) return;
+  const legacyHasAvatarOrObjectData =
+    hasStorageKeyInLevelDb(LEGACY_USER_DATA_DIR, 'nb_avatars_v1') || hasStorageKeyInLevelDb(LEGACY_USER_DATA_DIR, 'nb_objects_v1');
+  const currentHasAvatarOrObjectData =
+    hasStorageKeyInLevelDb(currentUserData, 'nb_avatars_v1') || hasStorageKeyInLevelDb(currentUserData, 'nb_objects_v1');
+  const shouldFullMigrate = !currentHasData;
+  const shouldOverlayLocalStorage = currentHasData && legacyHasAvatarOrObjectData && !currentHasAvatarOrObjectData;
+  if (!shouldFullMigrate && !shouldOverlayLocalStorage) return;
   fs.mkdirSync(currentUserData, { recursive: true });
-  const items = ['Local Storage', 'Session Storage', 'cache_uploads'];
+  const items = shouldFullMigrate ? ['Local Storage', 'Session Storage', 'cache_uploads'] : ['Local Storage'];
   items.forEach((name) => {
     const src = path.join(LEGACY_USER_DATA_DIR, name);
     const dest = path.join(currentUserData, name);
     if (!fs.existsSync(src)) return;
     if (fs.existsSync(dest)) {
+      const backup = `${dest}.backup-${Date.now()}`;
+      try {
+        fs.cpSync(dest, backup, { recursive: true });
+      } catch (_err) {}
       fs.rmSync(dest, { recursive: true, force: true });
     }
     fs.cpSync(src, dest, { recursive: true });
   });
-  console.log('[main] Migrated legacy user data to new app name folder.');
+  if (shouldOverlayLocalStorage) {
+    console.log('[main] Recovered legacy Local Storage (avatars/objects) into current profile.');
+  } else {
+    console.log('[main] Migrated legacy user data to new app name folder.');
+  }
+};
+
+const recoverLocalStorageArraySnapshotFromDir = (storageKey = '', userDataDir = '') => {
+  const targetKey = String(storageKey || '').trim();
+  if (!targetKey) return [];
+  const baseDir = String(userDataDir || '').trim() || app.getPath('userData');
+  const levelDbDir = path.join(baseDir, 'Local Storage', 'leveldb');
+  if (!fs.existsSync(levelDbDir)) return [];
+  let files = [];
+  try {
+    files = fs
+      .readdirSync(levelDbDir)
+      .filter((name) => /\.(ldb|log)$/i.test(name))
+      .map((name) => path.join(levelDbDir, name));
+  } catch (_err) {
+    return [];
+  }
+  if (!files.length) return [];
+  try {
+    const result = spawnSync('strings', ['-a', ...files], {
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024
+    });
+    const output = String(result?.stdout || '');
+    if (!output) return [];
+    const lines = output.split(/\r?\n/);
+    let best = [];
+    let bestLength = 0;
+    for (let index = 0; index < lines.length - 1; index += 1) {
+      if (String(lines[index] || '').trim() !== targetKey) continue;
+      const candidate = String(lines[index + 1] || '').trim();
+      if (!candidate.startsWith('[')) continue;
+      try {
+        const parsed = JSON.parse(candidate);
+        if (Array.isArray(parsed) && candidate.length > bestLength) {
+          best = parsed;
+          bestLength = candidate.length;
+        }
+      } catch (_err) {}
+    }
+    return best;
+  } catch (_err) {
+    return [];
+  }
+};
+
+const recoverLocalStorageArraySnapshot = (storageKey = '') => {
+  const targetKey = String(storageKey || '').trim();
+  if (!targetKey) return [];
+  const currentItems = recoverLocalStorageArraySnapshotFromDir(targetKey, app.getPath('userData'));
+  if (Array.isArray(currentItems) && currentItems.length) return currentItems;
+  if (app.getPath('userData') === LEGACY_USER_DATA_DIR) return currentItems;
+  const legacyItems = recoverLocalStorageArraySnapshotFromDir(targetKey, LEGACY_USER_DATA_DIR);
+  return Array.isArray(legacyItems) ? legacyItems : [];
+};
+
+const loadSavedProjectsFromDisk = () => {
+  try {
+    if (!fs.existsSync(SAVED_PROJECTS_FILE)) return [];
+    const raw = fs.readFileSync(SAVED_PROJECTS_FILE, 'utf8');
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (_err) {
+    return [];
+  }
+};
+
+const persistSavedProjectsToDisk = (projects = []) => {
+  const list = Array.isArray(projects) ? projects : [];
+  const dir = path.dirname(SAVED_PROJECTS_FILE);
+  fs.mkdirSync(dir, { recursive: true });
+  const tempFile = `${SAVED_PROJECTS_FILE}.tmp`;
+  fs.writeFileSync(tempFile, JSON.stringify(list, null, 2), 'utf8');
+  fs.renameSync(tempFile, SAVED_PROJECTS_FILE);
+  return true;
 };
 
 const createWindow = () => {
@@ -3660,6 +3963,95 @@ ipcMain.handle('disconnect-kie-logs-account', async () => {
   }
 });
 
+ipcMain.handle('runpod-list-pods', async (_event, payload = {}) => {
+  const apiKey = sanitizeRunpodApiKey(payload?.apiKey || '');
+  if (!apiKey) {
+    return { success: false, error: 'RunPod API key is required.', pods: [] };
+  }
+  const queryAttempts = [RUNPOD_LIST_PODS_QUERY, RUNPOD_LIST_PODS_QUERY_FALLBACK];
+  const errors = [];
+  for (const query of queryAttempts) {
+    try {
+      const data = await runpodGraphqlRequest(apiKey, query, {});
+      const pods = extractRunpodPods(data);
+      return { success: true, pods };
+    } catch (err) {
+      errors.push(String(err?.message || 'Unknown RunPod error'));
+    }
+  }
+  return {
+    success: false,
+    error: errors[0] || 'Could not load RunPod pods.',
+    debug: errors,
+    pods: []
+  };
+});
+
+ipcMain.handle('runpod-get-pod', async (_event, payload = {}) => {
+  const apiKey = sanitizeRunpodApiKey(payload?.apiKey || '');
+  const podId = String(payload?.podId || '').trim();
+  if (!apiKey) return { success: false, error: 'RunPod API key is required.' };
+  if (!podId) return { success: false, error: 'Pod ID is required.' };
+  try {
+    const data = await runpodGraphqlRequest(apiKey, RUNPOD_GET_POD_QUERY, { podId });
+    const pod = normalizeRunpodPod(data?.pod || null);
+    if (pod) return { success: true, pod };
+  } catch (_err) {}
+  try {
+    const data = await runpodGraphqlRequest(apiKey, RUNPOD_LIST_PODS_QUERY, {});
+    const pods = extractRunpodPods(data);
+    const match = pods.find((entry) => String(entry?.id || '').trim() === podId);
+    if (match) return { success: true, pod: match };
+    return { success: false, error: `Pod "${podId}" not found in your account.` };
+  } catch (err) {
+    return { success: false, error: String(err?.message || 'Could not load pod details.').trim() || 'Could not load pod details.' };
+  }
+});
+
+ipcMain.handle('runpod-probe-url', async (_event, payload = {}) => {
+  const targetUrl = sanitizeHttpUrl(payload?.url || '');
+  if (!targetUrl) return { success: false, error: 'A valid http(s) URL is required.' };
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12_000);
+  try {
+    const res = await fetch(targetUrl, {
+      method: 'GET',
+      redirect: 'follow',
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Content-Studio/1.0'
+      }
+    });
+    try {
+      await res.body?.cancel();
+    } catch (_err) {}
+    return {
+      success: true,
+      ok: res.ok,
+      status: Number(res.status || 0),
+      finalUrl: String(res.url || targetUrl)
+    };
+  } catch (err) {
+    if (err?.name === 'AbortError') {
+      return { success: false, error: 'Probe timed out.' };
+    }
+    return { success: false, error: String(err?.message || 'Probe failed.').trim() || 'Probe failed.' };
+  } finally {
+    clearTimeout(timeout);
+  }
+});
+
+ipcMain.handle('open-external-url', async (_event, payload = {}) => {
+  const targetUrl = sanitizeHttpUrl(payload?.url || '');
+  if (!targetUrl) return { success: false, error: 'A valid http(s) URL is required.' };
+  try {
+    await shell.openExternal(targetUrl);
+    return { success: true };
+  } catch (err) {
+    return { success: false, error: String(err?.message || 'Could not open URL.').trim() || 'Could not open URL.' };
+  }
+});
+
 const guessMime = (fileName) => {
   const ext = path.extname(fileName || '').toLowerCase();
   if (ext === '.gif') return 'image/gif';
@@ -3796,6 +4188,7 @@ ipcMain.on('renderer-log', (_event, payload = {}) => {
   const { level = 'log', message = '' } = payload;
   const fn = console[level] || console.log;
   fn(`[renderer] ${message}`);
+  appendDebugTrace('renderer', message);
 });
 
 const runAlignmentScript = async ({ audioPath }) => {
@@ -3864,6 +4257,31 @@ ipcMain.handle('persist-blob-file', async (_event, payload = {}) => {
     return { success: true, path: filePath };
   } catch (err) {
     return { success: false, error: err.message };
+  }
+});
+
+ipcMain.handle('recover-localstorage-array-snapshot', async (_event, storageKey = '') => {
+  try {
+    return { success: true, items: recoverLocalStorageArraySnapshot(storageKey) };
+  } catch (err) {
+    return { success: false, error: err.message || 'Recovery failed.', items: [] };
+  }
+});
+
+ipcMain.on('load-saved-projects-sync', (event) => {
+  try {
+    event.returnValue = { success: true, items: loadSavedProjectsFromDisk() };
+  } catch (err) {
+    event.returnValue = { success: false, error: err.message || 'Load failed.', items: [] };
+  }
+});
+
+ipcMain.on('persist-saved-projects-sync', (event, projects = []) => {
+  try {
+    persistSavedProjectsToDisk(projects);
+    event.returnValue = { success: true };
+  } catch (err) {
+    event.returnValue = { success: false, error: err.message || 'Persist failed.' };
   }
 });
 
@@ -3962,7 +4380,8 @@ ipcMain.handle('split-audio', async (_event, payload = {}) => {
       });
     });
 
-  const tmpRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'tiktok-audio-'));
+  fs.mkdirSync(TIKTOK_AUDIO_SEGMENTS_CACHE_DIR, { recursive: true });
+  const tmpRoot = fs.mkdtempSync(path.join(TIKTOK_AUDIO_SEGMENTS_CACHE_DIR, 'tiktok-audio-'));
   const results = [];
   for (let i = 0; i < segments.length; i += 1) {
     const seg = segments[i] || {};
@@ -7124,11 +7543,41 @@ ipcMain.handle('download-youtube-clip', async (_event, payload = {}) => {
       }
     };
 
+    const parseJsonOrThrow = async (res, sourceLabel = 'Fallback') => {
+      const contentType = String(res.headers.get('content-type') || '').toLowerCase();
+      const text = await res.text();
+      if (!contentType.includes('application/json')) {
+        const preview = text.slice(0, 80).replace(/\s+/g, ' ').trim();
+        throw new Error(`${sourceLabel} returned non-JSON (${res.status})${preview ? `: ${preview}` : ''}`);
+      }
+      try {
+        return JSON.parse(text);
+      } catch (err) {
+        const preview = text.slice(0, 80).replace(/\s+/g, ' ').trim();
+        throw new Error(
+          `${sourceLabel} JSON parse failed${preview ? `: ${preview}` : ''}${
+            err?.message ? ` (${err.message})` : ''
+          }`
+        );
+      }
+    };
+
+    const fallbackFetchOptions = {
+      dispatcher: ipv4Agent,
+      headers: {
+        'User-Agent':
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36',
+        Accept: 'application/json,text/plain,*/*',
+        'Accept-Language': 'en-US,en;q=0.9'
+      }
+    };
+
     const tryInvidious = async () => {
       const instances = [
         'https://yewtu.be',
         'https://vid.puffyan.us',
-        'https://invidious.fdn.fr'
+        'https://invidious.fdn.fr',
+        'https://invidious.privacyredirect.com'
       ];
       let lastErr = null;
       for (const base of instances) {
@@ -7136,12 +7585,12 @@ ipcMain.handle('download-youtube-clip', async (_event, payload = {}) => {
           sendProgress(0, `Fallback: checking ${base}…`);
           const apiUrl = `${base}/api/v1/videos/${videoId}`;
           const res = await withTimeout(
-            fetch(apiUrl, { dispatcher: ipv4Agent }),
+            fetch(apiUrl, fallbackFetchOptions),
             15000,
             'Invidious metadata timed out.'
           );
           if (!res.ok) throw new Error(`Invidious HTTP ${res.status}`);
-          const data = await res.json();
+          const data = await parseJsonOrThrow(res, `Invidious ${base}`);
           const formats = []
             .concat(data.formatStreams || [])
             .concat(data.adaptiveFormats || [])
@@ -7167,19 +7616,23 @@ ipcMain.handle('download-youtube-clip', async (_event, payload = {}) => {
     };
 
     const tryPiped = async () => {
-      const instances = ['https://piped.video'];
+      const instances = [
+        'https://piped.video',
+        'https://pipedapi.kavin.rocks',
+        'https://api.piped.video'
+      ];
       let lastErr = null;
       for (const base of instances) {
         try {
           sendProgress(0, `Fallback: checking ${base}…`);
           const apiUrl = `${base}/api/v1/streams/${videoId}`;
           const res = await withTimeout(
-            fetch(apiUrl, { dispatcher: ipv4Agent }),
+            fetch(apiUrl, fallbackFetchOptions),
             15000,
             'Piped metadata timed out.'
           );
           if (!res.ok) throw new Error(`Piped HTTP ${res.status}`);
-          const data = await res.json();
+          const data = await parseJsonOrThrow(res, `Piped ${base}`);
           const formats = (data.videoStreams || []).filter((f) => f && f.url);
           if (!formats.length) throw new Error('No formats from Piped.');
           const mp4 = formats.filter((f) => String(f.format || f.mimeType || '').includes('mp4'));
@@ -7199,6 +7652,56 @@ ipcMain.handle('download-youtube-clip', async (_event, payload = {}) => {
         }
       }
       throw lastErr || new Error('Piped fallback failed.');
+    };
+
+    const tryYtDlp = async (attemptLabel = '') => {
+      const outputTemplate = path.join(YOUTUBE_CACHE_DIR, `${safeScene}-${stamp}.%(ext)s`);
+      sendProgress(0, `${attemptLabel}trying yt-dlp fallback…`);
+      await withTimeout(
+        new Promise((resolve, reject) => {
+          const args = [
+            '--no-playlist',
+            '--restrict-filenames',
+            '--merge-output-format',
+            'mp4',
+            '-f',
+            'bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/bv*+ba/b',
+            '-o',
+            outputTemplate,
+            url
+          ];
+          const proc = spawn('yt-dlp', args, { stdio: ['ignore', 'pipe', 'pipe'] });
+          let stderr = '';
+          proc.stdout.on('data', (data) => {
+            const line = String(data || '').trim();
+            if (line) sendProgress(0, `${attemptLabel}yt-dlp: ${line.slice(0, 140)}`);
+          });
+          proc.stderr.on('data', (data) => {
+            const text = String(data || '');
+            stderr += text;
+            const line = text.split('\n').map((part) => part.trim()).filter(Boolean).pop();
+            if (line) sendProgress(0, `${attemptLabel}yt-dlp: ${line.slice(0, 140)}`);
+          });
+          proc.on('error', (err) => reject(err));
+          proc.on('close', (code) => {
+            if (code === 0) return resolve();
+            reject(new Error(stderr.trim() || `yt-dlp exited with ${code}`));
+          });
+        }),
+        ATTEMPT_TIMEOUT_MS,
+        'yt-dlp timed out.'
+      );
+      const prefix = `${safeScene}-${stamp}.`;
+      const candidates = fs
+        .readdirSync(YOUTUBE_CACHE_DIR)
+        .filter((name) => name.startsWith(prefix))
+        .map((name) => path.join(YOUTUBE_CACHE_DIR, name))
+        .filter((full) => fs.existsSync(full))
+        .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs);
+      if (!candidates.length) {
+        throw new Error('yt-dlp completed but no output file was found.');
+      }
+      return candidates[0];
     };
 
     let outPath = '';
@@ -7230,6 +7733,14 @@ ipcMain.handle('download-youtube-clip', async (_event, payload = {}) => {
           } catch (err3) {
             lastError = err3;
             sendProgress(0, `${label}Piped failed: ${err3.message}`);
+            try {
+              outPath = await tryYtDlp(label);
+              lastError = null;
+              break;
+            } catch (err4) {
+              lastError = err4;
+              sendProgress(0, `${label}yt-dlp failed: ${err4.message}`);
+            }
           }
         }
       }
